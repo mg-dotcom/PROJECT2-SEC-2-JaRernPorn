@@ -1,15 +1,9 @@
 <script setup>
-
+import Game1 from './components/Game1/Game1.vue'
 </script>
- 
-<template>
-<div>
-  <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
-</div>
-</template>
- 
-<style scoped>
 
-</style>
+<template>
+  <div><Game1 /></div>
+</template>
+
+<style scoped></style>
