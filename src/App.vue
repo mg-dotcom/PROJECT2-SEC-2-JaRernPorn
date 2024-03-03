@@ -43,9 +43,9 @@
       </button>
     </div>
 
-    <div class="flex justify-end px-6">
+    <div class="flex justify-end px-6 lg:px-36">
       <button
-        class="bg-title rounded-2xl text-white font-outfit font-semibold w-20 h-8 sm:text-2xl sm:w-28 sm:h-14 sm:rounded-3xl hover:bg-button-bgColor"
+        class="bg-title rounded-2xl text-white font-outfit font-semibold w-20 h-8 sm:text-2xl sm:w-28 sm:h-14 sm:rounded-3xl hover:bg-button-bgColor lg:w-40"
       >
         Check
       </button>
