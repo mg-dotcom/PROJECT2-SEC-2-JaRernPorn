@@ -17,6 +17,66 @@
         Which one of these is Apple?
       </h2>
     </div>
+
+    <div class="flex flex-row gap-16 justify-center mt-10">
+      <div class="h-[400px] w-[300px] rounded-3xl shadow-md bg-white">
+        <img
+          src="../../../public/Apple.svg"
+          alt="Apple"
+          class="w-[220px] h-[225px] ml-10 mt-3"
+        />
+        <div
+          class="border-solid border-2 border-black w-[230px] ml-7 mt-10"
+        ></div>
+        <h1 class="text-[24px] ml-10 mt-3">
+          苹果 <br />
+          píngguǒ
+        </h1>
+        <img
+          src="../../../public/SoundButton.svg"
+          alt="SoundButton"
+          class="absolute ml-52 -mt-12"
+        />
+      </div>
+      <div class="h-[400px] w-[300px] rounded-3xl shadow-md bg-white">
+        <img
+          src="../../../public/Apple.svg"
+          alt="Apple"
+          class="w-[220px] h-[225px] ml-10 mt-3"
+        />
+        <div
+          class="border-solid border-2 border-black w-[230px] ml-7 mt-10"
+        ></div>
+        <h1 class="text-[24px] ml-10 mt-3">
+          苹果 <br />
+          píngguǒ
+        </h1>
+        <img
+          src="../../../public/SoundButton.svg"
+          alt="SoundButton"
+          class="absolute ml-52 -mt-12"
+        />
+      </div>
+      <div class="h-[400px] w-[300px] rounded-3xl shadow-md bg-white">
+        <img
+          src="../../../public/Apple.svg"
+          alt="Apple"
+          class="w-[220px] h-[225px] ml-10 mt-3"
+        />
+        <div
+          class="border-solid border-2 border-black w-[230px] ml-7 mt-10"
+        ></div>
+        <h1 class="text-[24px] ml-10 mt-3">
+          苹果 <br />
+          píngguǒ
+        </h1>
+        <img
+          src="../../../public/SoundButton.svg"
+          alt="SoundButton"
+          class="absolute ml-52 -mt-12"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
