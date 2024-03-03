@@ -8,7 +8,7 @@
       >
         Category: ขึ้น
       </h1>
-      <img src="../../../public/Setting.svg" alt="Setting" class="pr-36" />
+      <img src="/Setting.svg" alt="Setting" class="pr-36" />
     </div>
 
     <div class="flex justify-center">
@@ -21,7 +21,7 @@
     <div class="flex flex-row gap-16 justify-center mt-10">
       <div class="h-[400px] w-[300px] rounded-3xl shadow-md bg-white">
         <img
-          src="../../../public/Apple.svg"
+          src="/Apple.svg"
           alt="Apple"
           class="w-[220px] h-[225px] ml-10 mt-3"
         />
@@ -33,14 +33,14 @@
           píngguǒ
         </h1>
         <img
-          src="../../../public/SoundButton.svg"
+          src="/SoundButton.svg"
           alt="SoundButton"
           class="absolute ml-52 -mt-12"
         />
       </div>
       <div class="h-[400px] w-[300px] rounded-3xl shadow-md bg-white">
         <img
-          src="../../../public/Apple.svg"
+          src="/Apple.svg"
           alt="Apple"
           class="w-[220px] h-[225px] ml-10 mt-3"
         />
@@ -52,14 +52,14 @@
           píngguǒ
         </h1>
         <img
-          src="../../../public/SoundButton.svg"
+          src="/SoundButton.svg"
           alt="SoundButton"
           class="absolute ml-52 -mt-12"
         />
       </div>
       <div class="h-[400px] w-[300px] rounded-3xl shadow-md bg-white">
         <img
-          src="../../../public/Apple.svg"
+          src="/Apple.svg"
           alt="Apple"
           class="w-[220px] h-[225px] ml-10 mt-3"
         />
@@ -71,7 +71,7 @@
           píngguǒ
         </h1>
         <img
-          src="../../../public/SoundButton.svg"
+          src="/SoundButton.svg"
           alt="SoundButton"
           class="absolute ml-52 -mt-12"
         />
