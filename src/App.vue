@@ -1,6 +1,4 @@
-<script setup>
-import Game4 from './components/Game4.vue'
-</script>
+<script setup></script>
 
 <template>
   <div class="w-full h-screen bg-main-bgColor">
