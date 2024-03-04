@@ -1,7 +1,6 @@
 <script setup>
-import { reactive, ref } from "vue"; // Add the import statement for reactive
+import { reactive, ref, computed } from "vue"; // Add the import statement for reactive
 import close from "./components/icons/iconClose.vue";
-import allCollection from "./components/allCollection.vue";
 const page = reactive({
   flashcard: true,
 });
@@ -18,21 +17,33 @@ const closeButton = () => {
   popup.newCollection = false;
 };
 
-const collection = ref([]);
+const collections = ref([]);
 const newCollectionName = ref("");
+const localCollections = JSON.parse(localStorage.getItem("collections")) || [];
+
+// Loop to populate collections with localCollections
+localCollections.forEach((collection) => {
+  collections.value.push(collection);
+});
 
 const addNewCollection = () => {
   popup.newCollection = false;
 
-  if (collection.value.length === 0 && newCollectionName.value === "") {
-    return "";
+  if (newCollectionName.value === "") {
+    return alert("Please enter a collection name");
   } else {
-    collection.value.push(newCollectionName.value);
+    collections.value.push(newCollectionName.value);
+    localStorage.setItem("collections", JSON.stringify(collections.value));
     newCollectionName.value = "";
   }
 };
-</script>
 
+const computedCollections = computed(() => {
+  return collections.value;
+});
+
+
+</script>
 <template>
   <section class="flashcard-home" v-show="page.flashcard">
     <div
@@ -57,13 +68,13 @@ const addNewCollection = () => {
         </div>
         <hr class="border-gray-300" />
         <div
-          v-if="collection.length === 0"
+          v-if="localCollections === null"
           class="text-gray-300 text-sm flex-grow flex justify-center items-center"
         >
           No collection added yet
         </div>
         <div v-else class="grid grid-cols-3 gap-2 p-2 text-center">
-          <div v-for="(item, index) in collection" :key="item">
+          <div v-for="(item, index) in computedCollections" :key="item">
             <div class="relative">
               <img class="w-[130px]" src="./assets/collection.svg" alt="" />
               <div
