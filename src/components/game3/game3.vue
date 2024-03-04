@@ -13,7 +13,13 @@ import Option from './Option.vue'
       </div>
     </div>
     <div>
-      <p>green</p>
+      <div class="flex justify-center">
+        <progress
+          class="progress progress-success"
+          value="100"
+          max="100"
+        ></progress>
+      </div>
     </div>
     <div class="flex justify-center">
       <div class="quiz flex flex-col items-center">
