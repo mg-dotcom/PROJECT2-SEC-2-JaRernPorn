@@ -1,4 +1,6 @@
-<script setup></script>
+<script setup>
+import Option from './Option.vue'
+</script>
 
 <template>
   <div class="font-outfit">
@@ -7,18 +9,14 @@
         Category : Fruit
       </div>
       <div class="setting flex">
-        <img
-          src="/public/Vector.svg"
-          alt="setting button"
-          class="w-10 "
-        />
+        <img src="/public/Vector.svg" alt="setting button" class="w-10" />
       </div>
     </div>
     <div>
-        <p>green</p>
+      <p>green</p>
     </div>
     <div class="flex justify-center">
-      <div class="quiz flex flex-col items-center ">
+      <div class="quiz flex flex-col items-center">
         <div class="text-title text-3xl font-semibold py-5">
           Select the correct meaning.
         </div>
@@ -29,9 +27,7 @@
           <h3>Apple</h3>
         </div>
         <div class="options py-12 w-3/4">
-          <div class="bg-title mb-3 text-center text-white text-lg font-normal p-2 rounded-xl">菠萝 bōluó</div>
-          <div class="bg-title mb-3 text-center text-white text-lg font-normal p-2 rounded-xl">苹果 píngguǒ</div>
-          <div class="bg-title mb-3 text-center text-white text-lg font-normal p-2 rounded-xl">葡萄 pú táo</div>
+          <Option :options="['菠萝 bōluó', '苹果 píngguǒ', '葡萄 pú táo']" />
         </div>
       </div>
     </div>
