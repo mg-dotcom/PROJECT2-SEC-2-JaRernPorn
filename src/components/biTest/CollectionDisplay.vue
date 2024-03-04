@@ -8,8 +8,8 @@ const props=defineProps({
 
 <template>
   <div>
-    <h2>Created Collection:</h2>
-    <p class="bg-blue-400 border border-black">{{ collectionName }}</p>
+    <h2 class="text-lg font-semibold mb-2">Created Collection:</h2>
+    <p class="text-gray-800">{{ collectionName }}</p>
   </div>
 </template>
 
