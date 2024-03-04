@@ -1,10 +1,10 @@
 <script setup>
-import FlashCard from './components/flashcard/FlashCard.vue';
+
 </script>
  
 <template>
 <div>
-  <FlashCard/>
+
 </div>
 </template>
  
