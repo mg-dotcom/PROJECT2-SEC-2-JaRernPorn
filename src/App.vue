@@ -9,4 +9,3 @@ import game3 from './components/game3/Game3.vue'
 </template>
 
 <style scoped></style>
-./components/game3/Game3.vue
