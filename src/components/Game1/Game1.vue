@@ -12,8 +12,7 @@
     </div>
 
     <div class="flex justify-center">
-      <h2 class="text-title font-outfit font-semibold text-[48px]">
-        <div>หลอดแท่ง</div>
+      <h2 class="text-title font-outfit font-semibold text-[48px] mt-24">
         Which one of these is Apple?
       </h2>
     </div>
@@ -26,7 +25,7 @@
           class="w-[220px] h-[225px] ml-10 mt-3"
         />
         <div
-          class="border-solid border-2 border-black w-[230px] ml-7 mt-10"
+          class="border-solid border-b-2 border-black w-[230px] ml-7 mt-10"
         ></div>
         <h1 class="text-[24px] ml-10 mt-3">
           苹果 <br />
@@ -45,7 +44,7 @@
           class="w-[220px] h-[225px] ml-10 mt-3"
         />
         <div
-          class="border-solid border-2 border-black w-[230px] ml-7 mt-10"
+          class="border-solid border-b-2 border-black w-[230px] ml-7 mt-10"
         ></div>
         <h1 class="text-[24px] ml-10 mt-3">
           苹果 <br />
@@ -64,7 +63,7 @@
           class="w-[220px] h-[225px] ml-10 mt-3"
         />
         <div
-          class="border-solid border-2 border-black w-[230px] ml-7 mt-10"
+          class="border-solid border-b-2 border-black w-[230px] ml-7 mt-10"
         ></div>
         <h1 class="text-[24px] ml-10 mt-3">
           苹果 <br />
