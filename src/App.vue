@@ -15,12 +15,8 @@ const howToPlayButton = () => {
 </script>
 
 <template>
-  <section
-    class="้HomePage"
-    v-show="page.homePage"
-    style="background-image: url('./assets/homePage/test2.png')"
-  >
-    <div class="h-screen w-full p-5">
+  <section class="้HomePage" v-show="page.homePage">
+    <div class="h-screen w-full bg-main-bgColor p-5">
       <div class="border-double border-8 border-title box-border h-full w-full">
         <div
           class="logo-title text-center text-title pt-title sm:text-title-size mobile:text-mobile-title-size"
