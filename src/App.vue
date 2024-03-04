@@ -1,5 +1,5 @@
 <script setup>
-import game3 from './components/game3/game3.vue'
+import game3 from './components/game3/Game3.vue'
 </script>
 
 <template>
@@ -9,3 +9,4 @@ import game3 from './components/game3/game3.vue'
 </template>
 
 <style scoped></style>
+./components/game3/Game3.vue
