@@ -1,6 +1,6 @@
 <script setup>
 import { reactive } from "vue";
-
+import settingButton from "./components/setting-button.vue";
 const page = reactive({
   homePage: true,
 });
@@ -17,6 +17,9 @@ const howToPlayButton = () => {
 <template>
   <section class="้HomePage" v-show="page.homePage">
     <div class="h-screen w-full bg-main-bgColor p-5">
+      <!-- Setting Button -->
+      <settingButton />
+
       <div class="border-double border-8 border-title box-border h-full w-full">
         <div
           class="logo-title text-center text-title pt-title sm:text-title-size mobile:text-mobile-title-size"
@@ -31,24 +34,30 @@ const howToPlayButton = () => {
             LET'S PRACTICE YOUR CHINESE VOCABULARY
           </p>
         </div>
-
+        <!-- Play Button -->
         <div id="home-page-button">
-          <!-- Play Button -->
           <div id="play-button" class="flex justify-center pt-12">
             <img
               class="w-72 relative hover:w-80 transition-all duration-300 ease-in-out cursor-pointer"
-              src="./assets/homePage/play-button.svg"
+              src="/homePage-pic/play-button.svg"
               alt="play-button"
-              @click="playButton"
             />
           </div>
           <!-- Flashcard Button -->
-          <div id="HTP-button" class="flex justify-center pt-6">
+          <div id="Flashcard-button" class="flex justify-center pt-6">
             <img
               class="w-72 relative hover:w-80 transition-all duration-300 ease-in-out cursor-pointer"
-              src="./assets/homePage/flashcard-button.svg"
+              src="/homePage-pic/flashcard-button.svg"
               alt="HTP-button"
-              @click="howToPlayButton"
+            />
+          </div>
+
+          <!-- How To Play Button -->
+          <div id="HTP-button" class="flex justify-center pt-6">
+            <img
+              class="absolute right-10 bottom-10 hover:scale-110 transition-transform duration-300"
+              src="/homePage-pic/HTP-button.svg"
+              alt="HTP-button"
             />
           </div>
         </div>
