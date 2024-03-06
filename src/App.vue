@@ -1,9 +1,8 @@
 <script setup>
 import { reactive, ref, computed } from "vue"; // Add the import statement for reactive
 import close from "./components/icons/iconClose.vue";
-import OptionCollection from "./components/OptionCollection.vue";
-import DeleteCollection from "./components/DeleteCollection.vue";
-import EditCollection from "./components/EditCollection.vue";
+import iconDelete from "./components/icons/iconDelete.vue";
+import iconEdit from "./components/icons/iconEdit.vue";
 
 const page = reactive({
   flashcard: true,
@@ -11,7 +10,8 @@ const page = reactive({
 
 const popup = reactive({
   newCollection: false,
-  OptionCollection: false,
+  optionCollection: false,
+  editCollection: false,
 });
 
 const addNewCollectionName = () => {
@@ -23,13 +23,13 @@ const closeButton = () => {
 };
 
 const showOption = (item) => {
-  popup.OptionCollection = !popup.OptionCollection;
+  popup.optionCollection = !popup.optionCollection;
   SelectedIndex.value = item;
   console.log(item);
 };
 
 const closeOption = () => {
-  popup.OptionCollection = false;
+  popup.optionCollection = false;
 };
 
 const SelectedIndex = ref(null);
@@ -67,12 +67,14 @@ const deleteCollection = (collectionId) => {
   localStorage.setItem("collections", JSON.stringify(updatedCollections));
 
   collections.value = updatedCollections;
+
+  closeOption();
 };
 
-// Add the editCollection method
 </script>
 <template>
-  <section class="flashcard-home" v-show="page.flashcard">
+  <!-- Flashcard Page-->
+  <section class="flashcard-page" v-show="page.flashcard">
     <div
       class="flex items-center justify-center min-h-screen w-screen"
       :class="{ absolute: popup.newCollection }"
@@ -89,6 +91,7 @@ const deleteCollection = (collectionId) => {
             <h1
               class="cursor-pointer inline hover:bg-[#f4ead8] p-[4px] rounded-xl transition-all duration-[270ms]"
               @click="addNewCollectionName"
+              @click.self="closeOption"
             >
               Add new +
             </h1>
@@ -102,6 +105,7 @@ const deleteCollection = (collectionId) => {
           No collection added yet
         </div>
 
+        <!-- Collection section -->
         <div class="relative">
           <div
             v-if="localCollections !== null"
@@ -128,39 +132,39 @@ const deleteCollection = (collectionId) => {
                     {{ item }}
                   </div>
                 </div>
-                <OptionCollection
-                  v-show="popup.OptionCollection && SelectedIndex === index"
-                  :collectionId="index"
-                  class="absolute left-[140px] z-40"
+
+                 <!-- Option Collection section -->
+                <div
+                  class="max-w-[270px] p-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 w-full absolute left-[140px] z-40"
+                  v-show="popup.optionCollection && SelectedIndex === index"
                 >
-                  <template #delete>
-                    <DeleteCollection
-                      @click="deleteCollection(index)"
-                      class="flex gap-3 hover:bg-gray-100 transition duration-[270ms] ease-in-out p-1 rounded-lg"
-                    >
-                      <iconDelete>
-                        <template #content>
-                          <div>Delete this collection</div>
-                        </template>
-                      </iconDelete>
-                    </DeleteCollection>
-                  </template>
-                  <template #edit>
-                    <EditCollection
-                      class="flex gap-3 hover:bg-gray-100 transition duration-[270ms] ease-in-out p-1 rounded-lg"
-                    >
-                      <iconEdit>
-                        <template #content> Edit this collection </template>
-                      </iconEdit>
-                    </EditCollection>
-                  </template>
-                </OptionCollection>
+                  <div
+                    id="deleteCollection"
+                    class="flex gap-3 hover:bg-gray-100 transition duration-[270ms] ease-in-out p-1 rounded-lg"
+                    @click="deleteCollection(index)"
+                  >
+                    <iconDelete>
+                      <template #content> Delete this collection </template>
+                    </iconDelete>
+                  </div>
+                  <hr class="my-2 border-gray-200 dark:border-gray-700" />
+                  <div
+                    id="editCollection"
+                    class="flex gap-3 hover:bg-gray-100 transition duration-[270ms] ease-in-out p-1 rounded-lg"
+                    @click="editCollection(index)"
+                  >
+                    <iconEdit>
+                      <template #content> Edit this collection </template>
+                    </iconEdit>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
+      <!-- Add New Collection Popup -->
       <section
         class="popup-newCollection absolute"
         v-show="popup.newCollection"
@@ -210,6 +214,7 @@ const deleteCollection = (collectionId) => {
           </div>
         </div>
       </section>
+
     </div>
   </section>
 </template>
