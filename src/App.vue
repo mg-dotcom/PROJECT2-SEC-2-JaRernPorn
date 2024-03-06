@@ -41,6 +41,15 @@ const addNewCollection = () => {
 const computedCollections = computed(() => {
   return collections.value;
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const element = document.getElementById("truncateText");
+  const maxCharacters = 27; // Adjust the maximum number of characters as needed
+
+  if (element.textContent.length > maxCharacters) {
+    element.classList.add("custom-truncate");
+  }
+});
 </script>
 <template>
   <section class="flashcard-home" v-show="page.flashcard">
@@ -76,7 +85,7 @@ const computedCollections = computed(() => {
             <div class="relative">
               <img class="w-[130px]" src="./assets/collection.svg" alt="" />
               <img
-                class="z-10 opacity-70 scale-[60%] hover:bg-neutral-400 w-[44px] h-[44px] p-3 rounded-full cursor-pointer absolute top-0 right-1"
+                class=" z-10 opacity-70 scale-[55%] hover:bg-gray-400 rounded-full w-10 h-10 p-2 cursor-pointer absolute top-2 right-[7.5px]"
                 src="./assets/option.svg"
                 alt="option"
               />
@@ -85,7 +94,7 @@ const computedCollections = computed(() => {
                 class="absolute w-[130px] inset-0 flex items-center justify-center overflow-hidden p-2"
               >
                 <div
-                  class="text-xl font-semibold whitespace-normal break-all overflow-ellipsis max-h-[70px]"
+                  class="text-xl font-semibold whitespace-normal break-all overflow-ellipsis max-h-[27px]"
                 >
                   {{ item }}
                 </div>
@@ -95,7 +104,7 @@ const computedCollections = computed(() => {
         </div>
       </div>
       <section
-        class="popup-newCollection absolute"
+        class="popup-newCollection absolute z-20"
         v-show="popup.newCollection"
       >
         <div
@@ -113,10 +122,10 @@ const computedCollections = computed(() => {
               <div class="my-7 flex flex-col items-center justify-center">
                 <img class="w-[178px]" src="./assets/collection.svg" alt="" />
                 <div
-                  class="w-[178px] overflow-hidden absolute flex items-center justify-center p-3"
+                  class="w-[178px] overflow-hidden absolute flex items-center justify-center"
                 >
                   <div
-                    class="text-2xl font-semibold whitespace-normal break-all overflow-ellipsis max-h-[120px]"
+                    class="text-2xl font-semibold whitespace-normal break-all overflow-ellipsis max-h-[127px]"
                   >
                     {{ newCollectionName }}
                   </div>
