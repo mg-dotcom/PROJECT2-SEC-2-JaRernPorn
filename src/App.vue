@@ -41,8 +41,6 @@ const addNewCollection = () => {
 const computedCollections = computed(() => {
   return collections.value;
 });
-
-
 </script>
 <template>
   <section class="flashcard-home" v-show="page.flashcard">
@@ -77,6 +75,12 @@ const computedCollections = computed(() => {
           <div v-for="(item, index) in computedCollections" :key="item">
             <div class="relative">
               <img class="w-[130px]" src="./assets/collection.svg" alt="" />
+              <img
+                class="z-10 opacity-70 scale-[60%] hover:bg-neutral-400 w-[44px] h-[44px] p-3 rounded-full cursor-pointer absolute top-0 right-1"
+                src="./assets/option.svg"
+                alt="option"
+              />
+
               <div
                 class="absolute w-[130px] inset-0 flex items-center justify-center overflow-hidden p-2"
               >
