@@ -4,14 +4,6 @@ import settingButton from "./components/setting-button.vue";
 const page = reactive({
   homePage: true,
 });
-
-const playButton = () => {
-  // Add your logic here
-};
-
-const howToPlayButton = () => {
-  // Add your logic here
-};
 </script>
 
 <template>
