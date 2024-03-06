@@ -9,6 +9,11 @@ const createCollection=()=>{
     collectionName.value=''
 }
 
+const deleteCollection=(collection)=>{
+    collections.value.splice(collection,1)
+
+}
+
 
 </script>
  
@@ -20,7 +25,7 @@ const createCollection=()=>{
     <button @click="createCollection()">Create</button>
     <!-- display collection -->
     <div v-for="(collection,index) in collections" :key="index">
-        <CollectionDisplay2 :collectionName="collection"></CollectionDisplay2>
+        <CollectionDisplay2 :collectionName="collection" :deleteCollection="deleteCollection" :collectionIndex="index"></CollectionDisplay2>
     </div>
     
 

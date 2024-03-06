@@ -1,15 +1,14 @@
 <script setup>
 defineProps({
-  collectionName: String
+  collectionName: String,
+  deleteCollection:Function,
+  collectionIndex:Number
 })
 
-const deleteCollection=()=>{
-
-}
 </script>
 
 <template>
-  <div class="bg-red-400">{{ collectionName }}<button class="underline bg-blue-300" @click="deleteCollection">delete</button></div>
+  <div class="bg-red-400">{{ collectionName }}<button class="underline bg-blue-300" @click="deleteCollection(collectionIndex)">delete</button></div>
   
 </template>
 
