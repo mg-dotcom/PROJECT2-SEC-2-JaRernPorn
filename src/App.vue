@@ -12,6 +12,7 @@ const popup = reactive({
   newCollection: false,
   optionCollection: false,
   editCollection: false,
+  renameCollection: false,
 });
 
 const addNewCollectionName = () => {
@@ -20,6 +21,7 @@ const addNewCollectionName = () => {
 
 const closeButton = () => {
   popup.newCollection = false;
+  popup.renameCollection = false;
 };
 
 const showOption = (item) => {
@@ -48,7 +50,10 @@ const addNewCollection = () => {
   if (newCollectionName.value === "") {
     return alert("Please enter a collection name");
   } else {
-    collections.value.push(newCollectionName.value);
+    collections.value.push({
+      collectionId: collections.value.length,
+      collectionName: newCollectionName.value,
+    });
     localStorage.setItem("collections", JSON.stringify(collections.value));
     newCollectionName.value = "";
   }
@@ -71,8 +76,21 @@ const deleteCollection = (collectionId) => {
   closeOption();
 };
 
+const renameCollectionName = ref("");
 
+const showRenameCollection = (collectionId) => {
+  console.log(localCollections);
+  popup.renameCollection = true;
+  closeOption();
+};
 
+const renameCollection = (collectionId) => {
+  const selectCollection = collections.value.filter(
+    (item, index) => index === collectionId
+  );
+
+  renameCollectionName.value = "";
+};
 </script>
 <template>
   <!-- Flashcard Page-->
@@ -107,16 +125,77 @@ const deleteCollection = (collectionId) => {
           No collection added yet
         </div>
 
-        <!-- Collection section -->
-        <div class="relative">
+        <!-- Show All Collection section -->
+        <div class="">
           <div
             v-if="localCollections !== null"
             class="grid grid-cols-3 gap-2 p-2 text-center"
             @click.self="closeOption"
           >
             <div v-for="(item, index) in computedCollections" :key="item">
+              <!-- Rename Collection Popup -->
+              <section
+                class="popup-renameCollection absolute top-0 left-0 w-screen h-screen z-50"
+                v-show="popup.renameCollection && SelectedIndex === index"
+              >
+                <div
+                  class="bg-black bg-opacity-50 flex items-center justify-center min-h-screen w-screen relative z-0"
+                >
+                  <div
+                    class="bg-white rounded-lg w-[580px] h-[350px] relative p-6"
+                  >
+                    <close
+                      class="absolute top-3 right-4 cursor-pointer"
+                      @click="closeButton"
+                    />
+                    <div class="flex flex-col items-center justify-center">
+                      <div class="text-center text-3xl font-mono font-bold">
+                        Rename collection
+                      </div>
+                      <div
+                        class="my-7 flex flex-col items-center justify-center"
+                      >
+                        <img
+                          class="w-[178px]"
+                          src="./assets/collection.svg"
+                          alt=""
+                        />
+                        <div
+                          class="w-[178px] overflow-hidden absolute flex items-center justify-center"
+                        >
+                          <div
+                            class="text-2xl font-semibold whitespace-normal break-all overflow-ellipsis max-h-[127px]"
+                          >
+                            {{ renameCollectionName }}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="flex gap-3">
+                        <input
+                          type="text"
+                          v-model="renameCollectionName"
+                          class="border-2 border-[#4096ff] rounded-md p-2 w-[400px] focus:outline-none focus:ring-2 focus:ring-[#4096ff] focus:border-transparent transition-all duration-[270ms]"
+                          placeholder="Collection name"
+                          @keydown.enter="renameCollection"
+                        />
+                        <div>
+                          <button
+                            class="bg-[#4096ff] text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#4096ff] focus:border-transparent transition-all duration-[270ms]"
+                            @click="renameCollection"
+                          >
+                            OK
+                          </button>
+                          <!-- Cancel Button -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Each Folder Collection -->
               <div class="relative flex flex-col items-center">
-                <img class="w-[130px]r" src="./assets/collection.svg" alt="" />
+                <img class="w-[130px]" src="./assets/collection.svg" alt="" />
 
                 <img
                   class="z-10 opacity-70 scale-[55%] hover:bg-gray-400 rounded-full w-10 h-10 p-2 cursor-pointer absolute top-2 right-[1.2px] transition-all duration-[270ms]"
@@ -131,11 +210,11 @@ const deleteCollection = (collectionId) => {
                   <div
                     class="text-xl font-semibold whitespace-normal break-all overflow-ellipsis max-h-[27px]"
                   >
-                    {{ item }}
+                    {{ item.collectionName }}
                   </div>
                 </div>
 
-                 <!-- Option Collection section -->
+                <!-- Option Collection section -->
                 <div
                   class="max-w-[270px] p-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 w-full absolute left-[140px] z-40"
                   v-show="popup.optionCollection && SelectedIndex === index"
@@ -153,7 +232,7 @@ const deleteCollection = (collectionId) => {
                   <div
                     id="editCollection"
                     class="flex gap-3 hover:bg-gray-100 transition duration-[270ms] ease-in-out p-1 rounded-lg"
-                    @click="editCollection(index)"
+                    @click="showRenameCollection(index)"
                   >
                     <iconEdit>
                       <template #content> Rename </template>
@@ -216,7 +295,6 @@ const deleteCollection = (collectionId) => {
           </div>
         </div>
       </section>
-
     </div>
   </section>
 </template>
