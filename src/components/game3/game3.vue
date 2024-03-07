@@ -1,5 +1,6 @@
 <script setup>
 import Option from './Option.vue'
+import data from '../../../data/game3/data.json'
 </script>
 
 <template>
@@ -33,7 +34,7 @@ import Option from './Option.vue'
           <h3>Apple</h3>
         </div>
         <div class="options py-12 w-3/4">
-          <Option :options="['菠萝 bōluó', '苹果 píngguǒ', '葡萄 pú táo']" />
+          <Option :options="data.categories[0].units[0].vocabularies" />
         </div>
       </div>
     </div>
