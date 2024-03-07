@@ -35,62 +35,82 @@ const makeItGone = () => {
 </script>
 
 <template>
-  <div>
-    <h1 class="text-3xl font-bold underline">FLASHCARD</h1>
-    <button class="border-2 border-black mt-10" @click="openForm">
-      Add New Folder
-    </button>
-  </div>
+  <div class="h-screen w-full relative">
+    <div
+      class="absolute inset-0 bg-cover bg-center"
+      :style="{ 'background-image': 'url(/dorajung.jpg)' }"
+    ></div>
 
-  <div>
-    <!-- <img src="/Folder.svg" class="w-40 mt-10" /> -->
-    <div v-for="(folder, index) in flashCard">
-      <div
-        class="bg-gray-200 border border-gray-300 rounded-md shadow-md w-60 h-52 mt-10 ml-10"
+    <div
+      class="absolute inset-0 flex flex-col items-center justify-start p-8 overflow-y-auto"
+    >
+      <h1 class="text-3xl font-bold text-white">FLASHCARD</h1>
+      <button
+        class="bg-[#b13f54] text-white font-bold py-2 px-4 rounded mt-4"
+        @click="openForm"
       >
-        <button class="text-2xl" @click="openFormWithinFolder(index)">
-          ...
-        </button>
-        <h1 class="flex justify-center mt-16 text-3xl">{{ folder.name }}</h1>
+        Add New Folder
+      </button>
+
+      <div>
+        <!-- <img src="/Folder.svg" class="w-40 mt-10" /> -->
+        <div class="grid grid-cols-5 gap-24 mt-8">
+          <div
+            v-for="(folder, index) in flashCard"
+            :key="index"
+            class="bg-gray-200 border border-gray-300 rounded-md shadow-md w-60 h-52"
+          >
+            <button class="text-2xl" @click="openFormWithinFolder(index)">
+              ...
+            </button>
+            <h1 class="flex justify-center mt-16 text-3xl">
+              {{ folder.name }}
+            </h1>
+          </div>
+        </div>
       </div>
+
+      <section
+        v-if="formInput"
+        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+      >
+        <div class="bg-white rounded-lg p-8">
+          <input
+            type="text"
+            class="border border-gray-300 rounded-lg px-4 py-2 mb-4"
+            placeholder="Name Folder"
+            v-model="nameFolder"
+            @keyup.enter="createNewFolder"
+          />
+          <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            @click="createNewFolder"
+          >
+            Done
+          </button>
+        </div>
+      </section>
+
+      <section
+        v-if="formInputInFolder"
+        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+      >
+        <div class="bg-white rounded-lg p-8">
+          <button
+            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+            @click="makeItGone(index)"
+          >
+            Delete
+          </button>
+          <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2"
+          >
+            Edit
+          </button>
+        </div>
+      </section>
     </div>
   </div>
-
-  <section form v-if="formInput" class="flex justify-center">
-    <div
-      class="border border-gray-300 rounded-lg w-64 h-36 bg-white flex flex-col items-center"
-    >
-      <input
-        type="text"
-        class="border border-gray-300 rounded-lg px-4 py-2 w-full mb-4"
-        placeholder="Name Folder"
-        v-model="nameFolder"
-        @keyup.enter="createNewFolder"
-      />
-      <button
-        class="bg-blue-500 text-white py-2 px-4 rounded-lg"
-        @click="createNewFolder"
-      >
-        Done
-      </button>
-    </div>
-  </section>
-
-  <section form v-if="formInputInFolder" class="flex justify-center">
-    <div
-      class="border border-gray-300 rounded-lg w-64 h-36 bg-white flex flex-col items-center"
-    >
-      <button
-        class="bg-blue-500 text-white py-2 px-4 rounded-lg mt-7"
-        @click="makeItGone(index)"
-      >
-        Delete
-      </button>
-      <button class="bg-blue-500 text-white py-2 px-4 rounded-lg mt-2">
-        Edit
-      </button>
-    </div>
-  </section>
 </template>
 
 <style scoped></style>
