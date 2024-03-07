@@ -36,12 +36,16 @@ const closeOption = () => {
 };
 
 // show option on the left of last folder
+const showOptionInLeft = (index) => {
+  return (index + 1) % 3 === 0;
+};
 
 const SelectedIndex = ref(null);
 const collections = ref([]);
 const newCollectionName = ref("");
 const localCollections = JSON.parse(localStorage.getItem("collections")) || [];
 
+console.log(localCollections);
 // Loop to populate collections with localCollections
 localCollections.forEach((collection) => {
   collections.value.push(collection);
@@ -51,9 +55,10 @@ const addNewCollection = () => {
   popup.newCollection = false;
 
   if (newCollectionName.value === "") {
-    return alert("Please enter a collection name");
+    console.log(collections.value.length);
   } else {
     collections.value.push({
+      // collectionId:
       collectionName: newCollectionName.value,
     });
     localStorage.setItem("collections", JSON.stringify(collections.value));
@@ -218,8 +223,11 @@ const editCollection = (collectionId) => {
 
               <!-- Each Folder Collection -->
               <div class="relative flex flex-col items-center">
-                <img class="w-[130px]" src="./assets/collection.svg" alt="" />
-
+                <img
+                  class="w-[130px] cursor-pointer"
+                  src="./assets/collection.svg"
+                  alt="collection"
+                />
                 <img
                   class="z-10 opacity-70 scale-[55%] hover:bg-gray-400 rounded-full w-10 h-10 p-2 cursor-pointer absolute top-2 right-[1.2px] transition-all duration-[270ms]"
                   src="./assets/option.svg"
@@ -231,7 +239,7 @@ const editCollection = (collectionId) => {
                   class="absolute w-[145px] inset-0 flex items-center justify-center overflow-hidden p-2 cursor-pointer"
                 >
                   <div
-                    class="text-xl font-semibold whitespace-normal break-all overflow-ellipsis max-h-[27px]"
+                    class="text-xl font-semibold whitespace-normal break-all overflow-ellipsis max-h-[27px] z-10"
                   >
                     {{ item.collectionName }}
                   </div>
@@ -239,11 +247,11 @@ const editCollection = (collectionId) => {
 
                 <!-- Option Collection section -->
                 <div
-                  class="max-w-[270px] p-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 w-full absolute left-[140px] z-40"
+                  class="max-w-[270px] p-3 bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700 w-full absolute z-40"
                   v-show="popup.optionCollection && SelectedIndex === index"
-                  :class="{
-                    'top-0': index === computedCollections.length ,
-                  }"
+                  :class="[
+                    showOptionInLeft(index) ? 'right-[32px]' : 'left-[132px]',
+                  ]"
                 >
                   <div
                     id="deleteCollection"
