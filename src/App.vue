@@ -3,6 +3,7 @@ import { reactive, ref, computed } from "vue"; // Add the import statement for r
 import close from "./components/icons/iconClose.vue";
 import iconDelete from "./components/icons/iconDelete.vue";
 import iconEdit from "./components/icons/iconEdit.vue";
+import { loadConfigFromFile } from "vite";
 
 const page = reactive({
   flashcard: true,
@@ -51,7 +52,7 @@ const addNewCollection = () => {
     return alert("Please enter a collection name");
   } else {
     collections.value.push({
-      collectionId: collections.value.length,
+      collectionId: collections.value.length + 1,
       collectionName: newCollectionName.value,
     });
     localStorage.setItem("collections", JSON.stringify(collections.value));
@@ -85,9 +86,22 @@ const showRenameCollection = (collectionId) => {
 };
 
 const renameCollection = (collectionId) => {
-  const selectCollection = collections.value.filter(
+  const editName = { collectionName: renameCollectionName.value };
+
+  const indexCollection = collections.value.findIndex(
     (item, index) => index === collectionId
   );
+
+  const editedCollection = {
+    ...localCollections[indexCollection],
+    ...editName,
+  };
+
+  if (indexCollection === -1) {
+    console.log("ค่าที่คุณกำหนดไม่พบในอาร์เรย์");
+  } else {
+    return "";
+  }
 
   renameCollectionName.value = "";
 };
@@ -176,12 +190,12 @@ const renameCollection = (collectionId) => {
                           v-model="renameCollectionName"
                           class="border-2 border-[#4096ff] rounded-md p-2 w-[400px] focus:outline-none focus:ring-2 focus:ring-[#4096ff] focus:border-transparent transition-all duration-[270ms]"
                           placeholder="Collection name"
-                          @keydown.enter="renameCollection"
+                          @keydown.enter="renameCollection(index)"
                         />
                         <div>
                           <button
                             class="bg-[#4096ff] text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#4096ff] focus:border-transparent transition-all duration-[270ms]"
-                            @click="renameCollection"
+                            @click="renameCollection(index)"
                           >
                             OK
                           </button>
