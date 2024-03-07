@@ -1,9 +1,8 @@
 <script setup>
-import { reactive, ref, computed } from "vue"; // Add the import statement for reactive
+import { ref, reactive, computed } from "vue";
 import close from "./components/icons/iconClose.vue";
 import iconDelete from "./components/icons/iconDelete.vue";
 import iconEdit from "./components/icons/iconEdit.vue";
-import { loadConfigFromFile } from "vite";
 
 const page = reactive({
   flashcard: true,
@@ -33,7 +32,10 @@ const showOption = (item) => {
 
 const closeOption = () => {
   popup.optionCollection = false;
+  renameCollectionName.value = "";
 };
+
+// show option on the left of last folder
 
 const SelectedIndex = ref(null);
 const collections = ref([]);
@@ -52,7 +54,6 @@ const addNewCollection = () => {
     return alert("Please enter a collection name");
   } else {
     collections.value.push({
-      collectionId: collections.value.length + 1,
       collectionName: newCollectionName.value,
     });
     localStorage.setItem("collections", JSON.stringify(collections.value));
@@ -79,35 +80,38 @@ const deleteCollection = (collectionId) => {
 
 const renameCollectionName = ref("");
 
-const showRenameCollection = (collectionId) => {
+const showRenameCollection = () => {
   console.log(localCollections);
   popup.renameCollection = true;
   closeOption();
 };
 
-const renameCollection = (collectionId) => {
+const editCollection = (collectionId) => {
   const editName = { collectionName: renameCollectionName.value };
 
   const indexCollection = collections.value.findIndex(
     (item, index) => index === collectionId
   );
 
-  const editedCollection = {
+  const updateCollectionName = {
     ...localCollections[indexCollection],
     ...editName,
   };
 
-  if (indexCollection === -1) {
-    console.log("ค่าที่คุณกำหนดไม่พบในอาร์เรย์");
+  if (renameCollectionName.value === "") {
+    return alert("Please enter a new collection name");
   } else {
-    return "";
+    // Remove 1 element at collectionId index, and insert {collectionName: updateCollectionName}
+    collections.value.splice(collectionId, 1, updateCollectionName);
+    localStorage.setItem("collections", JSON.stringify(collections.value));
+    popup.renameCollection = false;
+    renameCollectionName.value = "";
   }
-
-  renameCollectionName.value = "";
 };
 </script>
+
 <template>
-  <!-- Flashcard Page-->
+  <!-- Flashcard Page -->
   <section class="flashcard-page" v-show="page.flashcard">
     <div
       class="flex items-center justify-center min-h-screen w-screen"
@@ -140,20 +144,21 @@ const renameCollection = (collectionId) => {
         </div>
 
         <!-- Show All Collection section -->
-        <div class="">
+        <div class="all-collection">
           <div
             v-if="localCollections !== null"
             class="grid grid-cols-3 gap-2 p-2 text-center"
             @click.self="closeOption"
           >
             <div v-for="(item, index) in computedCollections" :key="item">
-              <!-- Rename Collection Popup -->
+              <!-- Rename Collection Popup  -->
               <section
                 class="popup-renameCollection absolute top-0 left-0 w-screen h-screen z-50"
                 v-show="popup.renameCollection && SelectedIndex === index"
               >
                 <div
                   class="bg-black bg-opacity-50 flex items-center justify-center min-h-screen w-screen relative z-0"
+                  @click.self="closeButton"
                 >
                   <div
                     class="bg-white rounded-lg w-[580px] h-[350px] relative p-6"
@@ -180,7 +185,11 @@ const renameCollection = (collectionId) => {
                           <div
                             class="text-2xl font-semibold whitespace-normal break-all overflow-ellipsis max-h-[127px]"
                           >
-                            {{ renameCollectionName }}
+                            {{
+                              renameCollectionName !== ""
+                                ? renameCollectionName
+                                : item.collectionName
+                            }}
                           </div>
                         </div>
                       </div>
@@ -189,13 +198,13 @@ const renameCollection = (collectionId) => {
                           type="text"
                           v-model="renameCollectionName"
                           class="border-2 border-[#4096ff] rounded-md p-2 w-[400px] focus:outline-none focus:ring-2 focus:ring-[#4096ff] focus:border-transparent transition-all duration-[270ms]"
-                          placeholder="Collection name"
-                          @keydown.enter="renameCollection(index)"
+                          :placeholder="item.collectionName"
+                          @keydown.enter="editCollection(index)"
                         />
                         <div>
                           <button
                             class="bg-[#4096ff] text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#4096ff] focus:border-transparent transition-all duration-[270ms]"
-                            @click="renameCollection(index)"
+                            @click="editCollection(index)"
                           >
                             OK
                           </button>
@@ -232,6 +241,9 @@ const renameCollection = (collectionId) => {
                 <div
                   class="max-w-[270px] p-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 w-full absolute left-[140px] z-40"
                   v-show="popup.optionCollection && SelectedIndex === index"
+                  :class="{
+                    'top-0': index === computedCollections.length ,
+                  }"
                 >
                   <div
                     id="deleteCollection"
@@ -266,6 +278,7 @@ const renameCollection = (collectionId) => {
       >
         <div
           class="bg-black bg-opacity-50 flex items-center justify-center min-h-screen w-screen"
+          @click.self="closeButton"
         >
           <div class="bg-white rounded-lg w-[580px] h-[350px] relative p-6">
             <close
