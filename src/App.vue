@@ -3,6 +3,7 @@ import { ref } from 'vue'
 // import folder from './components/folder.vue'
 const flashCard = ref([])
 const formInput = ref(false)
+const formInputInFolder = ref(false)
 const nameFolder = ref('')
 
 const createNewFolder = () => {
@@ -17,6 +18,16 @@ const createNewFolder = () => {
 
 const openForm = () => {
   formInput.value = true
+}
+
+const openFormWithinFolder = () => {
+  formInputInFolder.value = true
+}
+
+const makeItGone = (index) => {
+  console.log(flashCard.value)
+  flashCard.value.splice(index, 1) //ตัวที่จะลบ,จำนวนที่จะลบ
+  formInputInFolder.value = false
 }
 </script>
 
@@ -35,9 +46,25 @@ const openForm = () => {
       <div
         class="bg-gray-200 border border-gray-300 rounded-md shadow-md w-60 h-52 mt-10 ml-10"
       >
-        <button class="text-2xl">...</button>
+        <button class="text-2xl" @click="openFormWithinFolder">...</button>
         <h1 class="flex justify-center mt-16 text-3xl">{{ folder.name }}</h1>
       </div>
+
+      <section form v-if="formInputInFolder" class="flex justify-center">
+        <div
+          class="border border-gray-300 rounded-lg w-64 h-36 bg-white flex flex-col items-center"
+        >
+          <button
+            class="bg-blue-500 text-white py-2 px-4 rounded-lg mt-7"
+            @click="makeItGone(index)"
+          >
+            Delete
+          </button>
+          <button class="bg-blue-500 text-white py-2 px-4 rounded-lg mt-2">
+            Edit
+          </button>
+        </div>
+      </section>
     </div>
   </div>
 
@@ -50,6 +77,7 @@ const openForm = () => {
         class="border border-gray-300 rounded-lg px-4 py-2 w-full mb-4"
         placeholder="Name Folder"
         v-model="nameFolder"
+        @keyup.enter="createNewFolder"
       />
       <button
         class="bg-blue-500 text-white py-2 px-4 rounded-lg"
@@ -59,6 +87,29 @@ const openForm = () => {
       </button>
     </div>
   </section>
+
+  <!-- <section form v-if="formInputInFolder" class="flex justify-center">
+    <div
+      class="border border-gray-300 rounded-lg w-64 h-36 bg-white flex flex-col items-center"
+    >
+      <input
+        type="text"
+        class="border border-gray-300 rounded-lg px-4 py-2 w-full mb-4"
+        placeholder="Name Folder"
+        v-model="nameFolder"
+      />
+
+      <button
+        class="bg-blue-500 text-white py-2 px-4 rounded-lg mt-6"
+        @click="makeItGone(index)"
+      >
+        Delete
+      </button>
+      <button class="bg-blue-500 text-white py-2 px-4 rounded-lg mt-6">
+        Edit
+      </button>
+    </div>
+  </section> -->
 </template>
 
 <style scoped></style>
