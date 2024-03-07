@@ -71,6 +71,8 @@ const deleteCollection = (collectionId) => {
   closeOption();
 };
 
+
+
 </script>
 <template>
   <!-- Flashcard Page-->
@@ -144,7 +146,7 @@ const deleteCollection = (collectionId) => {
                     @click="deleteCollection(index)"
                   >
                     <iconDelete>
-                      <template #content> Delete this collection </template>
+                      <template #content> Delete </template>
                     </iconDelete>
                   </div>
                   <hr class="my-2 border-gray-200 dark:border-gray-700" />
@@ -154,7 +156,7 @@ const deleteCollection = (collectionId) => {
                     @click="editCollection(index)"
                   >
                     <iconEdit>
-                      <template #content> Edit this collection </template>
+                      <template #content> Rename </template>
                     </iconEdit>
                   </div>
                 </div>
