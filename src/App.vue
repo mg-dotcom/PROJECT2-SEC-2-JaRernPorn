@@ -1,12 +1,11 @@
 <script setup>
+import Result from './components/Result.vue';
 
 </script>
  
 <template>
 <div>
-  <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
+  <Result></Result>
 </div>
 </template>
  
