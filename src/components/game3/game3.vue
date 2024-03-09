@@ -1,6 +1,29 @@
 <script setup>
 import Option from './Option.vue'
 import data from '../../../data/game3/data.json'
+import { computed, ref } from 'vue'
+
+const answer = ref()
+const randomQuiz = ref(0)
+
+const checkAnswer = (selectedOption) => {
+  console.log(answer.value)
+  console.log('selected option= ' + selectedOption.word)
+
+  if(selectedOption.word===answer.value){
+    console.log('correct!');
+  }else{
+    console.log('Wrong!');
+  }
+  randomQuiz.value++
+}
+
+const currentQuiz = computed(() => {
+  answer.value = data.categories[0].units[0].vocabularies[randomQuiz.value].word
+  console.log(answer.value)
+
+  return data.categories[0].units[0].vocabularies[randomQuiz.value].image
+})
 </script>
 
 <template>
@@ -10,7 +33,11 @@ import data from '../../../data/game3/data.json'
         Category : Fruit
       </div>
       <div class="setting flex">
-        <img src="/public/Vector.svg" alt="setting button" class="w-10 hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out" />
+        <img
+          src="/public/Vector.svg"
+          alt="setting button"
+          class="w-10 hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
+        />
       </div>
     </div>
     <div>
@@ -30,11 +57,14 @@ import data from '../../../data/game3/data.json'
         <div
           class="pic bg-white flex flex-col items-center rounded-lg drop-shadow-lg w-32 py-5"
         >
-          <img src="/public/fruits/fruits-01.png" alt="" class="w-20" />
-          <h3>Apple</h3>
+          <img :src="currentQuiz" class="w-20" />
+          <h3>{{ answer }}</h3>
         </div>
         <div class="options py-12 w-3/4">
-          <Option :options="data.categories[0].units[0].vocabularies" />
+          <Option
+            :options="data.categories[0].units[0].vocabularies"
+            @optionClicked="checkAnswer"
+          />
         </div>
       </div>
     </div>

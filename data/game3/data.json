@@ -10,19 +10,19 @@
               "word": "apple",
               "meaning": "แอปเปิ้ล",
               "pronunciation": "path/to/apple.mp3",
-              "image": "path/to/apple.jpg"
+              "image": "./fruits/apple.png"
             },
             {
               "word": "banana",
               "meaning": "กล้วย",
               "pronunciation": "path/to/banana.mp3",
-              "image": "path/to/banana.jpg"
+              "image": "./fruits/banana.png"
             },
             {
               "word": "watermelon",
               "meaning": "แตงโม",
               "pronunciation": "path/to/watermelon.mp3",
-              "image": "path/to/watermelon.jpg"
+              "image": "./fruits/watermelon.png"
             }
           ]
         },

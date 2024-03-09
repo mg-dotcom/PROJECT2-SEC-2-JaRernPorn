@@ -25,7 +25,6 @@
         <div class="play"></div>
         <div class="home"></div>
       </div>
-      <button class="btn btn-primary">Button</button>
     </div>
   </div>
 </template>
