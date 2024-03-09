@@ -55,11 +55,12 @@ const addNewCollection = () => {
   popup.newCollection = false;
 
   if (newCollectionName.value === "") {
-    console.log(collections.value.length);
+    return alert("Please enter a collection name");
   } else {
     collections.value.push({
       // collectionId:
       collectionName: newCollectionName.value,
+      items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     });
     localStorage.setItem("collections", JSON.stringify(collections.value));
     newCollectionName.value = "";
@@ -98,16 +99,17 @@ const editCollection = (collectionId) => {
     (item, index) => index === collectionId
   );
 
+
   const updateCollectionName = {
-    ...localCollections[indexCollection],
+    ...collections.value[indexCollection],
     ...editName,
   };
 
   if (renameCollectionName.value === "") {
-    return alert("Please enter a new collection name");
+    console.log(collections.value[indexCollection]);
+    console.log(localCollections[indexCollection]);
   } else {
-    // Remove 1 element at collectionId index, and insert {collectionName: updateCollectionName}
-    collections.value.splice(collectionId, 1, updateCollectionName);
+    collections.value[indexCollection] = updateCollectionName;
     localStorage.setItem("collections", JSON.stringify(collections.value));
     popup.renameCollection = false;
     renameCollectionName.value = "";
