@@ -57,6 +57,6 @@ export default {
         listMobile: "2",
       },
     },
-  plugins: [],
+  plugins: [require("daisyui")],
 }
 }

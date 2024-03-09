@@ -10,7 +10,7 @@ import data from '../../../data/game3/data.json'
         Category : Fruit
       </div>
       <div class="setting flex">
-        <img src="/public/Vector.svg" alt="setting button" class="w-10" />
+        <img src="/public/Vector.svg" alt="setting button" class="w-10 hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out" />
       </div>
     </div>
     <div>
