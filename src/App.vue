@@ -10,7 +10,7 @@ const thisFolder = ref(null)
 const createNewFolder = () => {
   const newFolder = { name: nameFolder.value }
   flashCard.value.push(newFolder)
-  formInput.value = false
+  closeForm()
   console.log(nameFolder.value)
   console.log(flashCard.value)
 
@@ -19,6 +19,14 @@ const createNewFolder = () => {
 
 const openForm = () => {
   formInput.value = true
+}
+
+const closeForm = () => {
+  formInput.value = false
+}
+
+const closeFormInFolder = () => {
+  formInputInFolder.value = false
 }
 
 const openFormWithinFolder = (index) => {
@@ -73,6 +81,7 @@ const makeItGone = () => {
       <section
         v-if="formInput"
         class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+        @click="closeForm"
       >
         <div class="bg-white rounded-lg p-8">
           <input
@@ -94,6 +103,7 @@ const makeItGone = () => {
       <section
         v-if="formInputInFolder"
         class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+        @click="closeFormInFolder"
       >
         <div class="bg-white rounded-lg p-8">
           <button
