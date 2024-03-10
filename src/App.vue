@@ -4,9 +4,7 @@
   <div class="w-full h-screen bg-main-bgColor">
     <div class="flex flex-col gap-5 p-6 py-8">
       <div class="flex justify-between items-center">
-        <h1
-          class="font-outfit text-title text-3xl font-semibold sm:text-4xl lg:text-5xl"
-        >
+        <h1 class="font-outfit text-title text-3xl font-semibold sm:text-4xl">
           Category: Fruits
         </h1>
         <img
@@ -32,15 +30,24 @@
       </p>
     </div>
 
-    <div
-      class="grid gap-x-3 gap-y-6 grid-cols-2 grid-rows-3 p-7 md:gap-x-12 md:gap-y-10 lg:px-36 lg:py-12 lg:gap-x-20 lg:gap-y-10"
-    >
-      <button
-        class="bg-white rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-24 md:text-2xl lg:rounded-2xl"
-        v-for="n in 6"
-      >
-        {{ n }}
-      </button>
+    <div class="flex justify-center">
+      <div class="grid grid-cols grid-rows-3 gap-y-7 p-8">
+        <button
+          class="bg-white rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-20 md:w-96 md:text-2xl lg:rounded-2xl"
+          v-for="n in 3"
+        >
+          {{ n }}
+        </button>
+      </div>
+
+      <div class="grid grid-cols grid-rows-3 gap-y-7 p-8">
+        <button
+          class="bg-white rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-20 md:w-96 md:text-2xl lg:rounded-2xl"
+          v-for="n in 3"
+        >
+          {{ n }}
+        </button>
+      </div>
     </div>
 
     <div class="flex justify-end px-6 lg:px-36">
