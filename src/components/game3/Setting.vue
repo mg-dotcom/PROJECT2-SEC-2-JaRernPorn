@@ -1,4 +1,14 @@
-<script setup></script>
+<script setup>
+import { ref } from 'vue';
+
+const isPlaying=ref(false)
+const player=ref('')
+const musicControl=()=>{
+  isPlaying.value = !isPlaying.value
+ if (isPlaying.value) player.value.play()
+ else player.value.pause()
+}
+</script>
 
 <template>
   <div>
@@ -26,6 +36,9 @@
         <div class="home"></div>
       </div>
     </div>
+    <audio controls class="" ref="player">
+      <source src="../../assets/background-music.mp3" type="audio/mp3" />
+    </audio>
   </div>
 </template>
 

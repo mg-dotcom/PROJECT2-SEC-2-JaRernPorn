@@ -5,8 +5,8 @@ import Setting from './components/game3/Setting.vue';
 
 <template>
   <div class="bg-main-bgColor min-h-screen w-full">
-    <game3 />
-    <!-- <Setting/> -->
+    <!-- <game3 /> -->
+    <Setting/>
   </div>
 </template>
 
