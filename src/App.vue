@@ -7,7 +7,16 @@ const formInputInFolder = ref(false)
 const nameFolder = ref('')
 const thisFolder = ref(null)
 
+//edit
+const oldName = ref('')
+const editForm = ref(false)
+
 const createNewFolder = () => {
+  if (!nameFolder.value) {
+    //include null, undefined, 0, an empty string '', NaN, and false.
+    alert('Name smth beach')
+    return ''
+  }
   const newFolder = { name: nameFolder.value }
   flashCard.value.push(newFolder)
   closeForm()
@@ -23,6 +32,7 @@ const openForm = () => {
 
 const closeForm = () => {
   formInput.value = false
+  editForm.value = false
 }
 
 const closeFormInFolder = () => {
@@ -39,6 +49,12 @@ const makeItGone = () => {
   console.log(flashCard.value)
   flashCard.value.splice(thisFolder.value, 1) //ตัวที่จะลบ,จำนวนที่จะลบ
   formInputInFolder.value = false
+}
+
+const editThisFolder = () => {
+  editForm.value = true
+  console.log(flashCard.value[thisFolder.value].name)
+  oldName.value = flashCard.value[thisFolder.value].name
 }
 </script>
 
@@ -81,7 +97,7 @@ const makeItGone = () => {
       <section
         v-if="formInput"
         class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
-        @click="closeForm"
+        @click.self="closeForm"
       >
         <div class="bg-white rounded-lg p-8">
           <input
@@ -103,7 +119,7 @@ const makeItGone = () => {
       <section
         v-if="formInputInFolder"
         class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
-        @click="closeFormInFolder"
+        @click.self="closeFormInFolder"
       >
         <div class="bg-white rounded-lg p-8">
           <button
@@ -114,8 +130,30 @@ const makeItGone = () => {
           </button>
           <button
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2"
+            @click="editThisFolder"
           >
             Edit
+          </button>
+        </div>
+      </section>
+
+      <section
+        v-if="editForm"
+        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+        @click.self="closeForm"
+      >
+        <div>
+          <input
+            type="text"
+            class="border border-gray-300 rounded-lg px-4 py-2 mb-4"
+            :placeholder="oldName"
+            v-model="newName"
+          />
+          <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2"
+            @click="editThisFolder"
+          >
+            Finish
           </button>
         </div>
       </section>
