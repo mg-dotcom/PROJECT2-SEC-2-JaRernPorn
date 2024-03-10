@@ -1,12 +1,12 @@
 <script setup>
 import { ref, reactive, computed } from 'vue'
 
-const categories = ref([])
+// const categories = ref([])
+// const newCollection = ref('')
+// const editForm = ref(false)
+// const editCard = ref(false)
 const collections = ref([])
 const newCard = ref('')
-const newCollection = ref('')
-const editForm = ref(false)
-// const editCard = ref(false)
 
 const addNew = () => {
   if (newCard.value?.trim()) {
@@ -41,7 +41,7 @@ const removeCard = (card) => {
 <template>
   <div>
     <div class="flex flex-col gap-2 p-7 items-center justify-center">
-      <div class="flex gap-1">
+      <div class="flex gap-1 items-center">
         <p>Add new word</p>
         <input type="text" class="border h-8" v-model="newCard" />
         <button

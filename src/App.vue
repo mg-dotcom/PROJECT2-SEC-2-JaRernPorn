@@ -11,12 +11,12 @@ const flashcard = ref(true)
 <template>
   <div>
     <!-- test crud -->
-    <CRUD></CRUD>
+    <!-- <CRUD></CRUD> -->
     <!-- flashcard page -->
     <!-- <Flashcard></Flashcard> -->
 
     <!-- add new collection page -->
-    <!-- <AddCollection></AddCollection> -->
+    <AddCollection></AddCollection>
   </div>
 </template>
 

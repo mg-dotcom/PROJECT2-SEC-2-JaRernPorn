@@ -42,9 +42,10 @@ import { ref, reactive, computed } from 'vue'
         <input type="text" class="rounded-xl shadow-md w-1/4 h-11" />
       </div>
     </div>
-    <div class="flex py-8">
+
+    <div class="flex justify-center py-8">
       <button
-        class="bg-title text-white font-outfit font-medium text-xl px-4 py-2 tracking-wide rounded-xl"
+        class="bg-title text-white font-outfit font-medium text-xl px-4 py-2 tracking-wide rounded-xl hover:bg-button-bgColor"
       >
         ADD
       </button>
