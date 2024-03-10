@@ -23,7 +23,7 @@ const saveEditedCollection = () => {
 </script>
 
 <template>
-  <div class="bg-red-400">
+  <div class="bg-red-200">
     <span v-if="!editBox">{{ props.collectionName }}</span>
     <input
       v-else

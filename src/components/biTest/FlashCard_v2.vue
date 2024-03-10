@@ -5,8 +5,12 @@ import CollectionDisplay2 from './CollectionDisplay2.vue'
 const collectionName = ref('')
 const collections = ref([])
 const createCollection = () => {
-  collections.value.push(collectionName.value)
-  collectionName.value = ''
+  if (collectionName.value.trim().length <= 0) {
+    console.log('Pls typing collection name')
+  } else {
+    collections.value.push(collectionName.value)
+    collectionName.value = ''
+  }
 }
 
 const deleteCollection = (collection) => {
@@ -22,7 +26,12 @@ const saveEditedCollectionName = (editedCollectionName, collectionIndex) => {
   <div>
     <h1>FlashCard</h1>
     Add new Collection :
-    <input type="text" v-model="collectionName" class="border border-black" />
+    <input
+      type="text"
+      v-model="collectionName"
+      class="border border-black"
+      @keydown.enter="createCollection()"
+    />
     <button @click="createCollection()">Create</button>
     <!-- display collection -->
     <div v-for="(collection, index) in collections" :key="index">
