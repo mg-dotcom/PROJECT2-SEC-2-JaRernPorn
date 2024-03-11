@@ -1,15 +1,9 @@
 <script setup>
-
+import selectLevel from './components/selectLevel.vue'
 </script>
- 
-<template>
-<div>
-  <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
-</div>
-</template>
- 
-<style scoped>
 
-</style>
+<template>
+  <selectLevel />
+</template>
+
+<style scoped></style>
