@@ -18,6 +18,7 @@
             type="text"
             id="chineseword"
             class="border border-black bg-white rounded-md p-1 w-60"
+            placeholder="苹果"
           />
         </div>
 
@@ -27,6 +28,7 @@
             type="text"
             id="pinyin"
             class="border border-black bg-white rounded-md p-1 w-60"
+            placeholder="píngguǒ"
           />
         </div>
 
@@ -36,6 +38,7 @@
             type="text"
             id="meaning"
             class="border border-black bg-white rounded-md p-1 w-60"
+            placeholder="Apple"
           />
         </div>
       </div>
