@@ -24,11 +24,6 @@ watch(isPlaying, (newValue) => {
 </script>
 
 <template>
-  <!-- <p>Music</p>
-  <input type="checkbox" class="toggle" @click="musicControl" />
-  <audio controls class="hidden" ref="player">
-    <source src="./assets/voice/background-music.mp3" type="audio/mp3" />
-  </audio> -->
 
   <div class="w-full h-screen bg-main-bgColor">
     <div class="flex justify-center">
