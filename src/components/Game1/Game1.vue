@@ -1,5 +1,7 @@
 <script setup>
 import categories from '../../../data/categories.json'
+const currentIndexItem = ref(0)
+const currentIndexCate = ref(0)
 </script>
 
 <template>
@@ -24,7 +26,9 @@ import categories from '../../../data/categories.json'
     </div>
 
     <div class="flex flex-row gap-16 justify-center mt-10">
-      <div class="h-[400px] w-[300px] rounded-3xl shadow-md bg-white">
+      <div
+        class="h-[400px] w-[300px] rounded-3xl shadow-md bg-white cursor-pointer"
+      >
         <img
           src="/Apple.svg"
           alt="Apple"
