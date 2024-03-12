@@ -1,5 +1,5 @@
 <script setup>
-import categories from '../../../data/demoDate.json'
+import categories from '../../../data/categories.json'
 </script>
 
 <template>
