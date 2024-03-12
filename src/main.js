@@ -1,6 +1,6 @@
 import './assets/main.css'
 
 import { createApp } from 'vue'
-import App from './App.vue'
+import Flashcard from './Flashcard.vue'
 
-createApp(App).mount('#app')
+createApp(Flashcard).mount('#app')
