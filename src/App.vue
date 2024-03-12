@@ -5,7 +5,7 @@
     <div class="p-7 bg-main-bgColor h-screen overflow-y-hidden">
       <header>
         <img
-          class="w-16 absolute hover:w-catePage-20 transition-all duration-300 ease-in-out"
+          class="w-16 absolute hover:w-catePage-20 transition-all duration-300 ease-in-out cursor-pointer"
           src="./assets/categories/icon/left-arrow-01.png"
           alt="left-arrow"
         />
@@ -32,7 +32,7 @@
                 <img
                   src="./assets/categories/cate_fruits.png"
                   alt="fruits image"
-                  class="hover:drop-shadow-lg"
+                  class="hover:drop-shadow-lg cursor-pointer"
                 />
               </div>
               <p class="text-xl">Fruits</p>
@@ -44,7 +44,7 @@
                 <img
                   src="./assets/categories/cate_animals.png"
                   alt="animals image"
-                  class="hover:drop-shadow-lg"
+                  class="hover:drop-shadow-lg cursor-pointer"
                 />
               </div>
               <p class="text-xl">Animals</p>
@@ -56,7 +56,7 @@
                 <img
                   src="./assets/categories/cate_colors.png"
                   alt="colors image"
-                  class="hover:drop-shadow-lg"
+                  class="hover:drop-shadow-lg cursor-pointer"
                 />
               </div>
               <p class="text-xl">Colors</p>
@@ -73,7 +73,7 @@
                 <img
                   src="./assets/categories/cate_family.png"
                   alt="family image"
-                  class="hover:drop-shadow-lg"
+                  class="hover:drop-shadow-lg cursor-pointer"
                 />
               </div>
               <p class="text-xl">Family</p>
@@ -85,7 +85,7 @@
                 <img
                   src="./assets/categories/cate_numbers.png"
                   alt="family image"
-                  class="hover:drop-shadow-lg"
+                  class="hover:drop-shadow-lg cursor-pointer"
                 />
               </div>
               <p class="text-xl">Numbers</p>
