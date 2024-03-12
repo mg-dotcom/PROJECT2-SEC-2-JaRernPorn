@@ -6,7 +6,7 @@
     <div class="flex justify-between items-center p-2 md:p-4 lg:px-10 lg:py-12">
       <div>
         <img
-          src="img/flashcard/back-button.svg"
+          src="/img/flashcard/back-button.svg"
           alt="back button"
           class="w-16 cursor-pointer lg:w-20"
         />
@@ -33,11 +33,11 @@
         >
           Add new +
         </button>
-        <img
+        <!-- <img
           src="/flashcard/menu.svg"
           alt="menu"
           class="w-1 lg:w-1.5 cursor-pointer"
-        />
+        /> -->
       </div>
       <p class="border border-b-0 border-gray-border"></p>
       <div
