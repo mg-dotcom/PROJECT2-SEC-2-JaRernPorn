@@ -1,5 +1,5 @@
 <script setup>
-import { ref, defineEmits, watch } from 'vue';
+import { ref, watchEffect } from 'vue';
 
 const newWord = ref('');
 const newMeaning = ref('');
@@ -16,12 +16,13 @@ function goToAddCard() {
 
 const flashcards = ref([]);
 
-watch(flashcards, () => {
+watchEffect(flashcards, () => {
     if (flashcards.value.length > 0) {
         showFlashCard.value = true;
         showAddCard.value = false;
     }
-}, { deep: true });
+})
+// , { deep: true });
 // ตรวจสอบการเปลี่ยนแปลงของ flashcards
 
 
@@ -72,6 +73,7 @@ function cancelAddFlashcard() {
 
             <div class="cards flex-col justify-center items-center">
                 <div class="flex flex-wrap gap-10 justify-center ">
+
                     <div v-for="card in flashcards" :key="card.id" >
                         <div class=" flex flex-col justify-center h-[200px] w-[400px] rounded-3xl shadow-md bg-white">
                             <div class="flex flex-col items-center font-outfit text-lg ">
@@ -81,6 +83,7 @@ function cancelAddFlashcard() {
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
 
