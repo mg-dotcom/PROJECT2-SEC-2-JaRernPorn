@@ -6,8 +6,8 @@ import { computed, ref } from 'vue'
 
 const answer = ref()
 const randomQuiz = ref(0)
-const showSetting=ref(false)
-const showGame3=ref(true)
+const showSetting = ref(false)
+// const showGame3=ref(true)
 
 const checkAnswer = (selectedOption) => {
   console.log(answer.value)
@@ -28,15 +28,14 @@ const currentQuiz = computed(() => {
   return data.categories[0].units[0].vocabularies[randomQuiz.value].image
 })
 
-const toggleSetting=()=>{
-  showSetting.value=!showSetting.value
-  showGame3.value=!showGame3.value
+const toggleSetting = () => {
+  showSetting.value = !showSetting.value
+  // showGame3.value=!showGame3.value
 }
-
 </script>
 
 <template>
-  <div class="font-outfit" v-show="showGame3">
+  <div class="font-outfit">
     <div class="header flex justify-between p-16">
       <div class="category-name text-title text-4xl font-semibold">
         Category : Fruit
@@ -80,7 +79,7 @@ const toggleSetting=()=>{
     </div>
   </div>
 
-  <Setting v-show="showSetting"/>
+  <Setting v-show="showSetting" />
 </template>
 
 <style scoped></style>
