@@ -1,6 +1,7 @@
 <script setup>
 import Option from './Option.vue'
 import data from '../../../data/game3/data.json'
+import Setting from './Setting.vue'
 import { computed, ref } from 'vue'
 
 const answer = ref()
@@ -10,10 +11,10 @@ const checkAnswer = (selectedOption) => {
   console.log(answer.value)
   console.log('selected option= ' + selectedOption.word)
 
-  if(selectedOption.word===answer.value){
-    console.log('correct!');
-  }else{
-    console.log('Wrong!');
+  if (selectedOption.word === answer.value) {
+    console.log('correct!')
+  } else {
+    console.log('Wrong!')
   }
   randomQuiz.value++
 }
@@ -24,6 +25,7 @@ const currentQuiz = computed(() => {
 
   return data.categories[0].units[0].vocabularies[randomQuiz.value].image
 })
+
 </script>
 
 <template>
@@ -37,6 +39,7 @@ const currentQuiz = computed(() => {
           src="/public/Vector.svg"
           alt="setting button"
           class="w-10 hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
+          @click="Setting"
         />
       </div>
     </div>
