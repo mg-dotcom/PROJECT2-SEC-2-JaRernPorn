@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="absolute right-10 top-10 hover:scale-110 transition-transform duration-300"
-  >
+  <div class="hover:scale-110 transition-transform duration-300">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="48"
