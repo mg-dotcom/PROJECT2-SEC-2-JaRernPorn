@@ -1,31 +1,46 @@
 <script setup>
 import Option from './Option.vue'
-import data from '../../../data/game3/data.json'
+import data from '../../../data/game3/data2.json'
 import Setting from './Setting.vue'
 import { computed, ref } from 'vue'
 
 const answer = ref()
 const randomQuiz = ref(0)
 const showSetting = ref(false)
+// const pron = ref('')
 // const showGame3=ref(true)
 
+//pron
+// const player = ref('')
+// const musicControl = () => {
+// player.value.play()
+// }
+
+
 const checkAnswer = (selectedOption) => {
-  console.log(answer.value)
-  console.log('selected option= ' + selectedOption.word)
+  // console.log(answer.value)
+  // console.log('selected option= ' + selectedOption.word)
+  // pron.value = selectedOption.pronunciation
+  // musicControl()
 
   if (selectedOption.word === answer.value) {
-    console.log('correct!')
+    setTimeout(() => {
+      randomQuiz.value++
+      console.log('correct!')
+    }, 3000)
   } else {
-    console.log('Wrong!')
+    setTimeout(() => {
+      randomQuiz.value++
+      console.log('Wrong!')
+    }, 3000)
   }
-  randomQuiz.value++
 }
 
 const currentQuiz = computed(() => {
-  answer.value = data.categories[0].units[0].vocabularies[randomQuiz.value].word
+  answer.value = data.categories[0].units[0].items[randomQuiz.value].word
   console.log(answer.value)
 
-  return data.categories[0].units[0].vocabularies[randomQuiz.value].image
+  return data.categories[0].units[0].items[randomQuiz.value].src
 })
 
 const toggleSetting = () => {
@@ -71,7 +86,7 @@ const toggleSetting = () => {
         </div>
         <div class="options py-12 w-3/4">
           <Option
-            :options="data.categories[0].units[0].vocabularies"
+            :options="data.categories[0].units[0].items"
             @optionClicked="checkAnswer"
           />
         </div>

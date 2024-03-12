@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 
 const isPlaying = ref(true)
 const player = ref('')
@@ -20,7 +20,7 @@ watch(isPlaying, () => {
 
 <template>
   <div class="flex justify-center">
-    <div class="setting bg-white w-1/5 border border-black rounded-2xl ">
+    <div class="setting bg-white w-1/5 border border-black rounded-2xl">
       <div class="closebtn flex justify-end py-2 px-2 cursor-pointer">
         <img src="/public/close.svg" alt="close setting btn" class="" />
       </div>
@@ -30,17 +30,17 @@ watch(isPlaying, () => {
         <h1>Setting</h1>
       </div>
       <div class="musicToggle flex justify-between m-5">
-        <div class="font-alkatra text-2xl ">Music</div>
-        <div class="form-control ">
-            <input
-              type="checkbox"
-              class="toggle cursor-pointer"
-              v-model="isPlaying"
-              @change="musicControl"
-            />
+        <div class="font-alkatra text-2xl">Music</div>
+        <div class="form-control">
+          <input
+            type="checkbox"
+            class="toggle cursor-pointer"
+            v-model="isPlaying"
+            @change="musicControl"
+          />
         </div>
       </div>
-      <hr class="mx-5 border border-b-1 border-slate-200"/>
+      <hr class="mx-5 border border-b-1 border-slate-200" />
       <div class="btn flex m-5">
         <div class="restart">
           <img

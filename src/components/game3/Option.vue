@@ -1,9 +1,20 @@
 <script setup>
-const props = defineProps({ options: Array })
+const pron = ref('')
+const player = ref('')
+const musicControl = () => {
+player.value.play()
+}
+const props = defineProps({ 
+  options: Array,
+  pronunciation: String
+})
 const emits = defineEmits(['optionClicked'])
 const selectOption = (option) => {
+  musicControl()
+  pron.value = option.pronunciation
   emits('optionClicked', option)
 }
+
 </script>
 
 <template>
@@ -15,6 +26,10 @@ const selectOption = (option) => {
   >
     {{ option.word }}
   </div>
+
+  <audio controls class="" ref="player">
+    <source :src="pron" type="audio/mp3" />
+  </audio>
 </template>
 
 <style scoped></style>

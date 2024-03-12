@@ -8,24 +8,24 @@
           "items": [
             {
               "id": 1,
-              "src": "/play-game/fruits/apple.png",
+              "src": "./fruits/apple.png",
               "word": "苹果 (píngguǒ)",
               "meaning": "Apple",
-              "pronunciation": "/pronunciation/apple.mp3"
+              "pronunciation": "../../assets/pronunciation/apple.mp3"
             },
             {
               "id": 2,
-              "src": "/play-game/fruits/banana.png",
+              "src": "./fruits/banana.png",
               "word": "香蕉 (xiāngjiāo)",
               "meaning": "Banana",
-              "pronunciation": "/pronunciation/banana.mp3"
+              "pronunciation": "../../assets/pronunciation/banana.mp3"
             },
             {
               "id": 3,
-              "src": "/play-game/fruits/mango.png",
+              "src": "./fruits/watermelon.png",
               "word": "芒果 (mángguǒ)",
               "meaning": "Mango",
-              "pronunciation": "/pronunciation/mango.mp3"
+              "pronunciation": "../../assets/pronunciation/mango.mp3"
             }
           ]
         },
