@@ -19,9 +19,9 @@ watch(isPlaying, () => {
 </script>
 
 <template>
-  <div>
-    <div class="setting bg-white w-1/5 border border-black rounded-2xl">
-      <div class="closebtn ">
+  <div class="flex justify-center">
+    <div class="setting bg-white w-1/5 border border-black rounded-2xl ">
+      <div class="closebtn flex justify-end py-2 px-2 cursor-pointer">
         <img src="/public/close.svg" alt="close setting btn" class="" />
       </div>
       <div
@@ -46,24 +46,25 @@ watch(isPlaying, () => {
           <img
             src="/public/settingBtn/restartButton.png"
             alt="restart button"
-            class=""
+            class="restart cursor-pointer"
           />
         </div>
         <div class="play">
           <img
             src="/public/settingBtn/resumeButton.png"
             alt="resume button"
-            class="resume button"
+            class="resume cursor-pointer"
           />
         </div>
         <div class="home">
           <img
             src="/public/settingBtn/homebutton.png"
-            alt="home button"
+            alt="home cursor-pointer"
           />
         </div>
       </div>
     </div>
+
     <audio controls loop class="hidden" ref="player">
       <source src="../../assets/background-music.mp3" type="audio/mp3" />
     </audio>
