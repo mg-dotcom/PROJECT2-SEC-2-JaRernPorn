@@ -1,9 +1,9 @@
 <script setup>
-import { reactive } from "vue";
-import settingButton from "./components/setting-button.vue";
+import { reactive } from 'vue'
+import settingButton from './components/setting-button.vue'
 const page = reactive({
-  homePage: true,
-});
+  homePage: true
+})
 </script>
 
 <template>

@@ -263,3 +263,4 @@ const homeButton = () => {
     </div>
   </section>
 </template>
+./assets/data/categories

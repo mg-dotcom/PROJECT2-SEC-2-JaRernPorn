@@ -1,23 +1,13 @@
 <script setup>
-import categories from '../data/categories'
+import { ref, reactive } from 'vue'
+import { categories } from '../data/categories.json'
 
-const answer = ref('')
-const isChecking = ref(false)
-const selectedAnswer = ref('')
-const options = ref([])
 const currentIndexItem = ref(0)
 const currentIndexCate = ref(0)
-const settingButton = ref(false)
-const userAnswer = ref([])
 
 const init = () => {
-  settingButton.value = false
   currentIndexItem.value = 0
   currentIndexCate.value = 0
-  userAnswer.value = []
-  selectedAnswer.value = ''
-  options.value = []
-  answer.value = ''
 }
 
 const allPage = reactive({
@@ -27,71 +17,10 @@ const allPage = reactive({
   wordListPage: false
 })
 
-const popup = reactive({
-  showHowToPlayPage: false,
-  showAnswer: false,
-  showEndgame: false
-})
-
-const playButton = () => {
-  allPage.homePage = false
-  allPage.categoryPage = true
-}
-
-const howToPlayButton = () => {
-  allPage.homePage = true
-  popup.showHowToPlayPage = true
-}
-
-const closeHowToPlay = () => {
-  allPage.homePage = true
-  popup.showHowToPlayPage = false
-}
-
 const backToHome = () => {
   allPage.homePage = true
   allPage.categoryPage = false
   allPage.wordListPage = false
-  init()
-}
-
-const showPlaygame = (index) => {
-  currentIndexCate.value = index
-  allPage.playgamePage = true
-  allPage.categoryPage = false
-}
-
-const showWordListPage = () => {
-  popup.showEndgame = false
-  allPage.wordListPage = true
-}
-
-const openSetting = () => {
-  settingButton.value = true
-}
-
-const closeSetting = () => {
-  settingButton.value = false
-}
-
-const restartButton = () => {
-  allPage.playgamePage = true
-  allPage.wordListPage = false
-  userAnswer.value = []
-  currentIndexItem.value = 0
-  closeSetting()
-}
-
-const mainMenuButton = () => {
-  allPage.wordListPage = false
-  allPage.categoryPage = true
-  init()
-}
-
-const homeButton = () => {
-  allPage.playgamePage = false
-  allPage.categoryPage = false
-  allPage.homePage = true
   init()
 }
 </script>
@@ -128,7 +57,6 @@ const homeButton = () => {
               v-for="(category, cateIndex) in categories"
               :key="category.name"
               class="category-item flex flex-col items-center md:mb-9 cursor-pointer"
-              @click="showPlaygame(cateIndex)"
             >
               <div
                 class="pic w-52 pb-2 hover:w-56 transition-all duration-300 ease-in-out"
