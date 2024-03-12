@@ -1,9 +1,16 @@
 <script setup>
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import settingButton from './components/setting-button.vue'
+import CategoryPage from './CategoryPage.vue'
 const page = reactive({
-  homePage: true
+  homePage: true,
+  categoryPage: false
 })
+
+const showCategoryPage = () => {
+  page.homePage = false
+  page.categoryPage = true
+}
 </script>
 
 <template>
@@ -30,6 +37,7 @@ const page = reactive({
         <div id="home-page-button">
           <div id="play-button" class="flex justify-center pt-12">
             <img
+              @click="showCategoryPage"
               class="w-72 relative hover:w-80 transition-all duration-300 ease-in-out cursor-pointer"
               src="/homePage-pic/play-button.svg"
               alt="play-button"
@@ -56,6 +64,7 @@ const page = reactive({
       </div>
     </div>
   </section>
+  <section><CategoryPage v-show="page.categoryPage"></CategoryPage></section>
 </template>
 
 <style scoped></style>
