@@ -1,11 +1,10 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 
+const emits=defineEmits(['closeSetting','restartGame','resumeGame','goBackHome'])
 const isPlaying = ref(true)
 const player = ref('')
 const musicControl = () => {
-  isPlaying.value = !isPlaying.value
-
   if (isPlaying.value) {
     player.value.play()
   } else {
@@ -16,13 +15,19 @@ const musicControl = () => {
 watch(isPlaying, () => {
   musicControl()
 })
+
+onMounted(()=>{
+  isPlaying.value=true
+  musicControl()
+})
+
 </script>
 
 <template>
   <div class="flex justify-center">
     <div class="setting bg-white w-1/5 border border-black rounded-2xl">
       <div class="closebtn flex justify-end py-2 px-2 cursor-pointer">
-        <img src="/public/close.svg" alt="close setting btn" class="" />
+        <img src="/public/close.svg" alt="close setting btn" class="" @click="$emit('closeSetting')"/>
       </div>
       <div
         class="header text-center text-4xl font-alkatra text-title font-semibold"
@@ -36,6 +41,7 @@ watch(isPlaying, () => {
             type="checkbox"
             class="toggle cursor-pointer"
             v-model="isPlaying"
+            @click="isPlaying=!isPlaying"
             @change="musicControl"
           />
         </div>
@@ -47,6 +53,7 @@ watch(isPlaying, () => {
             src="/public/settingBtn/restartButton.png"
             alt="restart button"
             class="restart cursor-pointer"
+            @click="$emit('restartGame')"
           />
         </div>
         <div class="play">
@@ -54,12 +61,14 @@ watch(isPlaying, () => {
             src="/public/settingBtn/resumeButton.png"
             alt="resume button"
             class="resume cursor-pointer"
+            @click="$emit('resumeGame')"
           />
         </div>
         <div class="home">
           <img
             src="/public/settingBtn/homebutton.png"
             alt="home cursor-pointer"
+            @click="$emit('goBackHome')"
           />
         </div>
       </div>

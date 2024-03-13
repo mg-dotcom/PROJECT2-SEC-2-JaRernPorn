@@ -8,26 +8,15 @@ const answer = ref()
 const randomQuiz = ref(0)
 const showSetting = ref(false)
 const userSelected = ref()
-const pron = ref('')
-// const showGame3=ref(true)
 
-//pron
-// const player = ref('')
-// const musicControl = () => {
-// player.value.play()
-// }
 const setButtonCorrect = () => {
-  if (userSelected.value==answer.value) {
-    return "bg-green-600";
+  if (userSelected.value == answer.value) {
+    return 'bg-green-600'
   }
-  return "";
+  return ''
 }
 
 const checkAnswer = (selectedOption) => {
-  // console.log(answer.value)
-  // console.log('selected option= ' + selectedOption.word)
-  // pron.value = selectedOption.pronunciation
-  // player.value.play()
   userSelected.value = selectedOption.word
   console.log('user====' + userSelected.value)
   console.log('answer===' + answer.value)
@@ -53,7 +42,6 @@ const currentQuiz = computed(() => {
 
 const toggleSetting = () => {
   showSetting.value = !showSetting.value
-  // showGame3.value=!showGame3.value
 }
 
 const shuffle = (array) => {
@@ -80,15 +68,7 @@ const shuffle = (array) => {
         />
       </div>
     </div>
-    <div>
-      <!-- <div class="flex justify-center">
-        <progress
-          class="progress progress-success"
-          value="100"
-          max="100"
-        ></progress>
-      </div> -->
-    </div>
+    <div></div>
     <div class="flex justify-center">
       <div class="quiz flex flex-col items-center">
         <div class="text-title text-3xl font-semibold py-5">
@@ -110,7 +90,14 @@ const shuffle = (array) => {
       </div>
     </div>
   </div>
-  <Setting v-show="showSetting" />
+  <div class="absolute left-0 right-0 top-1/3" v-show="showSetting">
+    <Setting
+      @closeSetting="toggleSetting"
+      @restartGame=""
+      @resumeGame=""
+      @goBackHome=""
+    />
+  </div>
 </template>
 
 <style scoped></style>
