@@ -6,11 +6,9 @@ const props = defineProps({
 </script>
 
 <template>
-  <div>
-    <audio controls class="hidden">
-      <source :src="source" type="audio/mp3" />
-    </audio>
-  </div>
+  <audio controls class="hidden">
+    <source :src="source" type="audio/mp3" />
+  </audio>
 </template>
 
 <style scoped></style>
