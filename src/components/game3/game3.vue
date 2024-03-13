@@ -7,7 +7,7 @@ import { computed, ref } from 'vue'
 const answer = ref()
 const randomQuiz = ref(0)
 const showSetting = ref(false)
-const userSellectedId = ref()
+const userSelected = ref()
 const pron = ref('')
 // const showGame3=ref(true)
 
@@ -17,7 +17,10 @@ const pron = ref('')
 // player.value.play()
 // }
 const setButtonCorrect = () => {
-
+  if (userSelected.value==answer.value) {
+    return "bg-green-600";
+  }
+  return "";
 }
 
 const checkAnswer = (selectedOption) => {
@@ -25,17 +28,19 @@ const checkAnswer = (selectedOption) => {
   // console.log('selected option= ' + selectedOption.word)
   // pron.value = selectedOption.pronunciation
   // player.value.play()
-
+  userSelected.value = selectedOption.word
+  console.log('user====' + userSelected.value)
+  console.log('answer===' + answer.value)
   if (selectedOption.word === answer.value) {
     setTimeout(() => {
       randomQuiz.value++
       console.log('correct!')
-    }, 3000)
+    }, 2000)
   } else {
     setTimeout(() => {
       randomQuiz.value++
       console.log('Wrong!')
-    }, 3000)
+    }, 2000)
   }
 }
 
@@ -76,13 +81,13 @@ const shuffle = (array) => {
       </div>
     </div>
     <div>
-      <div class="flex justify-center">
+      <!-- <div class="flex justify-center">
         <progress
           class="progress progress-success"
           value="100"
           max="100"
         ></progress>
-      </div>
+      </div> -->
     </div>
     <div class="flex justify-center">
       <div class="quiz flex flex-col items-center">
@@ -98,7 +103,7 @@ const shuffle = (array) => {
         <div class="options py-12 w-3/4">
           <Option
             :options="data.categories[0].units[0].items"
-            :class="setButtonCorrect()"
+            :setCorrect="setButtonCorrect"
             @optionClicked="checkAnswer"
           />
         </div>
