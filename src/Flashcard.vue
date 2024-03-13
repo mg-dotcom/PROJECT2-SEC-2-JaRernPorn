@@ -4,6 +4,9 @@ import close from "./components/icons/iconClose.vue";
 import iconDelete from "./components/icons/iconDelete.vue";
 import iconEdit from "./components/icons/iconEdit.vue";
 import settingButton from "./components/icons/setting-button.vue";
+import { addNewCollection } from "./libs/collectionModal";
+import { deleteCollection } from "./libs/collectionModal";
+import { editCollection } from "./libs/collectionModal";
 
 const page = reactive({
   flashcard: true,
@@ -52,39 +55,9 @@ localCollections.forEach((collection) => {
   collections.value.push(collection);
 });
 
-const addNewCollection = () => {
-  popup.newCollection = false;
-
-  if (newCollectionName.value === "") {
-    return alert("Please enter a collection name");
-  } else {
-    collections.value.push({
-      // collectionId:
-      collectionName: newCollectionName.value,
-      items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-    });
-    localStorage.setItem("collections", JSON.stringify(collections.value));
-    newCollectionName.value = "";
-  }
-};
-
 const computedCollections = computed(() => {
   return collections.value;
 });
-
-// Add the deleteCollection method
-const deleteCollection = (collectionId) => {
-  const updatedCollections = collections.value.filter(
-    (item, index) => index !== collectionId
-  );
-
-  localStorage.setItem("collections", JSON.stringify(updatedCollections));
-
-  collections.value = updatedCollections;
-
-  closeOption();
-};
-
 const renameCollectionName = ref("");
 
 const showRenameCollection = () => {
@@ -92,27 +65,23 @@ const showRenameCollection = () => {
   closeOption();
 };
 
-const editCollection = (collectionId) => {
-  const editName = { collectionName: renameCollectionName.value };
+const addNewCollection = () => {
+  addNewCollection(newCollectionName.value, localCollections);
+  collections.value = localCollections;
+  newCollectionName.value = "";
+  popup.newCollection = false;
+};
 
-  const indexCollection = collections.value.findIndex(
-    (item, index) => index === collectionId
-  );
+const deleteCollection = (index) => {
+  deleteCollection(index, localCollections);
+  collections.value = localCollections;
+  popup.optionCollection = false;
+};
 
-  const updateCollectionName = {
-    ...collections.value[indexCollection],
-    ...editName,
-  };
-
-  if (renameCollectionName.value === "") {
-    console.log(collections.value[indexCollection]);
-    console.log(localCollections[indexCollection]);
-  } else {
-    collections.value[indexCollection] = updateCollectionName;
-    localStorage.setItem("collections", JSON.stringify(collections.value));
-    popup.renameCollection = false;
-    renameCollectionName.value = "";
-  }
+const editCollection = (index) => {
+  editCollection(index, localCollections, renameCollectionName.value);
+  collections.value = localCollections;
+  popup.renameCollection = false;
 };
 </script>
 
@@ -355,3 +324,4 @@ const editCollection = (collectionId) => {
 </template>
 
 <style scoped></style>
+./libs/CollectionModal./libs/CollectionModal./libs/CollectionModal
