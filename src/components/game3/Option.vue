@@ -1,25 +1,32 @@
 <script setup>
-import { ref } from 'vue'
-const pron = ref('')
-const player = ref('')
-const musicControl = () => {
-  player.value.play()
-}
+import { computed, ref } from 'vue'
+// const pron = ref('')
+const playerApple = ref('')
+const playerBanana = ref('')
+const playerMango = ref('')
+
 const props = defineProps({
-  options: Array,
-  pronunciation: String
+  options: Array
 })
 const emits = defineEmits(['optionClicked'])
+// const audioSrc = computed(() => pron.value)
 const selectOption = (option) => {
-  musicControl()
-  pron.value = option.pronunciation
   emits('optionClicked', option)
+  // pron.value = option.pronunciation
+  if (option.id === 0) {
+    playerApple.value.play()
+  } else if (option.id === 1) {
+    playerBanana.value.play()
+  } else if (option.id === 2) {
+    playerMango.value.play()
+  }
+  // console.log(option.pronunciation)
 }
 </script>
 
 <template>
   <div
-    v-for="(option, index) in options"
+    v-for="(option,index) in options"
     :key="index"
     @click="selectOption(option)"
     class="bg-title mb-3 text-center text-white text-lg font-normal p-2 rounded-xl hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
@@ -27,8 +34,14 @@ const selectOption = (option) => {
     {{ option.word }}
   </div>
 
-  <audio controls class="" ref="player">
-    <source :src="pron" type="audio/mp3" />
+  <audio controls class="" ref="playerApple">
+    <source src="../../assets/pronunciation/apple.mp3" type="audio/mp3" />
+  </audio>
+  <audio controls class="" ref="playerBanana">
+    <source src="../../assets/pronunciation/banana.mp3" type="audio/mp3" />
+  </audio>
+  <audio controls class="" ref="playerMango">
+    <source src="../../assets/pronunciation/mango.mp3" type="audio/mp3" />
   </audio>
 </template>
 

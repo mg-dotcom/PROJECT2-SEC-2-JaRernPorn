@@ -7,7 +7,8 @@ import { computed, ref } from 'vue'
 const answer = ref()
 const randomQuiz = ref(0)
 const showSetting = ref(false)
-// const pron = ref('')
+const userSellectedId = ref()
+const pron = ref('')
 // const showGame3=ref(true)
 
 //pron
@@ -15,13 +16,15 @@ const showSetting = ref(false)
 // const musicControl = () => {
 // player.value.play()
 // }
+const setButtonCorrect = () => {
 
+}
 
 const checkAnswer = (selectedOption) => {
   // console.log(answer.value)
   // console.log('selected option= ' + selectedOption.word)
   // pron.value = selectedOption.pronunciation
-  // musicControl()
+  // player.value.play()
 
   if (selectedOption.word === answer.value) {
     setTimeout(() => {
@@ -38,7 +41,7 @@ const checkAnswer = (selectedOption) => {
 
 const currentQuiz = computed(() => {
   answer.value = data.categories[0].units[0].items[randomQuiz.value].word
-  console.log(answer.value)
+  // console.log(answer.value)
 
   return data.categories[0].units[0].items[randomQuiz.value].src
 })
@@ -46,6 +49,14 @@ const currentQuiz = computed(() => {
 const toggleSetting = () => {
   showSetting.value = !showSetting.value
   // showGame3.value=!showGame3.value
+}
+
+const shuffle = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[array[i], array[j]] = [array[j], array[i]]
+  }
+  return array
 }
 </script>
 
@@ -87,13 +98,13 @@ const toggleSetting = () => {
         <div class="options py-12 w-3/4">
           <Option
             :options="data.categories[0].units[0].items"
+            :class="setButtonCorrect()"
             @optionClicked="checkAnswer"
           />
         </div>
       </div>
     </div>
   </div>
-
   <Setting v-show="showSetting" />
 </template>
 
