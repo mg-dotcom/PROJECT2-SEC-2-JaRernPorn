@@ -8,24 +8,6 @@ const currentIndexUnit = ref(0)
 const categoryPage = ref(true)
 const unitPage = ref(false)
 
-// const init = () => {
-//   currentIndexItem.value = 0
-//   currentIndexCate.value = 0
-// }
-
-// const allPage = reactive({
-//   homePage: true,
-//   categoryPage: false,
-//   unitPage: false
-// })
-
-// const backToHome = () => {
-//   allPage.homePage = true
-//   allPage.categoryPage = false
-//   allPage.wordListPage = false
-//   init()
-// }
-
 const showUnit = (cateIndex) => {
   currentIndexCate.value = cateIndex //เก็บ index category
   currentIndexUnit.value = cateIndex
