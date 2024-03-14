@@ -1,5 +1,5 @@
 <script setup>
-import Flashcard from "./components/FlashcardPage/Flashcard.vue";
+import Flashcard from "./components/FlashCardPage/FlashCard.vue";
 </script>
 
 <template>

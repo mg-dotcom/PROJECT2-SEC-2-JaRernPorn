@@ -1,13 +1,12 @@
 <script setup>
 import { ref, reactive, computed } from "vue";
-import close from "../FlashcardPage/icons/iconClose.vue"
-import iconDelete from "../FlashcardPage/icons/iconDelete.vue";
-import iconEdit from "../FlashcardPage/icons/iconEdit.vue";
-import settingButton from "../FlashcardPage/icons/setting-button.vue";
-import { addNewCollection } from "../../FlashCardLibs/libs/CollectionModal";
-import { deleteCollection } from "../../FlashCardLibs/libs/CollectionModal";
-import { editCollection } from "../../FlashCardLibs/libs/CollectionModal";
-
+import close from "../FlashCardPage/icons/iconClose.vue";
+import iconDelete from "../FlashCardPage/icons/iconDelete.vue";
+import iconEdit from "../FlashCardPage/icons/iconEdit.vue";
+import settingButton from "../FlashCardPage/icons/setting-button.vue";
+import { addNewCollection } from "../../libs/FlashCardLibs/CollectionModal";
+import { deleteCollection } from "../../libs/FlashCardLibs/CollectionModal";
+import { editCollection } from "../../libs/FlashCardLibs/CollectionModal";
 const page = reactive({
   flashcard: true,
 });
@@ -100,7 +99,7 @@ const handleEditCollection = (index) => {
         >
           <div class="hover:scale-110 transition-transform duration-300">
             <img
-              src="/img/flashcard/back-button.svg"
+              src="/img/flashcard-pic/back-button.svg"
               alt="back button"
               class="w-16 cursor-pointer lg:w-20"
             />
@@ -170,8 +169,8 @@ const handleEditCollection = (index) => {
                         >
                           <img
                             class="w-[178px]"
-                            src="./assets/collection.svg"
-                            alt=""
+                            src="/img/flashcard-pic/collection.svg"
+                            alt="collection-pic"
                           />
                           <div
                             class="w-[178px] overflow-hidden absolute flex items-center justify-center"
@@ -216,12 +215,12 @@ const handleEditCollection = (index) => {
                   >
                     <img
                       class="cursor-pointer"
-                      src="./assets/collection.svg"
+                      src="/img/flashcard-pic/collection.svg"
                       alt="collection"
                     />
                     <img
                       class="z-40 opacity-70 scale-[75%] hover:bg-gray-400 rounded-full w-10 h-10 p-2 cursor-pointer absolute top-[19px] right-[5px] transition-all duration-[270ms]"
-                      src="./assets/option.svg"
+                      src="/img/flashcard-pic/option.svg"
                       alt="option"
                       @click="showOption(index)"
                     />
@@ -287,7 +286,11 @@ const handleEditCollection = (index) => {
                 Add new collection
               </div>
               <div class="my-7 flex flex-col items-center justify-center">
-                <img class="w-[178px]" src="./assets/collection.svg" alt="" />
+                <img
+                  class="w-[178px]"
+                  src="/img/flashcard-pic/collection.svg"
+                  alt=""
+                />
                 <div
                   class="w-[160px] overflow-hidden absolute flex items-center justify-center"
                 >
