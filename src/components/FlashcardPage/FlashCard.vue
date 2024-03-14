@@ -1,6 +1,6 @@
 <script setup>
 import { ref, reactive, computed } from "vue";
-import close from "../FlashCardPage/icons/iconClose.vue";
+import close from "../FlashcardPage/icons/iconClose.vue"
 import iconDelete from "../FlashcardPage/icons/iconDelete.vue";
 import iconEdit from "../FlashcardPage/icons/iconEdit.vue";
 import settingButton from "../FlashcardPage/icons/setting-button.vue";
