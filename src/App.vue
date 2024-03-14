@@ -1,9 +1,9 @@
 <script setup>
-import Flashcard from "./Flashcard.vue";
+import Flashcard from "./components/FlashcardPage/Flashcard.vue";
 </script>
 
 <template>
   <Flashcard />
 </template>
 
-<style scoped></style>
+<style scoped></style>./components/FlashcardPage/FlashCard.vue

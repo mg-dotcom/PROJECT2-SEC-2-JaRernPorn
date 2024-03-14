@@ -1,12 +1,12 @@
 <script setup>
 import { ref, reactive, computed } from "vue";
-import close from "./components/icons/iconClose.vue";
-import iconDelete from "./components/icons/iconDelete.vue";
-import iconEdit from "./components/icons/iconEdit.vue";
-import settingButton from "./components/icons/setting-button.vue";
-import { addNewCollection } from "./libs/CollectionModal";
-import { deleteCollection } from "./libs/CollectionModal";
-import { editCollection } from "./libs/CollectionModal";
+import close from "../FlashcardPage/icons/iconClose.vue";
+import iconDelete from "../FlashcardPage/icons/iconDelete.vue";
+import iconEdit from "../FlashcardPage/icons/iconEdit.vue";
+import settingButton from "../FlashcardPage/icons/setting-button.vue";
+import { addNewCollection } from "../../FlashCardLibs/libs/CollectionModal";
+import { deleteCollection } from "../../FlashCardLibs/libs/CollectionModal";
+import { editCollection } from "../../FlashCardLibs/libs/CollectionModal";
 
 const page = reactive({
   flashcard: true,
@@ -325,3 +325,4 @@ const handleEditCollection = (index) => {
 
 <style scoped></style>
 ./libs/CollectionModal./libs/CollectionModal./libs/CollectionModal
+../libs/CollectionModal../libs/CollectionModal../libs/CollectionModal../../libs/FlashCardLibs/CollectionModal../../libs/FlashCardLibs/CollectionModal../../libs/FlashCardLibs/CollectionModal
