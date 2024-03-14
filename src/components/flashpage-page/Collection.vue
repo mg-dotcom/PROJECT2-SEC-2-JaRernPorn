@@ -1,26 +1,11 @@
 <script setup>
-import { defineProps, ref } from "vue";
+import { defineProps } from "vue";
+import { ref } from "vue";
+import close from "../flashpage-page/icons/iconClose.vue";
+import iconDelete from "../flashpage-page/icons/iconDelete.vue";
+import iconEdit from "../flashpage-page/icons/iconEdit.vue";
 
-const props = defineProps({
-  item: {
-    type: Object,
-    required: true,
-  },
-  index: {
-    type: Number,
-    required: true,
-  },
-  popup: {
-    type: Object,
-    required: true,
-  },
-});
-
-const showOption = (item) => {
-  popup.optionCollection = !popup.optionCollection;
-  SelectedIndex.value = item;
-  console.log(item);
-};
+const props = defineProps({});
 </script>
 
 <template>
@@ -46,6 +31,32 @@ const showOption = (item) => {
         >
           {{ item.collectionName }}
         </div>
+      </div>
+    </div>
+
+    <!-- Option Collection section -->
+    <div
+      class="max-w-[170px] p-3 bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700 w-full absolute z-40 left-[250px] top-[57px]"
+      v-show="popup.optionCollection && SelectedIndex === index"
+    >
+      <div
+        id="deleteCollection"
+        class="flex gap-3 hover:bg-gray-100 transition duration-[270ms] ease-in-out p-1 rounded-lg"
+        @click="handleDeleteCollection(index)"
+      >
+        <iconDelete>
+          <template #content> Delete </template>
+        </iconDelete>
+      </div>
+      <hr class="my-2 border-gray-200 dark:border-gray-700" />
+      <div
+        id="editCollection"
+        class="flex gap-3 hover:bg-gray-100 transition duration-[270ms] ease-in-out p-1 rounded-lg"
+        @click="showRenameCollection(index)"
+      >
+        <iconEdit>
+          <template #content> Rename </template>
+        </iconEdit>
       </div>
     </div>
   </div>

@@ -31,7 +31,6 @@ const closeButton = () => {
 const showOption = (item) => {
   popup.optionCollection = !popup.optionCollection;
   SelectedIndex.value = item;
-  console.log(item);
 };
 
 const closeOption = () => {
@@ -130,7 +129,7 @@ const handleEditCollection = (index) => {
           </div>
           <hr class="border-gray-300" />
           <div
-            v-if="localCollections === null"
+            v-if="computedCollections.length === 0"
             class="text-gray-300 text-sm flex-grow flex justify-center items-center"
           >
             No collection added yet
@@ -139,7 +138,7 @@ const handleEditCollection = (index) => {
           <!-- Show All Collection section -->
           <div class="all-collection">
             <div
-              v-if="localCollections !== null"
+              v-if="computedCollections.length > 0"
               class="grid grid-cols-3 gap-9 px-10 py-7 text-center"
               @click.self="closeOption"
             >
