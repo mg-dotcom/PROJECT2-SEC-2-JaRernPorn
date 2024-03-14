@@ -216,17 +216,17 @@ const handleEditCollection = (index) => {
                     alt="collection"
                   />
                   <img
-                    class="z-10 opacity-70 scale-[75%] hover:bg-gray-400 rounded-full w-10 h-10 p-2 cursor-pointer absolute top-[19px] right-[4px] transition-all duration-[270ms]"
+                    class="z-40 opacity-70 scale-[75%] hover:bg-gray-400 rounded-full w-10 h-10 p-2 cursor-pointer absolute top-[19px] right-[5px] transition-all duration-[270ms]"
                     src="./assets/option.svg"
                     alt="option"
                     @click="showOption(index)"
                   />
 
                   <div
-                    class="absolute inset-0 flex items-center justify-center overflow-hidden cursor-pointer hover:shadow-lg rounded-3xl transition-all duration-[170ms] hover:inset-2"
+                    class="absolute inset-[16px] flex items-center justify-center overflow-hidden cursor-pointer"
                   >
                     <div
-                      class="text-3xl font-semibold whitespace-normal break-all overflow-ellipsis z-10"
+                      class="w-[75%] text-3xl font-semibold whitespace-normal break-all overflow-ellipsis z-10"
                     >
                       {{ item.collectionName }}
                     </div>
@@ -234,11 +234,8 @@ const handleEditCollection = (index) => {
 
                   <!-- Option Collection section -->
                   <div
-                    class="max-w-[170px] p-3 bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700 w-full absolute z-40"
+                    class="max-w-[170px] p-3 bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700 w-full absolute z-40 left-[250px] top-[57px]"
                     v-show="popup.optionCollection && SelectedIndex === index"
-                    :class="[
-                      showOptionInLeft(index) ? 'right-[40px]' : 'left-[264px]',
-                    ]"
                   >
                     <div
                       id="deleteCollection"
@@ -266,8 +263,8 @@ const handleEditCollection = (index) => {
           </div>
         </div>
       </div>
-      <!-- Add New Collection Popup -->
 
+      <!-- Add New Collection Popup -->
       <section
         class="popup-newCollection z-50 fixed top-0 left-0"
         v-show="popup.newCollection"
@@ -288,10 +285,10 @@ const handleEditCollection = (index) => {
               <div class="my-7 flex flex-col items-center justify-center">
                 <img class="w-[178px]" src="./assets/collection.svg" alt="" />
                 <div
-                  class="w-[178px] overflow-hidden absolute flex items-center justify-center"
+                  class="w-[160px] overflow-hidden absolute flex items-center justify-center"
                 >
                   <div
-                    class="text-2xl font-semibold whitespace-normal break-all overflow-ellipsis max-h-[127px]"
+                    class="text-2xl font-semibold whitespace-normal break-all overflow-ellipsis max-h-[122px]"
                   >
                     {{ newCollectionName }}
                   </div>
@@ -303,7 +300,7 @@ const handleEditCollection = (index) => {
                   v-model="newCollectionName"
                   class="border-2 border-[#4096ff] rounded-md p-2 w-[400px] focus:outline-none focus:ring-2 focus:ring-[#4096ff] focus:border-transparent transition-all duration-[270ms]"
                   placeholder="Collection name"
-                  @keydown.enter="addNewCollection"
+                  @keydown.enter="handleAddNewCollection"
                 />
                 <div>
                   <button
