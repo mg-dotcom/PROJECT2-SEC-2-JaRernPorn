@@ -326,5 +326,3 @@ const handleEditCollection = (index) => {
 </template>
 
 <style scoped></style>
-./libs/CollectionModal./libs/CollectionModal./libs/CollectionModal
-../libs/CollectionModal../libs/CollectionModal../libs/CollectionModal../../libs/FlashCardLibs/CollectionModal../../libs/FlashCardLibs/CollectionModal../../libs/FlashCardLibs/CollectionModal

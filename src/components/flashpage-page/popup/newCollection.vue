@@ -27,6 +27,7 @@ const handleAddNewCollection = () => {
   addNewCollection(newColName, collections.value);
   newCollectionName.value = "";
   props.popup.newCollection = false;
+  sendCollectionsToParent();
 };
 
 const addNewCollectionName = () => {
@@ -40,10 +41,15 @@ const localCollections = JSON.parse(localStorage.getItem("collections")) || [];
 localCollections.forEach((collection) => {
   collections.value.push(collection);
 });
-const computedCollections = computed(() => {
-  return collections.value;
-});
-const emits = defineEmits(["computedCollections", collections.value]);
+
+const emits = defineEmits(["sendCollections"]);
+
+// Function to send collections.value to the parent component
+const sendCollectionsToParent = () => {
+  emits("sendCollections", collections.value);
+};
+
+console.log(collections.value);
 </script>
 
 <template>
