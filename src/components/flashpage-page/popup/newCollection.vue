@@ -18,12 +18,11 @@ const newCollectionName = ref("");
 
 const closeButton = () => {
   props.popup.newCollection = false;
-  props.popup.renameCollection = false;
   newCollectionName.value = "";
 };
 
 const handleAddNewCollection = () => {
-  const newColName = newCollectionName.value.trim(); // Trimmed to remove whitespace
+  const newColName = newCollectionName.value.trim(); 
   addNewCollection(newColName, collections.value);
   newCollectionName.value = "";
   props.popup.newCollection = false;
@@ -49,7 +48,6 @@ const sendCollectionsToParent = () => {
   emits("sendCollections", collections.value);
 };
 
-console.log(collections.value);
 </script>
 
 <template>

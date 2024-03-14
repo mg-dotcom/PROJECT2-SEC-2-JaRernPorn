@@ -8,12 +8,14 @@ const props = defineProps({
     required: true,
   },
 });
+
+console.log(props.closeOption);
 </script>
 
 <template>
   <div
     class="flex justify-between items-center p-2 md:p-4 lg:px-10 lg:py-7"
-    @click.self="closeOption"
+    @click.self="props.closeOption"
   >
     <div class="hover:scale-110 transition-transform duration-300">
       <img

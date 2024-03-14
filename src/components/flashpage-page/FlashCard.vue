@@ -17,7 +17,10 @@ const popup = reactive({
 const closeOption = () => {
   popup.optionCollection = false;
   renameCollectionName.value = "";
+  SelectedIndex.value = null;
 };
+
+const SelectedIndex = ref(null);
 
 const renameCollectionName = ref("");
 </script>

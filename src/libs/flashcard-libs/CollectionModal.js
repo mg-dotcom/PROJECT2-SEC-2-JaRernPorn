@@ -4,7 +4,7 @@ function addNewCollection(newCollectionName, collections) {
   } else {
     collections.push({
       // collectionId:
-      collectionName: newCollectionName.trim(),
+      name: newCollectionName.trim(),
       //for testing
       items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     });
