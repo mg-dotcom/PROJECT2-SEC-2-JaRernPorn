@@ -66,7 +66,8 @@ const showRenameCollection = () => {
 
 // CRUD
 const handleAddNewCollection = () => {
-  addNewCollection(newCollectionName.value, collections.value);
+  const newColName = newCollectionName.value.trim(); // Trimmed to remove whitespace
+  addNewCollection(newColName, collections.value);
   newCollectionName.value = "";
   popup.newCollection = false;
 };
@@ -176,7 +177,7 @@ const handleEditCollection = (index) => {
                             class="w-[178px] overflow-hidden absolute flex items-center justify-center"
                           >
                             <div
-                              class="text-2xl font-semibold whitespace-normal break-all overflow-ellipsis max-h-[127px]"
+                              class="text-2xl font-semibold font-outfit whitespace-normal break-all overflow-ellipsis max-h-[127px]"
                             >
                               {{
                                 renameCollectionName !== ""
@@ -206,11 +207,13 @@ const handleEditCollection = (index) => {
                       </div>
                     </div>
                   </div>
-                </section> 
+                </section>
 
                 <!-- Each Folder Collection -->
                 <div class="relative flex flex-col items-center font-outfit">
-                  <div class="hover: ">
+                  <div
+                    class="hover:shadow-lg rounded-3xl transition-all duration-[270ms]"
+                  >
                     <img
                       class="cursor-pointer"
                       src="./assets/collection.svg"
