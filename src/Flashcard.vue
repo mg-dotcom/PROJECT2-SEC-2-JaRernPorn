@@ -206,29 +206,30 @@ const handleEditCollection = (index) => {
                       </div>
                     </div>
                   </div>
-                </section>
+                </section> 
 
                 <!-- Each Folder Collection -->
                 <div class="relative flex flex-col items-center font-outfit">
-                  <img
-                    class="cursor-pointer"
-                    src="./assets/collection.svg"
-                    alt="collection"
-                  />
-                  <img
-                    class="z-40 opacity-70 scale-[75%] hover:bg-gray-400 rounded-full w-10 h-10 p-2 cursor-pointer absolute top-[19px] right-[5px] transition-all duration-[270ms]"
-                    src="./assets/option.svg"
-                    alt="option"
-                    @click="showOption(index)"
-                  />
-
-                  <div
-                    class="absolute inset-[16px] flex items-center justify-center overflow-hidden cursor-pointer"
-                  >
+                  <div class="hover: ">
+                    <img
+                      class="cursor-pointer"
+                      src="./assets/collection.svg"
+                      alt="collection"
+                    />
+                    <img
+                      class="z-40 opacity-70 scale-[75%] hover:bg-gray-400 rounded-full w-10 h-10 p-2 cursor-pointer absolute top-[19px] right-[5px] transition-all duration-[270ms]"
+                      src="./assets/option.svg"
+                      alt="option"
+                      @click="showOption(index)"
+                    />
                     <div
-                      class="w-[75%] text-3xl font-semibold whitespace-normal break-all overflow-ellipsis z-10"
+                      class="absolute inset-[16px] flex items-center justify-center overflow-hidden cursor-pointer"
                     >
-                      {{ item.collectionName }}
+                      <div
+                        class="w-[75%] text-3xl font-semibold whitespace-normal break-all overflow-ellipsis z-10"
+                      >
+                        {{ item.collectionName }}
+                      </div>
                     </div>
                   </div>
 
@@ -279,7 +280,7 @@ const handleEditCollection = (index) => {
               @click="closeButton"
             />
             <div class="flex flex-col items-center justify-center">
-              <div class="text-center text-3xl font-mono font-bold">
+              <div class="text-center text-3xl font-mono font-semibold">
                 Add new collection
               </div>
               <div class="my-7 flex flex-col items-center justify-center">
@@ -288,7 +289,7 @@ const handleEditCollection = (index) => {
                   class="w-[160px] overflow-hidden absolute flex items-center justify-center"
                 >
                   <div
-                    class="text-2xl font-semibold whitespace-normal break-all overflow-ellipsis max-h-[122px]"
+                    class="text-2xl font-outfit font-medium whitespace-normal break-all overflow-ellipsis max-h-[122px]"
                   >
                     {{ newCollectionName }}
                   </div>
