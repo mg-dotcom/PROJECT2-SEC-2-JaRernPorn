@@ -4,9 +4,9 @@ import close from "./components/icons/iconClose.vue";
 import iconDelete from "./components/icons/iconDelete.vue";
 import iconEdit from "./components/icons/iconEdit.vue";
 import settingButton from "./components/icons/setting-button.vue";
-import { addNewCollection } from "./libs/collectionModal";
-import { deleteCollection } from "./libs/collectionModal";
-import { editCollection } from "./libs/collectionModal";
+import { addNewCollection } from "./libs/CollectionModal";
+import { deleteCollection } from "./libs/CollectionModal";
+import { editCollection } from "./libs/CollectionModal";
 
 const page = reactive({
   flashcard: true,
@@ -26,6 +26,7 @@ const addNewCollectionName = () => {
 const closeButton = () => {
   popup.newCollection = false;
   popup.renameCollection = false;
+  newCollectionName.value = "";
 };
 
 const showOption = (item) => {
@@ -39,7 +40,6 @@ const closeOption = () => {
   renameCollectionName.value = "";
 };
 
-// show option on the left of last folder
 const showOptionInLeft = (index) => {
   return (index + 1) % 3 === 0;
 };
@@ -49,7 +49,6 @@ const collections = ref([]);
 const newCollectionName = ref("");
 const localCollections = JSON.parse(localStorage.getItem("collections")) || [];
 
-console.log(localCollections);
 // Loop to populate collections with localCollections
 localCollections.forEach((collection) => {
   collections.value.push(collection);
@@ -65,23 +64,23 @@ const showRenameCollection = () => {
   closeOption();
 };
 
-const addNewCollection = () => {
-  addNewCollection(newCollectionName.value, localCollections);
-  collections.value = localCollections;
+// CRUD
+const handleAddNewCollection = () => {
+  addNewCollection(newCollectionName.value, collections.value);
   newCollectionName.value = "";
   popup.newCollection = false;
 };
 
-const deleteCollection = (index) => {
-  deleteCollection(index, localCollections);
-  collections.value = localCollections;
-  popup.optionCollection = false;
+const handleDeleteCollection = (index) => {
+  collections.value = deleteCollection(index, collections.value);
+  closeOption();
 };
 
-const editCollection = (index) => {
-  editCollection(index, localCollections, renameCollectionName.value);
-  collections.value = localCollections;
+const handleEditCollection = (index) => {
+  const newName = renameCollectionName.value.trim(); // Trimmed to remove whitespace
+  collections.value = editCollection(index, newName, collections.value);
   popup.renameCollection = false;
+  closeOption();
 };
 </script>
 
@@ -193,12 +192,12 @@ const editCollection = (index) => {
                             v-model="renameCollectionName"
                             class="border-2 border-[#4096ff] rounded-md p-2 w-[400px] focus:outline-none focus:ring-2 focus:ring-[#4096ff] focus:border-transparent transition-all duration-[270ms]"
                             :placeholder="item.collectionName"
-                            @keydown.enter="editCollection(index)"
+                            @keydown.enter="handleEditCollection(index)"
                           />
                           <div>
                             <button
                               class="bg-[#4096ff] text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#4096ff] focus:border-transparent transition-all duration-[270ms]"
-                              @click="editCollection(index)"
+                              @click="handleEditCollection(index)"
                             >
                               OK
                             </button>
@@ -244,7 +243,7 @@ const editCollection = (index) => {
                     <div
                       id="deleteCollection"
                       class="flex gap-3 hover:bg-gray-100 transition duration-[270ms] ease-in-out p-1 rounded-lg"
-                      @click="deleteCollection(index)"
+                      @click="handleDeleteCollection(index)"
                     >
                       <iconDelete>
                         <template #content> Delete </template>
@@ -309,7 +308,7 @@ const editCollection = (index) => {
                 <div>
                   <button
                     class="bg-[#4096ff] text-white rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#4096ff] focus:border-transparent transition-all duration-[270ms]"
-                    @click="addNewCollection"
+                    @click="handleAddNewCollection"
                   >
                     ADD
                   </button>
