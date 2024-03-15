@@ -10,29 +10,31 @@ const answer = ref()
 const randomQuiz = ref(0)
 const showSetting = ref(false)
 const userSelected = ref()
-const showAudio=ref(false)
-const audioOfOption=ref(data.categories[0].units[0].items[0].pronunciation)
+const showAudio = ref(false)
+const showPopup = ref(false)
+const audioOfOption = ref(data.categories[0].units[0].items[0].pronunciation)
 // const options=data.categories[0].units[0].items
-const setColorOption=ref('')
+const setColorOption = ref('')
 
 const checkAnswer = (selectedOption) => {
   userSelected.value = selectedOption.word
-  showAudio.value=true
-  audioOfOption.value=selectedOption.pronunciation
+  showAudio.value = true
+  audioOfOption.value = selectedOption.pronunciation
   if (selectedOption.word === answer.value) {
-    setColorOption.value=answer.value
+    setColorOption.value = answer.value
     setTimeout(() => {
-      setColorOption.value=''
+      setColorOption.value = ''
       randomQuiz.value++
       console.log('correct!')
     }, 2000)
   } else {
-    setColorOption.value=''
-    setTimeout(() => {
-      setColorOption.value=''
-      randomQuiz.value++
-      console.log('Wrong!')
-    }, 2000)
+    // setColorOption.value = ''
+    showPopup.value = true
+    // setTimeout(() => {
+    //   setColorOption.value=''
+    //   randomQuiz.value++
+    //   console.log('Wrong!')
+    // }, 2000)
   }
 }
 
@@ -47,6 +49,11 @@ const toggleSetting = () => {
   showSetting.value = !showSetting.value
 }
 
+const closePopup = () => {
+  showPopup.value = !showPopup.value
+  setColorOption.value = ''
+  randomQuiz.value++
+}
 const shuffle = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
@@ -86,12 +93,15 @@ const shuffle = (array) => {
         <div class="options py-12 w-3/4">
           <Option
             :options="data.categories[0].units[0].items"
-            :correctOption="setColorOption"
+            :setColorOption="setColorOption"
             @optionClicked="checkAnswer"
           />
         </div>
-        <AudioControl v-if="showAudio" :source="audioOfOption"/>
+        <AudioControl v-if="showAudio" :source="audioOfOption" />
       </div>
+    </div>
+    <div class="">
+      <button class="bg-title text-white p-2 rounded-lg">Check</button>
     </div>
   </div>
   <div class="absolute left-0 right-0 top-1/3" v-show="showSetting">
@@ -102,8 +112,8 @@ const shuffle = (array) => {
       @goBackHome=""
     />
   </div>
-  <div class="popup" >
-    <answer_popup/>
+  <div class="" v-show="showPopup">
+    <answer_popup :answer="answer" @closePopup="closePopup" />
   </div>
 </template>
 

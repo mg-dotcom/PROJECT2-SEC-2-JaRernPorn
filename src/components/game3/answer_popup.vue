@@ -1,38 +1,43 @@
-<script setup></script>
+<script setup>
+const props = defineProps({
+  answer:String
+})
+const emits=defineEmits(['closePopup'])
+console.log(props.answer);
+</script>
 
 <template>
-  <div id="body" class="w-full h-screen p-5 relative">
-    <div
-      class="w-full h-full relative text-center flex justify-center items-center"
-    >
-      <div class="text-center relative translate-middle text-white">
-        <img
-          src="/public/Frame.png"
-          alt="Frame chinese theme"
-          class="w-8/12 mx-auto"
-        />
+  <section
+    class="fixed inset-0 flex justify-center items-center bg-black bg-opacity-75 z-50"
+  >
+    <div class="w-full h-full flex justify-center items-center">
+      <img
+        src="/public/Frame.png"
+        alt="Frame chinese theme"
+        class="mx-auto mobile:w-96 lg:w-3/5 xl:w-6/12"
+      />
+      <div
+        class="absolute p-4 text-center transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 flex-col space-y-14"
+      >
         <div
-          class="absolute p-4 text-center transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 flex-col space-y-14"
+          class="capitalize text-brownColor text-xl font-alkatra font-semibold tracking-wide relative right-7 top-8 sm:right-[50px] sm:text-4xl md:text-5xl lg:text-6xl lg:right-[60px] mobile:text-[25px]"
         >
+          The answer is<br />
           <div
-            class="capitalize text-brownColor text-xl font-alkatra font-semibold tracking-wide relative right-7 top-8 sm:right-[50px] sm:text-4xl md:text-5xl lg:text-6xl lg:right-[60px]"
+            class="text-green-700 font-NotoSansSC font-medium lowercase text-sm relative sm:text-2xl md:text-4xl mobile:text-[20px]"
           >
-            The answer is<br />
-            <div
-              class="text-answer-fontColor font-NotoSansSC font-medium lowercase text-sm relative sm:text-2xl md:text-4xl"
-            >
-              西瓜 (xīguā)
-            </div>
+            {{ props.answer }}
           </div>
-          <button
-            class="text-sm text-brownColor font-semibold font-alkatra tracking-wider relative right-7 bottom-3 hover:text-answer-fontColor sm:right-[50px] sm:top-[18px] sm:text-2xl md:text-3xl lg:right-[60px]"
-          >
-            NEXT
-          </button>
         </div>
+        <button
+          class="text-sm text-brownColor font-semibold font-alkatra tracking-wider relative right-7 bottom-3 hover:text-answer-fontColor hove:transition duration-150 sm:right-[50px] sm:top-[18px] sm:text-2xl md:text-3xl lg:right-[60px] mobile:text-[20px]"
+          @click="$emit('closePopup')"
+        >
+          NEXT
+        </button>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <style scoped></style>

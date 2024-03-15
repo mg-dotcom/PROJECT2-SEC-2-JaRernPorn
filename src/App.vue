@@ -7,9 +7,9 @@ import answer_popup from './components/game3/answer_popup.vue';
 
 <template>
   <div class="bg-main-bgColor min-h-screen w-full">
-    <!-- <game3 /> -->
+    <game3 />
     <!-- <Test/> -->
-    <answer_popup/>
+    <!-- <answer_popup/> -->
   </div>
 </template>
 
