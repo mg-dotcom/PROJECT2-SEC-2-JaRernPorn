@@ -27,6 +27,13 @@ const computedCollections = computed(() => {
   return collections.value;
 });
 
+const handleShowOption = (index) => {
+  if (SelectedIndex.value === index) {
+    return true;
+  }
+  return false;
+};
+
 // Listen for the showOption event emitted from the child component
 </script>
 
@@ -58,37 +65,10 @@ const computedCollections = computed(() => {
         :popup="popup"
         :closeOption="closeOption"
         :computedCollections="computedCollections"
-        @showOption="setSelectedIndex(index, popup.optionCollection)"
       >
         <template #collectionName>
           {{ collection.name }}
         </template>
-
-        <!-- Option Collection section -->
-        <div
-          class="max-w-[170px] p-3 bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700 w-full absolute z-40 left-[250px] top-[57px]"
-          v-show="handleShowOption"
-        >
-          <div
-            id="deleteCollection"
-            class="flex gap-3 hover:bg-gray-100 transition duration-[270ms] ease-in-out p-1 rounded-lg"
-            @click="handleDeleteCollection(props.index)"
-          >
-            <iconDelete>
-              <template #content> Delete </template>
-            </iconDelete>
-          </div>
-          <hr class="my-2 border-gray-200 dark:border-gray-700" />
-          <div
-            id="editCollection"
-            class="flex gap-3 hover:bg-gray-100 transition duration-[270ms] ease-in-out p-1 rounded-lg"
-            @click="showRenameCollection(props.index)"
-          >
-            <iconEdit>
-              <template #content> Rename </template>
-            </iconEdit>
-          </div>
-        </div>
       </Collection>
     </div>
   </div>
