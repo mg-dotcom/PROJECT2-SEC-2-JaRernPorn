@@ -1,5 +1,5 @@
 <script setup>
-import categories from '../../../data/categories.json'
+import { categories } from '../../../data/categories.json'
 import { computed } from 'vue'
 
 const currentQuestion = computed(() => {
