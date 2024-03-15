@@ -2,24 +2,21 @@
 import Option from './Option.vue'
 import data from '../../../data/game3/data2.json'
 import Setting from './Setting.vue'
+import AudioControl from './AudioControl.vue'
 import { computed, ref } from 'vue'
 
 const answer = ref()
 const randomQuiz = ref(0)
 const showSetting = ref(false)
 const userSelected = ref()
-
-const setButtonCorrect = () => {
-  if (userSelected.value == answer.value) {
-    return 'bg-green-600'
-  }
-  return ''
-}
+const showAudio=ref(false)
+const audioOfOption=ref(data.categories[0].units[0].items[0].pronunciation)
+// const options=data.categories[0].units[0].items
 
 const checkAnswer = (selectedOption) => {
   userSelected.value = selectedOption.word
-  console.log('user====' + userSelected.value)
-  console.log('answer===' + answer.value)
+  showAudio.value=true
+  audioOfOption.value=selectedOption.pronunciation
   if (selectedOption.word === answer.value) {
     setTimeout(() => {
       randomQuiz.value++
@@ -83,10 +80,10 @@ const shuffle = (array) => {
         <div class="options py-12 w-3/4">
           <Option
             :options="data.categories[0].units[0].items"
-            :setCorrect="setButtonCorrect"
             @optionClicked="checkAnswer"
           />
         </div>
+        <AudioControl v-if="showAudio" :source="audioOfOption"/>
       </div>
     </div>
   </div>
