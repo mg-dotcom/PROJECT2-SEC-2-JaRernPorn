@@ -1,12 +1,15 @@
 <script setup>
 import categories from '../../../data/categories.json'
-const currentIndexItem = ref(0)
-const currentIndexCate = ref(0)
+import { computed } from 'vue'
+
+const currentQuestion = computed(() => {
+  return categories[0].name
+})
 </script>
 
 <template>
   <div class="bg-main-bgColor h-screen w-full">
-    <div
+    <!-- <div
       class="flex justify-between pt-20"
       v-for="(category, categoriesIndex) in categories"
       :key="categoriesIndex"
@@ -17,14 +20,15 @@ const currentIndexCate = ref(0)
         Category: {{ category[0].name }}
       </h1>
       <img src="/Setting.svg" alt="Setting" class="pr-36" />
-    </div>
+    </div> -->
 
     <div class="flex justify-center">
       <h2 class="text-title font-outfit font-semibold text-[48px] mt-24">
-        Which one of these is Apple?
+        Which one of these is {{ currentQuestion }}?
       </h2>
     </div>
 
+    <!-- one card -->
     <div class="flex flex-row gap-16 justify-center mt-10">
       <div
         class="h-[400px] w-[300px] rounded-3xl shadow-md bg-white cursor-pointer"
