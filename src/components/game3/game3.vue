@@ -28,13 +28,7 @@ const checkAnswer = (selectedOption) => {
       console.log('correct!')
     }, 2000)
   } else {
-    // setColorOption.value = ''
     showPopup.value = true
-    // setTimeout(() => {
-    //   setColorOption.value=''
-    //   randomQuiz.value++
-    //   console.log('Wrong!')
-    // }, 2000)
   }
 }
 
@@ -93,7 +87,7 @@ const shuffle = (array) => {
         <div class="options py-12 w-3/4">
           <Option
             :options="data.categories[0].units[0].items"
-            :setColorOption="setColorOption"
+            :correctOption="answer"
             @optionClicked="checkAnswer"
           />
         </div>
@@ -101,7 +95,9 @@ const shuffle = (array) => {
       </div>
     </div>
     <div class="">
-      <button class="bg-title text-white p-2 rounded-lg">Check</button>
+      <button class="bg-title text-white p-2 rounded-lg" @click="checkAnswer">
+        Check
+      </button>
     </div>
   </div>
   <div class="absolute left-0 right-0 top-1/3" v-show="showSetting">
