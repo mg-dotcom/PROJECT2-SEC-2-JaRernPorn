@@ -3,6 +3,7 @@ import Option from './Option.vue'
 import data from '../../../data/game3/data2.json'
 import Setting from './Setting.vue'
 import AudioControl from './AudioControl.vue'
+import answer_popup from './answer_popup.vue'
 import { computed, ref } from 'vue'
 
 const answer = ref()
@@ -12,18 +13,23 @@ const userSelected = ref()
 const showAudio=ref(false)
 const audioOfOption=ref(data.categories[0].units[0].items[0].pronunciation)
 // const options=data.categories[0].units[0].items
+const setColorOption=ref('')
 
 const checkAnswer = (selectedOption) => {
   userSelected.value = selectedOption.word
   showAudio.value=true
   audioOfOption.value=selectedOption.pronunciation
   if (selectedOption.word === answer.value) {
+    setColorOption.value=answer.value
     setTimeout(() => {
+      setColorOption.value=''
       randomQuiz.value++
       console.log('correct!')
     }, 2000)
   } else {
+    setColorOption.value=''
     setTimeout(() => {
+      setColorOption.value=''
       randomQuiz.value++
       console.log('Wrong!')
     }, 2000)
@@ -80,6 +86,7 @@ const shuffle = (array) => {
         <div class="options py-12 w-3/4">
           <Option
             :options="data.categories[0].units[0].items"
+            :correctOption="setColorOption"
             @optionClicked="checkAnswer"
           />
         </div>
@@ -94,6 +101,9 @@ const shuffle = (array) => {
       @resumeGame=""
       @goBackHome=""
     />
+  </div>
+  <div class="popup" >
+    <answer_popup/>
   </div>
 </template>
 

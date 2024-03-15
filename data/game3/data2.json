@@ -22,7 +22,7 @@
             },
             {
               "id": 3,
-              "src": "./fruits/watermelon.png",
+              "src": "./fruits/mango.png",
               "word": "芒果 (mángguǒ)",
               "meaning": "Mango",
               "pronunciation": "../../assets/pronunciation/mango.mp3"
