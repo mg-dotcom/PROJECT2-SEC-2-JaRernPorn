@@ -17,8 +17,8 @@ export default {
         black: '#20201D',
         'answer-fontColor': '#BE4400',
         brownColor: '#52250E',
-        green: '#42d134',
-        blue: '#186cc7',
+        "green": '#42d134',
+        blue: '#186cc7'
       },
       fontSize: {
         'title-size': '118px',
