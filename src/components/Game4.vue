@@ -14,8 +14,10 @@ const closeSetting = (flag) => {
 </script>
 
 <template>
+  <!-- Game 4 page -->
   <div class="w-full h-screen bg-main-bgColor">
     <Topbar @setting="showSetting" />
+
     <div class="flex justify-center py-8">
       <p
         class="font-outfit text-title text-2xl font-semibold sm:text-3xl lg:text-4xl"
@@ -23,13 +25,11 @@ const closeSetting = (flag) => {
         Select the matching pairs
       </p>
     </div>
+
     <Options />
 
     <Teleport to="#setting">
-      <div
-        class="absolute left-0 right-0 top-1/3 m-auto h-48 w-72"
-        v-show="settingPopup"
-      >
+      <div class="absolute left-0 right-0 top-1/3 m-auto" v-show="settingPopup">
         <Setting @close="closeSetting" />
       </div>
     </Teleport>

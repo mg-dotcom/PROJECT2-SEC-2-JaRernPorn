@@ -13,7 +13,7 @@ const emits = defineEmits(['setting'])
         <img
           src="/game4/setting vector.svg"
           alt="setting"
-          class="w-8 cursor-pointer hover:w-11 transition-all duration-300 ease-in-out sm:w-10"
+          class="w-8 cursor-pointer hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out sm:w-10"
           @click="$emit('setting', true)"
         />
       </div>
