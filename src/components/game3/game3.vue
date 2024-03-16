@@ -16,13 +16,14 @@ const checkStatus = ref(false)
 const audioOfOption = ref(data.categories[0].units[0].items[0].pronunciation)
 const setColorOption = ref('')
 const isSelected = ref(false)
+const answerOfQuiz=ref('')
 
 const currentCategory = computed(() => {
   return data.categories[0].name //get [currentIndexCate.value]
 })
 
 const currentQuiz = computed(() => {
-  answer.value = data.categories[0].units[0].items[randomQuiz.value].word
+  answerOfQuiz.value = data.categories[0].units[0].items[randomQuiz.value].word
   meaning.value=data.categories[0].units[0].items[randomQuiz.value].meaning
 
   return data.categories[0].units[0].items[randomQuiz.value].src
@@ -42,18 +43,27 @@ const toggleSetting = () => {
 const closePopup = () => {
   showPopup.value = !showPopup.value
   setColorOption.value = ''
+  // answer.value=''
+  // userSelected.value=''
+  isSelected.value = false
   randomQuiz.value++
 }
 const turnOnCheckStatus = () => {
+  answer.value = data.categories[0].units[0].items[randomQuiz.value].word
   checkStatus.value = true
   if (userSelected.value === answer.value && checkStatus.value) {
     setColorOption.value = answer.value
+    userSelected.value=''
     setTimeout(() => {
+      answer.value=''
       setColorOption.value = ''
+      isSelected.value = false
       randomQuiz.value++
       console.log('correct!')
     }, 2000)
   } else {
+    answer.value=''
+  userSelected.value=''
     showPopup.value = true
   }
 }
@@ -97,6 +107,7 @@ const soundControl2 = (path) => {
             :options="data.categories[0].units[0].items"
             :correctOption="answer"
             :isSelected="isSelected"
+            :userSelected="userSelected"
             @optionClicked="checkAnswer"
           />
         </div>
@@ -120,7 +131,7 @@ const soundControl2 = (path) => {
     />
   </div>
   <div class="" v-show="showPopup">
-    <answer_popup :answer="answer" @closePopup="closePopup" />
+    <answer_popup :answer="answerOfQuiz" @closePopup="closePopup" />
   </div>
 </template>
 
