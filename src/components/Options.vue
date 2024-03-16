@@ -18,22 +18,26 @@ const handleMeaningClick = (id) => {
 }
 
 const checkMatch = () => {
-  if (clickedWordId.value === null || clickedMeaningId.value === null) {
+  if (!clickedWordId.value || !clickedMeaningId.value) {
     console.log('Please click both a word and its meaning.')
-    return ''
+    return
   }
 
-  const wordItem = data.categories[0].units[0].items.find(
-    (item) => item.id === clickedWordId.value
-  )
-  const meaningItem = data.categories[0].units[0].items.find(
-    (item) => item.id === clickedMeaningId.value
-  )
+  const { meaning: wordMeaning } =
+    data.categories[0].units[0].items.find(
+      ({ id }) => id === clickedWordId.value
+    ) || {}
+  const { meaning: meaningMeaning } =
+    data.categories[0].units[0].items.find(
+      ({ id }) => id === clickedMeaningId.value
+    ) || {}
 
-  if (wordItem && meaningItem && wordItem.meaning === meaningItem.meaning) {
-    console.log('Matched!')
-  } else {
-    console.log('Not matched.')
+  if (wordMeaning && meaningMeaning) {
+    if (wordMeaning === meaningMeaning) {
+      console.log('Matched!')
+    } else {
+      console.log('Not matched.')
+    }
   }
 }
 </script>
@@ -45,8 +49,8 @@ const checkMatch = () => {
         <button
           v-for="(wordOption, index) in data.categories[0].units[0].items"
           :key="index"
-          class="bg-white rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-20 md:w-96 md:text-2xl lg:rounded-2xl"
           @click="handleWordClick(wordOption.id)"
+          class="bg-white rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-20 md:w-96 md:text-2xl lg:rounded-2xl"
         >
           {{ wordOption.word }}
         </button>

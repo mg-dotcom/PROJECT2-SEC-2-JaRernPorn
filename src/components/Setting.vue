@@ -53,7 +53,10 @@ onMounted(() => {
           />
 
           <audio controls loop class="hidden" ref="player">
-            <source src="/voice/background-music.mp3" type="audio/mp3" />
+            <source
+              src="/background-music.mp3"
+              type="audio/mp3"
+            />
           </audio>
         </div>
 
