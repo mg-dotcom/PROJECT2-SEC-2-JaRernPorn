@@ -34,6 +34,11 @@ const soundControl = () => {
   }
 }
 
+const soundControl2 = (path) => {
+  const sound = new Audio(path)
+  sound.play()
+}
+
 // const checkAnswer
 </script>
 
@@ -61,7 +66,7 @@ const soundControl = () => {
         :class="{ 'bg-green-400': true, 'bg-red-500': false }"
         v-for="(item, itemIndex) in threeChoices"
         :key="itemIndex"
-        @click="soundControl"
+        @click="soundControl2(item.pronunciation)"
       >
         <img
           :src="item.src"
