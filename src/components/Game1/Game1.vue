@@ -2,11 +2,19 @@
 import { categories } from '../../../data/categories.json'
 import { computed, ref } from 'vue'
 import CheckButton from './CheckButton.vue'
+import Setting from '../Setting.vue'
 
 const currentIndexCate = ref(0)
-const currentIndexUnit = ref(1)
-const currentIndexItem = ref(1)
+const currentIndexUnit = ref(0)
+const currentIndexItem = ref(2)
 
+//Setting
+const showSetting = ref(false)
+const toggleSetting = () => {
+  showSetting.value = !showSetting.value
+}
+
+//Sound
 const player = ref('')
 const isPlaying = ref(true)
 
@@ -50,7 +58,12 @@ const soundControl2 = (path) => {
       >
         Category: {{ currentCategory }}
       </h1>
-      <img src="/Setting.svg" alt="Setting" class="pr-36" />
+      <img
+        src="/Setting.svg"
+        alt="Setting"
+        class="pr-36"
+        @click="showSetting = true"
+      />
     </div>
 
     <div class="flex justify-center">
@@ -73,6 +86,14 @@ const soundControl2 = (path) => {
           :alt="item.meaning"
           class="w-[220px] h-[225px] ml-10 mt-3"
         />
+        <div class="absolute left-0 right-0 top-1/3" v-show="showSetting">
+          <Setting
+            @closeSetting="toggleSetting"
+            @restartGame=""
+            @resumeGame=""
+            @goBackHome=""
+          />
+        </div>
         <div
           class="border-solid border-b-2 border-black w-[230px] ml-7 mt-10"
         ></div>
