@@ -16,13 +16,13 @@ const checkStatus = ref(false)
 const audioOfOption = ref(data.categories[0].units[0].items[0].pronunciation)
 // const options=data.categories[0].units[0].items
 const setColorOption = ref('')
-const isSelected=ref(false)
+const isSelected = ref(false)
 
 const checkAnswer = (selectedOption) => {
   userSelected.value = selectedOption.word
   showAudio.value = true
   audioOfOption.value = selectedOption.pronunciation
-  isSelected.value-true
+  isSelected.value = true
 
   // if (selectedOption.word === answer.value && checkStatus.value===true) {
   //   setColorOption.value = answer.value
