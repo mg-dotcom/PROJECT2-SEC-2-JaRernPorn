@@ -6,7 +6,7 @@ import Setting from '../Setting.vue'
 
 const currentIndexCate = ref(0)
 const currentIndexUnit = ref(0)
-const currentIndexItem = ref(2)
+const currentIndexItem = ref(0)
 
 //Setting
 const showSetting = ref(false)
@@ -24,7 +24,7 @@ const isPlaying = ref(true)
 //     player.value.pause()
 //   }
 // }
-const soundControl2 = (path) => {
+const soundControl = (path) => {
   if (!showSetting.value) {
     const sound = new Audio(path)
     sound.play()
@@ -49,11 +49,44 @@ const threeChoices = computed(() => {
   return categories[currentIndexCate.value].units[currentIndexUnit.value].items
 })
 
-// const checkAnswer
+//CheckAnswer
+// const correctAnswer =
+//   categories[currentIndexCate.value].units[currentIndexUnit.value].items[
+//     currentIndexItem.value
+//   ].meaning
+
+const checkAnswer = (userAnswer) => {
+  const correctAnswer = ref(
+    categories[currentIndexCate.value].units[currentIndexUnit.value].items[
+      currentIndexItem.value
+    ].meaning
+  )
+
+  console.log('corre ' + correctAnswer.value)
+  console.log('user ' + userAnswer)
+
+  if (userAnswer === correctAnswer.value) {
+    console.log('nice')
+  } else {
+    console.log('wrong dude')
+  }
+
+  correctAnswer.value = ''
+  userAnswer.value = []
+}
+
+//CollectAnswer
+const userAnswer = ref([])
+const selectedAnswer = (userSelect) => {
+  // console.log(userSelect)
+  userAnswer.value.push(userSelect)
+  // console.log(userAnswer.value)
+  // console.log(userAnswer.value)
+}
 </script>
 
 <template>
-  <div class="bg-main-bgColor h-screen w-full">
+  <div class="bg-main-bgColor min-h-screen w-full">
     <div class="flex justify-between pt-20">
       <h1
         class="text-3xl text-wrongPopup-size font-semibold font-outfit text-title pl-20"
@@ -78,16 +111,22 @@ const threeChoices = computed(() => {
     <div class="flex flex-row gap-16 justify-center mt-10">
       <div
         class="h-[400px] w-[300px] rounded-3xl shadow-md bg-white cursor-pointer hover:border-8 border-slate-200"
-        :class="{ 'bg-green-400': true, 'bg-red-500': false }"
+        :class="{
+          'bg-green-400': userAnswer.value,
+          'bg-red-500': userAnswer.value
+        }"
         v-for="(item, itemIndex) in threeChoices"
         :key="itemIndex"
-        @click="soundControl2(item.pronunciation)"
+        @click="selectedAnswer(item.meaning)"
       >
-        <img
-          :src="item.src"
-          :alt="item.meaning"
-          class="w-[220px] h-[225px] ml-10 mt-3"
-        />
+        <div>
+          <img
+            :src="item.src"
+            :alt="item.meaning"
+            class="w-[220px] h-[225px] ml-10 mt-3"
+            @click="soundControl(item.pronunciation)"
+          />
+        </div>
         <div class="absolute left-0 right-0 top-1/3" v-show="showSetting">
           <Setting
             @closeSetting="toggleSetting"
@@ -96,6 +135,7 @@ const threeChoices = computed(() => {
             @goBackHome=""
           />
         </div>
+
         <div
           class="border-solid border-b-2 border-black w-[230px] ml-7 mt-10"
         ></div>
@@ -106,17 +146,32 @@ const threeChoices = computed(() => {
           {{ item.word.split(' ')[0] }} <br />
           <!-- {{ item.word.split(' ')[1] }} -->
           {{ item.word.split(' ').slice(1).join(' ') }}
+          <!-- แบ่ง 
+            葡萄 
+            (pú 
+            táo) -->
+
+          <!-- [ "(pú", "táo)" ] -->
+
+          <!-- (pú,táo)-->
         </h1>
         <img
           src="/SoundButton.svg"
           alt="SoundButton"
           class="absolute ml-52 -mt-12"
         />
+
         <!-- <audio controls ref="player">
           <source :src="item.pronunciation" type="audio/mp3" />
         </audio> -->
 
-        <CheckButton />
+        <!-- <CheckButton /> -->
+        <button
+          class="rounded-full bg-[#B11717] text-white font-outfit font-medium text-resultButton-size w-40 h-14 absolute right-0 mr-28 bottom-0 mb-24"
+          @click="checkAnswer(userAnswer)"
+        >
+          Check
+        </button>
       </div>
     </div>
   </div>
