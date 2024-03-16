@@ -18,26 +18,25 @@ const handleMeaningClick = (id) => {
 }
 
 const checkMatch = () => {
+  // Check if both a word and its meaning have been clicked
   if (!clickedWordId.value || !clickedMeaningId.value) {
     console.log('Please click both a word and its meaning.')
     return
   }
 
-  const { meaning: wordMeaning } =
-    data.categories[0].units[0].items.find(
-      ({ id }) => id === clickedWordId.value
-    ) || {}
-  const { meaning: meaningMeaning } =
-    data.categories[0].units[0].items.find(
-      ({ id }) => id === clickedMeaningId.value
-    ) || {}
+  // ดึงข้อมูลจาก data มา
+  const { meaning: word } = data.categories[0].units[0].items.find(
+    ({ id }) => id === clickedWordId.value
+  )
+  const { meaning: meaning } = data.categories[0].units[0].items.find(
+    ({ id }) => id === clickedMeaningId.value
+  )
 
-  if (wordMeaning && meaningMeaning) {
-    if (wordMeaning === meaningMeaning) {
-      console.log('Matched!')
-    } else {
-      console.log('Not matched.')
-    }
+  // เทียบค่า and log
+  if (word === meaning) {
+    console.log('Matched!')
+  } else {
+    console.log('Not matched.')
   }
 }
 </script>
@@ -69,8 +68,8 @@ const checkMatch = () => {
     </div>
     <div class="flex justify-end px-6 lg:px-32">
       <button
-        class="bg-title rounded-2xl text-white font-outfit font-semibold w-20 h-8 sm:text-2xl sm:w-28 sm:h-14 sm:rounded-3xl hover:bg-button-bgColor lg:w-36 lg:h-12"
         @click="checkMatch"
+        class="bg-title rounded-2xl text-white font-outfit font-semibold w-20 h-8 sm:text-2xl sm:w-28 sm:h-14 sm:rounded-3xl hover:bg-button-bgColor lg:w-36 lg:h-12"
       >
         Check
       </button>
