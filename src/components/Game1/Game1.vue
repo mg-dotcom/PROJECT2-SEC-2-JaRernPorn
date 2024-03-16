@@ -3,7 +3,7 @@ import { categories } from '../../../data/categories.json'
 import { computed, ref } from 'vue'
 import CheckButton from './CheckButton.vue'
 
-const currentIndexCate = ref(0)
+const currentIndexCate = ref(1)
 const currentIndexUnit = ref(0)
 const currentIndexItem = ref(0)
 
@@ -26,13 +26,13 @@ const threeChoices = computed(() => {
   return categories[currentIndexCate.value].units[currentIndexUnit.value].items
 })
 
-const soundControl = () => {
-  if (isPlaying.value) {
-    player.value.play()
-  } else {
-    player.value.pause()
-  }
-}
+// const soundControl = () => {
+//   if (isPlaying.value) {
+//     player.value.play()
+//   } else {
+//     player.value.pause()
+//   }
+// }
 
 const soundControl2 = (path) => {
   const sound = new Audio(path)
@@ -81,16 +81,17 @@ const soundControl2 = (path) => {
           <!-- {{ item }} -->
           <!-- {{ item.word.split(' ') }} -->
           {{ item.word.split(' ')[0] }} <br />
-          {{ item.word.split(' ')[1] }}
+          <!-- {{ item.word.split(' ')[1] }} -->
+          {{ item.word.split(' ').slice(1).join(' ') }}
         </h1>
         <img
           src="/SoundButton.svg"
           alt="SoundButton"
           class="absolute ml-52 -mt-12"
         />
-        <audio controls ref="player">
+        <!-- <audio controls ref="player">
           <source :src="item.pronunciation" type="audio/mp3" />
-        </audio>
+        </audio> -->
 
         <CheckButton />
       </div>
