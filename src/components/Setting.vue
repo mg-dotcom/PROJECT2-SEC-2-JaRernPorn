@@ -8,6 +8,9 @@ const musicControl = () => {
   if (isPlaying.value) player.value.play()
   else player.value.pause()
 }
+
+const emits = defineEmits(['close'])
+const settingPopup = ref(false)
 </script>
 
 <template>
@@ -15,7 +18,12 @@ const musicControl = () => {
     <div class="flex justify-center">
       <div class="bg-white shadow-xl px-5 py-4 w-64 h-64 rounded-xl">
         <div class="flex justify-end py-2">
-          <img src="/game4/close.svg" alt="close" class="w-3 cursor-pointer" />
+          <img
+            src="/game4/close.svg"
+            alt="close"
+            class="w-3 cursor-pointer"
+            @click="$emit('close', false)"
+          />
         </div>
 
         <div class="flex justify-center py-1">
