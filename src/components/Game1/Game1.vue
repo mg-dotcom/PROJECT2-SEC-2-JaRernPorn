@@ -3,9 +3,9 @@ import { categories } from '../../../data/categories.json'
 import { computed, ref } from 'vue'
 import CheckButton from './CheckButton.vue'
 
-const currentIndexCate = ref(1)
-const currentIndexUnit = ref(0)
-const currentIndexItem = ref(0)
+const currentIndexCate = ref(0)
+const currentIndexUnit = ref(1)
+const currentIndexItem = ref(1)
 
 const player = ref('')
 const isPlaying = ref(true)
