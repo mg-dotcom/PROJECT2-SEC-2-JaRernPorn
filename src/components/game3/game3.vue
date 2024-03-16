@@ -1,11 +1,12 @@
 <script setup>
 import Option from './Option.vue'
-import data from '../../../data/game3/data2.json'
+import data from '../../../data/game3/data.json'
 import Setting from './Setting.vue'
 import answer_popup from './answer_popup.vue'
 import { computed, ref } from 'vue'
 
 const answer = ref()
+const meaning = ref()
 const randomQuiz = ref(0)
 const showSetting = ref(false)
 const userSelected = ref()
@@ -17,11 +18,12 @@ const setColorOption = ref('')
 const isSelected = ref(false)
 
 const currentCategory = computed(() => {
-  return data.categories[0].name; //get [currentIndexCate.value]
-});
+  return data.categories[0].name //get [currentIndexCate.value]
+})
 
 const currentQuiz = computed(() => {
   answer.value = data.categories[0].units[0].items[randomQuiz.value].word
+  meaning.value=data.categories[0].units[0].items[randomQuiz.value].meaning
   // console.log(answer.value)
 
   return data.categories[0].units[0].items[randomQuiz.value].src
@@ -89,7 +91,7 @@ const soundControl2 = (path) => {
           class="pic bg-white flex flex-col items-center rounded-lg drop-shadow-lg w-32 py-5"
         >
           <img :src="currentQuiz" class="w-20" />
-          <h3>{{ answer }}</h3>
+          <h3>{{ meaning }}</h3>
         </div>
         <div class="options py-12 w-3/4" @click="soundControl2(audioOfOption)">
           <Option

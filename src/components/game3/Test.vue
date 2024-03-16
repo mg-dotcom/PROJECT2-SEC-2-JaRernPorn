@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import data from '../../../data/game3/data2.json'
+import data from '../../../data/game3/data.json'
 // const music=ref(data.categories[0].units[0].items[0].pronunciation)
 const music2 = ref(data.categories[0].units[0].items)
 console.log(music2.value);
