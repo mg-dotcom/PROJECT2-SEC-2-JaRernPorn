@@ -32,7 +32,7 @@ onMounted(() => {
     <div class="setting bg-white w-1/5 border border-black rounded-2xl">
       <div class="closebtn flex justify-end py-2 px-2 cursor-pointer">
         <img
-          src="/public/close.svg"
+          src="/close.svg"
           alt="close setting btn"
           class=""
           @click="$emit('closeSetting')"
@@ -59,7 +59,7 @@ onMounted(() => {
       <div class="btn flex m-5">
         <div class="restart">
           <img
-            src="/public/settingBtn/restartButton.png"
+            src="/settingBtn/restartButton.png"
             alt="restart button"
             class="restart cursor-pointer"
             @click="$emit('restartGame')"
@@ -67,7 +67,7 @@ onMounted(() => {
         </div>
         <div class="play">
           <img
-            src="/public/settingBtn/resumeButton.png"
+            src="/settingBtn/resumeButton.png"
             alt="resume button"
             class="resume cursor-pointer"
             @click="$emit('resumeGame')"
@@ -75,7 +75,7 @@ onMounted(() => {
         </div>
         <div class="home">
           <img
-            src="/public/settingBtn/homebutton.png"
+            src="/settingBtn/homebutton.png"
             alt="home cursor-pointer"
             @click="$emit('goBackHome')"
           />

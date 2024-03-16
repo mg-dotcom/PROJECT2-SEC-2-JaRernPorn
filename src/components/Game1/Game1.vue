@@ -17,23 +17,6 @@ const toggleSetting = () => {
 //Sound
 const player = ref('')
 const isPlaying = ref(true)
-
-// const category = categories[currentIndexCate.value] ดิบๆไปก่อนนะ
-
-const currentCategory = computed(() => {
-  return categories[currentIndexCate.value].name
-})
-
-const currentQuestion = computed(() => {
-  return categories[currentIndexCate.value].units[currentIndexUnit.value].items[
-    currentIndexItem.value
-  ].meaning
-})
-
-const threeChoices = computed(() => {
-  return categories[currentIndexCate.value].units[currentIndexUnit.value].items
-})
-
 // const soundControl = () => {
 //   if (isPlaying.value) {
 //     player.value.play()
@@ -41,11 +24,30 @@ const threeChoices = computed(() => {
 //     player.value.pause()
 //   }
 // }
-
 const soundControl2 = (path) => {
-  const sound = new Audio(path)
-  sound.play()
+  if (!showSetting.value) {
+    const sound = new Audio(path)
+    sound.play()
+  }
 }
+
+//Category
+// const category = categories[currentIndexCate.value] ดิบๆไปก่อนนะ
+const currentCategory = computed(() => {
+  return categories[currentIndexCate.value].name
+})
+
+//Question
+const currentQuestion = computed(() => {
+  return categories[currentIndexCate.value].units[currentIndexUnit.value].items[
+    currentIndexItem.value
+  ].meaning
+})
+
+//Choices
+const threeChoices = computed(() => {
+  return categories[currentIndexCate.value].units[currentIndexUnit.value].items
+})
 
 // const checkAnswer
 </script>
@@ -62,7 +64,7 @@ const soundControl2 = (path) => {
         src="/Setting.svg"
         alt="Setting"
         class="pr-36"
-        @click="showSetting = true"
+        @click="toggleSetting"
       />
     </div>
 
