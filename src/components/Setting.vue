@@ -1,16 +1,26 @@
 <script setup>
-import { ref, watch, watchEffect } from 'vue'
+import { onMounted, ref, watch, watchEffect } from 'vue'
 
-const isPlaying = ref(false)
+const emits = defineEmits(['close', 'restartGame', 'resumeGame', 'goBackHome'])
+const isPlaying = ref(true)
 const player = ref('')
+
 const musicControl = () => {
-  isPlaying.value = !isPlaying.value
-  if (isPlaying.value) player.value.play()
-  else player.value.pause()
+  if (isPlaying.value) {
+    player.value.play()
+  } else {
+    player.value.pause()
+  }
 }
 
-const emits = defineEmits(['close'])
-const settingPopup = ref(false)
+watch(isPlaying, () => {
+  musicControl()
+})
+
+onMounted(() => {
+  isPlaying.value = true
+  musicControl()
+})
 </script>
 
 <template>
@@ -37,12 +47,13 @@ const settingPopup = ref(false)
           <input
             type="checkbox"
             class="toggle toggle-error"
-            @click="musicControl"
             v-model="isPlaying"
+            @click="isPlaying = !isPlaying"
+            @change="musicControl"
           />
 
-          <audio controls class="hidden" ref="player">
-            <source src="./assets/voice/background-music.mp3" />
+          <audio controls loop class="hidden" ref="player">
+            <source src="/voice/background-music.mp3" type="audio/mp3" />
           </audio>
         </div>
 
@@ -52,9 +63,29 @@ const settingPopup = ref(false)
 
         <div class="flex justify-center py-4">
           <div class="flex justify-between items-center gap-x-2 w-48">
-            <button><img src="/game4/replay.svg" alt="replay" /></button>
-            <button><img src="/game4/resume.svg" alt="resume" /></button>
-            <button><img src="/game4/home.svg" alt="home" /></button>
+            <button>
+              <img
+                src="/game4/replay.svg"
+                alt="restart"
+                class="restart cursor-pointer"
+                @click="$emit('restartGame')"
+              />
+            </button>
+            <button>
+              <img
+                src="/game4/resume.svg"
+                alt="resume"
+                class="resume cursor-pointer"
+                @click="$emit('resumeGame')"
+              />
+            </button>
+            <button>
+              <img
+                src="/game4/home.svg"
+                alt="home"
+                @click="$emit('goBackHome')"
+              />
+            </button>
           </div>
         </div>
       </div>

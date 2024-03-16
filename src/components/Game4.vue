@@ -4,13 +4,16 @@ import Options from './Options.vue'
 import Setting from './Setting.vue'
 import Topbar from './Topbar.vue'
 import { ref } from 'vue'
+
 const settingPopup = ref(false)
+
 const showSetting = (flag) => {
   settingPopup.value = flag //true
 }
 const closeSetting = (flag) => {
   settingPopup.value = flag //false
 }
+
 </script>
 
 <template>
@@ -26,10 +29,10 @@ const closeSetting = (flag) => {
       </p>
     </div>
 
-    <Options />
+    <Options  />
 
     <Teleport to="#setting">
-      <div class="absolute left-0 right-0 top-1/3 m-auto" v-show="settingPopup">
+      <div class="absolute left-0 right-0 top-0 m-auto" v-show="settingPopup">
         <Setting @close="closeSetting" />
       </div>
     </Teleport>
