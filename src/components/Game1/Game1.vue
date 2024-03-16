@@ -1,6 +1,7 @@
 <script setup>
 import { categories } from '../../../data/categories.json'
 import { computed, ref } from 'vue'
+import CheckButton from './CheckButton.vue'
 
 const currentIndexCate = ref(0)
 const currentIndexUnit = ref(0)
@@ -85,13 +86,9 @@ const soundControl = () => {
         <audio controls ref="player">
           <source :src="item.pronunciation" type="audio/mp3" />
         </audio>
+
+        <CheckButton />
       </div>
-      <button
-        class="rounded-full bg-[#B11717] text-white font-outfit font-medium text-resultButton-size w-40 h-14 absolute right-0 mr-28 bottom-0 mb-24"
-        @click="checkAnswer"
-      >
-        Check
-      </button>
     </div>
   </div>
 </template>
