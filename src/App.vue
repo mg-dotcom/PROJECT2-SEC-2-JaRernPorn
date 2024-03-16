@@ -7,9 +7,9 @@ import AddFlashcard from './components/AddFlashcard.vue'
 
 <template>
   <div>
-    <!-- <Game4></Game4> -->
+    <Game4></Game4>
     <!-- <Setting></Setting> -->
-    <AddFlashcard></AddFlashcard>
+    <!-- <AddFlashcard></AddFlashcard> -->
   </div>
 </template>
 

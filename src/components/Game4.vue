@@ -1,15 +1,15 @@
 <script setup>
 import { ref, computed } from 'vue'
-import categories from '../../data/categories.json'
+import data from '../../data/categories.json'
+
+// console.log(data.categories[0].name)
+// console.log(data.categories[0].units[0].items)
+// console.log(options.value)
 
 const options = ref([])
-const currentIndexItem = ref(0)
-const currentIndexCate = ref(0)
-const selectedAnswer = ref('')
-
-const currentCategory = computed(() => {
-  return categories[0].name
-})
+const wordSelected = ref('')
+const meaningSelected = ref('')
+const matchedPairs = ref([])
 
 const shuffle = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -19,35 +19,52 @@ const shuffle = (array) => {
   return array
 }
 
-const generateOptions = () => {
-  const optionsArray = []
-  // optionsArray.push({ id: 1, word: answer, meaning: meaning })
-  const units = categories[0].units[0].items
-  for (const word in units) {
-    if (word) {
-      optionsArray.push({
-        id: optionsArray.length + 1,
-        word: word,
-        meaning: meaning
-      })
+// const shuffleOption = () => {
+//   const optionsArray = []
+//   for (let i = 1; i < data.categories[0].units[0].items.length; i++) {
+//     const generateWord = data.categories[0].units[0].items[i].word
+//     const generateMeaning = data.categories[0].units[0].items[i].meaning
+//     if (optionsArray) {
+//       optionsArray.push({
+//         id: optionsArray.length + 1,
+//         word: generateWord,
+//         meaning: generateMeaning
+//       })
+//     }
+//   }
+//   return shuffle(optionsArray)
+// }
+
+const checkAnswer = (wordOrMeaning) => {
+  if (!wordSelected.value) {
+    wordSelected.value = wordOrMeaning
+    console.log('Correct')
+  } else if (!meaningSelected.value) {
+    meaningSelected.value = wordOrMeaning
+    // Check if the selected word and meaning match
+    if (wordSelected.value !== '' && meaningSelected.value !== '') {
+      const pair = { word: wordSelected.value, meaning: meaningSelected.value }
+      matchedPairs.value.push(pair)
+      console.log('Not correct')
+      // Reset selections after checking
+      wordSelected.value = ''
+      meaningSelected.value = ''
     }
   }
-  return shuffle(optionsArray)
 }
-
-const currentQuiz = computed(() => {
-  options.value = categories[0].units[0].items.length.word
-  generateOptions(options.value)
-  return categories[0].units[0].items.length.word
-})
+const isCorrectPair = (word, meaning) => {
+  return matchedPairs.value.some(
+    (pair) => pair.word === word && pair.meaning === meaning
+  )
+}
 </script>
 
 <template>
   <div class="w-full h-screen bg-main-bgColor">
-    <div class="flex flex-col gap-5 px-16 py-14">
+    <div class="flex flex-col gap-5 px-16 py-8">
       <div class="flex justify-between items-center">
         <h1 class="font-outfit text-title text-3xl font-semibold sm:text-4xl">
-          Category: Fruits
+          Category: {{ data.categories[0].name }}
         </h1>
         <img
           src="/game4/setting vector.svg"
@@ -75,21 +92,29 @@ const currentQuiz = computed(() => {
     <div class="flex justify-center">
       <div class="grid grid-cols grid-rows-3 gap-y-7 p-8">
         <button
-          v-for="(n, index) in 3"
+          v-for="(option, index) in data.categories[0].units[0].items"
           :key="index"
+          @click="checkAnswer(option.word)"
+          :class="{
+            'bg-green-500': isCorrectPair(option.word, option.meaning)
+          }"
           class="bg-white rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-20 md:w-96 md:text-2xl lg:rounded-2xl"
         >
-          {{ n }}
+          {{ option.word }}
         </button>
       </div>
 
       <div class="grid grid-cols grid-rows-3 gap-y-7 p-8">
         <button
-          class="bg-white rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-20 md:w-96 md:text-2xl lg:rounded-2xl"
-          v-for="(n, index) in 3"
+          v-for="(option, index) in data.categories[0].units[0].items"
           :key="index"
+          @click="checkAnswer(option.meaning)"
+          :class="{
+            'bg-green-500': isCorrectPair(option.word, option.meaning)
+          }"
+          class="bg-white rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-20 md:w-96 md:text-2xl lg:rounded-2xl"
         >
-          {{ n }}
+          {{ option.meaning }}
         </button>
       </div>
     </div>

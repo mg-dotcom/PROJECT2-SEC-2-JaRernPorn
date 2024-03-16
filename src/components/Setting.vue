@@ -1,38 +1,24 @@
 <script setup>
 import { ref, watch, watchEffect } from 'vue'
-// const isPlaying = ref(false)
-// const player = ref('')
-// const musicControl = () => {
-//   isPlaying.value = !isPlaying.value
-//   if (isPlaying.value) player.value.play()
-//   else player.value.pause()
-// }
 
 const isPlaying = ref(false)
-const player = ref(null)
-
+const player = ref('')
 const musicControl = () => {
   isPlaying.value = !isPlaying.value
+  if (isPlaying.value) player.value.play()
+  else player.value.pause()
 }
-
-watch(isPlaying, (newValue) => {
-  if (player.value) {
-    if (newValue) player.value.play()
-    else player.value.pause()
-  }
-})
 </script>
 
 <template>
-
-  <div class="w-full h-screen bg-main-bgColor">
+  <div class="w-full h-screen">
     <div class="flex justify-center">
-      <div class="bg-white shadow-xl p-4 w-64 h-64 rounded-xl">
+      <div class="bg-white shadow-xl px-5 py-4 w-64 h-64 rounded-xl">
         <div class="flex justify-end py-2">
           <img src="/game4/close.svg" alt="close" class="w-3 cursor-pointer" />
         </div>
 
-        <div class="flex justify-center py-2">
+        <div class="flex justify-center py-1">
           <span class="font-alkatra text-title font-semibold text-5xl"
             >Setting</span
           >
@@ -42,12 +28,13 @@ watch(isPlaying, (newValue) => {
           <span class="font-alkatra text-3xl text-gray-text">Music</span>
           <input
             type="checkbox"
-            class="toggle toggle-md"
+            class="toggle toggle-error"
             @click="musicControl"
             v-model="isPlaying"
           />
+
           <audio controls class="hidden" ref="player">
-            <source src="./assets/sample.mp3" />
+            <source src="./assets/voice/background-music.mp3" />
           </audio>
         </div>
 
