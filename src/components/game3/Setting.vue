@@ -1,8 +1,13 @@
 <script setup>
 import { onMounted, ref, watch } from 'vue'
 
-const emits=defineEmits(['closeSetting','restartGame','resumeGame','goBackHome'])
-const isPlaying = ref(true)
+const emits = defineEmits([
+  'closeSetting',
+  'restartGame',
+  'resumeGame',
+  'goBackHome'
+])
+const isPlaying = ref(false)
 const player = ref('')
 const musicControl = () => {
   if (isPlaying.value) {
@@ -16,18 +21,22 @@ watch(isPlaying, () => {
   musicControl()
 })
 
-onMounted(()=>{
-  isPlaying.value=true
+onMounted(() => {
+  isPlaying.value = false
   musicControl()
 })
-
 </script>
 
 <template>
   <div class="flex justify-center">
     <div class="setting bg-white w-1/5 border border-black rounded-2xl">
       <div class="closebtn flex justify-end py-2 px-2 cursor-pointer">
-        <img src="/public/close.svg" alt="close setting btn" class="" @click="$emit('closeSetting')"/>
+        <img
+          src="/public/close.svg"
+          alt="close setting btn"
+          class=""
+          @click="$emit('closeSetting')"
+        />
       </div>
       <div
         class="header text-center text-4xl font-alkatra text-title font-semibold"
@@ -41,7 +50,7 @@ onMounted(()=>{
             type="checkbox"
             class="toggle cursor-pointer"
             v-model="isPlaying"
-            @click="isPlaying=!isPlaying"
+            @click="isPlaying = !isPlaying"
             @change="musicControl"
           />
         </div>

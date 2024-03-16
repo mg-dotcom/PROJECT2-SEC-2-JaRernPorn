@@ -13,27 +13,12 @@ const showAudio = ref(false)
 const showPopup = ref(false)
 const checkStatus = ref(false)
 const audioOfOption = ref(data.categories[0].units[0].items[0].pronunciation)
-// const options=data.categories[0].units[0].items
 const setColorOption = ref('')
 const isSelected = ref(false)
 
-const checkAnswer = (selectedOption) => {
-  userSelected.value = selectedOption.word
-  showAudio.value = true
-  audioOfOption.value = selectedOption.pronunciation
-  isSelected.value = true
-
-  // if (selectedOption.word === answer.value && checkStatus.value===true) {
-  //   setColorOption.value = answer.value
-  //   setTimeout(() => {
-  //     setColorOption.value = ''
-  //     randomQuiz.value++
-  //     console.log('correct!')
-  //   }, 2000)
-  // } else {
-  //   showPopup.value = true
-  // }
-}
+const currentCategory = computed(() => {
+  return data.categories[0].name; //get [currentIndexCate.value]
+});
 
 const currentQuiz = computed(() => {
   answer.value = data.categories[0].units[0].items[randomQuiz.value].word
@@ -41,6 +26,13 @@ const currentQuiz = computed(() => {
 
   return data.categories[0].units[0].items[randomQuiz.value].src
 })
+
+const checkAnswer = (selectedOption) => {
+  userSelected.value = selectedOption.word
+  showAudio.value = true
+  audioOfOption.value = selectedOption.pronunciation
+  isSelected.value = true
+}
 
 const toggleSetting = () => {
   showSetting.value = !showSetting.value
@@ -64,13 +56,6 @@ const turnOnCheckStatus = () => {
     showPopup.value = true
   }
 }
-const shuffle = (array) => {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[array[i], array[j]] = [array[j], array[i]]
-  }
-  return array
-}
 
 const soundControl2 = (path) => {
   console.log(audioOfOption.value)
@@ -83,7 +68,7 @@ const soundControl2 = (path) => {
   <div class="font-outfit">
     <div class="header flex justify-between p-16">
       <div class="category-name text-title text-4xl font-semibold">
-        Category : Fruit
+        Category : {{ currentCategory }}
       </div>
       <div class="setting flex">
         <img
