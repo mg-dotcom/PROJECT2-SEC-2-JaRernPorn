@@ -12,24 +12,28 @@ const showSetting = ref(false)
 const userSelected = ref()
 const showAudio = ref(false)
 const showPopup = ref(false)
+const checkStatus = ref(false)
 const audioOfOption = ref(data.categories[0].units[0].items[0].pronunciation)
 // const options=data.categories[0].units[0].items
 const setColorOption = ref('')
+const isSelected=ref(false)
 
 const checkAnswer = (selectedOption) => {
   userSelected.value = selectedOption.word
   showAudio.value = true
   audioOfOption.value = selectedOption.pronunciation
-  if (selectedOption.word === answer.value) {
-    setColorOption.value = answer.value
-    setTimeout(() => {
-      setColorOption.value = ''
-      randomQuiz.value++
-      console.log('correct!')
-    }, 2000)
-  } else {
-    showPopup.value = true
-  }
+  isSelected.value-true
+
+  // if (selectedOption.word === answer.value && checkStatus.value===true) {
+  //   setColorOption.value = answer.value
+  //   setTimeout(() => {
+  //     setColorOption.value = ''
+  //     randomQuiz.value++
+  //     console.log('correct!')
+  //   }, 2000)
+  // } else {
+  //   showPopup.value = true
+  // }
 }
 
 const currentQuiz = computed(() => {
@@ -47,6 +51,19 @@ const closePopup = () => {
   showPopup.value = !showPopup.value
   setColorOption.value = ''
   randomQuiz.value++
+}
+const turnOnCheckStatus = () => {
+  checkStatus.value = true
+  if (userSelected.value === answer.value && checkStatus.value) {
+    setColorOption.value = answer.value
+    setTimeout(() => {
+      setColorOption.value = ''
+      randomQuiz.value++
+      console.log('correct!')
+    }, 2000)
+  } else {
+    showPopup.value = true
+  }
 }
 const shuffle = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -88,14 +105,18 @@ const shuffle = (array) => {
           <Option
             :options="data.categories[0].units[0].items"
             :correctOption="answer"
+            :isSelected="isSelected"
             @optionClicked="checkAnswer"
           />
         </div>
         <AudioControl v-if="showAudio" :source="audioOfOption" />
       </div>
     </div>
-    <div class="">
-      <button class="bg-title text-white p-2 rounded-lg" @click="checkAnswer">
+    <div class="flex justify-center">
+      <button
+        class="bg-title text-white p-2 rounded-lg"
+        @click="turnOnCheckStatus"
+      >
         Check
       </button>
     </div>

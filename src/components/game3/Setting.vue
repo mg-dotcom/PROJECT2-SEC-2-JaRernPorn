@@ -2,7 +2,7 @@
 import { onMounted, ref, watch } from 'vue'
 
 const emits=defineEmits(['closeSetting','restartGame','resumeGame','goBackHome'])
-const isPlaying = ref(true)
+const isPlaying = ref(false)
 const player = ref('')
 const musicControl = () => {
   if (isPlaying.value) {
@@ -17,7 +17,7 @@ watch(isPlaying, () => {
 })
 
 onMounted(()=>{
-  isPlaying.value=true
+  isPlaying.value=false
   musicControl()
 })
 

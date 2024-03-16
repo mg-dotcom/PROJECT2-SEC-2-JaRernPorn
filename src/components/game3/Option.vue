@@ -1,9 +1,11 @@
 <script setup>
 const props = defineProps({
   options: Array,
-  correctOption: String
+  correctOption: String,
+  isSelected :Boolean
 })
 const emits = defineEmits(['optionClicked'])
+console.log(props.isSelected);
 </script>
 
 <template>
@@ -12,7 +14,7 @@ const emits = defineEmits(['optionClicked'])
     :key="index"
     @click="$emit('optionClicked', option)"
     class="bg-title mb-3 text-center text-white text-lg font-normal p-2 rounded-xl hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
-    :class="{ 'bg-green-600': option.word === correctOption }"
+    :class="{ 'bg-green-600': option.word === correctOption , 'bg-blue-600': isSelected }"
   >
     {{ option.word }}
   </div>
