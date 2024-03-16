@@ -108,12 +108,12 @@ const currentItem = computed(() => {
 
       <div class="flex justify-center pt-20">
         <div class="flex flex-wrap justify-center gap-44 w-[800px] h-[500px]">
-          <div v-for="item in currentItem" :key="item.id">
-            <div
-              class="w-44 h-44 bg-[#F9D986] rounded-[50px] transition-all duration-300 ease-in-out transform hover:scale-110"
-            >
-              <img :src="item.src" :alt="item.meaning" />
-            </div>
+          <div
+            class="w-44 h-44 bg-[#F9D986] rounded-[50px] transition-all duration-300 ease-in-out transform hover:scale-110"
+            v-for="item in currentItem"
+            :key="item.id"
+          >
+            <img :src="item.src" :alt="item.meaning" />
           </div>
         </div>
       </div>
