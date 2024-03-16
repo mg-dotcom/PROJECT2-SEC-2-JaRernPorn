@@ -11,21 +11,21 @@
               "src": "./fruits/apple.png",
               "word": "苹果 (píngguǒ)",
               "meaning": "Apple",
-              "pronunciation": "../../assets/pronunciation/apple.mp3"
+              "pronunciation": "/pronunciation/apple.mp3"
             },
             {
               "id": 2,
               "src": "./fruits/banana.png",
               "word": "香蕉 (xiāngjiāo)",
               "meaning": "Banana",
-              "pronunciation": "../../assets/pronunciation/banana.mp3"
+              "pronunciation": "/pronunciation/banana.mp3"
             },
             {
               "id": 3,
               "src": "./fruits/mango.png",
               "word": "芒果 (mángguǒ)",
               "meaning": "Mango",
-              "pronunciation": "../../assets/pronunciation/mango.mp3"
+              "pronunciation": "/pronunciation/mango.mp3"
             }
           ]
         },

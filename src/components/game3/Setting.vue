@@ -2,7 +2,7 @@
 import { onMounted, ref, watch } from 'vue'
 
 const emits=defineEmits(['closeSetting','restartGame','resumeGame','goBackHome'])
-const isPlaying = ref(false)
+const isPlaying = ref(true)
 const player = ref('')
 const musicControl = () => {
   if (isPlaying.value) {
@@ -17,7 +17,7 @@ watch(isPlaying, () => {
 })
 
 onMounted(()=>{
-  isPlaying.value=false
+  isPlaying.value=true
   musicControl()
 })
 
@@ -75,7 +75,7 @@ onMounted(()=>{
     </div>
 
     <audio controls loop class="hidden" ref="player">
-      <source src="../../assets/background-music.mp3" type="audio/mp3" />
+      <source src="/background-music.mp3" type="audio/mp3" />
     </audio>
   </div>
 </template>

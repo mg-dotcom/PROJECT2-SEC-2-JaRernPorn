@@ -2,7 +2,6 @@
 import Option from './Option.vue'
 import data from '../../../data/game3/data2.json'
 import Setting from './Setting.vue'
-import AudioControl from './AudioControl.vue'
 import answer_popup from './answer_popup.vue'
 import { computed, ref } from 'vue'
 
@@ -72,6 +71,12 @@ const shuffle = (array) => {
   }
   return array
 }
+
+const soundControl2 = (path) => {
+  console.log(audioOfOption.value)
+  const sound = new Audio(path)
+  sound.play()
+}
 </script>
 
 <template>
@@ -101,7 +106,7 @@ const shuffle = (array) => {
           <img :src="currentQuiz" class="w-20" />
           <h3>{{ answer }}</h3>
         </div>
-        <div class="options py-12 w-3/4">
+        <div class="options py-12 w-3/4" @click="soundControl2(audioOfOption)">
           <Option
             :options="data.categories[0].units[0].items"
             :correctOption="answer"
@@ -109,7 +114,6 @@ const shuffle = (array) => {
             @optionClicked="checkAnswer"
           />
         </div>
-        <AudioControl v-if="showAudio" :source="audioOfOption" />
       </div>
     </div>
     <div class="flex justify-center">
