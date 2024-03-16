@@ -12,7 +12,7 @@ console.log(props.answer);
   >
     <div class="w-full h-full flex justify-center items-center">
       <img
-        src="/public/Frame.png"
+        src="/Frame.png"
         alt="Frame chinese theme"
         class="mx-auto mobile:w-96 lg:w-3/5 xl:w-6/12"
       />

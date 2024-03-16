@@ -24,7 +24,6 @@ const currentCategory = computed(() => {
 const currentQuiz = computed(() => {
   answer.value = data.categories[0].units[0].items[randomQuiz.value].word
   meaning.value=data.categories[0].units[0].items[randomQuiz.value].meaning
-  // console.log(answer.value)
 
   return data.categories[0].units[0].items[randomQuiz.value].src
 })
@@ -74,7 +73,7 @@ const soundControl2 = (path) => {
       </div>
       <div class="setting flex">
         <img
-          src="/public/Vector.svg"
+          src="/Vector.svg"
           alt="setting button"
           class="w-10 hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
           @click="toggleSetting"
@@ -105,7 +104,7 @@ const soundControl2 = (path) => {
     </div>
     <div class="flex justify-center">
       <button
-        class="bg-title text-white p-2 rounded-lg"
+        class="bg-title text-white p-2 rounded-lg hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
         @click="turnOnCheckStatus"
       >
         Check
