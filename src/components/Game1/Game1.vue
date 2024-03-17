@@ -1,8 +1,13 @@
 <script setup>
 import { categories } from '../../../data/categories.json'
 import { computed, ref } from 'vue'
+
+import Card from './Card.vue'
+
 import CheckButton from './CheckButton.vue'
+import SoundButton from './SoundButton.vue'
 import Setting from '../Setting.vue'
+
 import SoundControl from '../SoundControl.vue'
 
 const currentIndexCate = ref(0)
@@ -144,6 +149,17 @@ const selectedAnswer = (userSelect, itemIndex) => {
     </div>
 
     <!-- Cards -->
+    <Card
+      v-for="(item, itemIndex) in threeChoices"
+      :key="itemIndex"
+      @click="selectedAnswer(item.meaning, itemIndex)"
+    >
+      <h1 class="text-[24px] ml-10 mt-3">
+        {{ item.word.split(' ')[0] }} <br />
+        {{ item.word.split(' ').slice(1).join(' ') }}
+      </h1>
+    </Card>
+
     <div class="flex flex-row gap-16 justify-center mt-10">
       <div
         class="h-[400px] w-[300px] rounded-3xl shadow-md bg-white cursor-pointer hover:border-8 border-slate-200"
@@ -186,11 +202,7 @@ const selectedAnswer = (userSelect, itemIndex) => {
           {{ item.word.split(' ')[0] }} <br />
           {{ item.word.split(' ').slice(1).join(' ') }}
         </h1>
-        <img
-          src="/SoundButton.svg"
-          alt="SoundButton"
-          class="absolute ml-52 -mt-12"
-        />
+        <SoundButton />
       </div>
     </div>
     <CheckButton @click="checkAnswer(userAnswer)" />
