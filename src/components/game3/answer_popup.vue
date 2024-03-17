@@ -24,7 +24,7 @@ console.log(props.answer);
         >
           The answer is<br />
           <div
-            class="text-green font-NotoSansSC font-medium lowercase text-sm relative sm:text-2xl md:text-4xl mobile:text-[20px]"
+            class="text-greenTest font-NotoSansSC font-medium lowercase text-sm relative sm:text-2xl md:text-4xl mobile:text-[20px]"
           >
             {{ props.answer }}
           </div>
