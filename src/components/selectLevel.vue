@@ -90,7 +90,7 @@ const currentItem = computed(() => {
   </section>
 
   <section class="unit" v-if="unitPage">
-    <div class="bg-main-bgColor h-screen w-full">
+    <div class="bg-main-bgColor min-h-screen w-full">
       <div class="flex justify-between">
         <img
           src="/Arrow-button.svg"
