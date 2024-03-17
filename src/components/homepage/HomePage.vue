@@ -1,16 +1,16 @@
 <script setup>
-import { reactive, ref } from 'vue'
-import settingButton from './components/setting-button.vue'
-import CategoryPage from './CategoryPage.vue'
+import { reactive, ref } from "vue";
+import settingButton from "./setting-button.vue";
+import CategoryPage from "../category/CategoryPage.vue";
 const page = reactive({
   homePage: true,
-  categoryPage: false
-})
+  categoryPage: false,
+});
 
 const showCategoryPage = () => {
-  page.homePage = false
-  page.categoryPage = true
-}
+  page.homePage = false;
+  page.categoryPage = true;
+};
 </script>
 
 <template>
@@ -64,7 +64,9 @@ const showCategoryPage = () => {
       </div>
     </div>
   </section>
-  <section><CategoryPage v-show="page.categoryPage"></CategoryPage></section>
+  <section>
+    <CategoryPage v-show="page.categoryPage"></CategoryPage>
+  </section>
 </template>
 
 <style scoped></style>
