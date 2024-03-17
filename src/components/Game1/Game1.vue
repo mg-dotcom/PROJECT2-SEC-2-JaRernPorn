@@ -3,6 +3,7 @@ import { categories } from '../../../data/categories.json'
 import { computed, ref } from 'vue'
 import CheckButton from './CheckButton.vue'
 import Setting from '../Setting.vue'
+import SoundControl from '../SoundControl.vue'
 
 const currentIndexCate = ref(0)
 const currentIndexUnit = ref(0)
@@ -32,12 +33,12 @@ const isPlaying = ref(true)
 //     player.value.pause()
 //   }
 // }
-const soundControl = (path) => {
-  if (!showSetting.value) {
-    const sound = new Audio(path)
-    sound.play()
-  }
-}
+// const soundControl = (path) => {
+//   if (!showSetting.value) {
+//     const sound = new Audio(path)
+//     sound.play()
+//   }
+// }
 
 //Category
 // const category = categories[currentIndexCate.value] ดิบๆไปก่อนนะ
@@ -60,7 +61,6 @@ const currentQuestion = computed(() => {
 const threeChoices = computed(() => {
   return categories[currentIndexCate.value].units[currentIndexUnit.value].items
 })
-
 const currentItem = (itemIndex) => {
   currentIndexItem.value = itemIndex
 }
@@ -160,13 +160,15 @@ const selectedAnswer = (userSelect, itemIndex) => {
         :key="itemIndex"
         @click="selectedAnswer(item.meaning, itemIndex)"
       >
+        <!-- Sound-Part -->
         <div>
-          <img
-            :src="item.src"
-            :alt="item.meaning"
-            class="w-[220px] h-[225px] ml-10 mt-3"
-            @click="soundControl(item.pronunciation)"
-          />
+          <SoundControl :soundPath="item.pronunciation">
+            <img
+              :src="item.src"
+              :alt="item.meaning"
+              class="w-[220px] h-[225px] ml-10 mt-3"
+            />
+          </SoundControl>
         </div>
         <div class="absolute left-0 right-0 top-1/3" v-show="showSetting">
           <Setting
@@ -201,10 +203,6 @@ const selectedAnswer = (userSelect, itemIndex) => {
           alt="SoundButton"
           class="absolute ml-52 -mt-12"
         />
-
-        <!-- <audio controls ref="player">
-          <source :src="item.pronunciation" type="audio/mp3" />
-        </audio> -->
       </div>
     </div>
     <CheckButton @click="checkAnswer(userAnswer)" />
@@ -212,3 +210,6 @@ const selectedAnswer = (userSelect, itemIndex) => {
 </template>
 
 <style scoped></style>
+<!-- <audio controls ref="player">
+          <source :src="item.pronunciation" type="audio/mp3" />
+        </audio> -->
