@@ -6,15 +6,23 @@ const emits = defineEmits(['wordClicked', 'meaningClicked'])
 
 const clickedWordId = ref(null)
 const clickedMeaningId = ref(null)
+const audioOfOption = ref(data.categories[0].units[0].items[0].pronunciation)
 
-const handleWordClick = (id) => {
+const handleWordClick = (id, pronunciation) => {
   clickedWordId.value = id
+  soundControl(pronunciation)
   emits('wordClicked', id)
 }
 
 const handleMeaningClick = (id) => {
   clickedMeaningId.value = id
   emits('meaningClicked', id)
+}
+
+const soundControl = (path) => {
+  // console.log(audioOfOption.value)
+  const sound = new Audio(path)
+  sound.play()
 }
 
 const checkMatch = () => {
@@ -34,12 +42,19 @@ const checkMatch = () => {
       ({ id }) => id === clickedMeaningId.value
     ) || {}
 
-  // เทียบค่า and log
-
   if (wordId === meaningId) {
     console.log('Matched!')
+    console.log('word id: ' + clickedWordId.value)
+    console.log('meaning id: ' + clickedMeaningId.value)
   } else {
-    console.log('Not matched.')
+    console.log(
+      'Not matched because ' +
+        'wordId = ' +
+        clickedWordId.value +
+        ' ' +
+        'but meaningId = ' +
+        clickedMeaningId.value
+    )
     // setTimeout(() => {
     //   wrongButton()
     // }, 2000)
@@ -49,12 +64,12 @@ const checkMatch = () => {
   clickedMeaningId.value = ''
 }
 
-const wrongButton = () => {
-  if (clickedWordId.value && clickedMeaningId.value) {
-    return 'bg-red-600'
-  }
-  return ''
-}
+// const wrongButton = () => {
+//   if (clickedWordId.value && clickedMeaningId.value) {
+//     return 'bg-red-600'
+//   }
+//   return ''
+// }
 </script>
 
 <template>
@@ -64,7 +79,7 @@ const wrongButton = () => {
         <button
           v-for="(wordOption, index) in data.categories[0].units[0].items"
           :key="index"
-          @click="handleWordClick(wordOption.id)"
+          @click="handleWordClick(wordOption.id, wordOption.pronunciation)"
           class="bg-white rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-20 md:w-96 md:text-2xl lg:rounded-2xl"
         >
           {{ wordOption.word }}

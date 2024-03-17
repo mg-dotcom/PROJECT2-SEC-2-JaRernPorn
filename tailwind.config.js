@@ -22,7 +22,8 @@ export default {
         brownColor: '#52250E',
         'pink-border': '#F1D3D3',
         'blue-border': '#3B8BD4',
-        'gray-text': '#434343'
+        'gray-text': '#434343',
+        'correct-btn': '#D2FFAB'
       },
       fontSize: {
         'title-size': '118px',
