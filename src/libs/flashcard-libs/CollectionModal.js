@@ -24,9 +24,10 @@ function deleteCollection(collectionId, collections) {
 function editCollection(collectionId, newName, collections) {
   if (!newName.trim()) {
     alert("Please enter a new collection name");
+
     return collections; // orginal collections
   }
-  collections[collectionId].collectionName = newName.trim();
+  collections[collectionId].name = newName.trim();
   localStorage.setItem("collections", JSON.stringify(collections));
 
   return collections;

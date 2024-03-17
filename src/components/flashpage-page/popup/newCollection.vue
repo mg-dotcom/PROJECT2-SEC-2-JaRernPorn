@@ -53,7 +53,7 @@ const sendCollectionsToParent = () => {
 <template>
   <!-- Add New Collection -->
   <div class="text-start font-outfit text-base font-semibold pb-2">
-    <div @click.self="props.closeOption">
+    <div>
       <h1
         class="cursor-pointer inline hover:bg-[#f4ead8] p-[4px] rounded-xl transition-all duration-[270ms]"
         @click="addNewCollectionName"

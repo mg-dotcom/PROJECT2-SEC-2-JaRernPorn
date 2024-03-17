@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref } from "vue";
+import { reactive, ref, defineEmits } from "vue";
 import Header from "./Header.vue";
 import Content from "./Content.vue";
 
@@ -14,29 +14,25 @@ const popup = reactive({
   renameCollection: false,
 });
 
-const closeOption = () => {
+const closeOption = (nameChangeEvent) => {
   popup.optionCollection = false;
-  renameCollectionName.value = "";
-  SelectedIndex.value = null;
 };
-
-const SelectedIndex = ref(null);
-
-const renameCollectionName = ref("");
 </script>
 
 <template>
   <!-- Flashcard Page -->
   <section class="flashcard-page overflow-hidden" v-show="page.flashcard">
-    <div
-      class="min-h-screen w-screen bg-main-bgColor"
-      @click.self="closeOption"
-    >
+    <div class="min-h-screen w-screen bg-main-bgColor">
       <Header :closeOption="closeOption">
         <template #title> Flashcard </template>
       </Header>
 
-      <Content :closeOption="closeOption" :popup="popup"> </Content>
+      <Content
+        :closeOption="closeOption"
+        :popup="popup"
+        @selectedIndexChanged="SelectedIndex = $event"
+      >
+      </Content>
     </div>
   </section>
 </template>

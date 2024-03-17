@@ -1,47 +1,49 @@
 <script setup>
 import { ref } from "vue";
-import { defineProps } from "vue";
+import { defineProps, defineEmits } from "vue";
 import closeIcon from "../../flashpage-page/icons/iconClose.vue";
+import { editCollection } from "../../../libs/flashcard-libs/CollectionModal.js";
 const props = defineProps({
-  index: {
-    type: Number,
+  popup: {
+    type: Object,
     required: true,
   },
   closeOption: {
     type: Function,
     required: true,
   },
-  popup: {
-    type: Object,
-    required: true,
-  },
   computedCollections: {
     required: true,
   },
+  index: {
+    type: Number,
+    required: true,
+  },
 });
-
-console.log(props.popup.renameCollection);
-
+const emit = defineEmits([
+  "toClearName",
+  "toClearSelectedIndex",
+  "toUpdateName",
+  "changeCollectionName",
+]);
 const renameCollectionName = ref("");
 
 const SelectedIndex = ref(null);
 
-const handleEditCollection = (index) => {
-  const newName = renameCollectionName.value.trim(); // Trimmed to remove whitespace
-  props.computedCollections = editCollection(
-    index,
-    newName,
-    props.computedCollections
-  );
-  props.popup.renameCollection = false;
-  props.closeOption();
-};
-
 const closeButton = () => {
   props.popup.renameCollection = false;
   renameCollectionName.value = "";
+  emit("toClearSelectedIndex");
 };
 
+const toClearName = () => {
+  renameCollectionName.value = "";
+};
+
+const toUpdateName = () => {
+  emit("changeCollectionName", props.index, renameCollectionName.value);
+  emit("toClearSelectedIndex");
+};
 </script>
 
 <template>
@@ -87,14 +89,15 @@ const closeButton = () => {
             <input
               type="text"
               v-model="renameCollectionName"
+              @change="toClearName"
               class="border-2 border-[#4096ff] rounded-md p-2 w-[400px] focus:outline-none focus:ring-2 focus:ring-[#4096ff] focus:border-transparent transition-all duration-[270ms]"
               :placeholder="props.computedCollections[props.index].name"
-              @keydown.enter="handleEditCollection(props.index)"
+              @keydown.enter="toUpdateName"
             />
             <div>
               <button
                 class="bg-[#4096ff] text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#4096ff] focus:border-transparent transition-all duration-[270ms]"
-                @click="handleEditCollection(props.index)"
+                @click="toUpdateName"
               >
                 OK
               </button>

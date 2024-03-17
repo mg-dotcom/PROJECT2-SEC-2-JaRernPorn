@@ -1,17 +1,21 @@
 <script setup>
-import { defineProps } from "vue";
-import { ref } from "vue";
-import iconDelete from "../flashpage-page/icons/iconDelete.vue";
-import iconEdit from "../flashpage-page/icons/iconEdit.vue";
+import {
+  defineProps,
+  computed,
+  defineEmits,
+  onMounted,
+  onUnmounted,
+  watch,
+  ref,
+} from "vue";
+
 import renameCollection from "./popup/renameCollection.vue";
+import optionCollection from "./popup/optionCollection.vue";
+import { loadConfigFromFile } from "vite";
 
 const props = defineProps({
   index: {
     type: Number,
-    required: true,
-  },
-  closeOption: {
-    type: Function,
     required: true,
   },
   popup: {
@@ -21,40 +25,43 @@ const props = defineProps({
   computedCollections: {
     required: true,
   },
-
+  closeOption: {
+    type: Function,
+    required: true,
+  },
 });
-
 const SelectedIndex = ref(null);
-
-const showOption = (item) => {
+const showOption = (index, event) => {
   props.popup.optionCollection = !props.popup.optionCollection;
-  SelectedIndex.value = item;
-};
-
-const handleDeleteCollection = (index) => {
-  props.computedCollections.splice(index, 1);
-  localStorage.setItem("collections", JSON.stringify(props.computedCollections));
-};
-
-const showRenameCollection = (index) => {
-  props.popup.renameCollection = !props.popup.renameCollection;
   SelectedIndex.value = index;
+
+  if (props.popup.optionCollection === false) {
+    SelectedIndex.value = null;
+  }
+  event.stopPropagation();
 };
 
+const toClearSelectedIndex = () => {
+  SelectedIndex.value = null;
+};
 
+const emit = defineEmits(["changeCollectionName", "deleteCollection"]);
+
+const passDeleteCollection = (index) => {
+  emit("deleteCollection", index);
+};
+
+const passNewName = (newName, index) => {
+  emit("changeCollectionName", newName, index);
+};
 </script>
 
 <template>
-  <renameCollection
-    :index="index"
-    :popup="popup"
-    :closeOption="closeOption"
-    :computedCollections="computedCollections"
-  />
-
   <!-- Each Folder Collection -->
   <div class="relative flex flex-col items-center font-outfit">
-    <div class="hover:shadow-lg rounded-3xl transition-all duration-[270ms]">
+    <div
+      class="collection hover:shadow-lg rounded-3xl transition-all duration-[270ms]"
+    >
       <img
         class="cursor-pointer"
         src="/img/flashcard-pic/collection.svg"
@@ -64,7 +71,8 @@ const showRenameCollection = (index) => {
         class="z-40 opacity-70 scale-[75%] hover:bg-gray-400 rounded-full w-10 h-10 p-2 cursor-pointer absolute top-[19px] right-[5px] transition-all duration-[270ms]"
         src="/img/flashcard-pic/option.svg"
         alt="option"
-        @click="showOption(props.index)"
+        :id="`option-${props.index}`"
+        @click="showOption(props.index, $event)"
       />
       <div
         class="absolute inset-[16px] flex items-center justify-center overflow-hidden cursor-pointer"
@@ -76,32 +84,24 @@ const showRenameCollection = (index) => {
         </div>
       </div>
     </div>
-  </div>
+    {{ SelectedIndex === props.index }}
+    {{ props.popup.optionCollection }}
+    <optionCollection
+      v-show="props.popup.optionCollection && SelectedIndex === props.index"
+      :index="index"
+      :popup="popup"
+      @deleteCollection="passDeleteCollection"
+    ></optionCollection>
 
-  <!-- Option Collection section -->
-  <div
-    class="max-w-[170px] p-3 bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700 w-full absolute z-40 left-[250px] top-[57px]"
-    v-show="showOption(props.index)"
-  >
-    <div
-      id="deleteCollection"
-      class="flex gap-3 hover:bg-gray-100 transition duration-[270ms] ease-in-out p-1 rounded-lg"
-      @click="handleDeleteCollection(props.index)"
-    >
-      <iconDelete>
-        <template #content> Delete </template>
-      </iconDelete>
-    </div>
-    <hr class="my-2 border-gray-200 dark:border-gray-700" />
-    <div
-      id="editCollection"
-      class="flex gap-3 hover:bg-gray-100 transition duration-[270ms] ease-in-out p-1 rounded-lg"
-      @click="showRenameCollection(props.index)"
-    >
-      <iconEdit>
-        <template #content> Rename </template>
-      </iconEdit>
-    </div>
+    <renameCollection
+      v-show="props.popup.renameCollection && SelectedIndex === props.index"
+      :index="index"
+      :popup="popup"
+      :computedCollections="computedCollections"
+      :closeOption="closeOption"
+      @changeCollectionName="passNewName"
+      @toClearSelectedIndex="toClearSelectedIndex"
+    ></renameCollection>
   </div>
 </template>
 

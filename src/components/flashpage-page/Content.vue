@@ -1,9 +1,12 @@
 <script setup>
-import { defineProps, ref, computed } from "vue";
+import { defineProps, ref, computed, defineEmits } from "vue";
 import newCollection from "./popup/newCollection.vue";
 import Collection from "./Collection.vue";
+import { editCollection } from "../../libs/flashcard-libs/CollectionModal.js";
+import { deleteCollection } from "../../libs/flashcard-libs/CollectionModal.js";
 import iconDelete from "./icons/iconDelete.vue";
 import iconEdit from "./icons/iconEdit.vue";
+import optionCollection from "./popup/optionCollection.vue";
 
 const props = defineProps({
   popup: {
@@ -16,25 +19,31 @@ const props = defineProps({
   },
 });
 
-const SelectedIndex = ref(null);
+const emit = defineEmits(["clearName", "toClearName"]);
+
 const collections = ref([]);
 const localCollections = JSON.parse(localStorage.getItem("collections")) || [];
 
 localCollections.forEach((collection) => {
   collections.value.push(collection);
 });
+
 const computedCollections = computed(() => {
   return collections.value;
 });
 
-const handleShowOption = (index) => {
-  if (SelectedIndex.value === index) {
-    return true;
-  }
-  return false;
+const handleEditCollection = (index, newName) => {
+  const newNameTrim = newName.trim(); // Trimmed to remove whitespace
+  collections.value = editCollection(index, newNameTrim, collections.value);
+  props.popup.renameCollection = false;
+  props.closeOption();
 };
 
-// Listen for the showOption event emitted from the child component
+const handleDeleteCollection = (index) => {
+  collections.value = deleteCollection(index, collections.value);
+  props.closeOption();
+};
+
 </script>
 
 <template>
@@ -56,15 +65,16 @@ const handleShowOption = (index) => {
     <div
       v-if="computedCollections.length > 0"
       class="grid grid-cols-3 gap-9 px-10 py-7 text-center"
-      @click.self="closeOption"
     >
       <Collection
         v-for="(collection, index) in computedCollections"
         :key="index"
         :index="index"
         :popup="popup"
-        :closeOption="closeOption"
         :computedCollections="computedCollections"
+        :closeOption="closeOption"
+        @changeCollectionName="handleEditCollection"
+        @deleteCollection="handleDeleteCollection"
       >
         <template #collectionName>
           {{ collection.name }}
