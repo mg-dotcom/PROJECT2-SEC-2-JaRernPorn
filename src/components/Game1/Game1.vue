@@ -18,6 +18,8 @@ const correctAnswer = ref(
   ].meaning
 )
 
+const currentItem = ref([])
+
 // const correctAnswer = ref('')
 const isCorrect = ref('')
 const userAnswer = ref([])
@@ -122,7 +124,10 @@ const checkAnswer = (userAnswer) => {
 }
 
 //CollectAnswer
-const selectedAnswer = (userSelect, itemIndex) => {
+const selectedAnswer = (item, userSelect, itemIndex) => {
+  console.log(item)
+  currentItem.value = item.meaning
+  console.log(currentItem.value)
   console.log('โดนเรีัยก')
   userAnswer.value = []
   console.log('userSelect ' + userSelect)
@@ -172,6 +177,7 @@ const selectedAnswer = (userSelect, itemIndex) => {
         :isCorrect="isCorrect"
         :userAnswer="userAnswer"
         :correctAnswer="correctAnswer"
+        :currentItem="currentItem"
         @selected="selectedAnswer"
       ></Card>
     </div>

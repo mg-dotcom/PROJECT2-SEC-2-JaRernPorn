@@ -6,7 +6,8 @@ const props = defineProps({
   checkStatus: Boolean,
   isCorrect: String,
   userAnswer: Array,
-  correctAnswer: String
+  correctAnswer: String,
+  currentItem: String
 })
 
 const emits = defineEmits(['selected'])
@@ -17,8 +18,14 @@ const emits = defineEmits(['selected'])
     <div
       class="h-[400px] w-[300px] rounded-3xl shadow-md bg-white cursor-pointer hover:border-8 border-slate-200"
       :class="{
-        'bg-[#D2FFAD]': checkStatus && isCorrect === 'correct',
-        'bg-[#FF9E95]': checkStatus && isCorrect === 'wrong'
+        'bg-[#D2FFAD]':
+          checkStatus &&
+          isCorrect === 'correct' &&
+          userAnswer[0] === currentItem[0],
+        'bg-[#FF9E95]':
+          checkStatus &&
+          isCorrect === 'wrong' &&
+          userAnswer[0] !== currentItem[0]
 
         // 'bg-[#FF9E94]':
         //   !isCorrect &&
@@ -27,7 +34,7 @@ const emits = defineEmits(['selected'])
       }"
       v-for="(item, itemIndex) in choices"
       :key="itemIndex"
-      @click="$emit('selected', item.meaning, itemIndex)"
+      @click="$emit('selected', item, item.meaning, itemIndex)"
     >
       <!-- Sound-Part -->
       <SoundControl :soundPath="item.pronunciation">
