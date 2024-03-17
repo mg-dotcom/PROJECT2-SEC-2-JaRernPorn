@@ -1,9 +1,10 @@
 <script setup>
-import { defineProps, ref, computed, defineEmits } from "vue";
+import { defineProps, ref, computed, defineEmits, reactive } from "vue";
 import newCollection from "./popup/newCollection.vue";
 import Collection from "./Collection.vue";
 import { editCollection } from "../../libs/flashcard-libs/CollectionModal.js";
 import { deleteCollection } from "../../libs/flashcard-libs/CollectionModal.js";
+import { addNewCollection } from "../../libs/flashcard-libs/CollectionModal.js";
 
 const props = defineProps({
   popup: {
@@ -38,8 +39,13 @@ const handleEditCollection = (index, newName) => {
 
 const handleDeleteCollection = (index) => {
   collections.value = deleteCollection(index, collections.value);
-  console.log(index);
   props.closeOption();
+};
+
+const handleAddNewCollection = (name) => {
+  const newColName = name.trim();
+  addNewCollection(newColName, collections.value);
+  props.popup.newCollection = false;
 };
 
 const SelectedIndex = ref(0);
@@ -55,7 +61,7 @@ const toggleOptionCollection = (index) => {
     <newCollection
       :closeOption="closeOption"
       :popup="popup"
-      @sendCollections="collections"
+      @addNewCollections="handleAddNewCollection"
     />
 
     <!-- All Collections -->
@@ -67,7 +73,7 @@ const toggleOptionCollection = (index) => {
     </div>
 
     <div
-      v-if="computedCollections.length > 0"
+      v-else-if="computedCollections.length > 0"
       class="grid grid-cols-1 gap-10 px-10 py-7 text-center lg:grid-cols-3 md:grid-cols-3 md:gap-17 sm:grid-cols-2 sm:gap-10"
       @click.self="closeOption"
     >

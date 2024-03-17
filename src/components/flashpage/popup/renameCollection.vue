@@ -53,7 +53,9 @@ const toUpdateName = () => {
       class="bg-black bg-opacity-50 flex items-center justify-center min-h-screen w-screen relative z-0"
       @click.self="closeButton"
     >
-      <div class="bg-white rounded-lg w-[580px] h-[350px] relative p-6">
+      <div
+        class="bg-white rounded-lg xl:w-[580px] xl:h-[350px] relative p-6 lg:w-[570px] lg:h-[350px] md:scale-[80%] sm:scale-[70%] mobile:scale-[58%] mobile:w-[500px]"
+      >
         <closeIcon
           class="absolute top-3 right-4 cursor-pointer"
           @click="closeButton"

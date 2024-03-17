@@ -1,5 +1,5 @@
 function addNewCollection(newCollectionName, collections) {
-  if (!newCollectionName.trim()) {
+  if (newCollectionName === "") {
     return alert("Please enter a collection name");
   } else {
     collections.push({
