@@ -14,7 +14,7 @@ const popup = reactive({
   renameCollection: false,
 });
 
-const closeOption = (nameChangeEvent) => {
+const closeOption = () => {
   popup.optionCollection = false;
 };
 </script>
@@ -30,11 +30,7 @@ const closeOption = (nameChangeEvent) => {
         <template #title> Flashcard </template>
       </Header>
 
-      <Content
-        :closeOption="closeOption"
-        :popup="popup"
-      >
-      </Content>
+      <Content :closeOption="closeOption" :popup="popup"> </Content>
     </div>
   </section>
 </template>

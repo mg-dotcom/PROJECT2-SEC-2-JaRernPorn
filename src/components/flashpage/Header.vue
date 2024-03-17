@@ -15,7 +15,9 @@ const props = defineProps({
     class="flex justify-between items-center p-2 md:p-4 lg:px-10 lg:py-7"
     @click.self="closeOption"
   >
-    <div class="hover:scale-110 transition-transform duration-300">
+    <div
+      class="hover:scale-110 transition-transform duration-300 sm:scale-100 mobile:scale-90"
+    >
       <img
         src="/img/flashcard-pic/back-button.svg"
         alt="back button"

@@ -1,10 +1,9 @@
 <script setup>
-import Flashcard from "./components/flashpage/CollectionFlashCard.vue";
-import FlashCardCopy from "./components/flashpage/FlashCard-copy.vue";
+import Flashcard from "./components/flashpage/CollectionFlashcard.vue";
 </script>
 
 <template>
   <Flashcard />
 </template>
 
-<style scoped></style>
+<style scoped></style>./components/flashpage/CollectionFlashcard.vue
