@@ -9,6 +9,8 @@ const currentIndexUnit = ref(0)
 const currentIndexItem = ref(0)
 const currentIndexQuestion = ref(0)
 
+const checkingStatus = ref(false)
+
 // const correctAnswer = ref('')
 const isCorrect = ref(false)
 
@@ -49,13 +51,6 @@ const setCurrentQuestionIndex = (index) => {
 }
 
 const currentQuestion = computed(() => {
-  // correctAnswer.value =
-  //   categories[currentIndexCate.value].units[currentIndexUnit.value].items[
-  //     currentIndexQuestion.value
-  //   ].meaning
-
-  // console.log(correctAnswer.value)
-
   return categories[currentIndexCate.value].units[currentIndexUnit.value].items[
     currentIndexQuestion.value
   ].meaning
@@ -71,13 +66,9 @@ const currentItem = (itemIndex) => {
 }
 
 //CheckAnswer
-// const correctAnswer =
-//   categories[currentIndexCate.value].units[currentIndexUnit.value].items[
-//     currentIndexItem.value
-//   ].meaning
-
 const checkAnswer = (userAnswer) => {
   console.log(userAnswer)
+  checkingStatus.value = true
 
   const correctAnswer =
     categories[currentIndexCate.value].units[currentIndexUnit.value].items[
@@ -87,18 +78,31 @@ const checkAnswer = (userAnswer) => {
   console.log('correctans ' + correctAnswer)
   console.log('user ans ' + userAnswer[0])
 
-  currentIndexQuestion.value++
-
-  if (currentIndexQuestion.value > 2) {
-    currentIndexQuestion.value = 0
-  }
-
   if (userAnswer[0] === correctAnswer) {
+    setTimeout(() => {
+      isCorrect.value = true
+      setTimeout(() => {
+        isCorrect.value = false
+        currentIndexQuestion.value++
+        if (currentIndexQuestion.value > 2) {
+          currentIndexQuestion.value = 0
+        }
+      }, 2000)
+    }, 0)
     console.log('nice')
     console.log(currentIndexQuestion.value)
-    isCorrect.value = true
     console.log(isCorrect.value)
   } else {
+    setTimeout(() => {
+      isCorrect.value = false
+      setTimeout(() => {
+        isCorrect.value = true
+        currentIndexQuestion.value++
+        if (currentIndexQuestion.value > 2) {
+          currentIndexQuestion.value = 0
+        }
+      }, 1000)
+    }, 0)
     console.log('wrong dude')
     isCorrect.value = false
     console.log(isCorrect.value)
@@ -106,12 +110,14 @@ const checkAnswer = (userAnswer) => {
 }
 
 //CollectAnswer
-const selectedAnswer = (userSelect) => {
+const selectedAnswer = (userSelect, itemIndex) => {
   console.log('โดนเรีัยก')
   userAnswer.value = []
   console.log('userSelect ' + userSelect)
   userAnswer.value.push(userSelect.trim())
   // console.log('answer ' + userAnswer.value)
+
+  currentIndexItem.value = itemIndex
 }
 </script>
 
@@ -142,12 +148,17 @@ const selectedAnswer = (userSelect) => {
       <div
         class="h-[400px] w-[300px] rounded-3xl shadow-md bg-white cursor-pointer hover:border-8 border-slate-200"
         :class="{
-          'bg-correct-option-green': true,
-          'bg-wrong-option-red': false
+          'bg-[#D2FFAB]':
+            isCorrect && checkingStatus && userAnswer[0] === item.meaning,
+          'bg-white': !checkingStatus || (checkingStatus && !userAnswer[0])
+          // 'bg-[#FF9E94]':
+          //   !isCorrect &&
+          //   checkingStatus &&
+          //   !userAnswer[0].includes(item.meaning)
         }"
         v-for="(item, itemIndex) in threeChoices"
         :key="itemIndex"
-        @click="selectedAnswer(item.meaning)"
+        @click="selectedAnswer(item.meaning, itemIndex)"
       >
         <div>
           <img
