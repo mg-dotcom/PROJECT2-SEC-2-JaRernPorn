@@ -59,7 +59,7 @@ const passAndClear = (name, event) => {
       @click.self="closeButton"
     >
       <div
-        class="bg-white rounded-lg xl:w-[580px] xl:h-[350px] relative p-6 lg:w-[570px] lg:h-[350px] md:scale-[80%] sm:scale-[70%] mobile:scale-[73%] mobile:w-[500px]"
+        class="bg-white rounded-lg xl:scale-100 xl:w-[570px] xl:h-[350px] relative p-6 lg:w-[570px] lg:h-[350px] md:scale-[80%] sm:scale-[70%] mobile:scale-[73%] mobile:w-[500px]"
       >
         <closeIcon
           class="absolute top-3 right-4 cursor-pointer"
