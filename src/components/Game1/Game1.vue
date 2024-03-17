@@ -169,6 +169,7 @@ const selectedAnswer = (userSelect, itemIndex) => {
           />
         </SoundControl>
 
+        <!-- Setting Part -->
         <div class="absolute left-0 right-0 top-1/3" v-show="showSetting">
           <Setting
             @closeSetting="toggleSetting"
@@ -182,20 +183,8 @@ const selectedAnswer = (userSelect, itemIndex) => {
           class="border-solid border-b-2 border-black w-[230px] ml-7 mt-10"
         ></div>
         <h1 class="text-[24px] ml-10 mt-3">
-          <!-- {{ item.word }} <br /> -->
-          <!-- {{ item }} -->
-          <!-- {{ item.word.split(' ') }} -->
           {{ item.word.split(' ')[0] }} <br />
-          <!-- {{ item.word.split(' ')[1] }} -->
           {{ item.word.split(' ').slice(1).join(' ') }}
-          <!-- แบ่ง 
-            葡萄 
-            (pú 
-            táo) -->
-
-          <!-- [ "(pú", "táo)" ] -->
-
-          <!-- (pú,táo)-->
         </h1>
         <img
           src="/SoundButton.svg"
