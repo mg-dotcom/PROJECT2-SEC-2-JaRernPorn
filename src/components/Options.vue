@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import data from '../../data/categories.json'
 
 const emits = defineEmits(['wordClicked', 'meaningClicked'])
@@ -24,20 +24,36 @@ const checkMatch = () => {
     return
   }
 
-  // ดึงข้อมูลจาก data มา
-  const { meaning: word } = data.categories[0].units[0].items.find(
-    ({ id }) => id === clickedWordId.value
-  )
-  const { meaning: meaning } = data.categories[0].units[0].items.find(
-    ({ id }) => id === clickedMeaningId.value
-  )
+  // destructure id property then find clickedWordId.value
+  const { id: wordId } =
+    data.categories[0].units[0].items.find(
+      ({ id }) => id === clickedWordId.value
+    ) || {}
+  const { id: meaningId } =
+    data.categories[0].units[0].items.find(
+      ({ id }) => id === clickedMeaningId.value
+    ) || {}
 
   // เทียบค่า and log
-  if (word === meaning) {
+
+  if (wordId === meaningId) {
     console.log('Matched!')
   } else {
     console.log('Not matched.')
+    // setTimeout(() => {
+    //   wrongButton()
+    // }, 2000)
   }
+
+  clickedWordId.value = ''
+  clickedMeaningId.value = ''
+}
+
+const wrongButton = () => {
+  if (clickedWordId.value && clickedMeaningId.value) {
+    return 'bg-red-600'
+  }
+  return ''
 }
 </script>
 
@@ -59,8 +75,8 @@ const checkMatch = () => {
         <button
           v-for="(meaningOption, index) in data.categories[0].units[0].items"
           :key="index"
-          class="bg-white rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-20 md:w-96 md:text-2xl lg:rounded-2xl"
           @click="handleMeaningClick(meaningOption.id)"
+          class="bg-white rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-20 md:w-96 md:text-2xl lg:rounded-2xl"
         >
           {{ meaningOption.meaning }}
         </button>
