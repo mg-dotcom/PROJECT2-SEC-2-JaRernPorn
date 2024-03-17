@@ -161,15 +161,14 @@ const selectedAnswer = (userSelect, itemIndex) => {
         @click="selectedAnswer(item.meaning, itemIndex)"
       >
         <!-- Sound-Part -->
-        <div>
-          <SoundControl :soundPath="item.pronunciation">
-            <img
-              :src="item.src"
-              :alt="item.meaning"
-              class="w-[220px] h-[225px] ml-10 mt-3"
-            />
-          </SoundControl>
-        </div>
+        <SoundControl :soundPath="item.pronunciation">
+          <img
+            :src="item.src"
+            :alt="item.meaning"
+            class="w-[220px] h-[225px] ml-10 mt-3"
+          />
+        </SoundControl>
+
         <div class="absolute left-0 right-0 top-1/3" v-show="showSetting">
           <Setting
             @closeSetting="toggleSetting"
