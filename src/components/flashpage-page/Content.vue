@@ -41,6 +41,7 @@ const handleEditCollection = (index, newName) => {
 
 const handleDeleteCollection = (index) => {
   collections.value = deleteCollection(index, collections.value);
+  console.log(index);
   props.closeOption();
 };
 

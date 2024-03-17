@@ -13,12 +13,9 @@ function addNewCollection(newCollectionName, collections) {
 }
 
 function deleteCollection(collectionId, collections) {
-  const updatedCollections = collections.filter(
-    (item, index) => index !== collectionId
-  );
-
-  localStorage.setItem("collections", JSON.stringify(updatedCollections));
-  return updatedCollections;
+  collections.splice(collectionId, 1);
+  localStorage.setItem("collections", JSON.stringify(collections));
+  return collections;
 }
 
 function editCollection(collectionId, newName, collections) {
