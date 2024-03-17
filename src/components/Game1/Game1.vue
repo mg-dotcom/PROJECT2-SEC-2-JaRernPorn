@@ -205,16 +205,9 @@ const selectedAnswer = (userSelect, itemIndex) => {
         <!-- <audio controls ref="player">
           <source :src="item.pronunciation" type="audio/mp3" />
         </audio> -->
-
-        <!-- <CheckButton /> -->
       </div>
     </div>
-    <button
-      class="rounded-full bg-[#B11717] text-white font-outfit font-medium text-resultButton-size w-40 h-14 absolute right-0 mr-28 bottom-0 mb-24"
-      @click="checkAnswer(userAnswer)"
-    >
-      Check
-    </button>
+    <CheckButton @click="checkAnswer(userAnswer)" />
   </div>
 </template>
 
