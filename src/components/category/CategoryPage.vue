@@ -1,28 +1,29 @@
 <script setup>
-import { ref, reactive } from "vue";
-import { categories } from "../../../data/categories.json";
+import { ref, reactive } from 'vue'
+import { categories } from '../../../data/categories.json'
 
-const currentIndexItem = ref(0);
-const currentIndexCate = ref(0);
+// const currentIndexItem = ref(0)
+// const currentIndexCate = ref(0)
 
-const init = () => {
-  currentIndexItem.value = 0;
-  currentIndexCate.value = 0;
-};
+// const init = () => {
+//   currentIndexItem.value = 0
+//   currentIndexCate.value = 0
+// }
 
 const allPage = reactive({
   homePage: true,
   categoryPage: false,
   playgamePage: false,
-  wordListPage: false,
-});
+  wordListPage: false
+})
 
 const backToHome = () => {
-  allPage.homePage = true;
-  allPage.categoryPage = false;
-  allPage.wordListPage = false;
-  init();
-};
+  allPage.homePage = true
+  allPage.categoryPage = false
+  allPage.wordListPage = false
+  init()
+}
+
 </script>
 
 <template>
@@ -56,6 +57,7 @@ const backToHome = () => {
             <div
               v-for="(category, cateIndex) in categories"
               :key="category.name"
+              :currentCateIndex="cateIndex" 
               class="category-item flex flex-col items-center md:mb-9 cursor-pointer"
             >
               <div
