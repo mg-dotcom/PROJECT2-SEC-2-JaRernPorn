@@ -111,7 +111,7 @@ const selectedAnswer = (userSelect) => {
   userAnswer.value = []
   console.log('userSelect ' + userSelect)
   userAnswer.value.push(userSelect.trim())
-  console.log('answer ' + userAnswer.value)
+  // console.log('answer ' + userAnswer.value)
 }
 </script>
 
@@ -142,7 +142,7 @@ const selectedAnswer = (userSelect) => {
       <div
         class="h-[400px] w-[300px] rounded-3xl shadow-md bg-white cursor-pointer hover:border-8 border-slate-200"
         :class="{
-          'bg-green-400': true,
+          'bg-green': false,
           'bg-red-500': false
         }"
         v-for="(item, itemIndex) in threeChoices"
@@ -196,14 +196,14 @@ const selectedAnswer = (userSelect) => {
         </audio> -->
 
         <!-- <CheckButton /> -->
-        <button
-          class="rounded-full bg-[#B11717] text-white font-outfit font-medium text-resultButton-size w-40 h-14 absolute right-0 mr-28 bottom-0 mb-24"
-          @click="checkAnswer(userAnswer)"
-        >
-          Check
-        </button>
       </div>
     </div>
+    <button
+      class="rounded-full bg-[#B11717] text-white font-outfit font-medium text-resultButton-size w-40 h-14 absolute right-0 mr-28 bottom-0 mb-24"
+      @click="checkAnswer(userAnswer)"
+    >
+      Check
+    </button>
   </div>
 </template>
 

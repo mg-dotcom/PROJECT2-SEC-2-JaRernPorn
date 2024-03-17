@@ -16,7 +16,8 @@ export default {
         'quiz-bgColor': '#F4E4C0',
         black: '#20201D',
         'answer-fontColor': '#BE4400',
-        brownColor: '#52250E'
+        brownColor: '#52250E',
+        green: '	#008000'
       },
       fontSize: {
         'title-size': '118px',
