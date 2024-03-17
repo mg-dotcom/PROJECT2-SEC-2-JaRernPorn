@@ -7,6 +7,11 @@ import Setting from '../Setting.vue'
 const currentIndexCate = ref(0)
 const currentIndexUnit = ref(0)
 const currentIndexItem = ref(0)
+const currentIndexQuestion = ref(0)
+
+const correctAnswer = ref('')
+
+const userAnswer = ref([])
 
 //Setting
 const showSetting = ref(false)
@@ -38,9 +43,20 @@ const currentCategory = computed(() => {
 })
 
 //Question
+const setCurrentQuestionIndex = (index) => {
+  currentIndexQuestion.value = index
+}
+
 const currentQuestion = computed(() => {
+  // correctAnswer.value =
+  //   categories[currentIndexCate.value].units[currentIndexUnit.value].items[
+  //     currentIndexQuestion.value
+  //   ].meaning
+
+  // console.log(correctAnswer.value)
+
   return categories[currentIndexCate.value].units[currentIndexUnit.value].items[
-    currentIndexItem.value
+    currentIndexQuestion.value
   ].meaning
 })
 
@@ -49,6 +65,10 @@ const threeChoices = computed(() => {
   return categories[currentIndexCate.value].units[currentIndexUnit.value].items
 })
 
+const currentItem = (itemIndex) => {
+  currentIndexItem.value = itemIndex
+}
+
 //CheckAnswer
 // const correctAnswer =
 //   categories[currentIndexCate.value].units[currentIndexUnit.value].items[
@@ -56,32 +76,39 @@ const threeChoices = computed(() => {
 //   ].meaning
 
 const checkAnswer = (userAnswer) => {
-  const correctAnswer = ref(
+  const correctAnswer =
     categories[currentIndexCate.value].units[currentIndexUnit.value].items[
-      currentIndexItem.value
+      currentIndexQuestion.value
     ].meaning
-  )
 
-  console.log('corre ' + correctAnswer.value)
-  console.log('user ' + userAnswer)
+  console.log('correctans ' + correctAnswer)
+  console.log('user ans ' + userAnswer[0])
 
-  if (userAnswer === correctAnswer.value) {
+  currentIndexQuestion.value++
+
+  if (currentIndexQuestion.value > 2) {
+    currentIndexQuestion.value = 0
+  }
+
+  if (userAnswer[0] === correctAnswer) {
     console.log('nice')
+    console.log(currentIndexQuestion.value)
   } else {
     console.log('wrong dude')
   }
 
-  correctAnswer.value = ''
   userAnswer.value = []
 }
 
+// const isCorrect =
+
 //CollectAnswer
-const userAnswer = ref([])
 const selectedAnswer = (userSelect) => {
-  // console.log(userSelect)
-  userAnswer.value.push(userSelect)
-  // console.log(userAnswer.value)
-  // console.log(userAnswer.value)
+  console.log('โดนเรีัยก')
+  userAnswer.value = []
+  console.log('userSelect ' + userSelect)
+  userAnswer.value.push(userSelect.trim())
+  console.log('answer ' + userAnswer.value)
 }
 </script>
 
@@ -168,7 +195,7 @@ const selectedAnswer = (userSelect) => {
         <!-- <CheckButton /> -->
         <button
           class="rounded-full bg-[#B11717] text-white font-outfit font-medium text-resultButton-size w-40 h-14 absolute right-0 mr-28 bottom-0 mb-24"
-          @click="checkAnswer(userAnswer)"
+          @click.stop="checkAnswer(userAnswer)"
         >
           Check
         </button>
