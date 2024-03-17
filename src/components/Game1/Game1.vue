@@ -142,8 +142,8 @@ const selectedAnswer = (userSelect) => {
       <div
         class="h-[400px] w-[300px] rounded-3xl shadow-md bg-white cursor-pointer hover:border-8 border-slate-200"
         :class="{
-          'bg-correct-bgColor': true,
-          'bg-wrong-bgColor': false
+          'bg-correct-option-green': true,
+          'bg-wrong-option-red': false
         }"
         v-for="(item, itemIndex) in threeChoices"
         :key="itemIndex"
