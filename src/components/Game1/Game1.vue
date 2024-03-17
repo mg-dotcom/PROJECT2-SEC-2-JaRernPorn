@@ -1,14 +1,9 @@
 <script setup>
 import { categories } from '../../../data/categories.json'
 import { computed, ref } from 'vue'
-
 import Card from './Card.vue'
-
 import CheckButton from './CheckButton.vue'
-import SoundButton from './SoundButton.vue'
 import Setting from '../Setting.vue'
-
-import SoundControl from '../SoundControl.vue'
 
 const currentIndexCate = ref(0)
 const currentIndexUnit = ref(0)
@@ -17,9 +12,14 @@ const currentIndexQuestion = ref(0)
 
 const checkingStatus = ref(false)
 
-// const correctAnswer = ref('')
-const isCorrect = ref(false)
+const correctAnswer = ref(
+  categories[currentIndexCate.value].units[currentIndexUnit.value].items[
+    currentIndexQuestion.value
+  ].meaning
+)
 
+// const correctAnswer = ref('')
+const isCorrect = ref('')
 const userAnswer = ref([])
 
 //Setting
@@ -28,34 +28,12 @@ const toggleSetting = () => {
   showSetting.value = !showSetting.value
 }
 
-//Sound
-const player = ref('')
-const isPlaying = ref(true)
-// const soundControl = () => {
-//   if (isPlaying.value) {
-//     player.value.play()
-//   } else {
-//     player.value.pause()
-//   }
-// }
-// const soundControl = (path) => {
-//   if (!showSetting.value) {
-//     const sound = new Audio(path)
-//     sound.play()
-//   }
-// }
-
 //Category
-// const category = categories[currentIndexCate.value] ดิบๆไปก่อนนะ
 const currentCategory = computed(() => {
   return categories[currentIndexCate.value].name
 })
 
 //Question
-const setCurrentQuestionIndex = (index) => {
-  currentIndexQuestion.value = index
-}
-
 const currentQuestion = computed(() => {
   return categories[currentIndexCate.value].units[currentIndexUnit.value].items[
     currentIndexQuestion.value
@@ -66,52 +44,81 @@ const currentQuestion = computed(() => {
 const threeChoices = computed(() => {
   return categories[currentIndexCate.value].units[currentIndexUnit.value].items
 })
-const currentItem = (itemIndex) => {
-  currentIndexItem.value = itemIndex
-}
 
 //CheckAnswer
 const checkAnswer = (userAnswer) => {
   console.log(userAnswer)
   checkingStatus.value = true
 
-  const correctAnswer =
-    categories[currentIndexCate.value].units[currentIndexUnit.value].items[
-      currentIndexQuestion.value
-    ].meaning
-
-  console.log('correctans ' + correctAnswer)
+  console.log('correctans ' + correctAnswer.value)
   console.log('user ans ' + userAnswer[0])
 
-  if (userAnswer[0] === correctAnswer) {
-    setTimeout(() => {
-      isCorrect.value = true
-      setTimeout(() => {
-        isCorrect.value = false
-        currentIndexQuestion.value++
-        if (currentIndexQuestion.value > 2) {
-          currentIndexQuestion.value = 0
-        }
-      }, 2000)
-    }, 0)
-    console.log('nice')
-    console.log(currentIndexQuestion.value)
-    console.log(isCorrect.value)
-  } else {
-    setTimeout(() => {
-      isCorrect.value = false
-      setTimeout(() => {
-        isCorrect.value = true
-        currentIndexQuestion.value++
-        if (currentIndexQuestion.value > 2) {
-          currentIndexQuestion.value = 0
-        }
-      }, 1000)
-    }, 0)
-    console.log('wrong dude')
-    isCorrect.value = false
-    console.log(isCorrect.value)
+  // if (userAnswer[0] === correctAnswer.value) {
+  //   isCorrect.value = correctAnswer.value
+  //   setTimeout(() => {
+  //     currentIndexQuestion.value++
+  //     if (currentIndexQuestion.value > 2) {
+  //       currentIndexQuestion.value = 0
+  //     }
+  //   }, 2000)
+
+  //   console.log('nice')
+  //   console.log(currentIndexQuestion.value)
+  //   console.log(isCorrect.value)
+  // } else {
+  //   setTimeout(() => {
+  //     isCorrect.value = false
+  //     setTimeout(() => {
+  //       currentIndexQuestion.value++
+  //       if (currentIndexQuestion.value > 2) {
+  //         currentIndexQuestion.value = 0
+  //       }
+  //     }, 2000)
+  //   }, 0)
+  //   console.log('wrong dude')
+  //   isCorrect.value = false
+  //   console.log(isCorrect.value)
+  // }
+
+  // if (userAnswer[0] === correctAnswer.value) {
+  //   isCorrect.value = 'correct'
+  //   setTimeout(() => {
+  //     currentIndexQuestion.value++
+  //     if (currentIndexQuestion.value > 2) {
+  //       currentIndexQuestion.value = 0
+  //     }
+  //     isCorrect.value = ''
+  //   }, 2000)
+  // }
+  // if (userAnswer[0] !== correctAnswer.value) {
+  //   isCorrect.value = 'wrong'
+  //   setTimeout(() => {
+  //     currentIndexQuestion.value++
+  //     if (currentIndexQuestion.value > 2) {
+  //       currentIndexQuestion.value = 0
+  //     }
+  //     isCorrect.value = ''
+  //   }, 2000)
+  // }
+
+  if (userAnswer[0] === correctAnswer.value) {
+    isCorrect.value = 'correct'
   }
+  if (userAnswer[0] !== correctAnswer.value) {
+    isCorrect.value = 'wrong'
+  }
+
+  setTimeout(() => {
+    currentIndexQuestion.value++
+    if (currentIndexQuestion.value > 2) {
+      currentIndexQuestion.value = 0
+    }
+    isCorrect.value = ''
+  }, 2000)
+
+  console.log(userAnswer[0])
+
+  console.log(userAnswer[0])
 }
 
 //CollectAnswer
@@ -148,68 +155,29 @@ const selectedAnswer = (userSelect, itemIndex) => {
       </h2>
     </div>
 
-    <!-- Cards -->
-    <Card
-      v-for="(item, itemIndex) in threeChoices"
-      :key="itemIndex"
-      @click="selectedAnswer(item.meaning, itemIndex)"
-    >
-      <h1 class="text-[24px] ml-10 mt-3">
-        {{ item.word.split(' ')[0] }} <br />
-        {{ item.word.split(' ').slice(1).join(' ') }}
-      </h1>
-    </Card>
+    <!-- Setting Part -->
+    <div class="absolute left-0 right-0 top-1/3" v-show="showSetting">
+      <Setting
+        @closeSetting="toggleSetting"
+        @restartGame=""
+        @resumeGame=""
+        @goBackHome=""
+      />
+    </div>
 
     <div class="flex flex-row gap-16 justify-center mt-10">
-      <div
-        class="h-[400px] w-[300px] rounded-3xl shadow-md bg-white cursor-pointer hover:border-8 border-slate-200"
-        :class="{
-          'bg-[#D2FFAB]':
-            isCorrect && checkingStatus && userAnswer[0] === item.meaning,
-          'bg-white': !checkingStatus || (checkingStatus && !userAnswer[0])
-          // 'bg-[#FF9E94]':
-          //   !isCorrect &&
-          //   checkingStatus &&
-          //   !userAnswer[0].includes(item.meaning)
-        }"
-        v-for="(item, itemIndex) in threeChoices"
-        :key="itemIndex"
-        @click="selectedAnswer(item.meaning, itemIndex)"
-      >
-        <!-- Sound-Part -->
-        <SoundControl :soundPath="item.pronunciation">
-          <img
-            :src="item.src"
-            :alt="item.meaning"
-            class="w-[220px] h-[225px] ml-10 mt-3"
-          />
-        </SoundControl>
-
-        <!-- Setting Part -->
-        <div class="absolute left-0 right-0 top-1/3" v-show="showSetting">
-          <Setting
-            @closeSetting="toggleSetting"
-            @restartGame=""
-            @resumeGame=""
-            @goBackHome=""
-          />
-        </div>
-
-        <div
-          class="border-solid border-b-2 border-black w-[230px] ml-7 mt-10"
-        ></div>
-        <h1 class="text-[24px] ml-10 mt-3">
-          {{ item.word.split(' ')[0] }} <br />
-          {{ item.word.split(' ').slice(1).join(' ') }}
-        </h1>
-        <SoundButton />
-      </div>
+      <Card
+        :choices="threeChoices"
+        :checkStatus="checkingStatus"
+        :isCorrect="isCorrect"
+        :userAnswer="userAnswer"
+        :correctAnswer="correctAnswer"
+        @selected="selectedAnswer"
+      ></Card>
     </div>
+
     <CheckButton @click="checkAnswer(userAnswer)" />
   </div>
 </template>
 
 <style scoped></style>
-<!-- <audio controls ref="player">
-          <source :src="item.pronunciation" type="audio/mp3" />
-        </audio> -->
