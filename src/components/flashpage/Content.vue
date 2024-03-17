@@ -4,10 +4,7 @@ import newCollection from "./popup/newCollection.vue";
 import Collection from "./Collection.vue";
 import { editCollection } from "../../libs/flashcard-libs/CollectionModal.js";
 import { deleteCollection } from "../../libs/flashcard-libs/CollectionModal.js";
-import renameCollection from "./popup/renameCollection.vue";
-import iconDelete from "./icons/iconDelete.vue";
-import iconEdit from "./icons/iconEdit.vue";
-import optionCollection from "./popup/optionCollection.vue";
+
 
 const props = defineProps({
   popup: {

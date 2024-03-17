@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from "vue";
 import { defineProps, defineEmits } from "vue";
-import closeIcon from "../../flashpage-page/icons/iconClose.vue";
-import { editCollection } from "../../../libs/flashcard-libs/CollectionModal.js";
+import closeIcon from "../../flashpage/icons/iconClose.vue";
+
 const props = defineProps({
   popup: {
     type: Object,
@@ -48,9 +48,7 @@ const toUpdateName = () => {
 
 <template>
   <!-- Rename Collection Popup  -->
-  <section
-    class="popup-renameCollection z-50 fixed top-0 left-0"
-  >
+  <section class="popup-renameCollection z-50 fixed top-0 left-0">
     <div
       class="bg-black bg-opacity-50 flex items-center justify-center min-h-screen w-screen relative z-0"
       @click.self="closeButton"

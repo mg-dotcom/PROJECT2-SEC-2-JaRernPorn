@@ -1,6 +1,6 @@
 <script setup>
 import { defineProps } from "vue";
-import settingButton from "../flashpage-page/icons/setting-button.vue";
+import settingButton from "../flashpage/icons/setting-button.vue";
 
 const props = defineProps({
   closeOption: {

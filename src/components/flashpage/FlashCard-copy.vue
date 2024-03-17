@@ -1,9 +1,9 @@
 <script setup>
 import { ref, reactive, computed } from "vue";
-import close from "../flashpage-page/icons/iconClose.vue";
-import iconDelete from "../flashpage-page/icons/iconDelete.vue";
-import iconEdit from "../flashpage-page/icons/iconEdit.vue";
-import settingButton from "../flashpage-page/icons/setting-button.vue";
+import close from "../flashpage/icons/iconClose.vue";
+import iconDelete from "../flashpage/icons/iconDelete.vue";
+import iconEdit from "../flashpage/icons/iconEdit.vue";
+import settingButton from "../flashpage/icons/setting-button.vue";
 import { addNewCollection } from "../../libs/flashcard-libs/CollectionModal";
 import { deleteCollection } from "../../libs/flashcard-libs/CollectionModal";
 import { editCollection } from "../../libs/flashcard-libs/CollectionModal";
@@ -85,7 +85,7 @@ const handleEditCollection = (index) => {
 
 <template>
   <!-- Flashcard Page -->
-  <section class="flashcard-page overflow-hidden" v-show="page.flashcard">
+  <section class="flashcard overflow-hidden" v-show="page.flashcard">
     <section class="flashcard-home">
       <div
         class="min-h-screen w-screen bg-main-bgColor"

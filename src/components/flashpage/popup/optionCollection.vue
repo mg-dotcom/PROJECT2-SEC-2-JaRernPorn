@@ -1,7 +1,7 @@
 <script setup>
 import { defineProps, defineEmits } from "vue";
-import iconDelete from "../../flashpage-page/icons/iconDelete.vue";
-import iconEdit from "../../flashpage-page/icons/iconEdit.vue";
+import iconDelete from "../../flashpage/icons/iconDelete.vue";
+import iconEdit from "../../flashpage/icons/iconEdit.vue";
 
 const props = defineProps({
   index: {
