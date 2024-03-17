@@ -23,7 +23,9 @@ export default {
         'pink-border': '#F1D3D3',
         'blue-border': '#3B8BD4',
         'gray-text': '#434343',
-        'correct-btn': '#D2FFAB'
+        'correct-option-green': '#D2FFAB',
+        'wrong-option-red': '#FF9E94',
+        'selected-option-blue': '#186cc7'
       },
       fontSize: {
         'title-size': '118px',

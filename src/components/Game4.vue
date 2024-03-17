@@ -6,7 +6,6 @@ import Topbar from './Topbar.vue'
 import { ref } from 'vue'
 
 const settingPopup = ref(false)
-// const audioOfOption = ref(data.categories[0].units[0].items[0].pronunciation)
 
 const showSetting = (flag) => {
   settingPopup.value = flag //true
@@ -14,12 +13,6 @@ const showSetting = (flag) => {
 const closeSetting = (flag) => {
   settingPopup.value = flag //false
 }
-
-// const soundControl = (path) => {
-//   console.log(audioOfOption.value)
-//   const sound = new Audio(path)
-//   sound.play()
-// }
 </script>
 
 <template>
@@ -39,7 +32,7 @@ const closeSetting = (flag) => {
 
     <Teleport to="#setting">
       <div class="absolute left-0 right-0 top-0 m-auto" v-show="settingPopup">
-        <Setting @close="closeSetting"/>
+        <Setting @close="closeSetting" />
       </div>
     </Teleport>
   </div>

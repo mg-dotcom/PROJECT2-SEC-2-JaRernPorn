@@ -1,22 +1,34 @@
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import data from '../../data/categories.json'
 
-const emits = defineEmits(['wordClicked', 'meaningClicked'])
+// const emits = defineEmits(['wordClicked', 'meaningClicked'])
 
 const clickedWordId = ref(null)
 const clickedMeaningId = ref(null)
-const audioOfOption = ref(data.categories[0].units[0].items[0].pronunciation)
+const currentIndexItem = ref(0)
+const currentIndexCate = ref(0)
+const options = ref(data.categories[0].units[0].items)
+
+const shuffle = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[array[i], array[j]] = [array[j], array[i]]
+  }
+  return array
+}
+
+const shuffleOption = shuffle(options.value)
 
 const handleWordClick = (id, pronunciation) => {
   clickedWordId.value = id
   soundControl(pronunciation)
-  emits('wordClicked', id)
+  // emits('wordClicked', id)
 }
 
 const handleMeaningClick = (id) => {
   clickedMeaningId.value = id
-  emits('meaningClicked', id)
+  // emits('meaningClicked', id)
 }
 
 const soundControl = (path) => {
@@ -55,21 +67,11 @@ const checkMatch = () => {
         'but meaningId = ' +
         clickedMeaningId.value
     )
-    // setTimeout(() => {
-    //   wrongButton()
-    // }, 2000)
   }
 
   clickedWordId.value = ''
   clickedMeaningId.value = ''
 }
-
-// const wrongButton = () => {
-//   if (clickedWordId.value && clickedMeaningId.value) {
-//     return 'bg-red-600'
-//   }
-//   return ''
-// }
 </script>
 
 <template>
@@ -77,10 +79,10 @@ const checkMatch = () => {
     <div class="flex justify-center">
       <div class="grid grid-cols grid-rows-3 gap-y-7 p-8">
         <button
-          v-for="(wordOption, index) in data.categories[0].units[0].items"
+          v-for="(wordOption, index) in options"
           :key="index"
           @click="handleWordClick(wordOption.id, wordOption.pronunciation)"
-          class="bg-white rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-20 md:w-96 md:text-2xl lg:rounded-2xl"
+          class="bg-white text-black rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-20 md:w-96 md:text-2xl lg:rounded-2xl"
         >
           {{ wordOption.word }}
         </button>
@@ -88,10 +90,10 @@ const checkMatch = () => {
 
       <div class="grid grid-cols grid-rows-3 gap-y-7 p-8">
         <button
-          v-for="(meaningOption, index) in data.categories[0].units[0].items"
+          v-for="(meaningOption, index) in options"
           :key="index"
           @click="handleMeaningClick(meaningOption.id)"
-          class="bg-white rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-20 md:w-96 md:text-2xl lg:rounded-2xl"
+          class="bg-white text-black rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-20 md:w-96 md:text-2xl lg:rounded-2xl"
         >
           {{ meaningOption.meaning }}
         </button>
