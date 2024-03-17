@@ -28,23 +28,25 @@ const props = defineProps({
     type: Function,
     required: true,
   },
+  SelectedIndex: {
+    type: Number,
+    required: true,
+  },
 });
-const SelectedIndex = ref(null);
-const showOption = (index, event) => {
-  props.popup.optionCollection = !props.popup.optionCollection;
-  SelectedIndex.value = index;
 
-  if (props.popup.optionCollection === false) {
-    SelectedIndex.value = null;
-  }
-  event.stopPropagation();
+const showOption = (index, event) => {
+  emit("toggle-option-collection", index);
 };
 
 const toClearSelectedIndex = () => {
   SelectedIndex.value = null;
 };
 
-const emit = defineEmits(["changeCollectionName", "deleteCollection"]);
+const emit = defineEmits([
+  "changeCollectionName",
+  "deleteCollection",
+  "toggle-option-collection",
+]);
 
 const passDeleteCollection = (index) => {
   emit("deleteCollection", index);
@@ -79,12 +81,11 @@ const passNewName = (newName, index) => {
         <div
           class="w-[75%] text-3xl font-semibold whitespace-normal break-all overflow-ellipsis z-10"
         >
-          <slot name="collectionName">Empty Name</slot>
+          {{ props.computedCollections[props.index].name }}
         </div>
       </div>
     </div>
-    {{ SelectedIndex === props.index }}
-    {{ props.popup.optionCollection }}
+
     <optionCollection
       v-show="props.popup.optionCollection && SelectedIndex === props.index"
       :index="index"

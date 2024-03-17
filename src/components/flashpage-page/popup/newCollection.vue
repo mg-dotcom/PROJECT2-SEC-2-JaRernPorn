@@ -22,7 +22,7 @@ const closeButton = () => {
 };
 
 const handleAddNewCollection = () => {
-  const newColName = newCollectionName.value.trim(); 
+  const newColName = newCollectionName.value.trim();
   addNewCollection(newColName, collections.value);
   newCollectionName.value = "";
   props.popup.newCollection = false;
@@ -47,13 +47,12 @@ const emits = defineEmits(["sendCollections"]);
 const sendCollectionsToParent = () => {
   emits("sendCollections", collections.value);
 };
-
 </script>
 
 <template>
   <!-- Add New Collection -->
   <div class="text-start font-outfit text-base font-semibold pb-2">
-    <div>
+    <div @click.self="props.closeOption">
       <h1
         class="cursor-pointer inline hover:bg-[#f4ead8] p-[4px] rounded-xl transition-all duration-[270ms]"
         @click="addNewCollectionName"

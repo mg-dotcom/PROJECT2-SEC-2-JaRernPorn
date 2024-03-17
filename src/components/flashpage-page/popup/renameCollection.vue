@@ -50,7 +50,6 @@ const toUpdateName = () => {
   <!-- Rename Collection Popup  -->
   <section
     class="popup-renameCollection z-50 fixed top-0 left-0"
-    v-show="props.popup.renameCollection && SelectedIndex === props.index"
   >
     <div
       class="bg-black bg-opacity-50 flex items-center justify-center min-h-screen w-screen relative z-0"

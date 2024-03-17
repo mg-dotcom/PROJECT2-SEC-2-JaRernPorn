@@ -15,6 +15,8 @@ const props = defineProps({
 
 });
 
+
+
 const showRenameCollection = () => {
   props.popup.renameCollection = true;
   props.popup.optionCollection = false;
@@ -27,6 +29,7 @@ const emit = defineEmits(["deleteCollection"]);
   <!-- Option Collection Section -->
   <div
     class="max-w-[170px] p-3 bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700 w-full absolute z-40 left-[240px] top-[60px]"
+    
   >
     <div
       id="deleteCollection"

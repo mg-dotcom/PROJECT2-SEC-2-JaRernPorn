@@ -233,7 +233,10 @@ const handleEditCollection = (index) => {
                       </div>
                     </div>
                   </div>
-
+{{ SelectedIndex === index }}
+{{ popup.optionCollection }}
+{{  SelectedIndex }}
+{{ index }}
                   <!-- Option Collection section -->
                   <div
                     class="max-w-[170px] p-3 bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700 w-full absolute z-40 left-[250px] top-[57px]"

@@ -4,6 +4,7 @@ import newCollection from "./popup/newCollection.vue";
 import Collection from "./Collection.vue";
 import { editCollection } from "../../libs/flashcard-libs/CollectionModal.js";
 import { deleteCollection } from "../../libs/flashcard-libs/CollectionModal.js";
+import renameCollection from "./popup/renameCollection.vue";
 import iconDelete from "./icons/iconDelete.vue";
 import iconEdit from "./icons/iconEdit.vue";
 import optionCollection from "./popup/optionCollection.vue";
@@ -45,6 +46,12 @@ const handleDeleteCollection = (index) => {
   props.closeOption();
 };
 
+const SelectedIndex = ref(0);
+
+const toggleOptionCollection = (index) => {
+  props.popup.optionCollection = !props.popup.optionCollection;
+  SelectedIndex.value = index;
+};
 </script>
 
 <template>
@@ -66,6 +73,7 @@ const handleDeleteCollection = (index) => {
     <div
       v-if="computedCollections.length > 0"
       class="grid grid-cols-3 gap-9 px-10 py-7 text-center"
+      @click.self="closeOption"
     >
       <Collection
         v-for="(collection, index) in computedCollections"
@@ -74,12 +82,11 @@ const handleDeleteCollection = (index) => {
         :popup="popup"
         :computedCollections="computedCollections"
         :closeOption="closeOption"
+        :SelectedIndex="SelectedIndex"
         @changeCollectionName="handleEditCollection"
         @deleteCollection="handleDeleteCollection"
+        @toggle-option-collection="toggleOptionCollection"
       >
-        <template #collectionName>
-          {{ collection.name }}
-        </template>
       </Collection>
     </div>
   </div>
