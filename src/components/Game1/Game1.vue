@@ -9,7 +9,8 @@ const currentIndexUnit = ref(0)
 const currentIndexItem = ref(0)
 const currentIndexQuestion = ref(0)
 
-const correctAnswer = ref('')
+// const correctAnswer = ref('')
+const isCorrect = ref(false)
 
 const userAnswer = ref([])
 
@@ -93,14 +94,16 @@ const checkAnswer = (userAnswer) => {
   if (userAnswer[0] === correctAnswer) {
     console.log('nice')
     console.log(currentIndexQuestion.value)
+    return (isCorrect.value = true)
+    console.log(isCorrect.value)
   } else {
     console.log('wrong dude')
+    return (isCorrect.value = false)
+    console.log(isCorrect.value)
   }
 
   userAnswer.value = []
 }
-
-// const isCorrect =
 
 //CollectAnswer
 const selectedAnswer = (userSelect) => {
@@ -139,8 +142,8 @@ const selectedAnswer = (userSelect) => {
       <div
         class="h-[400px] w-[300px] rounded-3xl shadow-md bg-white cursor-pointer hover:border-8 border-slate-200"
         :class="{
-          'bg-green-400': userAnswer.value,
-          'bg-red-500': userAnswer.value
+          'bg-green-400': true,
+          'bg-red-500': false
         }"
         v-for="(item, itemIndex) in threeChoices"
         :key="itemIndex"
@@ -195,7 +198,7 @@ const selectedAnswer = (userSelect) => {
         <!-- <CheckButton /> -->
         <button
           class="rounded-full bg-[#B11717] text-white font-outfit font-medium text-resultButton-size w-40 h-14 absolute right-0 mr-28 bottom-0 mb-24"
-          @click.stop="checkAnswer(userAnswer)"
+          @click="checkAnswer(userAnswer)"
         >
           Check
         </button>
