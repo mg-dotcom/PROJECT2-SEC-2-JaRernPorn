@@ -11,7 +11,6 @@ import {
 
 import renameCollection from "./popup/renameCollection.vue";
 import optionCollection from "./popup/optionCollection.vue";
-import { loadConfigFromFile } from "vite";
 
 const props = defineProps({
   index: {
