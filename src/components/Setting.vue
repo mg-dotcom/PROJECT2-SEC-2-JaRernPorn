@@ -11,7 +11,7 @@ const isPlaying = ref(true)
 const player = ref('')
 const musicControl = () => {
   if (isPlaying.value) {
-    player.value.pause() //พักก่อน
+    player.value.play() //พักก่อน
   } else {
     player.value.pause()
   }

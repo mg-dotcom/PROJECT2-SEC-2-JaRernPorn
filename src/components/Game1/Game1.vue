@@ -77,6 +77,8 @@ const currentItem = (itemIndex) => {
 //   ].meaning
 
 const checkAnswer = (userAnswer) => {
+  console.log(userAnswer)
+
   const correctAnswer =
     categories[currentIndexCate.value].units[currentIndexUnit.value].items[
       currentIndexQuestion.value
@@ -94,15 +96,13 @@ const checkAnswer = (userAnswer) => {
   if (userAnswer[0] === correctAnswer) {
     console.log('nice')
     console.log(currentIndexQuestion.value)
-    return (isCorrect.value = true)
+    isCorrect.value = true
     console.log(isCorrect.value)
   } else {
     console.log('wrong dude')
-    return (isCorrect.value = false)
+    isCorrect.value = false
     console.log(isCorrect.value)
   }
-
-  userAnswer.value = []
 }
 
 //CollectAnswer
