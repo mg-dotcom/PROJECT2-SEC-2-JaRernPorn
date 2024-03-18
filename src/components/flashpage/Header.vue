@@ -1,7 +1,7 @@
 <script setup>
-import { defineProps } from "vue";
+import { defineProps, ref } from "vue";
 import settingButton from "../flashpage/icons/setting-button.vue";
-import setting from "../flashpage/icons/Setting.vue";
+import settingPopup from "../flashpage/popup/Setting.vue";
 
 const props = defineProps({
   closeOption: {
@@ -9,9 +9,22 @@ const props = defineProps({
     required: true,
   },
 });
+
+const showSetting = ref(false);
+
+const toggleSetting = () => {
+  showSetting.value = !showSetting.value;
+};
 </script>
 
 <template>
+  <div
+    class="z-50 fixed top-0 left-0 w-screen min-h-screen"
+    v-show="showSetting"
+  >
+    <settingPopup @closeSetting="toggleSetting" />
+  </div>
+
   <div
     class="flex justify-between items-center p-2 md:p-4 lg:px-10 lg:py-7"
     @click.self="closeOption"
@@ -33,7 +46,7 @@ const props = defineProps({
       </h1>
     </div>
     <div>
-      <settingButton />
+      <settingButton @click="toggleSetting" />
     </div>
   </div>
 </template>

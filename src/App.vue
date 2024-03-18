@@ -1,13 +1,9 @@
 <script setup>
-import Flashcard from "./components/flashpage/CollectionFlashcard.vue";
-import Setting from './components/Setting.vue'
+import CollectionFlashcard from "./components/flashpage/CollectionFlashCard.vue";
 </script>
 
 <template>
-   <div class="bg-main-bgColor min-h-screen w-full">
-    <Setting/>
-  </div>
-  <Flashcard />
+  <CollectionFlashcard />
 </template>
 
 <style scoped></style>
