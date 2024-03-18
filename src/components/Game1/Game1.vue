@@ -60,8 +60,10 @@ const threeChoices = computed(() => {
 })
 
 //CheckAnswer
-const checkAnswer = (userAnswer) => {
-  if (userAnswer.length === 0) {
+const checkAnswer = (userAns) => {
+  console.log(userAns.length)
+  console.log(userAns.value)
+  if (userAns.length === 0) {
     console.log('เลือกก่อนจ้ะ')
     return ''
   }
@@ -74,16 +76,16 @@ const checkAnswer = (userAnswer) => {
     ]
 
   console.log(showColor.value)
-  console.log(userAnswer)
-  console.log(userAnswer.meaning)
-  console.log(userAnswer[0])
+  console.log(userAns)
+  console.log(userAns.meaning)
+  console.log(userAns[0])
   // console.log(userAnswer[0].meaning)
-  console.log(correctAnswer.value)
+  console.log(userAns.value)
 
-  console.log(userAnswer[0].id)
+  console.log(userAns[0].id)
   console.log(correctAnswer.value.id)
 
-  if (userAnswer[0].id === correctAnswer.value.id) {
+  if (userAns[0].id === correctAnswer.value.id) {
     // userAnswerId.value = userAnswer[0].id
     console.log('nice')
     isCorrect.value = true
@@ -101,7 +103,7 @@ const checkAnswer = (userAnswer) => {
     }, 0)
   } else {
     console.log('Sorry mommy')
-    userAnswerId.value = userAnswer[0].id
+    userAnswerId.value = userAns[0].id
     isWrong.value = true
     isCorrect.value = true
     setTimeout(() => {
@@ -117,13 +119,14 @@ const checkAnswer = (userAnswer) => {
     }, 0)
   }
 
-  if (userAnswer[0].id !== correctAnswer.value.id) {
+  if (userAns[0].id !== correctAnswer.value.id) {
   }
 
-  if (userAnswer[0].id) {
+  if (userAns[0].id) {
   }
 
-  userAnswer.value = []
+  userAns = []
+  userAns.value = []
   checkStatus.value = false
 
   // checkingStatus.value = false
