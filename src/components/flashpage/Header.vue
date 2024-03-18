@@ -1,6 +1,7 @@
 <script setup>
 import { defineProps } from "vue";
 import settingButton from "../flashpage/icons/setting-button.vue";
+import setting from "../flashpage/icons/Setting.vue";
 
 const props = defineProps({
   closeOption: {
@@ -26,7 +27,7 @@ const props = defineProps({
     </div>
     <div>
       <h1
-        class="text-4xl font-alkatra text-title font-semibold md:text-5xl lg:text-6xl"
+        class="text-4xl font-alkatra text-title font-semibold md:text-5xl lg:text-7xl"
       >
         <slot name="title">Untitle</slot>
       </h1>

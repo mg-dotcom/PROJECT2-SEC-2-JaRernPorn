@@ -78,7 +78,7 @@ const passNewName = (newName, index) => {
         class="absolute inset-[16px] flex items-center justify-center overflow-hidden cursor-pointer"
       >
         <div
-          class="w-[75%] text-3xl font-medium whitespace-normal break-all overflow-ellipsis z-10 md:text-2xl lg:text-3xl"
+          class="w-[75%] text-3xl font-medium whitespace-normal break-all overflow-ellipsis z-10 md:text-2xl lg:text-4xl"
         >
           {{ props.computedCollections[props.index].name }}
         </div>
