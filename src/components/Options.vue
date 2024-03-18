@@ -40,14 +40,6 @@ const soundControl = (path) => {
   sound.play()
 }
 
-const afterCheckBtn = () => {
-  if (isMatching === true) {
-    return true
-  } else {
-    return false
-  }
-}
-
 const isMatching = () => {
   // Check if both a word and its meaning have been clicked
   if (!clickedWordId.value || !clickedMeaningId.value) {
@@ -75,12 +67,11 @@ const isMatching = () => {
 
     // console.log('word id: ' + clickedWordId.value)
     // console.log('meaning id: ' + clickedMeaningId.value)
-
-    setTimeout(() => {
-      clickedWordId.value = ''
-      clickedMeaningId.value = ''
-      return true
-    }, 1000)
+    return true
+    // setTimeout(() => {
+    //   clickedWordId.value = ''
+    //   clickedMeaningId.value = ''
+    // }, 1000)
   } else {
     console.log(
       'Not Matched ' +

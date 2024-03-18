@@ -1,6 +1,7 @@
 <script setup>
 import data from '../../data/categories.json'
 import Options from './Options.vue'
+import OptionDemo from './OptionDemo.vue'
 import Setting from './Setting.vue'
 import Topbar from './Topbar.vue'
 import { ref } from 'vue'
@@ -28,7 +29,8 @@ const closeSetting = (flag) => {
       </p>
     </div>
 
-    <Options />
+    <!-- <Options /> -->
+    <OptionDemo />
 
     <Teleport to="#setting">
       <div class="absolute left-0 right-0 top-0 m-auto" v-show="settingPopup">
