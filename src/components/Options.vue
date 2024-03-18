@@ -79,11 +79,11 @@ const checkMatch = () => {
           :key="index"
           @click="handleWordClick(wordOption)"
           :class="{
-            'border-2 border-blue-500':
+            'border-2 border-blue-border':
               clickedWordId && clickedWordId === wordOption.id,
-            'bg-green-500':
+            'bg-correct-option-green':
               correctOptionBg && userClickedWordCorrect.includes(wordOption.id),
-            'bg-red-500':
+            'bg-wrong-option-red':
               wrongOptionBg && !userClickedWordCorrect.includes(wordOption.id)
           }"
           class="bg-white text-black rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-20 md:w-96 md:text-2xl lg:rounded-2xl"
@@ -98,12 +98,12 @@ const checkMatch = () => {
           :key="index"
           @click="handleMeaningClick(meaningOption)"
           :class="{
-            'border-2 border-blue-500':
+            'border-2 border-blue-border':
               clickedMeaningId && meaningOption.id === clickedMeaningId,
-            'bg-green-500':
+            'bg-correct-option-green':
               correctOptionBg &&
               userClickedMeaningCorrect.includes(meaningOption.id),
-            'bg-red-500':
+            'bg-wrong-option-red':
               wrongOptionBg &&
               !userClickedMeaningCorrect.includes(meaningOption.id)
           }"
