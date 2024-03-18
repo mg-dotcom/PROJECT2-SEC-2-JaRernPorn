@@ -61,12 +61,10 @@ const threeChoices = computed(() => {
 
 //CheckAnswer
 const checkAnswer = (userAnswer) => {
-  // setTimeout(() => {
-  //   checkingStatus.value = true
-  //   setTimeout(() => {
-  //     checkingStatus.value = false
-  //   }, 2000)
-  // }, 0)
+  if (userAnswer.length === 0) {
+    console.log('เลือกก่อนจ้ะ')
+    return ''
+  }
 
   checkStatus.value = true
 
