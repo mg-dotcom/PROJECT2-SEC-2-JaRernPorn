@@ -1,15 +1,12 @@
 <script setup>
-import game3 from './components/game3/game3.vue'
-import Setting from './components/game3/Setting.vue'
-import answer_popup from './components/game3/answer_popup.vue';
+import Setting from './components/Setting.vue'
+
 </script>
 
 <template>
   <div class="bg-main-bgColor min-h-screen w-full">
-    <game3 />
-    <!-- <Test/> -->
-    <!-- <answer_popup/> -->
+    <Setting/>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped></style>./components/Setting.vue
