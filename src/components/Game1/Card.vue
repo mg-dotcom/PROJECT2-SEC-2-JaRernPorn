@@ -3,11 +3,14 @@ import SoundControl from '../SoundControl.vue'
 
 const props = defineProps({
   choices: Object,
+  showColor: Boolean,
   checkStatus: Boolean,
-  isCorrect: String,
+  isCorrect: Boolean,
+  isWrong: Boolean,
   userAnswer: Array,
-  correctAnswer: String,
-  currentItem: String
+  correctAnswer: Object,
+  currentItem: String,
+  userAnswerId: Number
 })
 
 const emits = defineEmits(['selected'])
@@ -18,23 +21,13 @@ const emits = defineEmits(['selected'])
     <div
       class="h-[400px] w-[300px] rounded-3xl shadow-md bg-white cursor-pointer hover:border-8 border-slate-200"
       :class="{
-        'bg-[#D2FFAD]':
-          checkStatus &&
-          isCorrect === 'correct' &&
-          userAnswer[0] === currentItem[0],
-        'bg-[#FF9E95]':
-          checkStatus &&
-          isCorrect === 'wrong' &&
-          userAnswer[0] !== currentItem[0]
-
-        // 'bg-[#FF9E94]':
-        //   !isCorrect &&
-        //   checkingStatus &&
-        //   !userAnswer[0].includes(item.meaning)
+        'bg-[#D2FFAB]': showColor && item.id === correctAnswer.id && isCorrect,
+        'bg-[#FF9E96]': showColor && item.id === userAnswerId && isWrong
+        // 'bg-white': !showColor
       }"
       v-for="(item, itemIndex) in choices"
       :key="itemIndex"
-      @click="$emit('selected', item, item.meaning, itemIndex)"
+      @click="$emit('selected', item)"
     >
       <!-- Sound-Part -->
       <SoundControl :soundPath="item.pronunciation">

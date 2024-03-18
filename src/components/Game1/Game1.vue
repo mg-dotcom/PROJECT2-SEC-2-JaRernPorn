@@ -10,19 +10,24 @@ const currentIndexUnit = ref(0)
 const currentIndexItem = ref(0)
 const currentIndexQuestion = ref(0)
 
-const checkingStatus = ref(false)
+const showColor = ref(false)
+const checkStatus = ref(false)
 
 const correctAnswer = ref(
   categories[currentIndexCate.value].units[currentIndexUnit.value].items[
     currentIndexQuestion.value
-  ].meaning
+  ]
 )
 
-const currentItem = ref([])
+// const currentItem = ref([])
 
 // const correctAnswer = ref('')
-const isCorrect = ref('')
+const isCorrect = ref(false)
+const isWrong = ref(false)
+// const isCorrect = ref('')
 const userAnswer = ref([])
+const idAnswer = ref([])
+const userAnswerId = ref(null)
 
 //Setting
 const showSetting = ref(false)
@@ -42,6 +47,13 @@ const currentQuestion = computed(() => {
   ].meaning
 })
 
+//Item
+const currentItem = computed(() => {
+  return categories[currentIndexCate.value].units[currentIndexUnit.value].items[
+    currentIndexQuestion.value
+  ]
+})
+
 //Choices
 const threeChoices = computed(() => {
   return categories[currentIndexCate.value].units[currentIndexUnit.value].items
@@ -49,92 +61,86 @@ const threeChoices = computed(() => {
 
 //CheckAnswer
 const checkAnswer = (userAnswer) => {
+  // setTimeout(() => {
+  //   checkingStatus.value = true
+  //   setTimeout(() => {
+  //     checkingStatus.value = false
+  //   }, 2000)
+  // }, 0)
+
+  checkStatus.value = true
+
+  correctAnswer.value =
+    categories[currentIndexCate.value].units[currentIndexUnit.value].items[
+      currentIndexQuestion.value
+    ]
+
+  console.log(showColor.value)
   console.log(userAnswer)
-  checkingStatus.value = true
+  console.log(userAnswer.meaning)
+  console.log(userAnswer[0])
+  // console.log(userAnswer[0].meaning)
+  console.log(correctAnswer.value)
 
-  console.log('correctans ' + correctAnswer.value)
-  console.log('user ans ' + userAnswer[0])
+  console.log(userAnswer[0].id)
+  console.log(correctAnswer.value.id)
 
-  // if (userAnswer[0] === correctAnswer.value) {
-  //   isCorrect.value = correctAnswer.value
-  //   setTimeout(() => {
-  //     currentIndexQuestion.value++
-  //     if (currentIndexQuestion.value > 2) {
-  //       currentIndexQuestion.value = 0
-  //     }
-  //   }, 2000)
+  if (userAnswer[0].id === correctAnswer.value.id) {
+    // userAnswerId.value = userAnswer[0].id
+    console.log('nice')
+    isCorrect.value = true
 
-  //   console.log('nice')
-  //   console.log(currentIndexQuestion.value)
-  //   console.log(isCorrect.value)
-  // } else {
-  //   setTimeout(() => {
-  //     isCorrect.value = false
-  //     setTimeout(() => {
-  //       currentIndexQuestion.value++
-  //       if (currentIndexQuestion.value > 2) {
-  //         currentIndexQuestion.value = 0
-  //       }
-  //     }, 2000)
-  //   }, 0)
-  //   console.log('wrong dude')
-  //   isCorrect.value = false
-  //   console.log(isCorrect.value)
-  // }
-
-  // if (userAnswer[0] === correctAnswer.value) {
-  //   isCorrect.value = 'correct'
-  //   setTimeout(() => {
-  //     currentIndexQuestion.value++
-  //     if (currentIndexQuestion.value > 2) {
-  //       currentIndexQuestion.value = 0
-  //     }
-  //     isCorrect.value = ''
-  //   }, 2000)
-  // }
-  // if (userAnswer[0] !== correctAnswer.value) {
-  //   isCorrect.value = 'wrong'
-  //   setTimeout(() => {
-  //     currentIndexQuestion.value++
-  //     if (currentIndexQuestion.value > 2) {
-  //       currentIndexQuestion.value = 0
-  //     }
-  //     isCorrect.value = ''
-  //   }, 2000)
-  // }
-
-  if (userAnswer[0] === correctAnswer.value) {
-    isCorrect.value = 'correct'
-  }
-  if (userAnswer[0] !== correctAnswer.value) {
-    isCorrect.value = 'wrong'
+    setTimeout(() => {
+      showColor.value = true
+      setTimeout(() => {
+        showColor.value = false
+        isCorrect.value = false
+        currentIndexQuestion.value++
+        if (currentIndexQuestion.value > 2) {
+          currentIndexQuestion.value = 0
+        }
+      }, 1500)
+    }, 0)
+  } else {
+    console.log('Sorry mommy')
+    userAnswerId.value = userAnswer[0].id
+    isWrong.value = true
+    isCorrect.value = true
+    setTimeout(() => {
+      showColor.value = true
+      setTimeout(() => {
+        showColor.value = false
+        isWrong.value = false
+        currentIndexQuestion.value++
+        if (currentIndexQuestion.value > 2) {
+          currentIndexQuestion.value = 0
+        }
+      }, 1500)
+    }, 0)
   }
 
-  setTimeout(() => {
-    currentIndexQuestion.value++
-    if (currentIndexQuestion.value > 2) {
-      currentIndexQuestion.value = 0
-    }
-    isCorrect.value = ''
-  }, 2000)
+  if (userAnswer[0].id !== correctAnswer.value.id) {
+  }
 
-  console.log(userAnswer[0])
+  if (userAnswer[0].id) {
+  }
 
-  console.log(userAnswer[0])
+  userAnswer.value = []
+  checkStatus.value = false
+
+  // checkingStatus.value = false
 }
 
 //CollectAnswer
-const selectedAnswer = (item, userSelect, itemIndex) => {
+const selectedAnswer = (item) => {
   console.log(item)
-  currentItem.value = item.meaning
-  console.log(currentItem.value)
-  console.log('โดนเรีัยก')
+  console.log(userAnswer.value)
   userAnswer.value = []
-  console.log('userSelect ' + userSelect)
-  userAnswer.value.push(userSelect.trim())
-  // console.log('answer ' + userAnswer.value)
-
-  currentIndexItem.value = itemIndex
+  console.log(userAnswer.value)
+  userAnswer.value.push(item)
+  // userAnswer.value.push(item)
+  console.log(userAnswer.value)
+  console.log(checkStatus.value)
 }
 </script>
 
@@ -173,11 +179,13 @@ const selectedAnswer = (item, userSelect, itemIndex) => {
     <div class="flex flex-row gap-16 justify-center mt-10">
       <Card
         :choices="threeChoices"
-        :checkStatus="checkingStatus"
+        :showColor="showColor"
         :isCorrect="isCorrect"
+        :isWrong="isWrong"
         :userAnswer="userAnswer"
         :correctAnswer="correctAnswer"
-        :currentItem="currentItem"
+        :userAnswerId="userAnswerId"
+        :checkStatus="checkStatus"
         @selected="selectedAnswer"
       ></Card>
     </div>
