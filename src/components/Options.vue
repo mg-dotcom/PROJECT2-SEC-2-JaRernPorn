@@ -4,11 +4,19 @@ import data from '../../data/categories.json'
 
 // const emits = defineEmits(['wordClicked', 'meaningClicked'])
 
-const clickedWordId = ref(null)
-const clickedMeaningId = ref(null)
+const clickedWordId = ref()
+const clickedMeaningId = ref()
 const currentIndexItem = ref(0)
 const currentIndexCate = ref(0)
 const options = ref(data.categories[0].units[0].items)
+const correctOptionBg = ref(false)
+const wrongOptionBg = ref(false)
+const userClickedWordCorrect = ref([])
+const userClickedMeaningCorrect = ref([])
+const userClickedWordWrong = ref([])
+const userClickedMeaningWrong = ref([])
+const wordOption = ref()
+const meaningOption = ref()
 
 const shuffle = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -20,57 +28,45 @@ const shuffle = (array) => {
 
 const shuffleOption = shuffle(options.value)
 
-const handleWordClick = (id, pronunciation) => {
-  clickedWordId.value = id
-  soundControl(pronunciation)
-  // emits('wordClicked', id)
+const handleWordClick = (userSelected) => {
+  wordOption.value = userSelected
+  clickedWordId.value = userSelected.id
+  console.log(clickedWordId.value)
+  soundControl(userSelected.pronunciation)
 }
 
-const handleMeaningClick = (id) => {
-  clickedMeaningId.value = id
-  // emits('meaningClicked', id)
+const handleMeaningClick = (userSelected) => {
+  meaningOption.value = userSelected
+  clickedMeaningId.value = userSelected.id
+  console.log(clickedMeaningId.value)
 }
 
 const soundControl = (path) => {
-  // console.log(audioOfOption.value)
   const sound = new Audio(path)
   sound.play()
 }
 
 const checkMatch = () => {
+  correctOptionBg.value = false
+  wrongOptionBg.value = false
   // Check if both a word and its meaning have been clicked
   if (!clickedWordId.value || !clickedMeaningId.value) {
     console.log('Please click both a word and its meaning.')
-    return
   }
 
-  // destructure id property then find clickedWordId.value
-  const { id: wordId } =
-    data.categories[0].units[0].items.find(
-      ({ id }) => id === clickedWordId.value
-    ) || {}
-  const { id: meaningId } =
-    data.categories[0].units[0].items.find(
-      ({ id }) => id === clickedMeaningId.value
-    ) || {}
-
-  if (wordId === meaningId) {
+  if (clickedWordId.value === clickedMeaningId.value) {
+    userClickedWordCorrect.value.push(clickedWordId.value)
+    userClickedMeaningCorrect.value.push(clickedMeaningId.value)
+    correctOptionBg.value = true
     console.log('Matched!')
-    console.log('word id: ' + clickedWordId.value)
-    console.log('meaning id: ' + clickedMeaningId.value)
   } else {
-    console.log(
-      'Not matched because ' +
-        'wordId = ' +
-        clickedWordId.value +
-        ' ' +
-        'but meaningId = ' +
-        clickedMeaningId.value
-    )
-  }
+    wrongOptionBg.value = true
+    userClickedWordWrong.value.push(clickedWordId.value)
+    userClickedMeaningWrong.value.push(clickedMeaningId.value)
+    
 
-  clickedWordId.value = ''
-  clickedMeaningId.value = ''
+    console.log('Not match!')
+  }
 }
 </script>
 
@@ -81,7 +77,15 @@ const checkMatch = () => {
         <button
           v-for="(wordOption, index) in options"
           :key="index"
-          @click="handleWordClick(wordOption.id, wordOption.pronunciation)"
+          @click="handleWordClick(wordOption)"
+          :class="{
+            'border-2 border-blue-500':
+              clickedWordId && clickedWordId === wordOption.id,
+            'bg-green-500':
+              correctOptionBg && userClickedWordCorrect.includes(wordOption.id),
+            'bg-red-500':
+              wrongOptionBg && !userClickedWordCorrect.includes(wordOption.id)
+          }"
           class="bg-white text-black rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-20 md:w-96 md:text-2xl lg:rounded-2xl"
         >
           {{ wordOption.word }}
@@ -92,7 +96,17 @@ const checkMatch = () => {
         <button
           v-for="(meaningOption, index) in options"
           :key="index"
-          @click="handleMeaningClick(meaningOption.id)"
+          @click="handleMeaningClick(meaningOption)"
+          :class="{
+            'border-2 border-blue-500':
+              clickedMeaningId && meaningOption.id === clickedMeaningId,
+            'bg-green-500':
+              correctOptionBg &&
+              userClickedMeaningCorrect.includes(meaningOption.id),
+            'bg-red-500':
+              wrongOptionBg &&
+              !userClickedMeaningCorrect.includes(meaningOption.id)
+          }"
           class="bg-white text-black rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-20 md:w-96 md:text-2xl lg:rounded-2xl"
         >
           {{ meaningOption.meaning }}
