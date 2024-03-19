@@ -3,13 +3,15 @@ import { computed, ref } from 'vue'
 import data from '../../data/categories.json'
 import SoundControl from './SoundControl.vue'
 
-// const emits = defineEmits(['wordClicked', 'meaningClicked'])
-
 const clickedWordId = ref(null)
 const clickedMeaningId = ref(null)
 const currentIndexItem = ref(0)
 const currentIndexCate = ref(0)
 const options = ref(data.categories[0].units[0].items)
+const wordArray = ref([])
+const meaningArray = ref([])
+const wrongWord = ref([])
+const wrongMeaning = ref([])
 
 const shuffle = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -25,13 +27,13 @@ const handleWordClick = (id, pronunciation) => {
   // รับ wordOption.id มา
   // assing ค่า clickedWordId.value = id (wordOption.id)
   clickedWordId.value = id
+  console.log(clickedWordId.value)
   soundControl(pronunciation)
-  // emits('wordClicked', id)
 }
 
 const handleMeaningClick = (id) => {
   clickedMeaningId.value = id
-  // emits('meaningClicked', id)
+  console.log(clickedMeaningId.value)
 }
 
 const soundControl = (path) => {
@@ -61,18 +63,16 @@ const isMatching = () => {
 
   // เอา wordId มาเทียบ meaningId ว่ามี id ตรงกันมั้ย
   if (wordId === meaningId) {
+    wordArray.value.push(wordId)
+    meaningArray.value.push(meaningId)
+    console.log(wordArray.value)
+    console.log(meaningArray.value)
     console.log(
       'Matched! by ' + 'word id = ' + wordId + ' ' + 'meaning id = ' + meaningId
     )
-
-    // console.log('word id: ' + clickedWordId.value)
-    // console.log('meaning id: ' + clickedMeaningId.value)
-    return true
-    // setTimeout(() => {
-    //   clickedWordId.value = ''
-    //   clickedMeaningId.value = ''
-    // }, 1000)
   } else {
+    wrongWord.value.push(wordId)
+    wrongMeaning.value.push(meaningId)
     console.log(
       'Not Matched ' +
         'wordId = ' +
@@ -82,13 +82,11 @@ const isMatching = () => {
         clickedMeaningId.value
     )
     setTimeout(() => {
-      clickedWordId.value = ''
-      clickedMeaningId.value = ''
-      return false
+      wrongWord.value = ''
+      wrongMeaning.value = ''
     }, 1000)
   }
 
-  // return wordId === meaningId
   clickedWordId.value = ''
   clickedMeaningId.value = ''
 }
@@ -98,14 +96,16 @@ const isMatching = () => {
   <div>
     <div class="flex justify-center">
       <div class="grid grid-cols grid-rows-3 gap-y-7 p-8">
-        <!-- :class="{
-            'bg-correct-option-green': isMatching(),
-            'bg-wrong-option-red': !isMatching()
-          }" -->
         <button
           v-for="(wordOption, index) in options"
           :key="index"
           @click="handleWordClick(wordOption.id, wordOption.pronunciation)"
+          :class="{
+            'border border-[#186cc7]':
+              clickedWordId && clickedWordId === wordOption.id,
+            'bg-[#D2FFAB] border-[#A3E36B]': wordArray.includes(wordOption.id),
+            'bg-[#FF9E94]': wrongWord.includes(wordOption.id)
+          }"
           class="bg-white text-black rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-20 md:w-96 md:text-2xl lg:rounded-2xl"
         >
           {{ wordOption.word }}
@@ -121,6 +121,14 @@ const isMatching = () => {
           v-for="(meaningOption, index) in options"
           :key="index"
           @click="handleMeaningClick(meaningOption.id)"
+          :class="{
+            'border border-[#186cc7]':
+              clickedMeaningId && clickedMeaningId === meaningOption.id,
+            'bg-[#D2FFAB] border-[#A3E36B]': meaningArray.includes(
+              meaningOption.id
+            ),
+            'bg-[#FF9E94]': wrongMeaning.includes(meaningOption.id)
+          }"
           class="bg-white text-black rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-20 md:w-96 md:text-2xl lg:rounded-2xl"
         >
           {{ meaningOption.meaning }}
@@ -134,6 +142,12 @@ const isMatching = () => {
       >
         Check
       </button>
+    </div>
+    <div class="flex justify-center text-2xl text-black">
+      {{ wordArray }} {{ meaningArray }}
+    </div>
+    <div class="flex justify-center text-2xl text-black">
+      {{ wrongWord }} {{ wrongMeaning }}
     </div>
   </div>
 </template>

@@ -6,8 +6,8 @@ import data from '../../data/categories.json'
 
 const clickedWordId = ref()
 const clickedMeaningId = ref()
-const currentIndexItem = ref(0)
-const currentIndexCate = ref(0)
+// const currentIndexItem = ref(0)
+// const currentIndexCate = ref(0)
 const options = ref(data.categories[0].units[0].items)
 const correctOptionBg = ref(false)
 const wrongOptionBg = ref(false)
@@ -47,8 +47,9 @@ const soundControl = (path) => {
 }
 
 const checkMatch = () => {
-  correctOptionBg.value = false
+  // correctOptionBg.value = false
   wrongOptionBg.value = false
+
   // Check if both a word and its meaning have been clicked
   if (!clickedWordId.value || !clickedMeaningId.value) {
     console.log('Please click both a word and its meaning.')
@@ -66,7 +67,6 @@ const checkMatch = () => {
     setTimeout(() => {
       wrongOptionBg.value = ''
     }, 1000)
-
     console.log('Not match!')
   }
 }
@@ -81,11 +81,11 @@ const checkMatch = () => {
           :key="index"
           @click="handleWordClick(wordOption)"
           :class="{
-            'border-2 border-blue-500':
+            'border-2 border-[#186cc7]':
               clickedWordId && clickedWordId === wordOption.id,
-            'bg-correct-option-green':
+            'bg-[#D2FFAB]':
               correctOptionBg && userClickedWordCorrect.includes(wordOption.id),
-            'bg-wrong-option-red':
+            'bg-[#FF9E94]':
               wrongOptionBg && !userClickedWordCorrect.includes(wordOption.id)
           }"
           class="bg-white text-black rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-20 md:w-96 md:text-2xl lg:rounded-2xl"
@@ -100,12 +100,12 @@ const checkMatch = () => {
           :key="index"
           @click="handleMeaningClick(meaningOption)"
           :class="{
-            'border-2 border-blue-500':
+            'border-2 border-[#186cc7]':
               clickedMeaningId && meaningOption.id === clickedMeaningId,
-            'bg-correct-option-green':
+            'bg-[#D2FFAB]':
               correctOptionBg &&
               userClickedMeaningCorrect.includes(meaningOption.id),
-            'bg-wrong-option-red':
+            'bg-[#FF9E94]':
               wrongOptionBg &&
               !userClickedMeaningCorrect.includes(meaningOption.id)
           }"
