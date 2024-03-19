@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 import data from '../../data/categories.json'
 import SoundControl from './SoundControl.vue'
 
+
 const currentIndexItem = ref(0)
 const currentIndexCate = ref(0)
 const clickedWordId = ref('')
@@ -74,8 +75,8 @@ const isMatching = () => {
     console.log('meaning length ' + meaningArray.value.length)
     console.log('options length ' + options.value.length)
     if (
-      wordArray.value.length === options.value.length ||
-      meaningArray === options.value.length
+      wordArray.value.length === options.value.length &&
+      meaningArray.value.length === options.value.length
     ) {
       // console.log('Complete')
       checkBtn.value = false
@@ -162,8 +163,7 @@ const isMatching = () => {
       {{ wrongWord }} {{ wrongMeaning }}
     </div>
     <div class="flex justify-center text-2xl text-black">
-      {{ continueBtn }}
-      {{ checkBtn }}
+      {{ checkBtn }} {{ continueBtn }}
     </div>
   </div>
 </template>
