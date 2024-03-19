@@ -54,9 +54,22 @@ const currentItem = computed(() => {
   ]
 })
 
-//Choices
+//Shuffle
+const shuffle = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[array[i], array[j]] = [array[j], array[i]]
+  }
+  return array
+}
+
+//Chioces
 const threeChoices = computed(() => {
-  return categories[currentIndexCate.value].units[currentIndexUnit.value].items
+  const choices =
+    categories[currentIndexCate.value].units[currentIndexUnit.value].items
+  console.log([...choices])
+  console.log(choices)
+  return shuffle([...choices])
 })
 
 //CheckAnswer
@@ -147,7 +160,7 @@ const selectedAnswer = (item) => {
       <img
         src="/Setting.svg"
         alt="Setting"
-        class="pr-36"
+        class="pr-36 cursor-pointer"
         @click="toggleSetting"
       />
     </div>
