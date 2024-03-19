@@ -17,22 +17,31 @@ const userSelected = ref()
 const showAudio = ref(false)
 const showPopup = ref(false)
 const checkStatus = ref(false)
-const audioOfOption = ref(data.categories[currentIndexCate.value].units[currentIndexUnit.value].items[randomQuiz.value].pronunciation)
+const audioOfOption = ref(
+  data.categories[currentIndexCate.value].units[currentIndexUnit.value].items[
+    randomQuiz.value
+  ].pronunciation
+)
 const setColorOption = ref('')
 const isSelected = ref(false)
-const answerOfQuiz=ref('')
-
+const answerOfQuiz = ref('')
 
 const currentCategory = computed(() => {
-  return data.categories[currentIndexCate.value].name //get [currentIndexCate.value]
+  return data.categories[currentIndexCate.value].name
 })
 
 const currentQuiz = computed(() => {
-  
-  answerOfQuiz.value = data.categories[currentIndexCate.value].units[currentIndexUnit.value].items[randomQuiz.value].word
-  meaning.value=data.categories[currentIndexCate.value].units[currentIndexUnit.value].items[randomQuiz.value].meaning
+  answerOfQuiz.value =
+    data.categories[currentIndexCate.value].units[currentIndexUnit.value].items[
+      randomQuiz.value
+    ].word
+  meaning.value =
+    data.categories[currentIndexCate.value].units[currentIndexUnit.value].items[
+      randomQuiz.value
+    ].meaning
 
-  return data.categories[currentIndexCate.value].units[currentIndexUnit.value].items[randomQuiz.value].src
+  return data.categories[currentIndexCate.value].units[currentIndexUnit.value]
+    .items[randomQuiz.value].src
 })
 //Shuffle
 const shuffle = (array) => {
@@ -43,8 +52,9 @@ const shuffle = (array) => {
   return array
 }
 
-const generateOption=computed(()=>{
-  const options=data.categories[currentIndexCate.value].units[currentIndexUnit.value].items
+const generateOption = computed(() => {
+  const options =
+    data.categories[currentIndexCate.value].units[currentIndexUnit.value].items
   return shuffle([...options])
 })
 
@@ -68,21 +78,24 @@ const closePopup = () => {
   randomQuiz.value++
 }
 const turnOnCheckStatus = () => {
-  answer.value = data.categories[currentIndexCate.value].units[currentIndexUnit.value].items[randomQuiz.value].word
+  answer.value =
+    data.categories[currentIndexCate.value].units[currentIndexUnit.value].items[
+      randomQuiz.value
+    ].word
   checkStatus.value = true
   if (userSelected.value === answer.value && checkStatus.value) {
     setColorOption.value = answer.value
-    userSelected.value=''
+    userSelected.value = ''
     setTimeout(() => {
-      answer.value=''
+      answer.value = ''
       setColorOption.value = ''
       isSelected.value = false
       randomQuiz.value++
       console.log('correct!')
     }, 2000)
   } else {
-    answer.value=''
-  userSelected.value=''
+    answer.value = ''
+    userSelected.value = ''
     showPopup.value = true
   }
 }
@@ -121,19 +134,18 @@ const soundControl2 = (path) => {
           <img :src="currentQuiz" class="w-20" />
           <h3>{{ meaning }}</h3>
         </div>
-        
+
         <div class="options py-12 w-3/4">
           <SoundControl :soundPath="audioOfOption">
-          <Option
-            :options="generateOption"
-            :correctOption="answer"
-            :isSelected="isSelected"
-            :userSelected="userSelected"
-            @optionClicked="checkAnswer"
-          />
+            <Option
+              :options="generateOption"
+              :correctOption="answer"
+              :isSelected="isSelected"
+              :userSelected="userSelected"
+              @optionClicked="checkAnswer"
+            />
           </SoundControl>
         </div>
-        
       </div>
     </div>
     <div class="flex justify-center">
@@ -156,7 +168,7 @@ const soundControl2 = (path) => {
   <div class="" v-show="showPopup">
     <answer_popup :answer="answerOfQuiz" @closePopup="closePopup" />
   </div>
-
 </template>
 
-<style scoped></style>./SoundControl.vue
+<style scoped></style>
+./SoundControl.vue
