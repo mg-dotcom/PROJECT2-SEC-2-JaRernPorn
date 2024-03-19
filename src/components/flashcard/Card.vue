@@ -1,19 +1,85 @@
 <script setup>
 import { defineProps } from "vue";
+import optionFlashcard from "./popup/optionFlashcard.vue";
 
-const props = defineProps;
+const props = defineProps({
+  computedFlashcards: {
+    required: true,
+  },
+  index: {
+    type: Number,
+    required: true,
+  },
+  SelectedIndex: {
+    type: Number,
+    required: true,
+  },
+  popup: {
+    type: Object,
+    required: true,
+  },
+});
+
+const showOption = (index, event) => {
+  emit("toggle-option-flashcard", index);
+};
+
+const deleteFlashcard = (index) => {
+  emit("deleteFlashcard", index);
+};
+
+const emit = defineEmits(["toggle-option-flashcard", "deleteFlashcard"]);
 </script>
 
 <template>
-  <div class="cards flex-col justify-center items-center">
-    <div class="flex flex-wrap gap-10 justify-center">
-      <div v-for="card in computedFlashcards" :key="card.id">
+  <div class="flex flex-row">
+    <div class="cards relative">
+      <div>
+        <optionFlashcard
+          class=""
+          v-show="props.popup.optionFlashcard && SelectedIndex === props.index"
+          :index="index"
+          :popup="popup"
+          @deleteCollection="deleteFlashcard(props.index)"
+        ></optionFlashcard>
+      </div>
+      <div class="font-outfit">
         <div
-          class="flex flex-col justify-center h-[200px] w-[400px] rounded-3xl shadow-md bg-white"
+          class="bg-white border-[#FF9E94] py-4 px-7 rounded-xl border-2 w-52 h-64 overflow-y-auto relative"
         >
-          <div class="flex flex-col items-center font-outfit text-lg">
-            <div>{{ card.word }}</div>
-            <div>{{ card.meaning }}</div>
+          <!-- Option -->
+          <img
+            class="z-40 opacity-70 hover:bg-gray-400 rounded-full w-10 h-10 p-2 scale-[75%] absolute top-0 right-0 transition-all duration-[270ms]"
+            src="/img/flashcard-pic/option.svg"
+            alt="option"
+            @click="showOption(props.index)"
+          />
+
+          <!-- Word in Card -->
+          <div class="flex flex-col h-full">
+            <div
+              class="flex items-center justify-center font-medium break-all lg:text-5xl"
+              :class="{
+                'h-auto':
+                  props.computedFlashcards[props.index].word.length > 15,
+                'h-[150px]':
+                  props.computedFlashcards[props.index].word.length <= 15,
+              }"
+            >
+              {{ props.computedFlashcards[props.index].word }}
+            </div>
+            <hr class="my-2 border-gray-300 dark:border-gray-700" />
+            <div
+              class="flex items-center justify-center lg:text-2xl break-all"
+              :class="{
+                'h-auto':
+                  props.computedFlashcards[props.index].pinyin.length > 8,
+                'h-[50px]':
+                  props.computedFlashcards[props.index].pinyin.length <= 8,
+              }"
+            >
+              {{ props.computedFlashcards[props.index].pinyin }}
+            </div>
           </div>
         </div>
       </div>
