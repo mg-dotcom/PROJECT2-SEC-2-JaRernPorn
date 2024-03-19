@@ -17,6 +17,7 @@ const userClickedWordWrong = ref([])
 const userClickedMeaningWrong = ref([])
 const wordOption = ref()
 const meaningOption = ref()
+const buttonWord=ref('Check')
 
 const shuffle = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -52,6 +53,11 @@ const checkMatch = () => {
   // Check if both a word and its meaning have been clicked
   if (!clickedWordId.value || !clickedMeaningId.value) {
     console.log('Please click both a word and its meaning.')
+  }
+
+  if(userClickedMeaningCorrect.value.length===options.value.length-1){
+    buttonWord.value='Continue'
+    console.log('End');
   }
 
   if (clickedWordId.value === clickedMeaningId.value) {
@@ -117,7 +123,7 @@ const checkMatch = () => {
         @click="checkMatch"
         class="bg-title rounded-2xl text-white font-outfit font-semibold w-20 h-8 sm:text-2xl sm:w-28 sm:h-14 sm:rounded-3xl hover:bg-button-bgColor lg:w-36 lg:h-12"
       >
-        Check
+        {{buttonWord}}
       </button>
     </div>
   </div>

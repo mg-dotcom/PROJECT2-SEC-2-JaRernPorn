@@ -18,7 +18,7 @@ watch(isPlaying, () => {
 })
 
 onMounted(() => {
-  isPlaying.value = true
+  isPlaying.value = false
   musicControl()
 })
 </script>
