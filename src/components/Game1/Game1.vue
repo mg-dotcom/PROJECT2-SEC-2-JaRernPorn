@@ -119,6 +119,7 @@ const checkAnswer = (userAns) => {
     }, 0)
   }
 
+  userAns.splice(0, 1)
   checkStatus.value = false
 }
 
