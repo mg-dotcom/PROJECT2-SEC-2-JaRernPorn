@@ -1,8 +1,9 @@
 <script setup>
-import { defineProps } from 'vue'
+import { ref, defineProps } from 'vue'
 import category from '../../data/categories.json'
 import SoundButton from './SoundButton.vue'
 import SoundControl from './SoundControl.vue'
+import Setting from './Setting.vue'
 
 const props = defineProps({
   categoryIndex: {
@@ -17,7 +18,10 @@ const props = defineProps({
   }
 })
 
-//const items = category.categories[0].units[0].items
+const showSetting = ref(false)
+const toggleSetting = () => {
+  showSetting.value = !showSetting.value
+}
 
 const currentCategory = category.categories[props.categoryIndex]
 const items = currentCategory.units[props.unitIndex].items
@@ -32,6 +36,7 @@ const items = currentCategory.units[props.unitIndex].items
             src="/setting.svg"
             alt="setting button"
             class="w-10 cursor-pointer"
+            @click="toggleSetting"
           />
         </div>
         <div class="font-semibold font-outfit text-title">
@@ -73,6 +78,14 @@ const items = currentCategory.units[props.unitIndex].items
             {{ item.word.split(' ').slice(1).join(' ') }}
           </h1>
           <SoundButton />
+        </div>
+        <div class="absolute left-0 right-0 top-1/3" v-show="showSetting">
+          <Setting
+            @closeSetting="toggleSetting"
+            @restartGame=""
+            @resumeGame=""
+            @goBackHome=""
+          />
         </div>
       </div>
 
