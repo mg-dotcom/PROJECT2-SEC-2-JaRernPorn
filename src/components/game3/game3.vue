@@ -4,6 +4,7 @@ import data from '../../../data/game3/data.json'
 import Setting from './Setting.vue'
 import answer_popup from './answer_popup.vue'
 import { computed, ref } from 'vue'
+import SoundControl from './SoundControl.vue'
 
 const currentIndexCate = ref(0)
 const currentIndexUnit = ref(0)
@@ -120,7 +121,9 @@ const soundControl2 = (path) => {
           <img :src="currentQuiz" class="w-20" />
           <h3>{{ meaning }}</h3>
         </div>
-        <div class="options py-12 w-3/4" @click="soundControl2(audioOfOption)">
+        
+        <div class="options py-12 w-3/4">
+          <SoundControl :soundPath="audioOfOption">
           <Option
             :options="generateOption"
             :correctOption="answer"
@@ -128,7 +131,9 @@ const soundControl2 = (path) => {
             :userSelected="userSelected"
             @optionClicked="checkAnswer"
           />
+          </SoundControl>
         </div>
+        
       </div>
     </div>
     <div class="flex justify-center">
@@ -151,6 +156,7 @@ const soundControl2 = (path) => {
   <div class="" v-show="showPopup">
     <answer_popup :answer="answerOfQuiz" @closePopup="closePopup" />
   </div>
+
 </template>
 
-<style scoped></style>
+<style scoped></style>./SoundControl.vue
