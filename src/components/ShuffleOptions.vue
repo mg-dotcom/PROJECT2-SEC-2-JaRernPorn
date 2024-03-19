@@ -16,79 +16,67 @@ const checkBtn = ref(true)
 const continueBtn = ref(false)
 
 const shuffle = (array) => {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[array[i], array[j]] = [array[j], array[i]]
-  }
   return array
+    .map((value) => ({ value, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ value }) => value)
 }
 
-const shuffleOption = shuffle(options.value)
+const shuffledWordOptions = computed(() =>
+  shuffle(options.value.map((item) => item.word))
+)
+const shuffledMeaningOptions = computed(() =>
+  shuffle(options.value.map((item) => item.meaning))
+)
 
 const handleWordClick = (id, pronunciation) => {
-  // รับ wordOption.id มา
-  // assing ค่า clickedWordId.value = id (wordOption.id)
   clickedWordId.value = id
-  console.log(clickedWordId.value)
   soundControl(pronunciation)
 }
 
 const handleMeaningClick = (id) => {
   clickedMeaningId.value = id
-  console.log(clickedMeaningId.value)
 }
 
 const soundControl = (path) => {
-  // console.log(audioOfOption.value)
   const sound = new Audio(path)
   sound.play()
 }
 
 const isMatching = () => {
-  // Check if both a word and its meaning have been clicked
   if (!clickedWordId.value || !clickedMeaningId.value) {
     console.log('Please click both a word and its meaning.')
     return
   }
 
-  // destructure id property then find clickedWordId.value
-  // สร้างตัวแปรโดย destructure มาแค่ id ใน object = ใช้ find เพื่อหาว่าปุ่มที่เราคลิก ตรงกับ id ไหนใน object ถ้าไม่เจอก็จะเป็น {}
-  // find() return first element
-  const { id: wordId } = options.value.find(
+  const clickedWord = options.value.find(
     (option) => option.id === clickedWordId.value
   )
-  const { id: meaningId } = options.value.find(
+  const clickedMeaning = options.value.find(
     (option) => option.id === clickedMeaningId.value
   )
 
-  // เอา wordId มาเทียบ meaningId ว่ามี id ตรงกันมั้ย
-  if (wordId === meaningId) {
-    wordArray.value.push(wordId)
-    meaningArray.value.push(meaningId)
-    console.log(wordArray.value + ' & ' + meaningArray.value)
+  if (clickedWord && clickedMeaning && clickedWord.id === clickedMeaning.id) {
+    wordArray.value.push(clickedWord.id)
+    meaningArray.value.push(clickedMeaning.id)
     console.log('Matched!')
-    console.log('word length ' + wordArray.value.length)
-    console.log('options length ' + options.value.length)
-    console.log('meaning length ' + meaningArray.value.length)
-    console.log('options length ' + options.value.length)
+
     if (
       wordArray.value.length === options.value.length &&
       meaningArray.value.length === options.value.length
     ) {
-      console.log('Complete!!!')
       checkBtn.value = false
       continueBtn.value = true
-      // console.log(continueBtn.value)
     }
   } else {
-    wrongWord.value.push(wordId)
-    wrongMeaning.value.push(meaningId)
-    console.log(wrongWord.value + ' & ' + wrongMeaning.value)
     console.log('Not Matched!')
+    wrongWord.value = [clickedWordId.value]
+    wrongMeaning.value = [clickedMeaningId.value]
+
     setTimeout(() => {
       wrongWord.value = []
       wrongMeaning.value = []
-    }, 1000)
+    }, 2000)
   }
 
   clickedWordId.value = ''
@@ -101,38 +89,39 @@ const isMatching = () => {
     <div class="flex justify-center">
       <div class="grid grid-cols grid-rows-3 gap-y-7 p-8">
         <button
-          v-for="(wordOption, index) in options"
+          v-for="(word, index) in shuffledWordOptions"
           :key="index"
-          @click="handleWordClick(wordOption.id, wordOption.pronunciation)"
+          @click="
+            handleWordClick(options[index].id, options[index].pronunciation)
+          "
           :class="{
-            'border-2 border-[#186cc7]':
-              clickedWordId && clickedWordId === wordOption.id,
-            'bg-correct-option-green border-green-border': wordArray.includes(
-              wordOption.id
+            'border-2 border-[#186cc7]': clickedWordId === options[index].id,
+            'bg-green-300 border-green-border': wordArray.includes(
+              options[index].id
             ),
-            'bg-wrong-option-red': wrongWord.includes(wordOption.id)
+            'bg-wrong-option-red': wrongWord.includes(options[index].id)
           }"
           class="bg-white text-black rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-20 md:w-96 md:text-2xl lg:rounded-2xl"
         >
-          {{ wordOption.word }}
+          {{ word }}
         </button>
       </div>
 
       <div class="grid grid-cols grid-rows-3 gap-y-7 p-8">
         <button
-          v-for="(meaningOption, index) in options"
+          v-for="(meaning, index) in shuffledMeaningOptions"
           :key="index"
-          @click="handleMeaningClick(meaningOption.id)"
+          @click="handleMeaningClick(options[index].id)"
           :class="{
-            'border border-blue-border':
-              clickedMeaningId && clickedMeaningId === meaningOption.id,
-            'bg-correct-option-green border-green-border':
-              meaningArray.includes(meaningOption.id),
-            'bg-wrong-option-red': wrongMeaning.includes(meaningOption.id)
+            'border border-blue-border': clickedMeaningId === options[index].id,
+            'bg-green-300 border-green-border': meaningArray.includes(
+              options[index].id
+            ),
+            'bg-wrong-option-red': wrongMeaning.includes(options[index].id)
           }"
           class="bg-white text-black rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-20 md:w-96 md:text-2xl lg:rounded-2xl"
         >
-          {{ meaningOption.meaning }}
+          {{ meaning }}
         </button>
       </div>
     </div>
@@ -163,5 +152,3 @@ const isMatching = () => {
     </div>
   </div>
 </template>
-
-<style scoped></style>

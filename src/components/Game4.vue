@@ -4,6 +4,7 @@ import Options from './Options.vue'
 import OptionDemo from './OptionDemo.vue'
 import Setting from './Setting.vue'
 import Topbar from './Topbar.vue'
+import ShuffleOptions from './ShuffleOptions.vue'
 import { ref } from 'vue'
 
 const settingPopup = ref(false)
@@ -30,6 +31,7 @@ const closeSetting = (flag) => {
     </div>
 
     <Options />
+    <!-- <ShuffleOptions /> -->
 
     <Teleport to="#setting">
       <div class="absolute left-0 right-0 top-0 m-auto" v-show="settingPopup">
