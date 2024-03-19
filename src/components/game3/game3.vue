@@ -117,7 +117,7 @@ const soundControl2 = (path) => {
         <img
           src="/Vector.svg"
           alt="setting button"
-          class="w-10 hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
+          class="w-10 hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
           @click="toggleSetting"
         />
       </div>
