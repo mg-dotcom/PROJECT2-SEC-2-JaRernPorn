@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, ref, watch, defineEmits } from "vue";
 
-const emits = defineEmits(["closeSetting", "close"]);
+const emits = defineEmits(["closeSetting"]);
 const isPlaying = ref(true);
 
 const player = ref("");

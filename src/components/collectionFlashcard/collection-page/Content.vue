@@ -1,10 +1,10 @@
 <script setup>
 import { defineProps, ref, computed, defineEmits } from "vue";
-import newCollection from "./popup/newCollection.vue";
+import newCollection from "../../collectionFlashcard/popup/newCollection.vue";
 import Collection from "./Collection.vue";
-import { editCollection } from "../../libs/flashcard-libs/CollectionModal.js";
-import { deleteCollection } from "../../libs/flashcard-libs/CollectionModal.js";
-import { addNewCollection } from "../../libs/flashcard-libs/CollectionModal.js";
+import { editCollection } from "../../../libs/flashcard-libs/CollectionModal.js";
+import { deleteCollection } from "../../../libs/flashcard-libs/CollectionModal.js";
+import { addNewCollection } from "../../../libs/flashcard-libs/CollectionModal.js";
 
 const props = defineProps({
   popup: {
@@ -95,3 +95,4 @@ const toggleOptionCollection = (index) => {
 </template>
 
 <style scoped></style>
+

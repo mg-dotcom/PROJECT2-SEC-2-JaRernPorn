@@ -1,7 +1,7 @@
 <script setup>
 import { reactive } from "vue";
-import Header from "./Header.vue";
-import Content from "./Content.vue";
+import Header from "./collection-page/Header.vue";
+import Content from "./collection-page/Content.vue";
 
 const page = reactive({
   flashcard: true,
@@ -12,6 +12,7 @@ const popup = reactive({
   optionCollection: false,
   editCollection: false,
   renameCollection: false,
+  Setting: false,
 });
 
 const closeOption = () => {
@@ -22,11 +23,8 @@ const closeOption = () => {
 <template>
   <!-- Flashcard Page -->
   <section class="flashcard-page overflow-hidden" v-show="page.flashcard">
-    <div
-      class="min-h-screen w-screen bg-main-bgColor"
-      @click.self="closeOption"
-    >
-      <Header :closeOption="closeOption">
+    <div class="min-h-screen w-screen bg-main-bgColor" @click.self="close">
+      <Header :closeOption="closeOption" :popup="popup">
         <template #title> Flashcard </template>
       </Header>
 
