@@ -4,6 +4,7 @@ import data from '../../data/categories.json'
 import SoundControl from './SoundControl.vue'
 
 const currentIndexItem = ref(0)
+const currentIndexUnit = ref(0)
 const currentIndexCate = ref(0)
 const clickedWordId = ref('')
 const clickedMeaningId = ref('')
@@ -23,7 +24,13 @@ const shuffle = (array) => {
   return array
 }
 
-const shuffleOption = shuffle(options.value)
+// const shuffleOption = shuffle(options.value)
+
+const shuffleOption = computed(() => {
+  // const options =
+  //   data.categories[currentIndexCate.value].units[currentIndexUnit.value].items
+  return shuffle([...options.value])
+})
 
 const handleWordClick = (id, pronunciation) => {
   // รับ wordOption.id มา
@@ -101,7 +108,7 @@ const isMatching = () => {
     <div class="flex justify-center">
       <div class="grid grid-cols grid-rows-3 gap-y-7 p-8">
         <button
-          v-for="(wordOption, index) in options"
+          v-for="(wordOption, index) in shuffleOption"
           :key="index"
           @click="handleWordClick(wordOption.id, wordOption.pronunciation)"
           :class="{
