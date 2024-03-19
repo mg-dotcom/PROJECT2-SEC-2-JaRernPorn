@@ -1,34 +1,51 @@
-<script setup></script>
+<script setup>
+import { defineProps, ref, computed } from "vue";
+import newFlashcard from "./popup/newFlashcard.vue";
+import Card from "./Card.vue";
+
+const props = defineProps({
+  popup: {
+    type: Object,
+    required: true,
+  },
+});
+
+const flashcards = ref([]);
+
+const computedFlashcards = computed(() => {
+  return flashcards.value;
+});
+
+const handleAddNewFlashcard = (chineseWord, pinyin, meaning) => {
+  flashcards.value.push({
+    id: flashcards.value.length + 1,
+    word: chineseWord,
+    pinyin: pinyin,
+    meaning: meaning,
+  });
+  console.log(flashcards.value);
+};
+</script>
 
 <template>
-  <div class="w-8/12 mx-auto flex flex-col">
-    <div class="text-start font-outfit text-base font-semibold pb-2">
-      <div>
-        <h1
-          class="cursor-pointer inline hover:bg-[#f4ead8] p-[4px] rounded-xl transition-all duration-[270ms]"
-        >
-          Add new +
-        </h1>
-      </div>
-    </div>
-    <hr class="border-gray-300" />
+  <newFlashcard
+    :popup="popup"
+    @addNewFlashcard="handleAddNewFlashcard"
+  ></newFlashcard>
 
-    <!-- <div class="cards flex-col justify-center items-center">
-          <div class="flex flex-wrap gap-10 justify-center">
-            <div v-for="card in flashcards" :key="card.id">
-              <div
-                class="flex flex-col justify-center h-[200px] w-[400px] rounded-3xl shadow-md bg-white"
-              >
-                <div class="flex flex-col items-center font-outfit text-lg">
-                 
-                  <div>{{ card.word }}</div>
-                  <div>{{ card.meaning }}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
-        
+  <!-- All Flashcard -->
+  <div
+    v-if="computedFlashcards.length === 0"
+    class="flex-grow flex justify-center items-center text-center h-[70vh]"
+  >
+    <div class="text-gray-300 text-sm">No flashcard added yet</div>
+  </div>
+
+  <div
+    v-else-if="computedFlashcards.length > 0"
+    class="grid grid-cols-1 gap-10 px-10 py-7 text-center lg:grid-cols-3 md:grid-cols-3 md:gap-17 sm:grid-cols-2 sm:gap-10"
+  >
+    <Card :computedFlashcards="computedFlashcards"></Card>
   </div>
 </template>
 
