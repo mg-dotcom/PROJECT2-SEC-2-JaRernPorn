@@ -25,7 +25,8 @@ export default {
         'gray-text': '#434343',
         'correct-option-green': '#D2FFAB',
         'wrong-option-red': '#FF9E94',
-        'selected-option-blue': '#186cc7'
+        'selected-option-blue': '#186cc7',
+        'green-border': '#A3E36B'
       },
       fontSize: {
         'title-size': '118px',

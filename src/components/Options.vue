@@ -3,15 +3,17 @@ import { computed, ref } from 'vue'
 import data from '../../data/categories.json'
 import SoundControl from './SoundControl.vue'
 
-const clickedWordId = ref(null)
-const clickedMeaningId = ref(null)
 const currentIndexItem = ref(0)
 const currentIndexCate = ref(0)
+const clickedWordId = ref('')
+const clickedMeaningId = ref('')
 const options = ref(data.categories[0].units[0].items)
 const wordArray = ref([])
 const meaningArray = ref([])
 const wrongWord = ref([])
 const wrongMeaning = ref([])
+const checkBtn = ref(true)
+const continueBtn = ref(false)
 
 const shuffle = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -65,25 +67,29 @@ const isMatching = () => {
   if (wordId === meaningId) {
     wordArray.value.push(wordId)
     meaningArray.value.push(meaningId)
-    console.log(wordArray.value)
-    console.log(meaningArray.value)
-    console.log(
-      'Matched! by ' + 'word id = ' + wordId + ' ' + 'meaning id = ' + meaningId
-    )
+    console.log(wordArray.value + ' & ' + meaningArray.value)
+    console.log('Matched!')
+    console.log('word length ' + wordArray.value.length)
+    console.log('options length ' + options.value.length)
+    console.log('meaning length ' + meaningArray.value.length)
+    console.log('options length ' + options.value.length)
+    if (
+      wordArray.value.length === options.value.length ||
+      meaningArray === options.value.length
+    ) {
+      // console.log('Complete')
+      checkBtn.value = false
+      continueBtn.value = true
+      // console.log(continueBtn.value)
+    }
   } else {
     wrongWord.value.push(wordId)
     wrongMeaning.value.push(meaningId)
-    console.log(
-      'Not Matched ' +
-        'wordId = ' +
-        clickedWordId.value +
-        ' ' +
-        'but meaningId = ' +
-        clickedMeaningId.value
-    )
+    console.log(wrongWord.value + ' & ' + wrongMeaning.value)
+    console.log('Not Matched!')
     setTimeout(() => {
-      wrongWord.value = ''
-      wrongMeaning.value = ''
+      wrongWord.value = []
+      wrongMeaning.value = []
     }, 1000)
   }
 
@@ -101,10 +107,12 @@ const isMatching = () => {
           :key="index"
           @click="handleWordClick(wordOption.id, wordOption.pronunciation)"
           :class="{
-            'border border-[#186cc7]':
+            'border-2 border-[#186cc7]':
               clickedWordId && clickedWordId === wordOption.id,
-            'bg-[#D2FFAB] border-[#A3E36B]': wordArray.includes(wordOption.id),
-            'bg-[#FF9E94]': wrongWord.includes(wordOption.id)
+            'bg-green-300 border-green-border': wordArray.includes(
+              wordOption.id
+            ),
+            'bg-wrong-option-red': wrongWord.includes(wordOption.id)
           }"
           class="bg-white text-black rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-20 md:w-96 md:text-2xl lg:rounded-2xl"
         >
@@ -113,21 +121,17 @@ const isMatching = () => {
       </div>
 
       <div class="grid grid-cols grid-rows-3 gap-y-7 p-8">
-        <!-- :class="{
-            'bg-correct-option-green': isMatching(),
-            'bg-wrong-option-red': !isMatching()
-          }" -->
         <button
           v-for="(meaningOption, index) in options"
           :key="index"
           @click="handleMeaningClick(meaningOption.id)"
           :class="{
-            'border border-[#186cc7]':
+            'border border-blue-border':
               clickedMeaningId && clickedMeaningId === meaningOption.id,
-            'bg-[#D2FFAB] border-[#A3E36B]': meaningArray.includes(
+            'bg-green-300 border-green-border': meaningArray.includes(
               meaningOption.id
             ),
-            'bg-[#FF9E94]': wrongMeaning.includes(meaningOption.id)
+            'bg-wrong-option-red': wrongMeaning.includes(meaningOption.id)
           }"
           class="bg-white text-black rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-20 md:w-96 md:text-2xl lg:rounded-2xl"
         >
@@ -138,9 +142,17 @@ const isMatching = () => {
     <div class="flex justify-end px-6 lg:px-32">
       <button
         @click="isMatching"
+        v-show="checkBtn"
         class="bg-title rounded-2xl text-white font-outfit font-semibold w-20 h-8 sm:text-2xl sm:w-28 sm:h-14 sm:rounded-3xl hover:bg-button-bgColor lg:w-36 lg:h-12"
       >
         Check
+      </button>
+      <button
+        @click=""
+        v-show="continueBtn"
+        class="bg-title rounded-2xl text-white font-outfit font-semibold w-20 h-8 sm:text-2xl sm:w-28 sm:h-14 sm:rounded-3xl hover:bg-button-bgColor lg:w-36 lg:h-12"
+      >
+        Continue
       </button>
     </div>
     <div class="flex justify-center text-2xl text-black">
@@ -148,6 +160,10 @@ const isMatching = () => {
     </div>
     <div class="flex justify-center text-2xl text-black">
       {{ wrongWord }} {{ wrongMeaning }}
+    </div>
+    <div class="flex justify-center text-2xl text-black">
+      {{ continueBtn }}
+      {{ checkBtn }}
     </div>
   </div>
 </template>
