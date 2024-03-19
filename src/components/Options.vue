@@ -47,7 +47,7 @@ const soundControl = (path) => {
 }
 
 const checkMatch = () => {
-  correctOptionBg.value = false
+  // correctOptionBg.value = false
   wrongOptionBg.value = false
   // Check if both a word and its meaning have been clicked
   if (!clickedWordId.value || !clickedMeaningId.value) {
@@ -63,8 +63,9 @@ const checkMatch = () => {
     wrongOptionBg.value = true
     userClickedWordWrong.value.push(clickedWordId.value)
     userClickedMeaningWrong.value.push(clickedMeaningId.value)
-    
-
+    setTimeout(() => {
+      wrongOptionBg.value = false
+    }, 1500)
     console.log('Not match!')
   }
 }
@@ -79,12 +80,11 @@ const checkMatch = () => {
           :key="index"
           @click="handleWordClick(wordOption)"
           :class="{
-            'border-2 border-blue-border':
+            'border-2 border-[#186cc7]':
               clickedWordId && clickedWordId === wordOption.id,
-            'bg-correct-option-green':
+            'bg-[#D2FFAB]':
               correctOptionBg && userClickedWordCorrect.includes(wordOption.id),
-            'bg-wrong-option-red':
-              wrongOptionBg && !userClickedWordCorrect.includes(wordOption.id)
+            'bg-[#FF9E94]': wrongOptionBg && wordOption.id === clickedWordId
           }"
           class="bg-white text-black rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-20 md:w-96 md:text-2xl lg:rounded-2xl"
         >
@@ -98,14 +98,13 @@ const checkMatch = () => {
           :key="index"
           @click="handleMeaningClick(meaningOption)"
           :class="{
-            'border-2 border-blue-border':
+            'border-2 border-[#186cc7]':
               clickedMeaningId && meaningOption.id === clickedMeaningId,
-            'bg-correct-option-green':
+            'bg-[#D2FFAB]':
               correctOptionBg &&
               userClickedMeaningCorrect.includes(meaningOption.id),
-            'bg-wrong-option-red':
-              wrongOptionBg &&
-              !userClickedMeaningCorrect.includes(meaningOption.id)
+            'bg-[#FF9E94]':
+              wrongOptionBg && meaningOption.id === clickedMeaningId
           }"
           class="bg-white text-black rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-20 md:w-96 md:text-2xl lg:rounded-2xl"
         >
