@@ -68,6 +68,7 @@ const items = currentCategory.units[props.unitIndex].items
               :alt="item.meaning"
               class="w-[220px] h-[225px] ml-10 mt-3"
             />
+            <SoundButton />
           </SoundControl>
 
           <div
@@ -77,7 +78,6 @@ const items = currentCategory.units[props.unitIndex].items
             {{ item.word.split(' ')[0] }} <br />
             {{ item.word.split(' ').slice(1).join(' ') }}
           </h1>
-          <SoundButton />
         </div>
         <div class="absolute left-0 right-0 top-1/3" v-show="showSetting">
           <Setting
