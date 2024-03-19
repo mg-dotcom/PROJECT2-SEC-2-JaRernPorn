@@ -37,6 +37,7 @@ const emits = defineEmits(['selected'])
           :alt="item.meaning"
           class="w-[220px] h-[225px] ml-10 mt-3"
         />
+        <SoundButton />
       </SoundControl>
 
       <div
@@ -46,7 +47,6 @@ const emits = defineEmits(['selected'])
         {{ item.word.split(' ')[0] }} <br />
         {{ item.word.split(' ').slice(1).join(' ') }}
       </h1>
-      <SoundButton />
     </div>
   </div>
 </template>
