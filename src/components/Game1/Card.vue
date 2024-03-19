@@ -1,5 +1,6 @@
 <script setup>
 import SoundControl from '../SoundControl.vue'
+import SoundButton from './SoundButton.vue'
 
 const props = defineProps({
   choices: Object,
@@ -45,6 +46,7 @@ const emits = defineEmits(['selected'])
         {{ item.word.split(' ')[0] }} <br />
         {{ item.word.split(' ').slice(1).join(' ') }}
       </h1>
+      <SoundButton />
     </div>
   </div>
 </template>
