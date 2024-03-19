@@ -5,6 +5,9 @@ import Setting from './Setting.vue'
 import answer_popup from './answer_popup.vue'
 import { computed, ref } from 'vue'
 
+const currentIndexCate = ref(0)
+const currentIndexUnit = ref(0)
+
 const answer = ref()
 const meaning = ref()
 const randomQuiz = ref(0)
@@ -13,20 +16,35 @@ const userSelected = ref()
 const showAudio = ref(false)
 const showPopup = ref(false)
 const checkStatus = ref(false)
-const audioOfOption = ref(data.categories[0].units[0].items[0].pronunciation)
+const audioOfOption = ref(data.categories[currentIndexCate.value].units[currentIndexUnit.value].items[randomQuiz.value].pronunciation)
 const setColorOption = ref('')
 const isSelected = ref(false)
 const answerOfQuiz=ref('')
 
+
 const currentCategory = computed(() => {
-  return data.categories[0].name //get [currentIndexCate.value]
+  return data.categories[currentIndexCate.value].name //get [currentIndexCate.value]
 })
 
 const currentQuiz = computed(() => {
-  answerOfQuiz.value = data.categories[0].units[0].items[randomQuiz.value].word
-  meaning.value=data.categories[0].units[0].items[randomQuiz.value].meaning
+  
+  answerOfQuiz.value = data.categories[currentIndexCate.value].units[currentIndexUnit.value].items[randomQuiz.value].word
+  meaning.value=data.categories[currentIndexCate.value].units[currentIndexUnit.value].items[randomQuiz.value].meaning
 
-  return data.categories[0].units[0].items[randomQuiz.value].src
+  return data.categories[currentIndexCate.value].units[currentIndexUnit.value].items[randomQuiz.value].src
+})
+//Shuffle
+const shuffle = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[array[i], array[j]] = [array[j], array[i]]
+  }
+  return array
+}
+
+const generateOption=computed(()=>{
+  const options=data.categories[currentIndexCate.value].units[currentIndexUnit.value].items
+  return shuffle([...options])
 })
 
 const checkAnswer = (selectedOption) => {
@@ -49,7 +67,7 @@ const closePopup = () => {
   randomQuiz.value++
 }
 const turnOnCheckStatus = () => {
-  answer.value = data.categories[0].units[0].items[randomQuiz.value].word
+  answer.value = data.categories[currentIndexCate.value].units[currentIndexUnit.value].items[randomQuiz.value].word
   checkStatus.value = true
   if (userSelected.value === answer.value && checkStatus.value) {
     setColorOption.value = answer.value
@@ -69,7 +87,7 @@ const turnOnCheckStatus = () => {
 }
 
 const soundControl2 = (path) => {
-  console.log(audioOfOption.value)
+  // console.log(audioOfOption.value)
   const sound = new Audio(path)
   sound.play()
 }
@@ -104,7 +122,7 @@ const soundControl2 = (path) => {
         </div>
         <div class="options py-12 w-3/4" @click="soundControl2(audioOfOption)">
           <Option
-            :options="data.categories[0].units[0].items"
+            :options="generateOption"
             :correctOption="answer"
             :isSelected="isSelected"
             :userSelected="userSelected"
