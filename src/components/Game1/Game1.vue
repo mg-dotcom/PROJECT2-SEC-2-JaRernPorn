@@ -119,17 +119,7 @@ const checkAnswer = (userAns) => {
     }, 0)
   }
 
-  if (userAns[0].id !== correctAnswer.value.id) {
-  }
-
-  if (userAns[0].id) {
-  }
-
-  userAns = []
-  userAns.value = []
   checkStatus.value = false
-
-  // checkingStatus.value = false
 }
 
 //CollectAnswer
@@ -162,7 +152,7 @@ const selectedAnswer = (item) => {
     </div>
 
     <div class="flex justify-center">
-      <h2 class="text-title font-outfit font-semibold text-[48px] mt-24">
+      <h2 class="text-title font-outfit font-semibold text-[48px] mt-10">
         Which one of these is {{ currentQuestion }}?
       </h2>
     </div>
@@ -191,7 +181,10 @@ const selectedAnswer = (item) => {
       ></Card>
     </div>
 
-    <CheckButton @click="checkAnswer(userAnswer)" />
+    <CheckButton
+      @click="checkAnswer(userAnswer)"
+      :disabled="userAnswer.length === 0 || checkStatus"
+    />
   </div>
 </template>
 
