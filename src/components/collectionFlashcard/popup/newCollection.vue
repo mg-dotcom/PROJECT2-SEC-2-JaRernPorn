@@ -1,7 +1,6 @@
 <script setup>
 import { defineProps, ref, defineEmits } from "vue";
-import { addNewCollection } from "../../../libs/flashcard-libs/CollectionModal.js";
-import closeIcon from "../../flashpage/icons/iconClose.vue";
+import closeIcon from "../../collectionFlashcard/icons/iconClose.vue";
 
 const props = defineProps({
   closeOption: {

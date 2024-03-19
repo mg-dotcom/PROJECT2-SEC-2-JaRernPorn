@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, ref, computed, defineEmits, reactive } from "vue";
+import { defineProps, ref, computed, defineEmits } from "vue";
 import newCollection from "./popup/newCollection.vue";
 import Collection from "./Collection.vue";
 import { editCollection } from "../../libs/flashcard-libs/CollectionModal.js";

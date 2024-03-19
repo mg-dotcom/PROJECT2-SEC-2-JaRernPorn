@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref, defineEmits } from "vue";
+import { reactive } from "vue";
 import Header from "./Header.vue";
 import Content from "./Content.vue";
 

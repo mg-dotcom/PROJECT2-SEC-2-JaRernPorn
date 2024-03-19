@@ -1,5 +1,5 @@
 <script setup>
-import CollectionFlashcard from "./components/flashpage/CollectionFlashCard.vue";
+import CollectionFlashcard from "./components/collectionFlashcard/CollectionFlashCard.vue";
 </script>
 
 <template>

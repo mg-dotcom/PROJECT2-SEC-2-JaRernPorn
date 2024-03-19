@@ -1,8 +1,5 @@
 <template>
   <div>
-    <!-- On desktop, display the text "Delete" -->
-    <!-- On mobile, display the icon representing deletion -->
-      <!-- You can use an appropriate SVG icon here -->
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="25"
