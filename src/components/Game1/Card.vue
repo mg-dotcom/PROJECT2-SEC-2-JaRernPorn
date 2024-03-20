@@ -1,6 +1,5 @@
 <script setup>
 import SoundControl from '../SoundControl.vue'
-import SoundButton from './SoundButton.vue'
 
 const props = defineProps({
   choices: Object,
@@ -36,7 +35,11 @@ const emits = defineEmits(['selected'])
           :alt="item.meaning"
           class="w-[220px] h-[225px] ml-10 mt-3"
         />
-        <SoundButton />
+        <img
+          src="/SoundButton.svg"
+          alt="SoundButton"
+          class="absolute ml-52 mt-20"
+        />
       </SoundControl>
 
       <div

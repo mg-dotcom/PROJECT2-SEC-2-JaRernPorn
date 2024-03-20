@@ -1,7 +1,6 @@
 <script setup>
 import { ref, defineProps } from 'vue'
 import category from '../../../data/categories.json'
-import SoundButton from '../SoundButton.vue'
 import SoundControl from '../SoundControl.vue'
 import Setting from '../Setting.vue'
 
@@ -68,7 +67,11 @@ const items = currentCategory.units[props.unitIndex].items
               :alt="item.meaning"
               class="w-[220px] h-[225px] ml-10 mt-3"
             />
-            <SoundButton />
+            <img
+              src="/SoundButton.svg"
+              alt="SoundButton"
+              class="absolute ml-52 mt-20"
+            />
           </SoundControl>
 
           <div

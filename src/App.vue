@@ -1,19 +1,19 @@
 <script setup>
-// import Game1 from './components/game1/Game1.vue'
+import Game1 from './components/game1/Game1.vue'
 import Game2 from './components/game2/Game2.vue'
 // import Game3 from './components/game3/Game3.vue'
 // import Game4 from './components/game4/Game4.vue'
 import Topbar from './components/Topbar.vue'
-import Result from './components/Result.vue';
+import Result from './components/Result.vue'
 </script>
 <template>
   <div>
-    <!-- <Game1></Game1> -->
+    <Game1></Game1>
     <!-- <Game2 /> -->
     <!-- <Game3 /> -->
     <!-- <Game4 /> -->
     <!-- <Topbar /> -->
-    <Result/>
+    <Result />
   </div>
 </template>
 <style scoped></style>
