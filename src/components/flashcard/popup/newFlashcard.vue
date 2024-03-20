@@ -15,9 +15,6 @@ const newMeaning = ref("");
 
 const emit = defineEmits(["addNewFlashcard"]);
 
-const closeButton = () => {
-  props.popup.newFlashcard = false;
-};
 
 const addNewFlashcard = () => {
   emit(
