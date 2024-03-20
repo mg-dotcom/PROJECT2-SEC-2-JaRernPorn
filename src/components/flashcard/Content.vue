@@ -10,8 +10,6 @@ const props = defineProps({
   },
 });
 
-
-
 const flashcards = ref([]);
 
 const computedFlashcards = computed(() => {
