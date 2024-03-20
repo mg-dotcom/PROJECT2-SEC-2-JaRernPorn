@@ -6,8 +6,8 @@ const Myclass = plugin(function ({ addUtilities }) {
     ".my-rotate-y-150": {
       transform: "rotateY(150deg)",
     },
-    ".my-rotate-y-210": {
-      transform: "rotateY(210deg)",
+    ".my-rotate-y-200": {
+      transform: "rotateY(200deg)",
     },
     ".my-rotate-y-30": {
       transform: "rotateY(30deg)",

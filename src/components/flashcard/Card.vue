@@ -69,7 +69,7 @@ const showMeaning = () => {
         @renameFlashcard="renameFlashcard"
       ></ranameFlashcard>
 
-      <div class="w-52 h-64 cursor-pointer group perspective">
+      <div class="w-52 h-64 cursor-pointer group perspective bg-transparent">
         <div
           class="relative preserve-3d group-hover:my-rotate-y-30 w-full h-full duration-1000 cursor-pointer"
           :class="{ 'my-rotate-y-150': isClicked }"
@@ -105,7 +105,7 @@ const showMeaning = () => {
             </div>
           </div>
           <div
-            class="absolute my-rotate-y-210 backface-hidden bg-white border-[#FF9E94] py-4 px-7 rounded-xl border-2 w-full h-full overflow-y-auto"
+            class="absolute my-rotate-y-200 backface-hidden bg-white border-[#FF9E94] py-4 px-7 rounded-xl border-2 w-full h-full overflow-y-auto"
           >
             <div class="flex flex-col h-full items-center justify-center">
               <div class="font-medium break-all text-center lg:text-xl">
