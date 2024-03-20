@@ -1,10 +1,10 @@
 <script setup>
 import Option from './Option.vue'
 import data from '../../../data/data.json'
-import Setting from './Setting.vue'
+import Setting from '../Setting.vue'
 import Answer_popup from './Answer_popup.vue'
 import { computed, ref } from 'vue'
-import SoundControl from './SoundControl.vue'
+import SoundControl from '../SoundControl.vue'
 
 const currentIndexCate = ref(0)
 const currentIndexUnit = ref(0)

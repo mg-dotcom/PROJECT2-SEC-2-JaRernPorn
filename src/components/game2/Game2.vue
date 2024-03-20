@@ -1,9 +1,9 @@
 <script setup>
 import { ref, computed, defineProps } from 'vue'
 import category from '../../../data/categories.json'
-import Setting from './Setting.vue'
+import Setting from '../Setting.vue'
 import Answer_popup from './Answer_popup.vue'
-import SoundControl from './SoundControl.vue'
+import SoundControl from '../SoundControl.vue'
 
 const answer = ref('')
 const options = ref([])

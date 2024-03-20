@@ -1,9 +1,9 @@
 <script setup>
 import { ref, defineProps } from 'vue'
-import category from '../../data/categories.json'
-import SoundButton from './SoundButton.vue'
-import SoundControl from './SoundControl.vue'
-import Setting from './Setting.vue'
+import category from '../../../data/categories.json'
+import SoundButton from '../SoundButton.vue'
+import SoundControl from '../SoundControl.vue'
+import Setting from '../Setting.vue'
 
 const props = defineProps({
   categoryIndex: {
