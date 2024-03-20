@@ -1,6 +1,7 @@
 <script setup>
 import { defineProps } from "vue";
 import optionFlashcard from "./popup/optionFlashcard.vue";
+import ranameFlashcard from "./popup/ranameFlashcard.vue";
 
 const props = defineProps({
   computedFlashcards: {
@@ -28,21 +29,35 @@ const deleteFlashcard = (index) => {
   emit("deleteFlashcard", index);
 };
 
-const emit = defineEmits(["toggle-option-flashcard", "deleteFlashcard"]);
+const showRenameFlashcard = (index) => {
+  emit("showRenameFlashcard", index);
+};
+
+const emit = defineEmits([
+  "toggle-option-flashcard",
+  "deleteFlashcard",
+  "showRenameFlashcard",
+]);
 </script>
 
 <template>
   <div class="flex flex-row">
     <div class="cards relative">
-      <div>
-        <optionFlashcard
-          class=""
-          v-show="props.popup.optionFlashcard && SelectedIndex === props.index"
-          :index="index"
-          :popup="popup"
-          @deleteCollection="deleteFlashcard(props.index)"
-        ></optionFlashcard>
-      </div>
+      <optionFlashcard
+        v-show="props.popup.optionFlashcard && SelectedIndex === props.index"
+        :index="index"
+        :popup="popup"
+        @deleteCollection="deleteFlashcard(props.index)"
+        @showRenameFlashcard="showRenameFlashcard"
+      ></optionFlashcard>
+
+      <ranameFlashcard
+        v-show="props.popup.renameFlashcard && SelectedIndex === props.index"
+        :index="index"
+        :popup="popup"
+        :computedFlashcards="computedFlashcards"
+      ></ranameFlashcard>
+
       <div class="font-outfit">
         <div
           class="bg-white border-[#FF9E94] py-4 px-7 rounded-xl border-2 w-52 h-64 overflow-y-auto relative"
@@ -61,9 +76,9 @@ const emit = defineEmits(["toggle-option-flashcard", "deleteFlashcard"]);
               class="flex items-center justify-center font-medium break-all lg:text-5xl"
               :class="{
                 'h-auto':
-                  props.computedFlashcards[props.index].word.length > 15,
+                  props.computedFlashcards[props.index].word.length > 14,
                 'h-[150px]':
-                  props.computedFlashcards[props.index].word.length <= 15,
+                  props.computedFlashcards[props.index].word.length <= 14,
               }"
             >
               {{ props.computedFlashcards[props.index].word }}
@@ -73,9 +88,9 @@ const emit = defineEmits(["toggle-option-flashcard", "deleteFlashcard"]);
               class="flex items-center justify-center lg:text-2xl break-all"
               :class="{
                 'h-auto':
-                  props.computedFlashcards[props.index].pinyin.length > 8,
+                  props.computedFlashcards[props.index].pinyin.length > 7,
                 'h-[50px]':
-                  props.computedFlashcards[props.index].pinyin.length <= 8,
+                  props.computedFlashcards[props.index].pinyin.length <= 7,
               }"
             >
               {{ props.computedFlashcards[props.index].pinyin }}

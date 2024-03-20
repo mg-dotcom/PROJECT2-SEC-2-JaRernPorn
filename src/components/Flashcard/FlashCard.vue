@@ -9,6 +9,7 @@ const popup = reactive({
   newFlashcard: false,
   //Setting
   optionFlashcard: false,
+  renameFlashcard: false,
 });
 </script>
 

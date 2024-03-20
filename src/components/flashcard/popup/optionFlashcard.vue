@@ -14,7 +14,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["deleteCollection"]);
+const emit = defineEmits(["deleteCollection", "showRenameFlashcard"]);
 </script>
 
 <template>
@@ -38,7 +38,7 @@ const emit = defineEmits(["deleteCollection"]);
     <div
       id="editCollection"
       class="flex gap-3 hover:bg-gray-100 transition duration-[270ms] ease-in-out p-1 rounded-lg"
-      @click="showRenameCollection"
+      @click="$emit('showRenameFlashcard', props.index)"
     >
       <iconEdit>
         <template #content>

@@ -37,6 +37,11 @@ const toggleOption = (index) => {
   props.popup.optionFlashcard = !props.popup.optionFlashcard;
   SelectedIndex.value = index;
 };
+
+const showRenameFlashcard = (index) => {
+  props.popup.renameFlashcard = !props.popup.renameFlashcard;
+  SelectedIndex.value = index;
+};
 </script>
 
 <template>
@@ -68,6 +73,7 @@ const toggleOption = (index) => {
         :computedFlashcards="computedFlashcards"
         @toggle-option-flashcard="toggleOption"
         @deleteFlashcard="handelDeleteFlashcard"
+        @showRenameFlashcard="showRenameFlashcard"
       ></Card>
     </div>
   </div>
