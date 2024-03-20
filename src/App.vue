@@ -1,6 +1,6 @@
 <script setup>
 import CollectionFlashcard from "./components/collectionFlashcard/CollectionFlashCard.vue";
-import FlashCard from "./components/flashcard/FlashCard.vue";
+import FlashCard from "./components/Flashcard/FlashCard.vue";
 </script>
 
 <template>
