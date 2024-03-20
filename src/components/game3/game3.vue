@@ -108,7 +108,7 @@ const soundControl2 = (path) => {
 </script>
 
 <template>
-  <div class="font-outfit">
+  <div class="font-outfit bg-main-bgColor min-h-screen">
     <div class="header flex justify-between p-16">
       <div class="category-name text-title text-4xl font-semibold">
         Category : {{ currentCategory }}
