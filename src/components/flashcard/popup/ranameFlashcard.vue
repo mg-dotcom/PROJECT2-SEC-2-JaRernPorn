@@ -16,37 +16,34 @@ const props = defineProps({
   },
 });
 
-console.log(props.computedFlashcards);
-
 const oldChineseWord = ref("");
 const oldPinyin = ref("");
 const oldMeaning = ref("");
 
-const emit = defineEmits(["addNewFlashcard"]);
+const emit = defineEmits(["renameFlashcard"]);
 
-// const addNewFlashcard = () => {
-//   emit(
-//     "addNewFlashcard",
-//     newChineseWord.value,
-//     newPinyin.value,
-//     newMeaning.value
-//   );
-//   props.popup.newFlashcard = false;
-//   newChineseWord.value = "";
-//   newPinyin.value = "";
-//   newMeaning.value = "";
-// };
-
-const showFlashCardAdd = () => {
-  props.popup.newFlashcard = true;
+const closeFlashCardAdd = () => {
+  props.popup.renameFlashcard = false;
+  props.popup.optionFlashcard = false;
+  oldChineseWord.value = "";
+  oldPinyin.value = "";
+  oldMeaning.value = "";
 };
 
-// const closeFlashCardAdd = () => {
-//   props.popup.renameFlashcard = false;
-//   newChineseWord.value = "";
-//   newPinyin.value = "";
-//   newMeaning.value = "";
-// };
+const renameFlashcard = (index) => {
+  emit(
+    "renameFlashcard",
+    oldChineseWord.value,
+    oldPinyin.value,
+    oldMeaning.value,
+    index
+  );
+  props.popup.renameFlashcard = false;
+  props.popup.optionFlashcard = false;
+  oldChineseWord.value = "";
+  oldPinyin.value = "";
+  oldMeaning.value = "";
+};
 </script>
 
 <template>
@@ -61,7 +58,10 @@ const showFlashCardAdd = () => {
       <div
         class="bg-white rounded-lg xl:scale-100 xl:w-[500px] xl:h-[463px] relative p-6 md:scale-[80%] sm:scale-[90%] mobile:scale-[73%] mobile:w-[500px]"
       >
-        <closeIcon class="absolute top-3 right-4 cursor-pointer" @click="" />
+        <closeIcon
+          class="absolute top-3 right-4 cursor-pointer"
+          @click="closeFlashCardAdd"
+        />
         <div class="flex flex-col items-center justify-center">
           <div class="text-center text-4xl font-mono font-semibold">
             Edit flashcard
@@ -73,7 +73,7 @@ const showFlashCardAdd = () => {
                 type="text"
                 v-model="oldChineseWord"
                 class="border-[1.5px] border-black rounded-md p-2 w-[360px] focus:outline-1 focus:ring-5 focus:transition-all duration-[300ms]"
-                :placeholder="props.computedFlashcards[props.index].word"
+                :placeholder="props.computedFlashcards[props.index].chineseWord"
               />
             </div>
 
@@ -100,13 +100,13 @@ const showFlashCardAdd = () => {
             <div class="flex flex-row gap-5 py-2">
               <button
                 class="bg-red-600 text-white rounded-md w-20 h-9 font-outfit font-medium"
-                @click=""
+                @click="closeFlashCardAdd"
               >
                 CANCEL
               </button>
               <button
                 class="bg-[#4096ff] text-white rounded-md w-20 font-outfit font-medium"
-                @click=""
+                @click="renameFlashcard(props.index)"
               >
                 ADD
               </button>

@@ -18,21 +18,6 @@ const computedFlashcards = computed(() => {
 
 const SelectedIndex = ref(0);
 
-const handleAddNewFlashcard = (chineseWord, pinyin, meaning) => {
-  flashcards.value.push({
-    id: flashcards.value.length + 1,
-    word: chineseWord,
-    pinyin: pinyin,
-    meaning: meaning,
-  });
-  props.popup.optionFlashcard = false;
-};
-
-const handelDeleteFlashcard = (index) => {
-  flashcards.value.splice(index, 1);
-  props.popup.optionFlashcard = false;
-};
-
 const toggleOption = (index) => {
   props.popup.optionFlashcard = !props.popup.optionFlashcard;
   SelectedIndex.value = index;
@@ -41,6 +26,30 @@ const toggleOption = (index) => {
 const showRenameFlashcard = (index) => {
   props.popup.renameFlashcard = !props.popup.renameFlashcard;
   SelectedIndex.value = index;
+};
+
+const handleAddNewFlashcard = (chineseWord, pinyin, meaning) => {
+  flashcards.value.push({
+    id: flashcards.value.length + 1,
+    chineseWord: chineseWord,
+    pinyin: pinyin,
+    meaning: meaning,
+  });
+  props.popup.optionFlashcard = false;
+  console.log("flashcards", flashcards.value);
+};
+
+const handelDeleteFlashcard = (index) => {
+  flashcards.value.splice(index, 1);
+  props.popup.optionFlashcard = false;
+};
+
+const handelEditFlashcard = (chineseWord, pinyin, meaning, index) => {
+  flashcards.value[index].chineseWord = chineseWord;
+  flashcards.value[index].pinyin = pinyin;
+  flashcards.value[index].meaning = meaning;
+  props.popup.renameFlashcard = false;
+  props.popup.optionFlashcard = false;
 };
 </script>
 
@@ -74,6 +83,7 @@ const showRenameFlashcard = (index) => {
         @toggle-option-flashcard="toggleOption"
         @deleteFlashcard="handelDeleteFlashcard"
         @showRenameFlashcard="showRenameFlashcard"
+        @renameFlashcard="handelEditFlashcard"
       ></Card>
     </div>
   </div>

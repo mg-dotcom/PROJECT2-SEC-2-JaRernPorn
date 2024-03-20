@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps } from "vue";
+import { defineProps, defineEmits } from "vue";
 import optionFlashcard from "./popup/optionFlashcard.vue";
 import ranameFlashcard from "./popup/ranameFlashcard.vue";
 
@@ -37,7 +37,12 @@ const emit = defineEmits([
   "toggle-option-flashcard",
   "deleteFlashcard",
   "showRenameFlashcard",
+  "renameFlashcard",
 ]);
+
+const renameFlashcard = (chineseWord, pinyin, meaning, index) => {
+  emit("renameFlashcard", chineseWord, pinyin, meaning, index);
+};
 </script>
 
 <template>
@@ -56,6 +61,7 @@ const emit = defineEmits([
         :index="index"
         :popup="popup"
         :computedFlashcards="computedFlashcards"
+        @renameFlashcard="renameFlashcard"
       ></ranameFlashcard>
 
       <div class="font-outfit">
@@ -73,24 +79,18 @@ const emit = defineEmits([
           <!-- Word in Card -->
           <div class="flex flex-col h-full">
             <div
-              class="flex items-center justify-center font-medium break-all lg:text-5xl"
-              :class="{
-                'h-auto':
-                  props.computedFlashcards[props.index].word.length > 14,
-                'h-[150px]':
-                  props.computedFlashcards[props.index].word.length <= 14,
-              }"
+              class="flex items-center justify-center h-[150px] font-medium break-all lg:text-5xl"
             >
-              {{ props.computedFlashcards[props.index].word }}
+              {{ props.computedFlashcards[props.index].chineseWord }}
             </div>
             <hr class="my-2 border-gray-300 dark:border-gray-700" />
             <div
               class="flex items-center justify-center lg:text-2xl break-all"
               :class="{
-                'h-auto':
-                  props.computedFlashcards[props.index].pinyin.length > 7,
-                'h-[50px]':
-                  props.computedFlashcards[props.index].pinyin.length <= 7,
+                'h-[50px] lg:text-xl':
+                  props.computedFlashcards[props.index].pinyin.length > 10,
+                'h-[50px] ':
+                  props.computedFlashcards[props.index].pinyin.length <= 10,
               }"
             >
               {{ props.computedFlashcards[props.index].pinyin }}

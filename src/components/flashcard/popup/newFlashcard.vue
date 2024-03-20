@@ -15,7 +15,7 @@ const newMeaning = ref("");
 
 const emit = defineEmits(["addNewFlashcard"]);
 
-
+//Pass and clear value of new flashcard
 const addNewFlashcard = () => {
   emit(
     "addNewFlashcard",
