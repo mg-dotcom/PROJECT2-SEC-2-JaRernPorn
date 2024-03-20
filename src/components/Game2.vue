@@ -120,13 +120,13 @@ const toggleSetting = () => {
             Select this in English.
           </div>
 
-          <div class="flex justify-between ">
+          <div class="flex justify-between items-center bg-white rounded-lg drop-shadow-lg w-80 py-5 px-5">
             <div
-              class="flex flex-col items-center bg-white text-2xl text-title font-semibold rounded-lg drop-shadow-lg w-80 py-5">
+              class="flex flex-col  text-2xl text-title font-semibold mx-3">
               <h3> {{ currentQuiz }} </h3>
             </div>
             <div
-              class="flex flex-col items-center hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer">
+              class="flex flex-col hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer">
               <SoundControl :soundPath="audioOfOption">
                 <img src="../../SoundButton.svg" alt="SoundButton" />
               </SoundControl>
