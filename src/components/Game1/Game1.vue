@@ -6,7 +6,7 @@ import CheckButton from './CheckButton.vue'
 import Setting from '../Setting.vue'
 
 const currentIndexCate = ref(0)
-const currentIndexUnit = ref(1)
+const currentIndexUnit = ref(0)
 const currentIndexItem = ref(0)
 const currentIndexQuestion = ref(0)
 
