@@ -1,5 +1,5 @@
 <script setup>
-import { categories } from '../../../data/categories.json'
+import { categories } from '../../../data/data.json'
 import { computed, ref } from 'vue'
 import Card from './Card.vue'
 import CheckButton from './CheckButton.vue'
@@ -129,7 +129,7 @@ const selectedAnswer = (item) => {
         Category: {{ currentCategory }}
       </h1>
       <img
-        src="/setting.svg"
+        src="/settingBtn/setting.svg"
         alt="Setting"
         class="pr-36 cursor-pointer"
         @click="toggleSetting"
