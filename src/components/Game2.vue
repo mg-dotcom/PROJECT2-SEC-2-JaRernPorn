@@ -1,6 +1,16 @@
 <script setup>
-import { defineProps } from 'vue'
+import { ref, computed, defineProps } from 'vue'
 import category from '../../data/categories.json'
+import Setting from './Setting.vue'
+import answer_popup from './answer_popup.vue'
+import SoundControl from './SoundControl.vue'
+
+const answer = ref('');
+const options = ref([]);
+const currentIndex = ref(0); //คำถามปัจจุบัน
+const showSetting = ref(false);
+const showPopup = ref(false);
+const checkStatus = ref(false);
 
 const props = defineProps({
   categoryIndex: { //เอาไว้ดึงข้อมูลของหมวดหมู่มาใช้
@@ -17,6 +27,70 @@ const props = defineProps({
 
 const currentCategory = category.categories[props.categoryIndex]
 const items = currentCategory.units[props.unitIndex].items
+
+const audioOfOption = ref(category.categories[props.categoryIndex].units[props.unitIndex].items[currentIndex.value].pronunciation)
+
+const currentQuiz = computed(() => {
+  if (currentIndex.value === items.length - 1) {
+    console.log('Game Over!');
+  }
+  answer.value = items[currentIndex.value].meaning; // กำหนดคำตอบจากข้อปัจจุบัน
+  options.value = generateOptions(answer.value);
+  return items[currentIndex.value].word; // แสดงคำปัจจุบันที่กำลังเล่น
+});
+
+const generateOptions = (answer) => {
+  const optionsArray = [];
+  optionsArray.push({ id: 1, value: answer });
+  while (optionsArray.length < 3) {
+    const randomIndex = Math.floor(Math.random() * items.length);
+    const randomWord = items[randomIndex].meaning;
+    if (!optionsArray.some((option) => option.value === randomWord)) {
+      optionsArray.push({ id: optionsArray.length + 1, value: randomWord });
+    }
+  }
+  return shuffle(optionsArray);
+};
+
+const shuffle = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+};
+
+const userSelected = ref('');
+const userAnswer = (userSelectedOption) => {
+  userSelected.value = userSelectedOption;
+};
+
+const checkAnswer = () => {
+  checkStatus.value = true;
+  //ตรวจสอบว่า answer.value มีค่าอยู่มั้ย 
+  if (answer.value && userSelected.value === answer.value) {
+    console.log('Correct!');
+
+    setTimeout(() => {
+      currentIndex.value++;
+    }, 2000);
+  } else {
+    console.log('Wrong!');
+    answer.value = ''
+    userSelected.value = ''
+    showPopup.value = true
+  }
+};
+
+const closePopup = () => {
+  showPopup.value = !showPopup.value
+  currentIndex.value++
+}
+
+const toggleSetting = () => {
+  showSetting.value = !showSetting.value
+}
+
 </script>
 
 <template>
@@ -31,7 +105,9 @@ const items = currentCategory.units[props.unitIndex].items
         </div>
 
         <div class="setting flex">
-          <img src="/setting.svg" alt="setting button" class="w-10" />
+          <img src="/setting.svg" alt="setting button"
+            class="w-10 hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
+            @click="toggleSetting" />
         </div>
 
       </div>
@@ -44,25 +120,48 @@ const items = currentCategory.units[props.unitIndex].items
             Select this in English.
           </div>
 
-          <div
-            class="flex flex-col items-center bg-white text-2xl text-title font-semibold rounded-lg drop-shadow-lg w-80 py-5">
-            <h3> 苹果 </h3>
+          <div class="flex justify-between ">
+            <div
+              class="flex flex-col items-center bg-white text-2xl text-title font-semibold rounded-lg drop-shadow-lg w-80 py-5">
+              <h3> {{ currentQuiz }} </h3>
+            </div>
+            <div
+              class="flex flex-col items-center hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer">
+              <SoundControl :soundPath="audioOfOption">
+                <img src="../../SoundButton.svg" alt="SoundButton" />
+              </SoundControl>
+            </div>
           </div>
 
           <div class=" py-12 w-3/4">
             <div class="grid grid-cols-1 gap-y-5 justify-center ">
-              <button v-for="(item, index) in items" :key="index"
+              <button v-for="(option, index) in options" :key="index" @click="userAnswer(option.value)"
                 class="flex justify-center items-center bg-title text-white font-semiboldl text-2xl h-14 sm:h-20 rounded-lg hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out">
-                {{ item.meaning }}
+                {{ option.value }}
               </button>
             </div>
           </div>
 
         </div>
       </div>
+      <div class="flex justify-center">
+        <button
+          class="bg-title text-white p-2 rounded-lg hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
+          @click="checkAnswer">
+          Check
+        </button>
+      </div>
 
     </div>
 
+  </div>
+
+  <div class="absolute left-0 right-0 top-1/3" v-show="showSetting">
+    <Setting @closeSetting="toggleSetting" @restartGame="" @resumeGame="" @goBackHome="" />
+  </div>
+
+  <div class="wrongAnswer" v-show="showPopup">
+    <answer_popup :answer="answer" @closePopup="closePopup" />
   </div>
 </template>
 
