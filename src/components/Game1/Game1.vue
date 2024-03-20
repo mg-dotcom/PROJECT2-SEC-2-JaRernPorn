@@ -6,7 +6,7 @@ import CheckButton from './CheckButton.vue'
 import Setting from '../Setting.vue'
 
 const currentIndexCate = ref(0)
-const currentIndexUnit = ref(0)
+const currentIndexUnit = ref(1)
 const currentIndexItem = ref(0)
 const currentIndexQuestion = ref(0)
 
@@ -19,14 +19,9 @@ const correctAnswer = ref(
   ]
 )
 
-// const currentItem = ref([])
-
-// const correctAnswer = ref('')
 const isCorrect = ref(false)
 const isWrong = ref(false)
-// const isCorrect = ref('')
 const userAnswer = ref([])
-const idAnswer = ref([])
 const userAnswerId = ref(null)
 
 //Setting
@@ -67,20 +62,11 @@ const shuffle = (array) => {
 const threeChoices = computed(() => {
   const choices =
     categories[currentIndexCate.value].units[currentIndexUnit.value].items
-  console.log([...choices])
-  console.log(choices)
   return shuffle([...choices])
 })
 
 //CheckAnswer
 const checkAnswer = (userAns) => {
-  console.log(userAns.length)
-  console.log(userAns.value)
-  if (userAns.length === 0) {
-    console.log('เลือกก่อนจ้ะ')
-    return ''
-  }
-
   checkStatus.value = true
 
   correctAnswer.value =
@@ -88,19 +74,9 @@ const checkAnswer = (userAns) => {
       currentIndexQuestion.value
     ]
 
-  console.log(showColor.value)
-  console.log(userAns)
-  console.log(userAns.meaning)
-  console.log(userAns[0])
-  // console.log(userAnswer[0].meaning)
-  console.log(userAns.value)
-
-  console.log(userAns[0].id)
-  console.log(correctAnswer.value.id)
-
   if (userAns[0].id === correctAnswer.value.id) {
     // userAnswerId.value = userAnswer[0].id
-    console.log('nice')
+    console.log('Correct!')
     isCorrect.value = true
 
     setTimeout(() => {
@@ -115,7 +91,7 @@ const checkAnswer = (userAns) => {
       }, 1500)
     }, 0)
   } else {
-    console.log('Sorry mommy')
+    console.log('Wrong!')
     userAnswerId.value = userAns[0].id
     isWrong.value = true
     isCorrect.value = true
@@ -124,6 +100,7 @@ const checkAnswer = (userAns) => {
       setTimeout(() => {
         showColor.value = false
         isWrong.value = false
+        isCorrect.value = false
         currentIndexQuestion.value++
         if (currentIndexQuestion.value > 2) {
           currentIndexQuestion.value = 0
@@ -138,14 +115,8 @@ const checkAnswer = (userAns) => {
 
 //CollectAnswer
 const selectedAnswer = (item) => {
-  console.log(item)
-  console.log(userAnswer.value)
   userAnswer.value = []
-  console.log(userAnswer.value)
   userAnswer.value.push(item)
-  // userAnswer.value.push(item)
-  console.log(userAnswer.value)
-  console.log(checkStatus.value)
 }
 </script>
 
