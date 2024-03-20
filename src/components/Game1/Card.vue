@@ -22,8 +22,8 @@ const emits = defineEmits(['selected'])
     <div
       class="h-[400px] w-[300px] rounded-3xl shadow-md bg-white cursor-pointer hover:border-8 border-slate-200"
       :class="{
-        'bg-[#d0ffa0]': showColor && item.id === correctAnswer.id && isCorrect,
-        'bg-[#faa09a]': showColor && item.id === userAnswerId && isWrong
+        'bg-[#d0ffa3]': showColor && item.id === correctAnswer.id && isCorrect,
+        'bg-[#faa09b]': showColor && item.id === userAnswerId && isWrong
       }"
       v-for="(item, itemIndex) in choices"
       :key="itemIndex"

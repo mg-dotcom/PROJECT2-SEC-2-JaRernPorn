@@ -129,7 +129,7 @@ const selectedAnswer = (item) => {
         Category: {{ currentCategory }}
       </h1>
       <img
-        src="/Setting.svg"
+        src="/setting.svg"
         alt="Setting"
         class="pr-36 cursor-pointer"
         @click="toggleSetting"
