@@ -1,5 +1,5 @@
 <script setup>
-import Game2 from './components/Game2.vue';
+import Game2 from './components/game2/Game2.vue';
 import FlashCard from './components/FlashCard.vue'
 
 </script>
@@ -13,4 +13,4 @@ import FlashCard from './components/FlashCard.vue'
  
 <style scoped>
 
-</style>
+</style>./components/game2/Game2.vue

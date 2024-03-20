@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, defineProps } from 'vue'
-import category from '../../data/categories.json'
+import category from '../../../data/categories.json'
 import Setting from './Setting.vue'
 import answer_popup from './answer_popup.vue'
 import SoundControl from './SoundControl.vue'
@@ -134,7 +134,7 @@ const toggleSetting = () => {
             </div>
             <div class="flex flex-col hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer">
               <SoundControl :soundPath="audioOfOption">
-                <img src="../../SoundButton.svg" alt="SoundButton" />
+                <img src="../../../SoundButton.svg" alt="SoundButton" />
               </SoundControl>
             </div>
           </div>
