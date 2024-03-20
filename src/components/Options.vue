@@ -49,7 +49,7 @@ const isMatching = () => {
     return
   }
 
-  // destructure id property then find clickedWordId.value
+  // destructure id property
   // สร้างตัวแปรโดย destructure มาแค่ id ใน object
   // find() return first element
   const { id: wordId } = options.value.find(
