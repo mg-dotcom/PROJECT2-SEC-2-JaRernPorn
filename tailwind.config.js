@@ -18,7 +18,10 @@ export default {
         'answer-fontColor': '#BE4400',
         brownColor: '#52250E',
         'pink-border': '#F1D3D3',
-        'blue-border': '#3B8BD4'
+        'blue-border': '#3B8BD4',
+        'correct-option-green': '#D2FFAB',
+        'wrong-option-red': '#FF9E94',
+        'selected-option-blue': '#186cc7'
       },
       fontSize: {
         'title-size': '118px',
