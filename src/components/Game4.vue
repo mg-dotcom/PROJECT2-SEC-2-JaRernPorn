@@ -1,10 +1,8 @@
 <script setup>
 import data from '../../data/categories.json'
 import Options from './Options.vue'
-import OptionDemo from './OptionDemo.vue'
 import Setting from './Setting.vue'
 import Topbar from './Topbar.vue'
-import ShuffleOptions from './ShuffleOptions.vue'
 import { ref } from 'vue'
 
 const settingPopup = ref(false)
