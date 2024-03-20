@@ -62,25 +62,31 @@ const shuffle = (array) => {
   return array;
 };
 
+const isSelected = ref(false);
+const colorOption = ref(false);
+
 const userSelected = ref('');
 const userAnswer = (userSelectedOption) => {
   userSelected.value = userSelectedOption;
+  isSelected.value = true;
 };
 
 const checkAnswer = () => {
   checkStatus.value = true;
-  //ตรวจสอบว่า answer.value มีค่าอยู่มั้ย 
-  if (answer.value && userSelected.value === answer.value) {
+
+  if (userSelected.value === answer.value) {
+    colorOption.value = true;
+    isSelected.value = false;
     console.log('Correct!');
 
     setTimeout(() => {
       currentIndex.value++;
+      colorOption.value = false;
+      answer.value = '';
     }, 2000);
   } else {
     console.log('Wrong!');
-    answer.value = ''
-    userSelected.value = ''
-    showPopup.value = true
+    showPopup.value = true;
   }
 };
 
@@ -123,12 +129,10 @@ const toggleSetting = () => {
           </div>
 
           <div class="flex justify-between items-center bg-white rounded-lg drop-shadow-lg w-80 py-5 px-5">
-            <div
-              class="flex flex-col  text-2xl text-title font-semibold mx-3">
+            <div class="flex flex-col  text-2xl text-title font-semibold mx-3">
               <h3> {{ currentQuiz }} </h3>
             </div>
-            <div
-              class="flex flex-col hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer">
+            <div class="flex flex-col hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer">
               <SoundControl :soundPath="audioOfOption">
                 <img src="../../SoundButton.svg" alt="SoundButton" />
               </SoundControl>
@@ -138,7 +142,11 @@ const toggleSetting = () => {
           <div class=" py-12 w-3/4">
             <div class="grid grid-cols-1 gap-y-5 justify-center ">
               <button v-for="(option, index) in options" :key="index" @click="userAnswer(option.value)"
-                class="flex justify-center items-center bg-title text-white font-semiboldl text-2xl h-14 sm:h-20 rounded-lg hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out">
+                class="flex justify-center items-center bg-title text-white font-semiboldl text-2xl h-14 sm:h-20 rounded-lg hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
+                :class="{
+            'bg-correct-option-green': option.value === answer && colorOption,
+            'bg-selected-option-blue': option.value === userSelected && isSelected
+          }">
                 {{ option.value }}
               </button>
             </div>
