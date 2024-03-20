@@ -21,7 +21,9 @@ export default {
         'blue-border': '#3B8BD4',
         'correct-option-green': '#D2FFAB',
         'wrong-option-red': '#FF9E94',
-        'selected-option-blue': '#186cc7'
+        'selected-option-blue': '#186cc7',
+        greenTest: '#42d134',
+        blueTest: '#186cc7'
       },
       fontSize: {
         'title-size': '118px',
