@@ -43,6 +43,7 @@ const renameFlashcard = (index) => {
   oldChineseWord.value = "";
   oldPinyin.value = "";
   oldMeaning.value = "";
+  console.log(index);
 };
 </script>
 

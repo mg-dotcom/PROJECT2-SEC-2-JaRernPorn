@@ -10,6 +10,8 @@ const props = defineProps({
   },
 });
 
+
+
 const flashcards = ref([]);
 
 const computedFlashcards = computed(() => {
@@ -50,6 +52,8 @@ const handelEditFlashcard = (chineseWord, pinyin, meaning, index) => {
   flashcards.value[index].meaning = meaning;
   props.popup.renameFlashcard = false;
   props.popup.optionFlashcard = false;
+  console.log(SelectedIndex.value);
+  console.log(index);
 };
 </script>
 

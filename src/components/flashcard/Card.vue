@@ -70,7 +70,7 @@ const renameFlashcard = (chineseWord, pinyin, meaning, index) => {
         >
           <!-- Option -->
           <img
-            class="z-40 opacity-70 hover:bg-gray-400 rounded-full w-10 h-10 p-2 scale-[75%] absolute top-0 right-0 transition-all duration-[270ms]"
+            class="z-40 opacity-50 hover:bg-gray-400 rounded-full w-10 h-10 p-2 scale-[75%] absolute top-0 right-0 transition-all duration-[270ms]"
             src="/img/flashcard-pic/option.svg"
             alt="option"
             @click="showOption(props.index)"
