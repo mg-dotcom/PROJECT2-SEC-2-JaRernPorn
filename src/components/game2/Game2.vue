@@ -2,7 +2,7 @@
 import { ref, computed, defineProps } from 'vue'
 import category from '../../../data/categories.json'
 import Setting from './Setting.vue'
-import answer_popup from './answer_popup.vue'
+import Answer_popup from './Answer_popup.vue'
 import SoundControl from './SoundControl.vue'
 
 const answer = ref('')
@@ -183,7 +183,7 @@ const toggleSetting = () => {
   </div>
 
   <div class="wrongAnswer" v-show="showPopup">
-    <answer_popup :answer="answer" @closePopup="closePopup" />
+    <Answer_popup :answer="answer" @closePopup="closePopup" />
   </div>
 </template>
 

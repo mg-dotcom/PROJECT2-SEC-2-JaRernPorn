@@ -1,6 +1,6 @@
 <script setup>
 import { reactive, ref } from 'vue'
-import settingButton from './setting-button.vue'
+import SettingHomepage from './SettingHomepage.vue'
 import selectLevel from '../category/selectLevel.vue'
 
 const page = reactive({
@@ -75,7 +75,7 @@ const toggleSetting = () => {
       </div>
     </div>
     <div class="absolute left-0 right-0 top-1/3" v-show="showSetting">
-      <settingButton @closeSetting="toggleSetting" />
+      <SettingHomepage @closeSetting="toggleSetting" />
     </div>
   </section>
   <section>

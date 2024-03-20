@@ -1,8 +1,8 @@
 <script setup>
 import Option from './Option.vue'
-import data from '../../../data/game3/data.json'
+import data from '../../../data/data.json'
 import Setting from './Setting.vue'
-import answer_popup from './answer_popup.vue'
+import Answer_popup from './Answer_popup.vue'
 import { computed, ref } from 'vue'
 import SoundControl from './SoundControl.vue'
 
@@ -166,7 +166,7 @@ const soundControl2 = (path) => {
     />
   </div>
   <div class="" v-show="showPopup">
-    <answer_popup :answer="answerOfQuiz" @closePopup="closePopup" />
+    <Answer_popup :answer="answerOfQuiz" @closePopup="closePopup" />
   </div>
 </template>
 
