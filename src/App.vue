@@ -7,7 +7,7 @@ import Game3 from './components/game3/game3.vue'
   <div>
     <!-- <Game1></Game1> -->
     <!-- <Game2 /> -->
-    <Game3 />
+    <!-- <Game3 /> -->
   </div>
 </template>
 <style scoped></style>
