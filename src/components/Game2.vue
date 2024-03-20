@@ -28,7 +28,9 @@ const props = defineProps({
 const currentCategory = category.categories[props.categoryIndex]
 const items = currentCategory.units[props.unitIndex].items
 
-const audioOfOption = ref(category.categories[props.categoryIndex].units[props.unitIndex].items[currentIndex.value].pronunciation)
+const audioOfOption = computed(() => {
+  return category.categories[props.categoryIndex].units[props.unitIndex].items[currentIndex.value].pronunciation;
+});
 
 const currentQuiz = computed(() => {
   if (currentIndex.value === items.length - 1) {
