@@ -275,21 +275,21 @@
         {
           "items": [
             {
-              "id": 4,
+              "id": 1,
               "src": "/play-game/family/older-brother.png",
               "word": "哥哥 (gē ge)",
               "meaning": "Elder brother",
               "pronunciation": "/pronunciation/older-brother.mp3"
             },
             {
-              "id": 5,
+              "id": 2,
               "src": "/play-game/family/younger-brother.png",
               "word": "弟弟 (dì di)",
               "meaning": "Younger brother",
               "pronunciation": "/pronunciation/younger-brother.mp3"
             },
             {
-              "id": 6,
+              "id": 3,
               "src": "/play-game/family/older-sister.png",
               "word": "姐姐 (jiě jie)",
               "meaning": "Elder sister",
@@ -300,21 +300,21 @@
         {
           "items": [
             {
-              "id": 7,
+              "id": 1,
               "src": "/play-game/family/younger-sister.png",
               "word": "妹妹 (mèi mei)",
               "meaning": "Younger sister",
               "pronunciation": "/pronunciation/younger-sister.mp3"
             },
             {
-              "id": 8,
+              "id": 2,
               "src": "/play-game/family/son.png",
               "word": "儿子 (ér zi)",
               "meaning": "Son",
               "pronunciation": "/pronunciation/son.mp3"
             },
             {
-              "id": 9,
+              "id": 3,
               "src": "/play-game/family/daughter.png",
               "word": "女儿 (nǚ ér)",
               "meaning": "Daughter",
@@ -356,21 +356,21 @@
         {
           "items": [
             {
-              "id": 4,
+              "id": 1,
               "src": "/play-game/number/zero.png",
               "word": "零 (líng)",
               "meaning": "Zero",
               "pronunciation": "/pronunciation/zero.mp3"
             },
             {
-              "id": 5,
+              "id": 2,
               "src": "/play-game/number/one.png",
               "word": "一 (yī)",
               "meaning": "One",
               "pronunciation": "/pronunciation/one.mp3"
             },
             {
-              "id": 6,
+              "id": 3,
               "src": "/play-game/number/ten.png",
               "word": "十 (shí)",
               "meaning": "Ten",
@@ -381,21 +381,21 @@
         {
           "items": [
             {
-              "id": 7,
+              "id": 1,
               "src": "/play-game/number/eight.png",
               "word": "八 (bā)",
               "meaning": "Eight",
               "pronunciation": "/pronunciation/eight.mp3"
             },
             {
-              "id": 8,
+              "id": 2,
               "src": "/play-game/number/three.png",
               "word": "三 (sān)",
               "meaning": "Three",
               "pronunciation": "/pronunciation/three.mp3"
             },
             {
-              "id": 9,
+              "id": 3,
               "src": "/play-game/number/six.png",
               "word": "六 (liù)",
               "meaning": "Six",
