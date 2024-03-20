@@ -1,7 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
-import data from '../../data/categories.json'
-import SoundControl from './SoundControl.vue'
+import data from '../../../data/categories.json'
 
 const currentIndexItem = ref(0)
 const currentIndexUnit = ref(0)
@@ -49,8 +48,6 @@ const isMatching = () => {
     return
   }
 
-  // destructure id property
-  // สร้างตัวแปรโดย destructure มาแค่ id ใน object
   // find() return first element
   const { id: wordId } = options.value.find(
     (option) => option.id === clickedWordId.value
@@ -59,11 +56,9 @@ const isMatching = () => {
     (option) => option.id === clickedMeaningId.value
   )
 
-  // เอา wordId มาเทียบ meaningId ว่ามี id ตรงกันมั้ย
   if (wordId === meaningId) {
     wordArray.value.push(wordId)
     meaningArray.value.push(meaningId)
-
     if (
       wordArray.value.length === options.value.length &&
       meaningArray.value.length === options.value.length
@@ -96,7 +91,7 @@ const isMatching = () => {
           :class="{
             'border-2 border-selected-option-blue':
               clickedWordId && clickedWordId === wordOption.id,
-            'bg-correct-option-green border-[#A3E36B]': wordArray.includes(
+            'bg-[#D2FFAB] border-green-border': wordArray.includes(
               wordOption.id
             ),
             'bg-wrong-option-red': wrongWord.includes(wordOption.id)
@@ -115,7 +110,7 @@ const isMatching = () => {
           :class="{
             'border border-selected-option-blue':
               clickedMeaningId && clickedMeaningId === meaningOption.id,
-            'bg-correct-option-green border-[#A3E36B]': meaningArray.includes(
+            'bg-[#D2FFAB] border-green-border': meaningArray.includes(
               meaningOption.id
             ),
             'bg-wrong-option-red': wrongMeaning.includes(meaningOption.id)
@@ -141,15 +136,6 @@ const isMatching = () => {
       >
         Continue
       </button>
-    </div>
-    <div class="flex justify-center text-2xl text-black">
-      {{ wordArray }} {{ meaningArray }}
-    </div>
-    <div class="flex justify-center text-2xl text-black">
-      {{ wrongWord }} {{ wrongMeaning }}
-    </div>
-    <div class="flex justify-center text-2xl text-black">
-      {{ checkBtn }} {{ continueBtn }}
     </div>
   </div>
 </template>

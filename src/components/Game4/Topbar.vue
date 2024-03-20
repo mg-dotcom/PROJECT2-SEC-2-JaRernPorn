@@ -1,5 +1,5 @@
 <script setup>
-import data from '../../data/categories.json'
+import data from '../../../data/categories.json'
 const emits = defineEmits(['setting'])
 </script>
 

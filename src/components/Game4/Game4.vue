@@ -1,5 +1,4 @@
 <script setup>
-import data from '../../data/categories.json'
 import Options from './Options.vue'
 import Setting from './Setting.vue'
 import Topbar from './Topbar.vue'
