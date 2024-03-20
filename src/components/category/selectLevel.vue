@@ -9,7 +9,7 @@ const categoryPage = ref(true)
 const unitPage = ref(false)
 
 const showUnit = (cateIndex) => {
-  currentIndexCate.value = cateIndex //เก็บ index category
+  currentIndexCate.value = cateIndex
   currentIndexUnit.value = cateIndex
 
   console.log(cateIndex)
@@ -32,7 +32,7 @@ const currentCategory = computed(() => {
 
 const currentItem = computed(() => {
   const currentUnit = categories[currentIndexCate.value].units
-  const firstItem = currentUnit.map((unit) => unit.items[0]) //map อันแรกในแต่ละunit
+  const firstItem = currentUnit.map((unit) => unit.items[0])
   return firstItem
 })
 </script>
