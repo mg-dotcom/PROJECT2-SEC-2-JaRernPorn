@@ -103,7 +103,7 @@ const currentItem = computed(() => {
         >
           {{ currentCategory }}
         </h1>
-        <img src="/Setting.svg" alt="Setting" class="pt-20 pr-20" />
+        <img src="/setting.svg" alt="Setting" class="pt-20 pr-20" />
       </div>
 
       <div class="flex justify-center pt-20">

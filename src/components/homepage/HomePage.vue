@@ -1,13 +1,15 @@
 <script setup>
 import { reactive, ref } from 'vue'
 import SettingHomepage from './SettingHomepage.vue'
-import selectLevel from '../category/selectLevel.vue'
+import CategoriesUnits from '../category/CategoriesUnits.vue'
+import HowToPlay from './HowToPlay.vue'
 
 const page = reactive({
   homePage: true,
   categoryPage: false
 })
 const showSetting = ref(false)
+const showHowtoplay = ref(false)
 
 const showCategoryPage = () => {
   page.homePage = false
@@ -16,6 +18,10 @@ const showCategoryPage = () => {
 
 const toggleSetting = () => {
   showSetting.value = !showSetting.value
+}
+
+const toggleHowToPlay = (flag) => {
+  showHowtoplay.value = flag
 }
 </script>
 
@@ -27,7 +33,7 @@ const toggleSetting = () => {
           <img
             src="/settingHomepage/Vector.svg"
             alt="setting button"
-            class="w-10 hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
+            class="w-10 cursor-pointer hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
             @click="toggleSetting"
           />
         </div>
@@ -66,7 +72,8 @@ const toggleSetting = () => {
           <!-- How To Play Button -->
           <div id="HTP-button" class="flex justify-center pt-6">
             <img
-              class="absolute right-10 bottom-10 hover:scale-110 transition-transform duration-300"
+              @howToPlay="toggleHowToPlay"
+              class="cursor-pointer absolute right-10 bottom-10 hover:scale-110 transition-transform duration-300"
               src="/homePage-pic/HTP-button.svg"
               alt="HTP-button"
             />
@@ -79,7 +86,7 @@ const toggleSetting = () => {
     </div>
   </section>
   <section>
-    <selectLevel v-show="page.categoryPage"></selectLevel>
+    <CategoriesUnits v-show="page.categoryPage"></CategoriesUnits>
   </section>
 </template>
 
