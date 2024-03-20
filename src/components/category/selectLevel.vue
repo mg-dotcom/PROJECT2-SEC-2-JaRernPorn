@@ -1,6 +1,6 @@
 <script setup>
 import { ref, reactive, computed } from 'vue'
-import { categories } from '../../data/categories.json'
+import { categories } from '../../../data/categories.json'
 
 const currentIndexCate = ref(0)
 const currentIndexUnit = ref(0)

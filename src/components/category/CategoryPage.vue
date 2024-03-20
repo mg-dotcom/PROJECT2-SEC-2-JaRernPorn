@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { ref, reactive } from 'vue'
 import { categories } from '../../../data/categories.json'
 
@@ -30,7 +30,7 @@ const backToHome = () => {
   <section class="category">
     <div class="p-7 bg-main-bgColor min-h-screen">
       <header>
-        <!-- Back to home Button -->
+        Back to home Button
         <img
           class="w-16 absolute hover:w-catePage-20 transition-all duration-300 ease-in-out cursor-pointer"
           src="/categories/icon/left-arrow.png"
@@ -79,4 +79,4 @@ const backToHome = () => {
   </section>
 </template>
 
-<style scoped></style>
+<style scoped></style> -->
