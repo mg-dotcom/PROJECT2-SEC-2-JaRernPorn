@@ -56,6 +56,7 @@ const handelEditFlashcard = (chineseWord, pinyin, meaning, index) => {
   <div class="w-8/12 mx-auto flex flex-col" @click.self="closeOption">
     <newFlashcard
       :popup="popup"
+      :closeOption="closeOption"
       @addNewFlashcard="handleAddNewFlashcard"
     ></newFlashcard>
 
@@ -69,7 +70,7 @@ const handelEditFlashcard = (chineseWord, pinyin, meaning, index) => {
     <!-- All Flashcard -->
     <div
       v-else-if="computedFlashcards.length > 0"
-      class="grid grid-cols-1 gap-10 px-10 py-7 text-center lg:grid-cols-4 md:grid-cols-3 md:gap-17 sm:grid-cols-2 sm:gap-10"
+      class="grid grid-cols-1 px-10 py-7 text-center xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 md:gap-17 sm:grid-cols-2 sm:gap-10"
       @click.self="closeOption"
     >
       <Card

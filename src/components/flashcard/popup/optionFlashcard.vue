@@ -20,7 +20,7 @@ const emit = defineEmits(["deleteCollection", "showRenameFlashcard"]);
 <template>
   <!-- Option Collection Section -->
   <div
-    class="absolute z-40 sm:block mobile:flex xl:max-w-[170px] xl:scale-105 p-3 bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700 xl:w-full xl:left-[186px] lg:top-[46px] md:left-[79px] md:top-[18px] md:w-[180px] md:scale-[70%] sm:left-[240px] sm:top-[60px] mobile:left-[143px] mobile:top-[44px]"
+    class="z-40 absolute sm:block mobile:flex xl:max-w-[170px] xl:scale-105 p-3 bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700 xl:w-full xl:left-[186px] lg:top-[23px] lg:left-[100px] md:left-[79px] md:top-[18px] md:w-[180px] md:scale-[70%] sm:left-[240px] sm:top-[60px] mobile:left-[143px] mobile:top-[44px]"
   >
     <div
       id="deleteCollection"
