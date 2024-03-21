@@ -3,13 +3,13 @@ const emits = defineEmits(['howToPlay', 'closeHowtoplay'])
 </script>
 
 <template>
-  <div class="flex justify-center">
+  <div class="flex items-center justify-center w-full h-screen">
     <div
       @click="$emit('howToPlay', true)"
-      class="grid grid-cols-1 bg-white w-1/3 h-96 overflow-y-scroll rounded-xl p-6"
+      class="grid grid-cols-1 bg-white w-full max-w-md max-h-96 overflow-y-auto rounded-xl p-5 shadow-md"
     >
       <div @click="$emit('closeHowtoplay', false)" class="flex justify-end">
-        <img src="/close.svg" alt="close" class="w-4 cursor-pointer" />
+        <img src="/close.svg" alt="close" class="w-3 cursor-pointer" />
       </div>
       <div
         class="text-4xl font-alkatra text-title font-semibold flex justify-center uppercase"
@@ -52,34 +52,37 @@ const emits = defineEmits(['howToPlay', 'closeHowtoplay'])
           </div>
         </div>
       </div>
+
       <div
         class="text-4xl font-alkatra text-title font-semibold flex justify-center uppercase py-4"
       >
         Flashcard
       </div>
-      <div class="text-black font-outfit">
-        1. Create a collection of your vocabulary.
-        <div class="py-2">
-          <img src="" alt="flashcard-1" />
+      <div class="flex flex-col gap-4 py-3">
+        <div class="text-black font-outfit">
+          1. Create a collection of your vocabulary.
+          <div class="py-2">
+            <img src="/homePage-pic/flashcard-1.svg" alt="flashcard-1" />
+          </div>
         </div>
-      </div>
-      <div class="text-black font-outfit">
-        2. Then, add flashcards to your collection.
-        <div class="py-2">
-          <img src="" alt="flashcard-2" />
+        <div class="text-black font-outfit">
+          2. Then, add flashcards to your collection.
+          <div class="py-2">
+            <img src="/homePage-pic/flashcard-2.svg" alt="flashcard-2" />
+          </div>
         </div>
-      </div>
-      <div class="text-black font-outfit">
-        3. Click on the flashcard to see the word's definition.
-        <div class="py-2">
-          <img src="" alt="flashcard-3" />
+        <div class="text-black font-outfit">
+          3. Click on the flashcard to see the word's definition.
+          <div class="py-2">
+            <img src="/homePage-pic/flashcard-3.svg" alt="flashcard-3" />
+          </div>
         </div>
-      </div>
-      <div class="text-black font-outfit">
-        4. You can also create, update, and delete both collections and
-        flashcards.
-        <div class="py-2">
-          <img src="" alt="flashcard-4" />
+        <div class="text-black font-outfit">
+          4. You can also create, update, and delete both collections and
+          flashcards.
+          <div class="py-2">
+            <img src="/homePage-pic/flashcard-4.svg" alt="flashcard-4" />
+          </div>
         </div>
       </div>
     </div>
