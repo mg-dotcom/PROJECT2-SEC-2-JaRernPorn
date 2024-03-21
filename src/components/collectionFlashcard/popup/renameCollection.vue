@@ -77,6 +77,7 @@ const toUpdateName = () => {
               v-model="renameCollectionName"
               class="border-2 border-[#4096ff] rounded-md p-2 w-[400px] focus:outline-none focus:ring-2 focus:ring-[#4096ff] focus:border-transparent transition-all duration-[270ms]"
               :placeholder="props.computedCollections[props.index].name"
+              @focus="$event.target.select()"
               @keydown.enter="toUpdateName"
             />
             <div>
