@@ -6,22 +6,24 @@ import HowToPlay from './HowToPlay.vue'
 
 const page = reactive({
   homePage: true,
-  categoryPage: false
+  categoryPage: false,
+  howToPlay: false
 })
 const showSetting = ref(false)
-const showHowtoplay = ref(false)
 
 const showCategoryPage = () => {
   page.homePage = false
   page.categoryPage = true
+  page.howToPlay = false
+}
+const showHowtoplay = () => {
+  page.homePage = true
+  page.categoryPage = false
+  page.howToPlay = true
 }
 
 const toggleSetting = () => {
   showSetting.value = !showSetting.value
-}
-
-const toggleHowToPlay = (flag) => {
-  showHowtoplay.value = flag
 }
 </script>
 
@@ -72,12 +74,18 @@ const toggleHowToPlay = (flag) => {
           <!-- How To Play Button -->
           <div id="HTP-button" class="flex justify-center pt-6">
             <img
-              @howToPlay="toggleHowToPlay"
+              @click="showHowtoplay"
               class="cursor-pointer absolute right-10 bottom-10 hover:scale-110 transition-transform duration-300"
               src="/homePage-pic/HTP-button.svg"
               alt="HTP-button"
             />
           </div>
+          <section id="howToPlay">
+            <HowToPlay
+              v-show="page.howToPlay"
+              @closeHowtoplay="page.howToPlay = false"
+            ></HowToPlay>
+          </section>
         </div>
       </div>
     </div>
