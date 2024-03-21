@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { defineProps, defineEmits } from "vue";
-import closeIcon from "../../collectionFlashcard/icons/iconClose.vue";
+import closeIcon from "../../icons/iconClose.vue";
 
 const props = defineProps({
   popup: {

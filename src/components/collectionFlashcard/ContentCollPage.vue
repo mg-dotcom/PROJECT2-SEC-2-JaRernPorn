@@ -1,7 +1,7 @@
 <script setup>
 import { defineProps, ref, computed, defineEmits } from "vue";
-import newCollection from "../../collectionFlashcard/popup/newCollection.vue";
-import Collection from "./Collection.vue";
+import newCollection from "../collectionFlashcard/popup/newCollection.vue";
+import Collection from "../collectionFlashcard/Collection.vue";
 import { editCollection } from "../../../libs/flashcard-libs/CollectionModal.js";
 import { deleteCollection } from "../../../libs/flashcard-libs/CollectionModal.js";
 import { addNewCollection } from "../../../libs/flashcard-libs/CollectionModal.js";

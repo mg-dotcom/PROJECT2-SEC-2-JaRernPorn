@@ -1,6 +1,6 @@
 <script setup>
 import { defineProps, ref, defineEmits } from "vue";
-import closeIcon from "../../collectionFlashcard/icons/iconClose.vue";
+import closeIcon from "../../icons/iconClose.vue";
 
 const props = defineProps({
   closeOption: {

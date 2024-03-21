@@ -1,7 +1,7 @@
 <script setup>
 import { defineProps, defineEmits } from "vue";
-import iconDelete from "../../collectionFlashcard/icons/iconDelete.vue";
-import iconEdit from "../../collectionFlashcard/icons/iconEdit.vue";
+import iconDelete from "../../icons/iconDelete.vue";
+import iconEdit from "../../icons/iconEdit.vue";
 
 const props = defineProps({
   index: {
