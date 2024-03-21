@@ -1,8 +1,8 @@
 <script setup>
 import { defineProps, defineEmits } from "vue";
 
-import renameCollection from "../../collectionFlashcard/popup/renameCollection.vue";
-import optionCollection from "../../collectionFlashcard/popup/optionCollection.vue";
+import renameCollection from "../collectionFlashcard/popup/renameCollection.vue";
+import optionCollection from "../collectionFlashcard/popup/optionCollection.vue";
 
 const props = defineProps({
   index: {

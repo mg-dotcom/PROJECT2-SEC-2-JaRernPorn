@@ -1,7 +1,7 @@
 <script setup>
 import { defineProps, ref } from "vue";
 import settingButton from "./icons/setting-button.vue";
-import settingPopup from "./popup/Setting.vue";
+import settingPopup from "./Setting.vue";
 
 const props = defineProps({
   closeOption: {

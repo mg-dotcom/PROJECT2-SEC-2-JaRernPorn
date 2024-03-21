@@ -1,7 +1,7 @@
 <script setup>
 import { reactive } from "vue";
 import Header from "../Header.vue";
-import Content from "../collectionflashcard/ContentCollPage.vue";
+import Content from "./ContentCollPage.vue";
 
 const page = reactive({
   flashcard: true,
