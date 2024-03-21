@@ -1,39 +1,31 @@
 <script setup>
-import { ref } from 'vue';
-import AddNewCollection from './collection/AddNewCollection.vue';
-import Collection from './collection/Collection.vue';
+import { reactive, ref } from "vue";
+import Header from "../Header.vue";
+import Content from "./ContentFcPage.vue";
 
-const showAddNewCollection = ref(false);
-const collectionName = ref('');
-const toggleAddNewCollection=()=>{
-  showAddNewCollection.value=!showAddNewCollection.value
-}
+const showFlashCard = ref(true);
 
-const handleCollectionAdded = (name) => {
-  collectionName.value = name;
+const popup = reactive({
+  newFlashcard: false,
+  //Setting
+  optionFlashcard: false,
+  renameFlashcard: false,
+});
+
+const closeOption = () => {
+  popup.optionFlashcard = false;
 };
-
 </script>
 
 <template>
-  <div>
-    <div class="header">
-      <h1 class="text-2xl font-bold ">Flashcard</h1>
-    </div>
+  <div class="bg-main-bgColor min-h-screen w-full" @click.self="closeOption">
+    <section v-if="showFlashCard" @click.self="closeOption">
+      <Header :closeOption="closeOption">
+        <template #title> </template>
+      </Header>
 
-    <div class="addNew mt-4">
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="toggleAddNewCollection">Add new +</button>
-      <hr class="my-4"/>
-    </div>
-
-    <div>
-        <Collection :collectionName="collectionName"/>
-    </div>
-
-    <div v-if="showAddNewCollection">
-        <AddNewCollection @collectionAdded="handleCollectionAdded"/>
-    </div>
-
+      <Content :popup="popup" :closeOption="closeOption"></Content>
+    </section>
   </div>
 </template>
 
