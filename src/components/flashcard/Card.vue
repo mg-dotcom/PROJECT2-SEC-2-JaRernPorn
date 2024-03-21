@@ -76,7 +76,7 @@ const showMeaning = () => {
         alt="option"
         @click="showOption(props.index)"
       />
-      <div class="w-52 h-64 cursor-pointer group perspective bg-transparent ">
+      <div class="w-52 h-64 cursor-pointer group perspective bg-transparent">
         <div
           class="relative preserve-3d group-hover:my-rotate-y-30 w-full h-full duration-1000 cursor-pointer"
           :class="{ 'my-rotate-y-150': isClicked }"
@@ -85,9 +85,17 @@ const showMeaning = () => {
           <div
             class="absolute bg-white border-[#FF9E94] py-4 px-7 rounded-xl border-2 w-full h-full backface-hidden overflow-y-auto"
           >
-            <div class="flex flex-col h-full">
+            <div class="flex flex-col h-full justify-center">
               <div
-                class="flex items-center justify-center h-[150px] font-medium break-all lg:text-5xl"
+                class="flex items-center justify-center font-medium break-all lg:text-5xl"
+                :class="{
+                  'h-auto':
+                    props.computedFlashcards[props.index].chineseWord.length >
+                    10,
+                  'h-[140px]':
+                    props.computedFlashcards[props.index].chineseWord.length <=
+                    10,
+                }"
               >
                 {{ props.computedFlashcards[props.index].chineseWord }}
               </div>
@@ -95,10 +103,10 @@ const showMeaning = () => {
               <div
                 class="flex items-center justify-center lg:text-2xl break-all"
                 :class="{
-                  'h-[50px] lg:text-xl':
-                    props.computedFlashcards[props.index].pinyin.length > 10,
-                  'h-[50px] ':
-                    props.computedFlashcards[props.index].pinyin.length <= 10,
+                  'h-auto':
+                    props.computedFlashcards[props.index].pinyin.length > 15,
+                  'h-[42px]':
+                    props.computedFlashcards[props.index].pinyin.length <= 15,
                 }"
               >
                 {{ props.computedFlashcards[props.index].pinyin }}
