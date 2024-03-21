@@ -30,10 +30,6 @@ const showOption = (index, event) => {
   emit("toggle-option-collection", index);
 };
 
-const toClearSelectedIndex = () => {
-  SelectedIndex.value = null;
-};
-
 const emit = defineEmits([
   "changeCollectionName",
   "deleteCollection",
@@ -91,7 +87,6 @@ const passNewName = (newName, index) => {
       :computedCollections="computedCollections"
       :closeOption="closeOption"
       @changeCollectionName="passNewName"
-      @toClearSelectedIndex="toClearSelectedIndex"
     ></renameCollection>
   </div>
 </template>

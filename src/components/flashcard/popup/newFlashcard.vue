@@ -110,6 +110,7 @@ const isEmpty = (value) => {
                   'border-black': !chineseWordIsEmpty,
                 }"
                 @input="chineseWordIsEmpty = isEmpty(newChineseWord)"
+                @keydown.enter="addNewFlashcard"
                 placeholder="Chinese word"
               />
               <div
@@ -133,6 +134,7 @@ const isEmpty = (value) => {
                 }"
                 @input="pinyinIsEmpty = isEmpty(newPinyin)"
                 placeholder="Pinyin"
+                @keydown.enter="addNewFlashcard"
               />
               <div
                 v-if="pinyinIsEmpty"
@@ -154,6 +156,7 @@ const isEmpty = (value) => {
                   'border-black': !meaningIsEmpty,
                 }"
                 @input="meaningIsEmpty = isEmpty(newMeaning)"
+                @keydown.enter="addNewFlashcard"
                 placeholder="Meaning"
               />
               <div

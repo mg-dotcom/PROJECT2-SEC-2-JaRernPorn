@@ -20,29 +20,17 @@ const props = defineProps({
     required: true,
   },
 });
-const emit = defineEmits([
-  "toClearName",
-  "toClearSelectedIndex",
-  "toUpdateName",
-  "changeCollectionName",
-]);
-const renameCollectionName = ref("");
-
-const SelectedIndex = ref(null);
+const emit = defineEmits(["toUpdateName", "changeCollectionName"]);
+const renameCollectionName = ref(props.computedCollections[props.index].name);
 
 const closeButton = () => {
   props.popup.renameCollection = false;
-  renameCollectionName.value = "";
-  emit("toClearSelectedIndex");
-};
-
-const toClearName = () => {
-  renameCollectionName.value = "";
+  renameCollectionName.value = props.computedCollections[props.index].name;
 };
 
 const toUpdateName = () => {
   emit("changeCollectionName", props.index, renameCollectionName.value);
-  emit("toClearSelectedIndex");
+  renameCollectionName.value = props.computedCollections[props.index].name;
 };
 </script>
 
@@ -51,10 +39,9 @@ const toUpdateName = () => {
   <section class="popup-renameCollection z-50 fixed top-0 left-0">
     <div
       class="bg-black bg-opacity-50 flex items-center justify-center min-h-screen w-screen relative z-0"
-      @click.self="closeButton"
     >
       <div
-        class="bg-white rounded-lg xl:w-[580px] xl:h-[350px] relative p-6 lg:w-[570px] lg:h-[350px] md:scale-[80%] sm:scale-[70%] mobile:scale-[58%] mobile:w-[500px]"
+        class="bg-white rounded-lg xl:scale-100 xl:w-[580px] xl:h-[350px] relative p-6 lg:w-[570px] lg:h-[350px] md:scale-[80%] sm:scale-[70%] mobile:scale-[58%] mobile:w-[500px]"
       >
         <closeIcon
           class="absolute top-3 right-4 cursor-pointer"
@@ -88,9 +75,9 @@ const toUpdateName = () => {
             <input
               type="text"
               v-model="renameCollectionName"
-              @change="toClearName"
               class="border-2 border-[#4096ff] rounded-md p-2 w-[400px] focus:outline-none focus:ring-2 focus:ring-[#4096ff] focus:border-transparent transition-all duration-[270ms]"
               :placeholder="props.computedCollections[props.index].name"
+              @focus="$event.target.select()"
               @keydown.enter="toUpdateName"
             />
             <div>

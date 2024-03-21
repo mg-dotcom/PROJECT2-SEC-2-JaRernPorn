@@ -1,7 +1,10 @@
 <script setup>
 import { defineProps, ref, computed } from "vue";
 import newFlashcard from "./popup/newFlashcard.vue";
+import { addNewFlashcard } from "../../libs/flashcard-libs/FlashCardModal.js";
+import { deleteFlashcard } from "../../libs/flashcard-libs/FlashCardModal.js";
 import Card from "./Card.vue";
+import { editFlashcard } from "../../libs/flashcard-libs/FlashCardModal.js";
 
 const props = defineProps({
   popup: {
@@ -33,24 +36,17 @@ const showRenameFlashcard = (index) => {
 };
 
 const handleAddNewFlashcard = (chineseWord, pinyin, meaning) => {
-  flashcards.value.push({
-    id: flashcards.value.length + 1,
-    chineseWord: chineseWord,
-    pinyin: pinyin,
-    meaning: meaning,
-  });
+  addNewFlashcard(chineseWord, pinyin, meaning, flashcards.value);
   props.popup.optionFlashcard = false;
 };
 
 const handelDeleteFlashcard = (index) => {
-  flashcards.value.splice(index, 1);
+  deleteFlashcard(index, flashcards.value);
   props.popup.optionFlashcard = false;
 };
 
 const handelEditFlashcard = (chineseWord, pinyin, meaning, index) => {
-  flashcards.value[index].chineseWord = chineseWord;
-  flashcards.value[index].pinyin = pinyin;
-  flashcards.value[index].meaning = meaning;
+  editFlashcard(chineseWord, pinyin, meaning, index, flashcards.value);
   props.popup.renameFlashcard = false;
   props.popup.optionFlashcard = false;
 };
