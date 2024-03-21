@@ -3,7 +3,12 @@ import { defineProps, ref } from "vue";
 import settingButton from "./icons/setting-button.vue";
 import settingPopup from "./popup/Setting.vue";
 
-const props = defineProps({});
+const props = defineProps({
+  closeOption: {
+    type: Function,
+    required: true,
+  },
+});
 
 const showSetting = ref(false);
 

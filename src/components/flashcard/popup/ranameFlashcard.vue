@@ -19,6 +19,9 @@ const props = defineProps({
 const oldChineseWord = ref("");
 const oldPinyin = ref("");
 const oldMeaning = ref("");
+const chineseWordIsEmpty = ref(false);
+const pinyinIsEmpty = ref(false);
+const meaningIsEmpty = ref(false);
 
 const emit = defineEmits(["renameFlashcard"]);
 
@@ -28,33 +31,49 @@ const closeFlashCardAdd = () => {
   oldChineseWord.value = "";
   oldPinyin.value = "";
   oldMeaning.value = "";
+  chineseWordIsEmpty.value = false;
+  pinyinIsEmpty.value = false;
+  meaningIsEmpty.value = false;
 };
 
 const renameFlashcard = (index) => {
-  emit(
-    "renameFlashcard",
-    oldChineseWord.value,
-    oldPinyin.value,
-    oldMeaning.value,
-    index
-  );
-  props.popup.renameFlashcard = false;
-  props.popup.optionFlashcard = false;
-  oldChineseWord.value = "";
-  oldPinyin.value = "";
-  oldMeaning.value = "";
-  console.log(index);
+  const chineseWordEmpty = oldChineseWord.value.trim() === "";
+  const pinyinEmpty = oldPinyin.value.trim() === "";
+  const meaningEmpty = oldMeaning.value.trim() === "";
+  if (chineseWordEmpty || pinyinEmpty || meaningEmpty) {
+    chineseWordIsEmpty.value = chineseWordEmpty;
+    pinyinIsEmpty.value = pinyinEmpty;
+    meaningIsEmpty.value = meaningEmpty;
+    return;
+  } else {
+    emit(
+      "renameFlashcard",
+      oldChineseWord.value,
+      oldPinyin.value,
+      oldMeaning.value,
+      index
+    );
+    props.popup.renameFlashcard = false;
+    props.popup.optionFlashcard = false;
+    oldChineseWord.value = "";
+    chineseWordIsEmpty.value = false;
+    pinyinIsEmpty.value = false;
+    meaningIsEmpty.value = false;
+  }
+};
+
+const isEmpty = (value) => {
+  return value === "";
 };
 </script>
 
 <template>
   <section
-    class="popup-newCollection z-50 fixed top-0 left-0"
+    class="popup oldCollection z-50 fixed top-0 left-0"
     v-show="props.popup.renameFlashcard"
   >
     <div
       class="bg-black bg-opacity-50 flex items-center justify-center min-h-screen w-screen"
-      @click.self="closeFlashCardAdd"
     >
       <div
         class="bg-white rounded-lg xl:scale-100 xl:w-[500px] xl:h-[463px] relative p-6 md:scale-[80%] sm:scale-[90%] mobile:scale-[73%] mobile:w-[500px]"
@@ -73,9 +92,21 @@ const renameFlashcard = (index) => {
               <input
                 type="text"
                 v-model="oldChineseWord"
-                class="border-[1.5px] border-black rounded-md p-2 w-[360px] focus:outline-1 focus:ring-5 focus:transition-all duration-[300ms]"
+                class="border-[1.5px] rounded-md p-2 w-[360px]"
+                :class="{
+                  'border-red-600': chineseWordIsEmpty,
+                  'focus:border-red-600': chineseWordIsEmpty,
+                  'border-black': !chineseWordIsEmpty,
+                }"
+                @input="chineseWordIsEmpty = isEmpty(oldChineseWord)"
                 :placeholder="props.computedFlashcards[props.index].chineseWord"
               />
+              <div
+                v-if="chineseWordIsEmpty"
+                class="absolute right-20 top-40 text-xs text-red-600"
+              >
+                Please fill value in form
+              </div>
             </div>
 
             <div class="chinese-word input-box gap-y-1 flex flex-col">
@@ -84,8 +115,20 @@ const renameFlashcard = (index) => {
                 type="text"
                 v-model="oldPinyin"
                 class="border-[1.5px] border-black rounded-md p-2 w-[360px] focus:outline-1 focus:ring-5 focus:transition-all duration-[300ms]"
+                :class="{
+                  'border-red-600': pinyinIsEmpty,
+                  'focus:border-red-600': pinyinIsEmpty,
+                  'border-black': !pinyinIsEmpty,
+                }"
+                @input="pinyinIsEmpty = isEmpty(oldPinyin)"
                 :placeholder="props.computedFlashcards[props.index].pinyin"
               />
+              <div
+                v-if="pinyinIsEmpty"
+                class="absolute right-20 top-[258px] text-xs text-red-600"
+              >
+                Please fill value in form
+              </div>
             </div>
 
             <div class="chinese-word input-box gap-y-1 flex flex-col">
@@ -94,8 +137,20 @@ const renameFlashcard = (index) => {
                 type="text"
                 v-model="oldMeaning"
                 class="border-[1.5px] border-black rounded-md p-2 w-[360px] focus:outline-1 focus:ring-5 focus:transition-all duration-[300ms]"
+                :class="{
+                  'border-red-600': meaningIsEmpty,
+                  'focus:border-red-600': meaningIsEmpty,
+                  'border-black': !meaningIsEmpty,
+                }"
+                @input="meaningIsEmpty = isEmpty(oldMeaning)"
                 :placeholder="props.computedFlashcards[props.index].meaning"
               />
+              <div
+                v-if="meaningIsEmpty"
+                class="absolute right-20 top-[356px] text-xs text-red-600"
+              >
+                Please fill value in form
+              </div>
             </div>
 
             <div class="flex flex-row gap-5 py-2">

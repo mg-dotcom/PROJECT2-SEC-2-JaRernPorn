@@ -31,6 +31,7 @@ const deleteFlashcard = (index) => {
 
 const showRenameFlashcard = (index) => {
   emit("showRenameFlashcard", index);
+  props.popup.optionFlashcard = false;
 };
 
 const emit = defineEmits([
@@ -69,7 +70,13 @@ const showMeaning = () => {
         @renameFlashcard="renameFlashcard"
       ></ranameFlashcard>
 
-      <div class="w-52 h-64 cursor-pointer group perspective bg-transparent">
+      <img
+        class="z-40 bg-white shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] hover:bg-gray-200 rounded-full w-5 h-10 p-2 scale-[75%] absolute top-0 -right-[23px] transition-all duration-[270ms]"
+        src="/img/flashcard-pic/option.svg"
+        alt="option"
+        @click="showOption(props.index)"
+      />
+      <div class="w-52 h-64 cursor-pointer group perspective bg-transparent ">
         <div
           class="relative preserve-3d group-hover:my-rotate-y-30 w-full h-full duration-1000 cursor-pointer"
           :class="{ 'my-rotate-y-150': isClicked }"
@@ -78,12 +85,6 @@ const showMeaning = () => {
           <div
             class="absolute bg-white border-[#FF9E94] py-4 px-7 rounded-xl border-2 w-full h-full backface-hidden overflow-y-auto"
           >
-            <img
-              class="z-40 opacity-50 hover:bg-gray-400 rounded-full w-10 h-10 p-2 scale-[75%] absolute top-0 right-0 transition-all duration-[270ms]"
-              src="/img/flashcard-pic/option.svg"
-              alt="option"
-              @click="showOption(props.index)"
-            />
             <div class="flex flex-col h-full">
               <div
                 class="flex items-center justify-center h-[150px] font-medium break-all lg:text-5xl"
@@ -104,6 +105,7 @@ const showMeaning = () => {
               </div>
             </div>
           </div>
+
           <div
             class="absolute my-rotate-y-200 backface-hidden bg-white border-[#FF9E94] py-4 px-7 rounded-xl border-2 w-full h-full overflow-y-auto"
           >

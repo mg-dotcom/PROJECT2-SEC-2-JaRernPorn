@@ -12,22 +12,11 @@ const props = defineProps({
 const newChineseWord = ref("");
 const newPinyin = ref("");
 const newMeaning = ref("");
+const chineseWordIsEmpty = ref(false);
+const pinyinIsEmpty = ref(false);
+const meaningIsEmpty = ref(false);
 
 const emit = defineEmits(["addNewFlashcard"]);
-
-//Pass and clear value of new flashcard
-const addNewFlashcard = () => {
-  emit(
-    "addNewFlashcard",
-    newChineseWord.value,
-    newPinyin.value,
-    newMeaning.value
-  );
-  props.popup.newFlashcard = false;
-  newChineseWord.value = "";
-  newPinyin.value = "";
-  newMeaning.value = "";
-};
 
 const showFlashCardAdd = () => {
   props.popup.newFlashcard = true;
@@ -38,6 +27,41 @@ const closeFlashCardAdd = () => {
   newChineseWord.value = "";
   newPinyin.value = "";
   newMeaning.value = "";
+  chineseWordIsEmpty.value = false;
+  pinyinIsEmpty.value = false;
+  meaningIsEmpty.value = false;
+};
+
+const addNewFlashcard = () => {
+  const chineseWordEmpty = newChineseWord.value.trim() === "";
+  const pinyinEmpty = newPinyin.value.trim() === "";
+  const meaningEmpty = newMeaning.value.trim() === "";
+
+  // if any of the input is empty, set red border and message
+  if (chineseWordEmpty || pinyinEmpty || meaningEmpty) {
+    chineseWordIsEmpty.value = chineseWordEmpty;
+    pinyinIsEmpty.value = pinyinEmpty;
+    meaningIsEmpty.value = meaningEmpty;
+    return;
+  } else {
+    emit(
+      "addNewFlashcard",
+      newChineseWord.value,
+      newPinyin.value,
+      newMeaning.value
+    );
+    props.popup.newFlashcard = false;
+    newChineseWord.value = "";
+    newPinyin.value = "";
+    newMeaning.value = "";
+    chineseWordIsEmpty.value = false;
+    pinyinIsEmpty.value = false;
+    meaningIsEmpty.value = false;
+  }
+};
+
+const isEmpty = (value) => {
+  return value === "";
 };
 </script>
 
@@ -60,7 +84,6 @@ const closeFlashCardAdd = () => {
   >
     <div
       class="bg-black bg-opacity-50 flex items-center justify-center min-h-screen w-screen"
-      @click.self="closeFlashCardAdd"
     >
       <div
         class="bg-white rounded-lg xl:scale-100 xl:w-[500px] xl:h-[463px] relative p-6 md:scale-[80%] sm:scale-[90%] mobile:scale-[73%] mobile:w-[500px]"
@@ -76,12 +99,25 @@ const closeFlashCardAdd = () => {
           <div class="my-6 flex flex-col items-center justify-center gap-y-7">
             <div class="chinese-word input-box gap-y-1 flex flex-col">
               <div class="font-outfit">Chinese word</div>
+
               <input
                 type="text"
                 v-model="newChineseWord"
-                class="border-[1.5px] border-black rounded-md p-2 w-[360px] focus:outline-1 focus:ring-5 focus:transition-all duration-[300ms]"
+                class="border-[1.5px] rounded-md p-2 w-[360px]"
+                :class="{
+                  'border-red-600': chineseWordIsEmpty,
+                  'focus:border-red-600': chineseWordIsEmpty,
+                  'border-black': !chineseWordIsEmpty,
+                }"
+                @input="chineseWordIsEmpty = isEmpty(newChineseWord)"
                 placeholder="Chinese word"
               />
+              <div
+                v-if="chineseWordIsEmpty"
+                class="absolute right-20 top-40 text-xs text-red-600"
+              >
+                Please fill value in form
+              </div>
             </div>
 
             <div class="chinese-word input-box gap-y-1 flex flex-col">
@@ -89,9 +125,21 @@ const closeFlashCardAdd = () => {
               <input
                 type="text"
                 v-model="newPinyin"
-                class="border-[1.5px] border-black rounded-md p-2 w-[360px] focus:outline-1 focus:ring-5 focus:transition-all duration-[300ms]"
+                class="border-[1.5px] rounded-md p-2 w-[360px] focus:outline-1 focus:ring-5 border-black"
+                :class="{
+                  'border-red-600': pinyinIsEmpty,
+                  'focus:border-red-600': pinyinIsEmpty,
+                  'border-black': !pinyinIsEmpty,
+                }"
+                @input="pinyinIsEmpty = isEmpty(newPinyin)"
                 placeholder="Pinyin"
               />
+              <div
+                v-if="pinyinIsEmpty"
+                class="absolute right-20 top-[258px] text-xs text-red-600"
+              >
+                Please fill value in form
+              </div>
             </div>
 
             <div class="chinese-word input-box gap-y-1 flex flex-col">
@@ -99,9 +147,21 @@ const closeFlashCardAdd = () => {
               <input
                 type="text"
                 v-model="newMeaning"
-                class="border-[1.5px] border-black rounded-md p-2 w-[360px] focus:outline-1 focus:ring-5 focus:transition-all duration-[300ms]"
+                class="border-[1.5px] border-black rounded-md p-2 w-[360px] focus:outline-1 focus:ring-5"
+                :class="{
+                  'border-red-600': meaningIsEmpty,
+                  'focus:border-red-600': meaningIsEmpty,
+                  'border-black': !meaningIsEmpty,
+                }"
+                @input="meaningIsEmpty = isEmpty(newMeaning)"
                 placeholder="Meaning"
               />
+              <div
+                v-if="meaningIsEmpty"
+                class="absolute right-20 top-[356px] text-xs text-red-600"
+              >
+                Please fill value in form
+              </div>
             </div>
 
             <div class="flex flex-row gap-5 py-2">

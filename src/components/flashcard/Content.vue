@@ -8,6 +8,10 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  closeOption: {
+    type: Function,
+    required: true,
+  },
 });
 
 const flashcards = ref([]);
@@ -36,7 +40,6 @@ const handleAddNewFlashcard = (chineseWord, pinyin, meaning) => {
     meaning: meaning,
   });
   props.popup.optionFlashcard = false;
-  console.log("flashcards", flashcards.value);
 };
 
 const handelDeleteFlashcard = (index) => {
@@ -50,19 +53,16 @@ const handelEditFlashcard = (chineseWord, pinyin, meaning, index) => {
   flashcards.value[index].meaning = meaning;
   props.popup.renameFlashcard = false;
   props.popup.optionFlashcard = false;
-  console.log(SelectedIndex.value);
-  console.log(index);
 };
 </script>
 
 <template>
-  <div class="w-8/12 mx-auto flex flex-col">
+  <div class="w-8/12 mx-auto flex flex-col" @click.self="closeOption">
     <newFlashcard
       :popup="popup"
       @addNewFlashcard="handleAddNewFlashcard"
     ></newFlashcard>
 
-    <!-- All Flashcard -->
     <div
       v-if="computedFlashcards.length === 0"
       class="flex-grow flex justify-center items-center text-center h-[70vh]"
@@ -70,9 +70,11 @@ const handelEditFlashcard = (chineseWord, pinyin, meaning, index) => {
       <div class="text-gray-300 text-sm">No flashcard added yet</div>
     </div>
 
+    <!-- All Flashcard -->
     <div
       v-else-if="computedFlashcards.length > 0"
       class="grid grid-cols-1 gap-10 px-10 py-7 text-center lg:grid-cols-4 md:grid-cols-3 md:gap-17 sm:grid-cols-2 sm:gap-10"
+      @click.self="closeOption"
     >
       <Card
         v-for="(card, index) in computedFlashcards"

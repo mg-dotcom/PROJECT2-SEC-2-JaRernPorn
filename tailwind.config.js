@@ -1,7 +1,7 @@
 // @type {import('tailwindcss').Config}
 const plugin = require("tailwindcss/plugin");
 
-const Myclass = plugin(function ({ addUtilities }) {
+const Filpping = plugin(function ({ addUtilities }) {
   addUtilities({
     ".my-rotate-y-150": {
       transform: "rotateY(150deg)",
@@ -80,5 +80,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("daisyui"), Myclass],
+  plugins: [require("daisyui"), Filpping],
 };
