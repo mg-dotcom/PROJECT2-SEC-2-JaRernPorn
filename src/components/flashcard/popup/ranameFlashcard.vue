@@ -16,9 +16,9 @@ const props = defineProps({
   },
 });
 
-const oldChineseWord = ref("");
-const oldPinyin = ref("");
-const oldMeaning = ref("");
+const oldChineseWord = ref(props.computedFlashcards[props.index].chineseWord);
+const oldPinyin = ref(props.computedFlashcards[props.index].pinyin);
+const oldMeaning = ref(props.computedFlashcards[props.index].meaning);
 const chineseWordIsEmpty = ref(false);
 const pinyinIsEmpty = ref(false);
 const meaningIsEmpty = ref(false);
@@ -28,9 +28,6 @@ const emit = defineEmits(["renameFlashcard"]);
 const closeFlashCardAdd = () => {
   props.popup.renameFlashcard = false;
   props.popup.optionFlashcard = false;
-  oldChineseWord.value = "";
-  oldPinyin.value = "";
-  oldMeaning.value = "";
   chineseWordIsEmpty.value = false;
   pinyinIsEmpty.value = false;
   meaningIsEmpty.value = false;
@@ -55,7 +52,6 @@ const renameFlashcard = (index) => {
     );
     props.popup.renameFlashcard = false;
     props.popup.optionFlashcard = false;
-    oldChineseWord.value = "";
     chineseWordIsEmpty.value = false;
     pinyinIsEmpty.value = false;
     meaningIsEmpty.value = false;
@@ -92,14 +88,10 @@ const isEmpty = (value) => {
               <input
                 type="text"
                 v-model="oldChineseWord"
-                class="border-[1.5px] rounded-md p-2 w-[360px]"
-                :class="{
-                  'border-red-600': chineseWordIsEmpty,
-                  'focus:border-red-600': chineseWordIsEmpty,
-                  'border-black': !chineseWordIsEmpty,
-                }"
-                @input="chineseWordIsEmpty = isEmpty(oldChineseWord)"
+                class="border-[1.5px] rounded-md p-2 w-[360px] border-black"
+                @focus="$event.target.select()"
                 :placeholder="props.computedFlashcards[props.index].chineseWord"
+                @keydown.enter="renameFlashcard(props.index)"
               />
               <div
                 v-if="chineseWordIsEmpty"
@@ -114,14 +106,11 @@ const isEmpty = (value) => {
               <input
                 type="text"
                 v-model="oldPinyin"
-                class="border-[1.5px] border-black rounded-md p-2 w-[360px] focus:outline-1 focus:ring-5 focus:transition-all duration-[300ms]"
-                :class="{
-                  'border-red-600': pinyinIsEmpty,
-                  'focus:border-red-600': pinyinIsEmpty,
-                  'border-black': !pinyinIsEmpty,
-                }"
+                class="border-[1.5px] border-black rounded-md p-2 w-[360px]"
+                @focus="$event.target.select()"
                 @input="pinyinIsEmpty = isEmpty(oldPinyin)"
                 :placeholder="props.computedFlashcards[props.index].pinyin"
+                @keydown.enter="renameFlashcard(props.index)"
               />
               <div
                 v-if="pinyinIsEmpty"
@@ -136,14 +125,11 @@ const isEmpty = (value) => {
               <input
                 type="text"
                 v-model="oldMeaning"
-                class="border-[1.5px] border-black rounded-md p-2 w-[360px] focus:outline-1 focus:ring-5 focus:transition-all duration-[300ms]"
-                :class="{
-                  'border-red-600': meaningIsEmpty,
-                  'focus:border-red-600': meaningIsEmpty,
-                  'border-black': !meaningIsEmpty,
-                }"
+                class="border-[1.5px] border-black rounded-md p-2 w-[360px]"
+                @focus="$event.target.select()"
                 @input="meaningIsEmpty = isEmpty(oldMeaning)"
                 :placeholder="props.computedFlashcards[props.index].meaning"
+                @keydown.enter="renameFlashcard(props.index)"
               />
               <div
                 v-if="meaningIsEmpty"
