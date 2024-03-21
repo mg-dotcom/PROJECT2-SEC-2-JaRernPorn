@@ -165,7 +165,7 @@ const isEmpty = (value) => {
                 class="bg-[#4096ff] text-white rounded-md w-20 font-outfit font-medium"
                 @click="renameFlashcard(props.index)"
               >
-                ADD
+                OK
               </button>
             </div>
           </div>
