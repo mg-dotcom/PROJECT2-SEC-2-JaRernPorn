@@ -88,8 +88,13 @@ const isEmpty = (value) => {
               <input
                 type="text"
                 v-model="oldChineseWord"
-                class="border-[1.5px] rounded-md p-2 w-[360px] border-black"
+                class="border-[1.5px] rounded-md p-2 w-[360px]"
                 @focus="$event.target.select()"
+                :class="{
+                  'border-red-600': chineseWordIsEmpty,
+                  'focus:border-red-600': chineseWordIsEmpty,
+                  'border-black': !chineseWordIsEmpty,
+                }"
                 :placeholder="props.computedFlashcards[props.index].chineseWord"
                 @keydown.enter="renameFlashcard(props.index)"
               />
@@ -108,6 +113,11 @@ const isEmpty = (value) => {
                 v-model="oldPinyin"
                 class="border-[1.5px] border-black rounded-md p-2 w-[360px]"
                 @focus="$event.target.select()"
+                :class="{
+                  'border-red-600': pinyinIsEmpty,
+                  'focus:border-red-600': pinyinIsEmpty,
+                  'border-black': !pinyinIsEmpty,
+                }"
                 @input="pinyinIsEmpty = isEmpty(oldPinyin)"
                 :placeholder="props.computedFlashcards[props.index].pinyin"
                 @keydown.enter="renameFlashcard(props.index)"
@@ -127,6 +137,11 @@ const isEmpty = (value) => {
                 v-model="oldMeaning"
                 class="border-[1.5px] border-black rounded-md p-2 w-[360px]"
                 @focus="$event.target.select()"
+                :class="{
+                  'border-red-600': meaningIsEmpty,
+                  'focus:border-red-600': meaningIsEmpty,
+                  'border-black': !meaningIsEmpty,
+                }"
                 @input="meaningIsEmpty = isEmpty(oldMeaning)"
                 :placeholder="props.computedFlashcards[props.index].meaning"
                 @keydown.enter="renameFlashcard(props.index)"
