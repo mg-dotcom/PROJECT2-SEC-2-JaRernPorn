@@ -11,16 +11,7 @@ import HowToPlay from './components/homepage/HowToPlay.vue'
 </script>
 <template>
   <div>
-    <!-- <Game1></Game1> -->
-    <!-- <Game2 /> -->
-    <!-- <Game3 /> -->
-    <!-- <Game4 /> -->
-    <!-- <Topbar /> -->
-    <!-- <HomePage /> -->
-    <!-- <HowToPlay /> -->
     <RouterView />
-    <!-- <FlashCard /> -->
-    <!-- <Units /> -->
   </div>
 </template>
 <style scoped></style>

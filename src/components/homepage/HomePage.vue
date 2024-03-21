@@ -25,7 +25,6 @@ const showHowtoplay = () => {
 const toggleSetting = () => {
   showSetting.value = !showSetting.value
 }
-
 </script>
 
 <template>
@@ -66,13 +65,14 @@ const toggleSetting = () => {
               /></div
           ></router-link>
           <!-- Flashcard Button -->
-          <div id="Flashcard-button" class="flex justify-center pt-6">
-            <img
-              class="w-72 relative hover:w-80 transition-all duration-300 ease-in-out cursor-pointer"
-              src="/homePage-pic/flashcard-button.svg"
-              alt="HTP-button"
-            />
-          </div>
+          <router-link :to="{ name: 'CollectionFlashCard' }">
+            <div id="Flashcard-button" class="flex justify-center pt-6">
+              <img
+                class="w-72 relative hover:w-80 transition-all duration-300 ease-in-out cursor-pointer"
+                src="/homePage-pic/flashcard-button.svg"
+                alt="HTP-button"
+              /></div
+          ></router-link>
           <!-- How To Play Button -->
           <div id="HTP-button" class="flex justify-center pt-6">
             <img

@@ -1,19 +1,24 @@
 import CategoriesUnits from '@/components/category/CategoriesUnits.vue'
 import HomePage from '@/components/homepage/HomePage.vue'
-import FlashCard from '@/components/FlashCard.vue'
+import FlashCard from '@/components/flashcard/FlashCard.vue'
+import CollectionFlashCard from '@/components/collectionFlashcard/CollectionFlashCard.vue'
 import Units from '@/components/category/Units.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 const history = createWebHistory()
 const routes = [
-  { path: '/', redirect: '/homepage' },
-  { path: '/homepage', name: 'HomePage', component: HomePage },
+  { path: '/', redirect: '/home' },
+  { path: '/home', name: 'HomePage', component: HomePage },
   { path: '/category', name: 'CategoriesUnits', component: CategoriesUnits },
   {
     path: '/category/units/:units',
     name: 'Units',
     component: Units
   },
-  { path: '/flashcard', name: 'Flashcard', component: FlashCard }
+  {
+    path: '/flashcard',
+    name: 'CollectionFlashCard',
+    component: CollectionFlashCard
+  }
 ]
 const router = createRouter({ history, routes })
 export default router

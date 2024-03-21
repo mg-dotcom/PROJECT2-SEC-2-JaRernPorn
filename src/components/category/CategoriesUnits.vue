@@ -84,7 +84,7 @@ const goBack = () => {
                   />
                 </div>
               </router-link>
-              <p class="text-xl">{{ category.name }} {{ cateIndex }}</p>
+              <p class="text-xl">{{ category.name }}</p>
             </div>
           </div>
         </div>

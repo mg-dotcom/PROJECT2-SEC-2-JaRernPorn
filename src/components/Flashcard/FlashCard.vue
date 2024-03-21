@@ -1,20 +1,22 @@
 <script setup>
-import { reactive, ref } from "vue";
-import Header from "../Header.vue";
-import Content from "./ContentFcPage.vue";
 
-const showFlashCard = ref(true);
+import { reactive, ref } from 'vue'
+import Header from '../Header.vue'
+import Content from './ContentFcPage.vue'
+
+const showFlashCard = ref(true)
 
 const popup = reactive({
   newFlashcard: false,
   //Setting
   optionFlashcard: false,
-  renameFlashcard: false,
-});
+  renameFlashcard: false
+})
 
 const closeOption = () => {
-  popup.optionFlashcard = false;
-};
+  popup.optionFlashcard = false
+}
+
 </script>
 
 <template>

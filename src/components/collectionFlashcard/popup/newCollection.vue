@@ -1,37 +1,37 @@
 <script setup>
-import { defineProps, ref, defineEmits } from "vue";
-import closeIcon from "../../icons/iconClose.vue";
+import { defineProps, ref, defineEmits } from 'vue'
+import closeIcon from '../../icons/iconClose.vue'
 
 const props = defineProps({
   closeOption: {
     type: Function,
-    required: true,
+    required: true
   },
   popup: {
     type: Object,
-    required: true,
-  },
-});
+    required: true
+  }
+})
 
 const closeButton = () => {
-  props.popup.newCollection = false;
-  newCollectionName.value = "New Collection";
-};
+  props.popup.newCollection = false
+  newCollectionName.value = 'New Collection'
+}
 
 const addNewCollectionName = () => {
-  props.popup.newCollection = true;
-  props.closeOption();
-};
+  props.popup.newCollection = true
+  props.closeOption()
+}
 
-const emit = defineEmits(["addNewCollections"]);
+const emit = defineEmits(['addNewCollections'])
 
-const newCollectionName = ref("New Collection");
+const newCollectionName = ref('New Collection')
 
 const passAndClear = (name, event) => {
-  emit("addNewCollections", name);
-  newCollectionName.value = "New Collection";
-  props.popup.newCollection = false;
-};
+  emit('addNewCollections', name)
+  newCollectionName.value = 'New Collection'
+  props.popup.newCollection = false
+}
 </script>
 
 <template>
@@ -64,7 +64,7 @@ const passAndClear = (name, event) => {
           @click="closeButton"
         />
         <div class="flex flex-col items-center justify-center">
-          <div class="text-center text-3xl font-mono font-semibold">
+          <div class="text-center text-3xl font-outfit text-title font-medium">
             Add new collection
           </div>
           <div class="my-7 flex flex-col items-center justify-center">
@@ -95,7 +95,7 @@ const passAndClear = (name, event) => {
 
             <div>
               <button
-                class="bg-[#4096ff] text-white rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#4096ff] focus:border-transparent transition-all duration-[270ms]"
+                class="bg-[#B11717] text-white rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#B11717] focus:border-transparent transition-all duration-[270ms]"
                 @click="passAndClear(newCollectionName, $event)"
               >
                 ADD

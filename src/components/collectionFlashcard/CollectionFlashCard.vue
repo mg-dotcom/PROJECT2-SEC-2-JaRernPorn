@@ -1,23 +1,23 @@
 <script setup>
-import { reactive } from "vue";
-import Header from "../Header.vue";
-import Content from "./ContentCollPage.vue";
+import { reactive } from 'vue'
+import Header from '../Header.vue'
+import Content from './ContentCollPage.vue'
 
 const page = reactive({
-  flashcard: true,
-});
+  flashcard: true
+})
 
 const popup = reactive({
   newCollection: false,
   optionCollection: false,
   editCollection: false,
   renameCollection: false,
-  Setting: false,
-});
+  Setting: false
+})
 
 const closeOption = () => {
-  popup.optionCollection = false;
-};
+  popup.optionCollection = false
+}
 </script>
 
 <template>
