@@ -4,6 +4,7 @@
 // import Game3 from './components/game3/Game3.vue'
 // import Game4 from './components/game4/Game4.vue'
 import Topbar from './components/Topbar.vue'
+import Units from './components/category/Units.vue'
 import HomePage from './components/homepage/HomePage.vue'
 import HowToPlay from './components/homepage/HowToPlay.vue'
 // import FlashCard from './components/FlashCard.vue'
@@ -17,8 +18,9 @@ import HowToPlay from './components/homepage/HowToPlay.vue'
     <!-- <Topbar /> -->
     <!-- <HomePage /> -->
     <!-- <HowToPlay /> -->
-    <!-- <RouterView /> -->
-    <FlashCard />
+    <RouterView />
+    <!-- <FlashCard /> -->
+    <!-- <Units /> -->
   </div>
 </template>
 <style scoped></style>

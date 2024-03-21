@@ -25,6 +25,7 @@ const showHowtoplay = () => {
 const toggleSetting = () => {
   showSetting.value = !showSetting.value
 }
+
 </script>
 
 <template>
@@ -53,15 +54,17 @@ const toggleSetting = () => {
           </p>
         </div>
         <!-- Play Button -->
+
         <div id="home-page-button">
-          <div id="play-button" class="flex justify-center pt-12">
-            <img
-              @click="showCategoryPage"
-              class="w-72 relative hover:w-80 transition-all duration-300 ease-in-out cursor-pointer"
-              src="/homePage-pic/play-button.svg"
-              alt="play-button"
-            />
-          </div>
+          <router-link :to="{ name: 'CategoriesUnits' }">
+            <div id="play-button" class="flex justify-center pt-12">
+              <img
+                @click="showCategoryPage"
+                class="w-72 relative hover:w-80 transition-all duration-300 ease-in-out cursor-pointer"
+                src="/homePage-pic/play-button.svg"
+                alt="play-button"
+              /></div
+          ></router-link>
           <!-- Flashcard Button -->
           <div id="Flashcard-button" class="flex justify-center pt-6">
             <img
@@ -70,7 +73,6 @@ const toggleSetting = () => {
               alt="HTP-button"
             />
           </div>
-
           <!-- How To Play Button -->
           <div id="HTP-button" class="flex justify-center pt-6">
             <img
@@ -93,9 +95,9 @@ const toggleSetting = () => {
       <SettingHomepage @closeSetting="toggleSetting" />
     </div>
   </section>
-  <section>
+  <!-- <section>
     <CategoriesUnits v-show="page.categoryPage"></CategoriesUnits>
-  </section>
+  </section> -->
 </template>
 
 <style scoped></style>

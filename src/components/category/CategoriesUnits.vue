@@ -1,4 +1,5 @@
 <script setup>
+import { useRoute, useRouter } from 'vue-router'
 import { ref, reactive, computed } from 'vue'
 import { categories } from '../../../data/categories.json'
 
@@ -21,11 +22,6 @@ const showUnit = (cateIndex) => {
   categoryPage.value = false
 }
 
-const backToCategory = () => {
-  unitPage.value = false
-  categoryPage.value = true
-}
-
 const currentCategory = computed(() => {
   return categories[currentIndexCate.value].name
 })
@@ -35,6 +31,11 @@ const currentItem = computed(() => {
   const firstItem = currentUnit.map((unit) => unit.items[0])
   return firstItem
 })
+
+const router = useRouter()
+const goBack = () => {
+  router.go(-1)
+}
 </script>
 
 <template>
@@ -46,7 +47,7 @@ const currentItem = computed(() => {
           class="w-16 absolute hover:w-catePage-20 transition-all duration-300 ease-in-out cursor-pointer"
           src="/categories/icon/left-arrow.png"
           alt="left-arrow"
-          @click="backToHome"
+          @click="goBack"
         />
 
         <div class="header flex justify-center items-center">
@@ -70,50 +71,21 @@ const currentItem = computed(() => {
               :key="category.name"
               class="category-item flex flex-col items-center md:mb-9 cursor-pointer"
             >
-              <div
-                class="pic w-52 pb-2 hover:w-56 transition-all duration-300 ease-in-out"
+              <router-link
+                :to="{ name: 'Units', params: { units: cateIndex } }"
               >
-                <img
-                  :src="category.image"
-                  :alt="category.name"
-                  class="hover:drop-shadow-lg"
-                  @click="showUnit(cateIndex)"
-                />
-              </div>
-
-              <p class="text-xl">{{ category.name }}</p>
+                <div
+                  class="pic w-52 pb-2 hover:w-56 transition-all duration-300 ease-in-out"
+                >
+                  <img
+                    :src="category.image"
+                    :alt="category.name"
+                    class="hover:drop-shadow-lg"
+                  />
+                </div>
+              </router-link>
+              <p class="text-xl">{{ category.name }} {{ cateIndex }}</p>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="unit" v-if="unitPage">
-    <div class="bg-main-bgColor min-h-screen w-full">
-      <div class="flex justify-between">
-        <img
-          src="/Arrow-button.svg"
-          alt="Arrow"
-          class="pt-20 pl-20 cursor-pointer"
-          @click="backToCategory"
-        />
-        <h1
-          class="text-3xl text-wrongPopup-size font-semibold font-outfit text-title pt-28 pr-20"
-        >
-          {{ currentCategory }}
-        </h1>
-        <img src="/setting.svg" alt="Setting" class="pt-20 pr-20" />
-      </div>
-
-      <div class="flex justify-center pt-20">
-        <div class="flex flex-wrap justify-center gap-44 w-[800px] h-[500px]">
-          <div
-            class="w-44 h-44 bg-[#F9D986] rounded-[50px] transition-all duration-300 ease-in-out transform hover:scale-110"
-            v-for="item in currentItem"
-            :key="item.id"
-          >
-            <img :src="item.src" :alt="item.meaning" />
           </div>
         </div>
       </div>

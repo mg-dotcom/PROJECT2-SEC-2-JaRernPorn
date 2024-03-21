@@ -1,8 +1,8 @@
 <script setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
 import data from '../../data/categories.json'
 import Setting from '../components/Setting.vue'
-const currentIndexCate=ref(2)
+const currentIndexCate = ref(2)
 const showSetting = ref(false)
 const toggleSetting = () => {
   showSetting.value = !showSetting.value
@@ -17,7 +17,7 @@ const toggleSetting = () => {
           Category: {{ data.categories[currentIndexCate].name }}
         </h1>
         <img
-          src="/setting.svg"
+          src="/Setting.svg"
           alt="setting"
           class="w-8 cursor-pointer hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out sm:w-10"
           @click="toggleSetting"
@@ -25,13 +25,13 @@ const toggleSetting = () => {
       </div>
     </div>
     <div class="absolute left-0 right-0 top-1/3" v-show="showSetting">
-    <Setting
-      @closeSetting="toggleSetting"
-      @restartGame=""
-      @resumeGame=""
-      @goBackHome=""
-    />
-  </div>
+      <Setting
+        @closeSetting="toggleSetting"
+        @restartGame=""
+        @resumeGame=""
+        @goBackHome=""
+      />
+    </div>
   </div>
 </template>
 
