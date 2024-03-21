@@ -15,7 +15,7 @@ const props = defineProps({
 
 const closeButton = () => {
   props.popup.newCollection = false;
-  newCollectionName.value = "";
+  newCollectionName.value = "New Collection";
 };
 
 const addNewCollectionName = () => {
@@ -25,11 +25,11 @@ const addNewCollectionName = () => {
 
 const emit = defineEmits(["addNewCollections"]);
 
-const newCollectionName = ref("");
+const newCollectionName = ref("New Collection");
 
 const passAndClear = (name, event) => {
   emit("addNewCollections", name);
-  newCollectionName.value = "";
+  newCollectionName.value = "New Collection";
   props.popup.newCollection = false;
 };
 </script>
@@ -55,7 +55,6 @@ const passAndClear = (name, event) => {
   >
     <div
       class="bg-black bg-opacity-50 flex items-center justify-center min-h-screen w-screen"
-      @click.self="closeButton"
     >
       <div
         class="bg-white rounded-lg xl:scale-100 xl:w-[570px] xl:h-[350px] relative p-6 lg:w-[570px] lg:h-[350px] md:scale-[80%] sm:scale-[70%] mobile:scale-[73%] mobile:w-[500px]"
@@ -92,6 +91,7 @@ const passAndClear = (name, event) => {
               placeholder="Collection name"
               @keydown.enter="passAndClear(newCollectionName, $event)"
             />
+
             <div>
               <button
                 class="bg-[#4096ff] text-white rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#4096ff] focus:border-transparent transition-all duration-[270ms]"

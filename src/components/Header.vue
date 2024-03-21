@@ -8,6 +8,7 @@ const props = defineProps({
     type: Function,
     required: true,
   },
+
 });
 
 const showSetting = ref(false);
