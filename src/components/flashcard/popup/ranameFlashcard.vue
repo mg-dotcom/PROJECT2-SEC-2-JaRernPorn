@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, ref, defineEmits } from "vue";
+import { defineProps, ref, defineEmits, computed, watch } from "vue";
 import closeIcon from "../../icons/iconClose.vue";
 
 const props = defineProps({
@@ -14,11 +14,11 @@ const props = defineProps({
     type: Number,
     required: true,
   },
+  SelectedIndex: {
+    required: true,
+  },
 });
 
-const oldChineseWord = ref(props.computedFlashcards[props.index].chineseWord);
-const oldPinyin = ref(props.computedFlashcards[props.index].pinyin);
-const oldMeaning = ref(props.computedFlashcards[props.index].meaning);
 const chineseWordIsEmpty = ref(false);
 const pinyinIsEmpty = ref(false);
 const meaningIsEmpty = ref(false);
@@ -33,7 +33,7 @@ const closeFlashCardAdd = () => {
   meaningIsEmpty.value = false;
 };
 
-const renameFlashcard = (index) => {
+const renameFlashcard = () => {
   const chineseWordEmpty = oldChineseWord.value.trim() === "";
   const pinyinEmpty = oldPinyin.value.trim() === "";
   const meaningEmpty = oldMeaning.value.trim() === "";
@@ -48,7 +48,7 @@ const renameFlashcard = (index) => {
       oldChineseWord.value,
       oldPinyin.value,
       oldMeaning.value,
-      index
+      props.SelectedIndex
     );
     props.popup.renameFlashcard = false;
     props.popup.optionFlashcard = false;
@@ -61,6 +61,23 @@ const renameFlashcard = (index) => {
 const isEmpty = (value) => {
   return value === "";
 };
+
+const oldChineseWord = ref(
+  props.computedFlashcards[props.SelectedIndex].chineseWord
+);
+const oldPinyin = ref(props.computedFlashcards[props.SelectedIndex].pinyin);
+const oldMeaning = ref(props.computedFlashcards[props.SelectedIndex].meaning);
+
+watch(
+  () => props.computedFlashcards[props.SelectedIndex],
+  () => {
+    oldChineseWord.value =
+      props.computedFlashcards[props.SelectedIndex].chineseWord;
+    oldPinyin.value = props.computedFlashcards[props.SelectedIndex].pinyin;
+    oldMeaning.value = props.computedFlashcards[props.SelectedIndex].meaning;
+    console.log(props.computedFlashcards[props.SelectedIndex]);
+  }
+);
 </script>
 
 <template>
@@ -88,8 +105,13 @@ const isEmpty = (value) => {
               <input
                 type="text"
                 v-model="oldChineseWord"
-                class="border-[1.5px] rounded-md p-2 w-[360px] border-black"
+                class="border-[1.5px] rounded-md p-2 w-[360px]"
                 @focus="$event.target.select()"
+                :class="{
+                  'border-red-600': chineseWordIsEmpty,
+                  'focus:border-red-600': chineseWordIsEmpty,
+                  'border-black': !chineseWordIsEmpty,
+                }"
                 :placeholder="props.computedFlashcards[props.index].chineseWord"
                 @keydown.enter="renameFlashcard(props.index)"
               />
@@ -108,6 +130,11 @@ const isEmpty = (value) => {
                 v-model="oldPinyin"
                 class="border-[1.5px] border-black rounded-md p-2 w-[360px]"
                 @focus="$event.target.select()"
+                :class="{
+                  'border-red-600': pinyinIsEmpty,
+                  'focus:border-red-600': pinyinIsEmpty,
+                  'border-black': !pinyinIsEmpty,
+                }"
                 @input="pinyinIsEmpty = isEmpty(oldPinyin)"
                 :placeholder="props.computedFlashcards[props.index].pinyin"
                 @keydown.enter="renameFlashcard(props.index)"
@@ -127,6 +154,11 @@ const isEmpty = (value) => {
                 v-model="oldMeaning"
                 class="border-[1.5px] border-black rounded-md p-2 w-[360px]"
                 @focus="$event.target.select()"
+                :class="{
+                  'border-red-600': meaningIsEmpty,
+                  'focus:border-red-600': meaningIsEmpty,
+                  'border-black': !meaningIsEmpty,
+                }"
                 @input="meaningIsEmpty = isEmpty(oldMeaning)"
                 :placeholder="props.computedFlashcards[props.index].meaning"
                 @keydown.enter="renameFlashcard(props.index)"
@@ -150,7 +182,7 @@ const isEmpty = (value) => {
                 class="bg-[#4096ff] text-white rounded-md w-20 font-outfit font-medium"
                 @click="renameFlashcard(props.index)"
               >
-                ADD
+                OK
               </button>
             </div>
           </div>

@@ -18,7 +18,6 @@ const editFlashcard = (chineseWord, pinyin, meaning, index, flashcards) => {
   flashcards[index].chineseWord = chineseWord;
   flashcards[index].pinyin = pinyin;
   flashcards[index].meaning = meaning;
-
   return flashcards;
 };
 

@@ -7,6 +7,10 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  closeOption: {
+    type: Function,
+    required: true,
+  },
 });
 
 const newChineseWord = ref("");
@@ -66,7 +70,7 @@ const isEmpty = (value) => {
 </script>
 
 <template>
-  <div class="text-start font-outfit text-base font-semibold pb-2">
+  <div class="text-start font-outfit text-base font-semibold pb-2" @click="props.closeOption">
     <div>
       <h1
         class="cursor-pointer inline hover:bg-[#f4ead8] p-[4px] rounded-xl transition-all duration-[270ms]"
