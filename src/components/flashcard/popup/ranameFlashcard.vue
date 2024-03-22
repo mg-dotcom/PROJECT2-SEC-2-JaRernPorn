@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, ref, defineEmits, computed } from "vue";
+import { defineProps, ref, defineEmits, computed, watch } from "vue";
 import closeIcon from "../../icons/iconClose.vue";
 
 const props = defineProps({
@@ -62,16 +62,20 @@ const isEmpty = (value) => {
   return value === "";
 };
 
-const oldChineseWord = computed(
-  () => props.computedFlashcards[props.SelectedIndex].chineseWord
-);
-const oldPinyin = computed(
-  () => props.computedFlashcards[props.SelectedIndex].pinyin
-);
-const oldMeaning = computed(
-  () => props.computedFlashcards[props.SelectedIndex].meaning
-);
+// Define reactive data instead of computed properties
+const oldChineseWord = ref(props.computedFlashcards[props.SelectedIndex].chineseWord);
+const oldPinyin = ref(props.computedFlashcards[props.SelectedIndex].pinyin);
+const oldMeaning = ref(props.computedFlashcards[props.SelectedIndex].meaning);
 
+watch(
+  () => props.computedFlashcards[props.SelectedIndex],
+  () => {
+    oldChineseWord.value =
+      props.computedFlashcards[props.SelectedIndex].chineseWord;
+    oldPinyin.value = props.computedFlashcards[props.SelectedIndex].pinyin;
+    oldMeaning.value = props.computedFlashcards[props.SelectedIndex].meaning;
+  }
+);
 </script>
 
 <template>
