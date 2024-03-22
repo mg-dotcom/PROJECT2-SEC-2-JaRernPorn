@@ -27,7 +27,6 @@ const closeOption = () => {
       <Header :closeOption="closeOption">
         <template #title> Flashcard </template>
       </Header>
-
       <Content :closeOption="closeOption" :popup="popup"> </Content>
     </div>
   </section>
