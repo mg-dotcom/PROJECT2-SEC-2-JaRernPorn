@@ -3,16 +3,22 @@ import { reactive, ref } from 'vue'
 import SettingHomepage from './SettingHomepage.vue'
 import CategoriesUnits from '../category/CategoriesUnits.vue'
 
+import { useRouter } from 'vue-router'
+const router = useRouter()
+const goToPlayGame = () => {
+  router.push({ path: '/PlayGame' })
+}
+
 const page = reactive({
   homePage: true,
   categoryPage: false
 })
 const showSetting = ref(false)
 
-const showCategoryPage = () => {
-  page.homePage = false
-  page.categoryPage = true
-}
+// const showCategoryPage = () => {
+//   page.homePage = false
+//   page.categoryPage = true
+// }
 
 const toggleSetting = () => {
   showSetting.value = !showSetting.value
@@ -53,7 +59,7 @@ const backToHome = () => {
         <div id="home-page-button">
           <div id="play-button" class="flex justify-center pt-12">
             <img
-              @click="showCategoryPage"
+              @click="goToPlayGame"
               class="w-72 relative hover:w-80 transition-all duration-300 ease-in-out cursor-pointer"
               src="/homePage-pic/play-button.svg"
               alt="play-button"
