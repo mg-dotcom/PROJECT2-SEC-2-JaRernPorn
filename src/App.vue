@@ -5,7 +5,6 @@ import Game1 from './components/game1/Game1.vue'
 
 <template>
   <div>
-    <Game1 />
     <HomePage />
   </div>
 </template>

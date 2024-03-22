@@ -1,15 +1,6 @@
 <script setup>
 import { ref, reactive, computed } from 'vue'
 import { categories } from '../../../data/data.json'
-import router from '@/router'
-
-props: {
-  backToHome: Function
-}
-
-const goBack = () => {
-  backToHome()
-}
 
 const currentIndexCate = ref(0)
 const currentIndexUnit = ref(0)
@@ -45,10 +36,10 @@ const currentItem = computed(() => {
   return firstItem
 })
 
-// const backToHome = () => {
-//   props.homepage = true
-//   categoryPage.value = false
-// }
+const backToHome = () => {
+  props.homepage = true
+  categoryPage.value = false
+}
 </script>
 
 <template>
@@ -60,7 +51,7 @@ const currentItem = computed(() => {
           class="w-16 absolute hover:w-catePage-20 transition-all duration-300 ease-in-out cursor-pointer"
           src="/categories/icon/left-arrow.png"
           alt="left-arrow"
-          @click="goBack"
+          @click="backToHome"
         />
 
         <div class="header flex justify-center items-center">
