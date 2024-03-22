@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, defineProps } from 'vue'
-import category from '../../../data/categories.json'
+import data from '../../../data/data.json'
 import Setting from '../Setting.vue'
 import Answer_popup from './Answer_popup.vue'
 import SoundControl from '../SoundControl.vue'
@@ -27,11 +27,11 @@ const props = defineProps({
 
 //const items = category.categories[0].units[0].items
 
-const currentCategory = category.categories[props.categoryIndex]
+const currentCategory = data.categories[props.categoryIndex]
 const items = currentCategory.units[props.unitIndex].items
 
 const audioOfOption = computed(() => {
-  return category.categories[props.categoryIndex].units[props.unitIndex].items[
+  return data.categories[props.categoryIndex].units[props.unitIndex].items[
     currentIndex.value
   ].pronunciation
 })
@@ -114,7 +114,7 @@ const toggleSetting = () => {
 
         <div class="setting flex">
           <img
-            src="/setting.svg"
+            src="/settingBtn/setting.svg"
             alt="setting button"
             class="w-10 hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
             @click="toggleSetting"
@@ -138,7 +138,7 @@ const toggleSetting = () => {
               class="flex flex-col hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
             >
               <SoundControl :soundPath="audioOfOption">
-                <img src="../../../SoundButton.svg" alt="SoundButton" />
+                <img src="/SoundButton.svg" alt="SoundButton" />
               </SoundControl>
             </div>
           </div>

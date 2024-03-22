@@ -85,7 +85,7 @@ const backToHome = () => {
   </section>
   <section>
     <CategoriesUnits
-      v-if="page.categoryPage"
+      v-show="page.categoryPage"
       :backToHome="backToHome"
     ></CategoriesUnits>
   </section>
