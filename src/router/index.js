@@ -3,6 +3,7 @@ import HomePage from '@/components/homepage/HomePage.vue'
 import FlashCard from '@/components/flashcard/FlashCard.vue'
 import CollectionFlashCard from '@/components/collectionFlashcard/CollectionFlashCard.vue'
 import Units from '@/components/category/Units.vue'
+import NotFound from '@/components/NotFound.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 const history = createWebHistory()
 const routes = [
@@ -18,6 +19,10 @@ const routes = [
     path: '/flashcard',
     name: 'CollectionFlashCard',
     component: CollectionFlashCard
+  },
+  {
+    path: '/:notfound(.*)',
+    component: NotFound
   }
 ]
 const router = createRouter({ history, routes })
