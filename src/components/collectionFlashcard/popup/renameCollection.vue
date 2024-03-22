@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import { defineProps, defineEmits } from "vue";
+import { defineProps, defineEmits, watch } from "vue";
 import closeIcon from "../../icons/iconClose.vue";
 
 const props = defineProps({
@@ -23,14 +23,21 @@ const props = defineProps({
 const emit = defineEmits(["toUpdateName", "changeCollectionName"]);
 const renameCollectionName = ref(props.computedCollections[props.index].name);
 
+watch(
+  () => props.computedCollections[props.index],
+  () => {
+    renameCollectionName.value = props.computedCollections[props.index].name;
+  }
+);
+
 const closeButton = () => {
   props.popup.renameCollection = false;
   renameCollectionName.value = props.computedCollections[props.index].name;
 };
 
 const toUpdateName = () => {
-  emit("changeCollectionName", props.index, renameCollectionName.value);
   renameCollectionName.value = props.computedCollections[props.index].name;
+  emit("changeCollectionName", props.index, renameCollectionName.value);
 };
 </script>
 
