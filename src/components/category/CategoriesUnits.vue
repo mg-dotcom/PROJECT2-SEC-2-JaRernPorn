@@ -1,6 +1,7 @@
 <script setup>
 import { ref, reactive, computed } from 'vue'
 import { categories } from '../../../data/data.json'
+import Game1 from '../game1/Game1.vue'
 
 //Router
 import { useRouter } from 'vue-router'
@@ -131,6 +132,12 @@ const currentItem = computed(() => {
         </div>
       </div>
     </div>
+
+    <Game1
+      v-if="unitPage"
+      :currentIndexCate="currentIndexCate"
+      :currentIndexUnit="currentIndexUnit"
+    ></Game1>
   </section>
 </template>
 

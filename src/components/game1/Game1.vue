@@ -5,51 +5,57 @@ import Card from './Card.vue'
 import CheckButton from './CheckButton.vue'
 import Setting from '../Setting.vue'
 
-const currentIndexCate = ref(0)
-const currentIndexUnit = ref(0)
+const props = defineProps({
+  currentIndexCate: Number,
+  currentIndexUnit: Number
+})
+
+const { currentIndexCate, currentIndexUnit } = props
+// const currentIndexCate = ref(0)
+// const currentIndexUnit = ref(0)
 const currentIndexItem = ref(0)
 const currentIndexQuestion = ref(0)
 
 const showColor = ref(false)
 const checkStatus = ref(false)
 
-const correctAnswer = ref(
-  categories[currentIndexCate.value].units[currentIndexUnit.value].items[
+const correctAnswer = computed(() => {
+  return categories[props.currentIndexCate].units[props.currentIndexUnit].items[
     currentIndexQuestion.value
   ]
-)
+})
 
 const isCorrect = ref(false)
 const isWrong = ref(false)
 const userAnswer = ref([])
 const userAnswerId = ref(null)
 
-//Setting
+// Setting
 const showSetting = ref(false)
 const toggleSetting = () => {
   showSetting.value = !showSetting.value
 }
 
-//Category
+// Category
 const currentCategory = computed(() => {
-  return categories[currentIndexCate.value].name
+  return categories[props.currentIndexCate].name
 })
 
-//Question
+// Question
 const currentQuestion = computed(() => {
-  return categories[currentIndexCate.value].units[currentIndexUnit.value].items[
+  return categories[props.currentIndexCate].units[props.currentIndexUnit].items[
     currentIndexQuestion.value
   ].meaning
 })
 
-//Item
-const currentItem = computed(() => {
-  return categories[currentIndexCate.value].units[currentIndexUnit.value].items[
-    currentIndexQuestion.value
-  ]
+// Choices
+const threeChoices = computed(() => {
+  const choices =
+    categories[props.currentIndexCate].units[props.currentIndexUnit].items
+  return shuffle([...choices])
 })
 
-//Shuffle
+// Shuffle
 const shuffle = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
@@ -57,13 +63,6 @@ const shuffle = (array) => {
   }
   return array
 }
-
-//Chioces
-const threeChoices = computed(() => {
-  const choices =
-    categories[currentIndexCate.value].units[currentIndexUnit.value].items
-  return shuffle([...choices])
-})
 
 //CheckAnswer
 const checkAnswer = (userAns) => {
