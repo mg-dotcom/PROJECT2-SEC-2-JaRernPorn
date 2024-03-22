@@ -219,21 +219,21 @@
         {
           "items": [
             {
-              "id": 7,
+              "id": 1,
               "src": "/play-game/color/yellow.png",
               "word": "黄色 (huáng sè)",
               "meaning": "Yellow",
               "pronunciation": "/pronunciation/Colors/yellow.mp3"
             },
             {
-              "id": 8,
+              "id": 2,
               "src": "/play-game/color/brown.png",
               "word": "棕色 (zōng sè)",
               "meaning": "Brown",
               "pronunciation": "/pronunciation/Colors/brown.mp3"
             },
             {
-              "id": 9,
+              "id": 3,
               "src": "/play-game/color/red.png",
               "word": "红色 (hóng sè)",
               "meaning": "Red",
