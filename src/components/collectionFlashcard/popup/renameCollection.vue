@@ -32,11 +32,9 @@ watch(
 
 const closeButton = () => {
   props.popup.renameCollection = false;
-  renameCollectionName.value = props.computedCollections[props.index].name;
 };
 
 const toUpdateName = () => {
-  renameCollectionName.value = props.computedCollections[props.index].name;
   emit("changeCollectionName", props.index, renameCollectionName.value);
 };
 </script>
