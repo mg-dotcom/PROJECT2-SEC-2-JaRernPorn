@@ -2,6 +2,14 @@
 import { ref, reactive, computed } from 'vue'
 import { categories } from '../../../data/data.json'
 
+//Router
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
+const backToHome = () => {
+  router.push({ path: '/Home' })
+}
+
 const currentIndexCate = ref(0)
 const currentIndexUnit = ref(0)
 
@@ -36,10 +44,10 @@ const currentItem = computed(() => {
   return firstItem
 })
 
-const backToHome = () => {
-  props.homepage = true
-  categoryPage.value = false
-}
+// const backToHome = () => {
+//   props.homepage = true
+//   categoryPage.value = false
+// }
 </script>
 
 <template>

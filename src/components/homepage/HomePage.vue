@@ -3,6 +3,7 @@ import { reactive, ref } from 'vue'
 import SettingHomepage from './SettingHomepage.vue'
 import CategoriesUnits from '../category/CategoriesUnits.vue'
 
+//Router
 import { useRouter } from 'vue-router'
 const router = useRouter()
 const goToPlayGame = () => {
