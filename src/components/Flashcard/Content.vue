@@ -54,7 +54,7 @@ const handelEditFlashcard = (chineseWord, pinyin, meaning, index) => {
     SelectedIndex.value,
     flashcards.value
   );
-  // console.log("after edit", index);
+
   props.popup.renameFlashcard = false;
   props.popup.optionFlashcard = false;
 };

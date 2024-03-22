@@ -70,8 +70,7 @@ const showMeaning = () => {
         :SelectedIndex="SelectedIndex"
         @renameFlashcard="renameFlashcard"
       ></ranameFlashcard>
-      {{ SelectedIndex }}
-      {{ props.index }}
+
       <img
         class="z-40 bg-amber-200 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] hover:bg-amber-300 rounded-full w-5 h-10 p-2 scale-[75%] absolute xl:top-0 xl:-right-[19px] lg:top-3 lg:-right-[8px] md:top-0 md:-right-[19px] transition-all duration-[270ms]"
         src="/img/flashcard-pic/option.svg"

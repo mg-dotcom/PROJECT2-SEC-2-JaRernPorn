@@ -4,8 +4,8 @@ import FlashCard from "./components/Flashcard/FlashCard.vue";
 </script>
 
 <template>
-  <!-- <CollectionFlashcard /> -->
-  <FlashCard />
+  <CollectionFlashcard />
+  <!-- <FlashCard /> -->
 </template>
 
 <style scoped></style>
