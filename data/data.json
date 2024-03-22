@@ -173,21 +173,21 @@
               "src": "/play-game/colors/black.png",
               "word": "黑色 (hēi sè)",
               "meaning": "Black",
-              "pronunciation": "/pronunciation/Colors/black.mp3"
+              "pronunciation": "/pronunciation/Colors/Black.mp3"
             },
             {
               "id": 2,
               "src": "/play-game/colors/blue.png",
               "word": "蓝色 (lán sè)",
               "meaning": "Blue",
-              "pronunciation": "/pronunciation/Colors/blue.mp3"
+              "pronunciation": "/pronunciation/Colors/Blue.mp3"
             },
             {
               "id": 3,
               "src": "/play-game/colors/green.png",
               "word": "绿色 (lǜ sè)",
               "meaning": "Green",
-              "pronunciation": "/pronunciation/Colors/green.mp3"
+              "pronunciation": "/pronunciation/Colors/Green.mp3"
             }
           ]
         },
@@ -198,21 +198,21 @@
               "src": "/play-game/colors/orange.png",
               "word": "橙色 (chéng sè)",
               "meaning": "Orange",
-              "pronunciation": "/pronunciation/Colors/orange.mp3"
+              "pronunciation": "/pronunciation/Colors/Orange.mp3"
             },
             {
               "id": 2,
               "src": "/play-game/colors/pink.png",
               "word": "粉红色 (fěn hóng sè)",
               "meaning": "Pink",
-              "pronunciation": "/pronunciation/Colors/pink.mp3"
+              "pronunciation": "/pronunciation/Colors/Pink.mp3"
             },
             {
               "id": 3,
               "src": "/play-game/colors/purple.png",
               "word": "紫色 (zǐ sè)",
               "meaning": "Purple",
-              "pronunciation": "/pronunciation/Colors/purple.mp3"
+              "pronunciation": "/pronunciation/Colors/Purple.mp3"
             }
           ]
         },
@@ -223,21 +223,21 @@
               "src": "/play-game/colors/yellow.png",
               "word": "黄色 (huáng sè)",
               "meaning": "Yellow",
-              "pronunciation": "/pronunciation/Colors/yellow.mp3"
+              "pronunciation": "/pronunciation/Colors/Yellow.mp3"
             },
             {
               "id": 2,
               "src": "/play-game/colors/brown.png",
               "word": "棕色 (zōng sè)",
               "meaning": "Brown",
-              "pronunciation": "/pronunciation/Colors/brown.mp3"
+              "pronunciation": "/pronunciation/Colors/Brown.mp3"
             },
             {
               "id": 3,
               "src": "/play-game/colors/red.png",
               "word": "红色 (hóng sè)",
               "meaning": "Red",
-              "pronunciation": "/pronunciation/Colors/red.mp3"
+              "pronunciation": "/pronunciation/Colors/Red.mp3"
             }
           ]
         }
@@ -261,14 +261,14 @@
               "src": "/play-game/family/mother.png",
               "word": "妈妈 (mā ma)",
               "meaning": "Mother",
-              "pronunciation": "/pronunciation/Family/mother.mp3"
+              "pronunciation": "/pronunciation/Family/mom.mp3"
             },
             {
               "id": 3,
               "src": "/play-game/family/father.png",
               "word": "爸爸 (bà ba)",
               "meaning": "Father",
-              "pronunciation": "/pronunciation/Family/father.mp3"
+              "pronunciation": "/pronunciation/Family/dad.mp3"
             }
           ]
         },
@@ -279,21 +279,21 @@
               "src": "/play-game/family/older-brother.png",
               "word": "哥哥 (gē ge)",
               "meaning": "Elder brother",
-              "pronunciation": "/pronunciation/Family/older-brother.mp3"
+              "pronunciation": "/pronunciation/Family/olderbrother.mp3"
             },
             {
               "id": 2,
               "src": "/play-game/family/younger-brother.png",
               "word": "弟弟 (dì di)",
               "meaning": "Younger brother",
-              "pronunciation": "/pronunciation/Family/younger-brother.mp3"
+              "pronunciation": "/pronunciation/Family/youngerbrother.mp3"
             },
             {
               "id": 3,
               "src": "/play-game/family/older-sister.png",
               "word": "姐姐 (jiě jie)",
               "meaning": "Elder sister",
-              "pronunciation": "/pronunciation/Family/older-sister.mp3"
+              "pronunciation": "/pronunciation/Family/oldersister.mp3"
             }
           ]
         },
@@ -304,7 +304,7 @@
               "src": "/play-game/family/younger-sister.png",
               "word": "妹妹 (mèi mei)",
               "meaning": "Younger sister",
-              "pronunciation": "/pronunciation/Family/younger-sister.mp3"
+              "pronunciation": "/pronunciation/Family/youngersister.mp3"
             },
             {
               "id": 2,
@@ -335,21 +335,21 @@
               "src": "/play-game/numbers/seven.png",
               "word": "七 (qī)",
               "meaning": "Seven",
-              "pronunciation": "/pronunciation/Numbers/seven.mp3"
+              "pronunciation": "/pronunciation/numbers/seven.mp3"
             },
             {
               "id": 2,
               "src": "/play-game/numbers/two.png",
               "word": "二 (èr)",
               "meaning": "Two",
-              "pronunciation": "/pronunciation/Numbers/two.mp3"
+              "pronunciation": "/pronunciation/numbers/two.mp3"
             },
             {
               "id": 3,
               "src": "/play-game/numbers/five.png",
               "word": "五 (wǔ)",
               "meaning": "Five",
-              "pronunciation": "/pronunciation/Numbers/five.mp3"
+              "pronunciation": "/pronunciation/numbers/five.mp3"
             }
           ]
         },
@@ -360,21 +360,21 @@
               "src": "/play-game/numbers/zero.png",
               "word": "零 (líng)",
               "meaning": "Zero",
-              "pronunciation": "/pronunciation/Numbers/zero.mp3"
+              "pronunciation": "/pronunciation/numbers/zero.mp3"
             },
             {
               "id": 2,
               "src": "/play-game/numbers/one.png",
               "word": "一 (yī)",
               "meaning": "One",
-              "pronunciation": "/pronunciation/Numbers/one.mp3"
+              "pronunciation": "/pronunciation/numbers/one.mp3"
             },
             {
               "id": 3,
               "src": "/play-game/numbers/ten.png",
               "word": "十 (shí)",
               "meaning": "Ten",
-              "pronunciation": "/pronunciation/Numbers/ten.mp3"
+              "pronunciation": "/pronunciation/numbers/ten.mp3"
             }
           ]
         },
@@ -385,21 +385,21 @@
               "src": "/play-game/numbers/eight.png",
               "word": "八 (bā)",
               "meaning": "Eight",
-              "pronunciation": "/pronunciation/Numbers/eight.mp3"
+              "pronunciation": "/pronunciation/numbers/eight.mp3"
             },
             {
               "id": 2,
               "src": "/play-game/numbers/three.png",
               "word": "三 (sān)",
               "meaning": "Three",
-              "pronunciation": "/pronunciation/Numbers/three.mp3"
+              "pronunciation": "/pronunciation/numbers/three.mp3"
             },
             {
               "id": 3,
               "src": "/play-game/numbers/six.png",
               "word": "六 (liù)",
               "meaning": "Six",
-              "pronunciation": "/pronunciation/Numbers/six.mp3"
+              "pronunciation": "/pronunciation/numbers/six.mp3"
             }
           ]
         }

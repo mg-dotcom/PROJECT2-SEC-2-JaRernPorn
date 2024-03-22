@@ -6,8 +6,8 @@ import Answer_popup from './Answer_popup.vue'
 import { computed, ref } from 'vue'
 import SoundControl from '../SoundControl.vue'
 
-const currentIndexCate = ref(0)
-const currentIndexUnit = ref(0)
+const currentIndexCate = ref(2)
+const currentIndexUnit = ref(1)
 
 const answer = ref()
 const meaning = ref()
