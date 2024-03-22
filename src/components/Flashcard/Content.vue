@@ -31,8 +31,9 @@ const toggleOption = (index) => {
 };
 
 const showRenameFlashcard = (index) => {
-  props.popup.renameFlashcard = !props.popup.renameFlashcard;
+  props.popup.renameFlashcard = true;
   SelectedIndex.value = index;
+  // console.log("before select", SelectedIndex.value);
 };
 
 const handleAddNewFlashcard = (chineseWord, pinyin, meaning) => {
@@ -46,7 +47,14 @@ const handelDeleteFlashcard = (index) => {
 };
 
 const handelEditFlashcard = (chineseWord, pinyin, meaning, index) => {
-  editFlashcard(chineseWord, pinyin, meaning, index, flashcards.value);
+  editFlashcard(
+    chineseWord,
+    pinyin,
+    meaning,
+    SelectedIndex.value,
+    flashcards.value
+  );
+  // console.log("after edit", index);
   props.popup.renameFlashcard = false;
   props.popup.optionFlashcard = false;
 };

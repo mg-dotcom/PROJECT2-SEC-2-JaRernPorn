@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, ref, defineEmits } from "vue";
+import { defineProps, ref, defineEmits, computed } from "vue";
 import closeIcon from "../../icons/iconClose.vue";
 
 const props = defineProps({
@@ -14,11 +14,11 @@ const props = defineProps({
     type: Number,
     required: true,
   },
+  SelectedIndex: {
+    required: true,
+  },
 });
 
-const oldChineseWord = ref(props.computedFlashcards[props.index].chineseWord);
-const oldPinyin = ref(props.computedFlashcards[props.index].pinyin);
-const oldMeaning = ref(props.computedFlashcards[props.index].meaning);
 const chineseWordIsEmpty = ref(false);
 const pinyinIsEmpty = ref(false);
 const meaningIsEmpty = ref(false);
@@ -33,7 +33,7 @@ const closeFlashCardAdd = () => {
   meaningIsEmpty.value = false;
 };
 
-const renameFlashcard = (index) => {
+const renameFlashcard = () => {
   const chineseWordEmpty = oldChineseWord.value.trim() === "";
   const pinyinEmpty = oldPinyin.value.trim() === "";
   const meaningEmpty = oldMeaning.value.trim() === "";
@@ -48,7 +48,7 @@ const renameFlashcard = (index) => {
       oldChineseWord.value,
       oldPinyin.value,
       oldMeaning.value,
-      index
+      props.SelectedIndex
     );
     props.popup.renameFlashcard = false;
     props.popup.optionFlashcard = false;
@@ -61,6 +61,17 @@ const renameFlashcard = (index) => {
 const isEmpty = (value) => {
   return value === "";
 };
+
+const oldChineseWord = computed(
+  () => props.computedFlashcards[props.SelectedIndex].chineseWord
+);
+const oldPinyin = computed(
+  () => props.computedFlashcards[props.SelectedIndex].pinyin
+);
+const oldMeaning = computed(
+  () => props.computedFlashcards[props.SelectedIndex].meaning
+);
+
 </script>
 
 <template>
