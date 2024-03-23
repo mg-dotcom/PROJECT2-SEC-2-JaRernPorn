@@ -1,30 +1,30 @@
 <script setup>
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref, watch } from "vue";
 
 const emits = defineEmits([
-  'closeSetting',
-  'restartGame',
-  'resumeGame',
-  'goBackHome'
-])
-const isPlaying = ref(true)
-const player = ref('')
+  "closeSetting",
+  "restartGame",
+  "resumeGame",
+  "goBackHome",
+]);
+const isPlaying = ref(true);
+const player = ref("");
 const musicControl = () => {
   if (isPlaying.value) {
-    player.value.play()
+    player.value.play();
   } else {
-    player.value.pause()
+    player.value.pause();
   }
-}
+};
 
 watch(isPlaying, () => {
-  musicControl()
-})
+  musicControl();
+});
 
 onMounted(() => {
-  isPlaying.value = true
-  musicControl()
-})
+  isPlaying.value = true;
+  musicControl();
+});
 </script>
 
 <template>
