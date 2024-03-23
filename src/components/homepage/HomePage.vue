@@ -1,27 +1,22 @@
 <script setup>
-import { reactive, ref } from 'vue'
-import SettingHomepage from './SettingHomepage.vue'
-import CategoriesUnits from '../category/CategoriesUnits.vue'
+import { reactive, ref } from "vue";
+import SettingHomepage from "./SettingHomepage.vue";
+import CategoriesUnits from "../category/CategoriesUnits.vue";
 
 const page = reactive({
   homePage: true,
-  categoryPage: false
-})
-const showSetting = ref(false)
+  categoryPage: false,
+});
+const showSetting = ref(false);
 
 const showCategoryPage = () => {
-  page.homePage = false
-  page.categoryPage = true
-}
+  page.homePage = false;
+  page.categoryPage = true;
+};
 
 const toggleSetting = () => {
-  showSetting.value = !showSetting.value
-}
-
-const backToHome = () => {
-  page.homePage = true
-  page.categoryPage = false
-}
+  showSetting.value = !showSetting.value;
+};
 </script>
 
 <template>
@@ -82,12 +77,6 @@ const backToHome = () => {
     <div class="absolute left-0 right-0 top-1/3" v-show="showSetting">
       <SettingHomepage @closeSetting="toggleSetting" />
     </div>
-  </section>
-  <section>
-    <CategoriesUnits
-      v-show="page.categoryPage"
-      :backToHome="backToHome"
-    ></CategoriesUnits>
   </section>
 </template>
 

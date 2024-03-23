@@ -1,6 +1,6 @@
 <script setup>
-import { ref, reactive, computed } from 'vue'
-import { data } from '../../../data/data.json'
+import { ref, computed } from 'vue'
+import  data  from '../../../data/data.json'
 
 const currentIndexCate = ref(0)
 const currentIndexUnit = ref(0)
@@ -36,10 +36,7 @@ const currentItem = computed(() => {
   return firstItem
 })
 
-const backToHome = () => {
-  props.homepage = true
-  categoryPage.value = false
-}
+
 </script>
 
 <template>
@@ -71,7 +68,7 @@ const backToHome = () => {
             class="md:flex md:space-x-32 md:flex-wrap md:w-3/4 md:justify-center"
           >
             <div
-              v-for="(category, cateIndex) in categories"
+              v-for="(category, cateIndex) in data"
               :key="category.name"
               class="category-item flex flex-col items-center md:mb-9 cursor-pointer"
             >
