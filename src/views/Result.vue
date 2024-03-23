@@ -8,7 +8,12 @@ import { useRouter, useRoute } from "vue-router";
 const route = useRoute();
 const router = useRouter();
 
-const playAgain = () => {};
+const playAgain = () => {
+  router.push({
+    name: "Game1",
+    params: { cateIndex: route.params.cateIndex, unit: route.params.unit },
+  });
+};
 
 const mainMenu = () => {
   router.push({ name: "Categories" });
@@ -34,12 +39,12 @@ const items = currentCategory.units[unitIndex.value].items;
 <template>
   <div class="bg-main-bgColor h-screen w-full p-5">
     <div class="border-double border-8 border-title box-border h-full w-full">
-      <div class="flex justify-between pt-10 px-20">
+      <div class="">
         <div class="setting flex">
           <img
             src="/settingBtn/setting.svg"
             alt="setting button"
-            class="w-10 cursor-pointer"
+            class="w-10 cursor-pointer absolute right-14 top-10 hover:scale-105 transition-all duration-300 ease-in-out"
             @click="toggleSetting"
           />
         </div>
@@ -48,20 +53,28 @@ const items = currentCategory.units[unitIndex.value].items;
             <img
               src="/settingBtn/home.svg"
               alt="home button"
-              class="cursor-pointer size-14"
+              class="cursor-pointer size-14 absolute left-14 top-10 hover:scale-105 transition-all duration-300 ease-in-out"
             />
           </router-link>
         </div>
       </div>
 
-      <div class="flex justify-center mt-3">
-        <h1 class="text-title text-[86px] font-alkatra font-semibold">
+      <div class="flex justify-center mt-5">
+        <h1 class="text-title text-7xl font-alkatra font-semibold">
           Review Vocabulary
-          <!-- : {{ currentCategory.name }} -->
         </h1>
       </div>
 
-      <div class="flex flex-row gap-16 justify-center mt-10">
+      <div class="absolute left-0 right-0 top-1/3 z-20" v-show="showSetting">
+        <Setting
+          @closeSetting="toggleSetting"
+          @restartGame=""
+          @resumeGame=""
+          @goBackHome=""
+        />
+      </div>
+
+      <div class="flex flex-row gap-16 justify-center mt-5 scale-75">
         <div
           class="h-[400px] w-[300px] rounded-3xl shadow-md bg-white cursor-pointer hover:border-8 border-slate-200"
           v-for="(item, index) in items"
@@ -89,17 +102,9 @@ const items = currentCategory.units[unitIndex.value].items;
             {{ item.word.split(" ").slice(1).join(" ") }}
           </h1>
         </div>
-        <div class="absolute left-0 right-0 top-1/3" v-show="showSetting">
-          <Setting
-            @closeSetting="toggleSetting"
-            @restartGame=""
-            @resumeGame=""
-            @goBackHome=""
-          />
-        </div>
       </div>
 
-      <div class="flex flex-wrap justify-center mt-16">
+      <div class="flex flex-wrap justify-center mt-6">
         <div class="flex justify-center gap-6">
           <div
             class="flex justify-center items-center bg-title rounded-lg font-Outfit font-semibold text-lg p-4 text-white text-center hover:bg-button-bgColor sm:text-lg sm:p-3 sm:w-40 h-16"

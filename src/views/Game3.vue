@@ -191,9 +191,17 @@ const turnOnCheckStatus = () => {
   <div class="absolute left-0 right-0 top-1/3" v-show="showSetting">
     <Setting
       @closeSetting="toggleSetting"
-      @restartGame=""
-      @resumeGame=""
-      @goBackHome=""
+      @restartGame="
+          router.push({
+            name: 'Game1',
+            params: {
+              cateIndex: route.params.cateIndex,
+              unit: route.params.unit,
+            },
+          })
+        "
+      @resumeGame="toggleSetting"
+      @goBackHome="router.push('/')"
     />
   </div>
   <div class="" v-show="showPopup">
@@ -202,4 +210,3 @@ const turnOnCheckStatus = () => {
 </template>
 
 <style scoped></style>
-./SoundControl.vue

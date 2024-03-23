@@ -16,9 +16,6 @@ const options = ref(
   data.categories[currentIndexItem.value].units[currentIndexUnit.value].items
 );
 
-const currentCategory = computed(() => {
-  return data.categories[currentIndexItem.value].name;
-});
 const wordArray = ref([]);
 const meaningArray = ref([]);
 const wrongWord = ref([]);
@@ -105,24 +102,6 @@ const isMatching = () => {
 <template>
   <div>
     <div class="flex justify-center">
-      <header class="py-8 px-10 flex-grow-0">
-        <!-- Back to home Button -->
-        <div class="header flex justify-center items-center">
-          <div
-            class="categories text-title font-semibold font-outfit text-4xl flex items-center justify-start w-full"
-          >
-            Category: {{ currentCategory }}
-          </div>
-        </div>
-        <div class="setting">
-          <img
-            src="/settingBtn/setting.svg"
-            alt="setting button"
-            class="w-10 absolute right-10 top-10 hover:scale-105 transition-all duration-300 ease-in-out"
-            @click="toggleSetting"
-          />
-        </div>
-      </header>
       <div class="grid grid-cols grid-rows-3 gap-y-7 p-8">
         <button
           v-for="(wordOption, index) in shuffleOption"

@@ -134,10 +134,34 @@ const checkAnswer = (userAns) => {
 
   console.log(currentIndexQuestion.value);
 };
+
+const restartGame = () => {
+  // Check if the current route name is "Game1"
+  if (router.currentRoute.value.name === "Game1") {
+    // Reload the current route
+    router.go(0);
+  } else {
+    router.push({
+      name: "Game1",
+      params: {
+        cateIndex: route.params.cateIndex,
+        unit: route.params.unit,
+      },
+    });
+  }
+};
 </script>
 
 <template>
   <div class="bg-main-bgColor min-h-screen w-full flex flex-col">
+    <div class="absolute left-0 right-0 top-1/3 z-20" v-show="showSetting">
+      <Setting
+        @closeSetting="toggleSetting"
+        @restartGame="restartGame"
+        @resumeGame="toggleSetting"
+        @goBackHome="router.push('/')"
+      />
+    </div>
     <div class="">
       <header class="py-8 px-10 flex-grow-0">
         <!-- Back to home Button -->
@@ -166,14 +190,6 @@ const checkAnswer = (userAns) => {
         </div>
 
         <!-- Setting Part -->
-        <div class="absolute left-0 right-0 top-1/3" v-show="showSetting">
-          <Setting
-            @closeSetting="toggleSetting"
-            @restartGame=""
-            @resumeGame=""
-            @goBackHome=""
-          />
-        </div>
 
         <div class="scale-75">
           <Card
