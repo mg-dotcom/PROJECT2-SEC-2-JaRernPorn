@@ -2,7 +2,7 @@ import CategoriesUnits from '@/components/category/CategoriesUnits.vue'
 import HomePage from '@/components/homepage/HomePage.vue'
 import CollectionFlashCard from '@/components/collectionFlashcard/CollectionFlashCard.vue'
 import Units from '@/components/category/Units.vue'
-import NotFound from '@/components/NotFound.vue'
+import NotFound from '@/views/NotFound.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import FlashCard from '@/components/Flashcard/FlashCard.vue'
 const history = createWebHistory()
