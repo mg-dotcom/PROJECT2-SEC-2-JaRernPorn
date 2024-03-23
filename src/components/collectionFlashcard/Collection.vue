@@ -10,6 +10,10 @@ const props = defineProps({
     type: Number,
     required: true
   },
+  id: {
+    type: Number,
+    required: true
+  },
   popup: {
     type: Object,
     required: true
@@ -37,8 +41,8 @@ const emit = defineEmits([
   'toggle-option-collection'
 ])
 
-const passDeleteCollection = (index) => {
-  emit('deleteCollection', index)
+const passDeleteCollection = (index, id) => {
+  emit('deleteCollection', index, id)
 }
 
 const passNewName = (newName, index) => {
@@ -78,6 +82,7 @@ const passNewName = (newName, index) => {
       v-show="props.popup.optionCollection && SelectedIndex === props.index"
       :index="index"
       :popup="popup"
+      :id="props.id"
       @deleteCollection="passDeleteCollection"
     ></optionCollection>
 

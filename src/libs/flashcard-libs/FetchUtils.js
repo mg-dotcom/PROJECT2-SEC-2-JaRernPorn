@@ -34,4 +34,15 @@ async function addNewCollection(url, newCollection) {
   }
 }
 
-export { getCollections, getFlashcards, addNewCollection }
+async function deleteCollection(url, id) {
+  try {
+    const res = await fetch(`${url}/${id}`, {
+      method: 'DELETE'
+    })
+    return res.status
+  } catch (error) {
+    console.log(`error: ${error}`)
+  }
+}
+
+export { getCollections, getFlashcards, addNewCollection, deleteCollection }

@@ -3,11 +3,14 @@ import { defineProps, ref, computed, defineEmits, onMounted } from 'vue'
 import newCollection from '../collectionFlashcard/popup/newCollection.vue'
 import Collection from '../collectionFlashcard/Collection.vue'
 import { editCollection } from '../../libs/flashcard-libs/CollectionModal.js'
-import { deleteCollection } from '../../libs/flashcard-libs/CollectionModal.js'
+// import { deleteCollection } from '../../libs/flashcard-libs/CollectionModal.js'
 // import { addNewCollection } from '../../libs/flashcard-libs/CollectionModal.js'
 
-import { getCollections } from '../../libs/flashcard-libs/FetchUtils' //destruct
-import { addNewCollection } from '../../libs/flashcard-libs/FetchUtils'
+import {
+  getCollections,
+  addNewCollection,
+  deleteCollection
+} from '../../libs/flashcard-libs/FetchUtils' //destruct
 
 const props = defineProps({
   popup: {
@@ -26,8 +29,7 @@ const collections = ref([])
 const localCollections = JSON.parse(localStorage.getItem('collections')) || []
 
 onMounted(async () => {
-  const newCollection = await getCollections(import.meta.env.VITE_BASE_URL)
-  collections.value = newCollection
+  collections.value = await getCollections(import.meta.env.VITE_BASE_URL)
 })
 // localCollections.forEach((collection) => {
 //   collections.value.push(collection)
@@ -44,8 +46,13 @@ const handleEditCollection = (index, newName) => {
   props.closeOption()
 }
 
-const handleDeleteCollection = (index) => {
-  collections.value = deleteCollection(index, collections.value)
+// const handleDeleteCollection = (index) => {
+//   collections.value = deleteCollection(index, collections.value)
+//   props.closeOption()
+// }
+
+const handleDeleteCollection = async (index, id) => {
+  collections.value = await deleteCollection(import.meta.env.VITE_BASE_URL, id)
   props.closeOption()
 }
 
@@ -68,7 +75,6 @@ const handleDeleteCollection = (index) => {
 const handleAddNewCollection = async (name) => {
   const newColName = name.trim()
   const addNew = await addNewCollection(import.meta.env.VITE_BASE_URL, {
-    id: 88,
     name: newColName
   })
   collections.value.push(addNew)
@@ -107,6 +113,7 @@ const toggleOptionCollection = (index) => {
       <Collection
         v-for="(collection, index) in computedCollections"
         :key="index"
+        :id="collection.id"
         :index="index"
         :popup="popup"
         :computedCollections="computedCollections"
