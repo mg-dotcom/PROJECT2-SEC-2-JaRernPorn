@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomePage from "../views/HomePage.vue";
+import Categories from "../views/Categories.vue";
 import CategoriesUnits from "../views/CategoriesUnits.vue";
-import Game1 from "../views/Game1.vue";
+import Game from "../views/Game.vue";
 const history = createWebHistory();
 
 const routes = [
@@ -16,15 +17,23 @@ const routes = [
     path: "/",
     redirect: "/",
   },
+  // categories route path
   {
     path: "/categories",
     name: "Categories",
+    component: Categories,
+  },
+  // categories unit route path
+  {
+    path: "/categories/:category/:cateIndex",
+    name: "CategoriesUnits",
     component: CategoriesUnits,
   },
+  // game route path
   {
-    path: "/game1/:unit",
-    name: "Game1",
-    component: Game1,
+    path: "/categories/:category/:cateIndex/game/:unit",
+    name: "Game",
+    component: Game,
   },
 ];
 

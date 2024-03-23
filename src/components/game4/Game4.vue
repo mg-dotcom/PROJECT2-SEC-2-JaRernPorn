@@ -1,17 +1,17 @@
 <script setup>
-import Options from './Options.vue
-import Setting from '../Setting.vue'
-import Topbar from '../Topbar.vue'
-import { ref } from 'vue'
+import Options from "./Options.vue";
+import Setting from "../Setting.vue";
+import Topbar from "../Topbar.vue";
+import { ref } from "vue";
 
-const settingPopup = ref(false)
+const settingPopup = ref(false);
 
 const showSetting = (flag) => {
-  settingPopup.value = flag //true
-}
+  settingPopup.value = flag; //true
+};
 const closeSetting = (flag) => {
-  settingPopup.value = flag //false
-}
+  settingPopup.value = flag; //false
+};
 </script>
 
 <template>

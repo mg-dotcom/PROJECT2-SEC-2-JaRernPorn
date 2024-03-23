@@ -1,31 +1,13 @@
 <script setup>
 import { ref, computed } from "vue";
+import { useRoute } from "vue-router";
+const route = useRoute(); // using useRoute() hook to access the current route object
 
 import { categories } from "../../data/data.json";
 
-const currentIndexCate = ref(0);
-const currentIndexUnit = ref(0);
+const currentIndexCate = ref(route.params.cateIndex);
 
-const categoryPage = ref(true);
-const unitPage = ref(false);
-
-const showUnit = (cateIndex) => {
-  currentIndexCate.value = cateIndex;
-  currentIndexUnit.value = cateIndex;
-
-  console.log(cateIndex);
-  console.log(categories[currentIndexCate.value].name);
-  console.log(categories[currentIndexCate.value].units);
-  console.log(categories[currentIndexCate.value].units[0]);
-
-  unitPage.value = true;
-  categoryPage.value = false;
-};
-
-const backToCategory = () => {
-  unitPage.value = false;
-  categoryPage.value = true;
-};
+const unitPage = ref(true);
 
 const currentCategory = computed(() => {
   return categories[currentIndexCate.value].name;
@@ -39,67 +21,17 @@ const currentItem = computed(() => {
 </script>
 
 <template>
-  <section class="category" v-if="categoryPage">
-    <div class="bg-main-bgColor min-h-screen overflow-hidden">
-      <header class="py-7 px-7">
-        <!-- Back to home -->
-        <router-link to="/">
-          <img
-            class="w-16 absolute hover:w-catePage-20 transition-all duration-300 ease-in-out cursor-pointer"
-            src="/categories/icon/left-arrow.png"
-            alt="left-arrow"
-          />
-        </router-link>
-
-        <div class="header flex justify-center items-center">
-          <div
-            class="categories text-title font-semibold font-outfit text-5xl flex items-center justify-center w-full px-17"
-          >
-            Categories
-          </div>
-        </div>
-      </header>
-
-      <div class="flex content-center justify-center scale-90 flex-grow">
-        <div
-          class="font-semibold text-black font-outfit md:flex md:justify-center"
-        >
-          <div
-            class="md:flex md:space-x-32 md:flex-wrap md:w-3/4 md:justify-center md:items-center"
-          >
-            <div
-              v-for="(category, cateIndex) in categories"
-              :key="category.name"
-              class="category-item flex flex-col items-center md:mb-9 cursor-pointer"
-            >
-              <div
-                class="pic w-52 pb-2 hover:scale-105 transition-all duration-300 ease-in-out"
-              >
-                <img
-                  :src="category.image"
-                  :alt="category.name"
-                  class="hover:drop-shadow-lg"
-                  @click="showUnit(cateIndex)"
-                />
-              </div>
-
-              <p class="text-xl">{{ category.name }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="unit" v-if="unitPage">
     <div class="bg-main-bgColor min-h-screen w-full">
       <div class="flex justify-between">
-        <img
-          src="/categories/icon/left-arrow.png"
-          alt="Arrow"
-          class="pt-20 pl-20 cursor-pointer size-40"
-          @click="backToCategory"
-        />
+        <!-- Back to category -->
+        <router-link :to="{ name: 'Categories' }">
+          <img
+            src="/categories/icon/left-arrow.png"
+            alt="Arrow"
+            class="pt-20 pl-20 cursor-pointer size-40"
+          />
+        </router-link>
         <h1
           class="text-3xl text-wrongPopup-size font-semibold font-outfit text-title pt-28 pr-20"
         >
@@ -115,7 +47,7 @@ const currentItem = computed(() => {
             v-for="(item, index) in currentItem"
             :key="item.id"
           >
-            <router-link :to="{ name: 'Game1', params: { unit: index } }">
+            <router-link :to="{ name: 'Game', params: { unit: index } }">
               <img :src="item.src" :alt="item.meaning" />
               {{ index }}
             </router-link>

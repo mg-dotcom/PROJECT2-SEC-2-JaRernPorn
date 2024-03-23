@@ -1,17 +1,23 @@
-<script setup></script>
+<script setup>
+import { ref } from "vue";
+
+import { categories } from "../../data/data.json";
+
+const categoryPage = ref(true);
+</script>
 
 <template>
   <section class="category" v-if="categoryPage">
     <div class="bg-main-bgColor min-h-screen overflow-hidden">
       <header class="py-7 px-7">
         <!-- Back to home Button -->
-        <RouterLink to="/">
+        <router-link to="/">
           <img
             class="w-16 absolute hover:w-catePage-20 transition-all duration-300 ease-in-out cursor-pointer"
             src="/categories/icon/left-arrow.png"
             alt="left-arrow"
           />
-        </RouterLink>
+        </router-link>
 
         <div class="header flex justify-center items-center">
           <div
@@ -37,12 +43,21 @@
               <div
                 class="pic w-52 pb-2 hover:scale-105 transition-all duration-300 ease-in-out"
               >
-                <img
-                  :src="category.image"
-                  :alt="category.name"
-                  class="hover:drop-shadow-lg"
-                  @click="showUnit(cateIndex)"
-                />
+                <router-link
+                  :to="{
+                    name: 'CategoriesUnits',
+                    params: {
+                      category: category.name.toLowerCase(),
+                      cateIndex: cateIndex,
+                    },
+                  }"
+                >
+                  <img
+                    :src="category.image"
+                    :alt="category.name"
+                    class="hover:drop-shadow-lg"
+                  />
+                </router-link>
               </div>
 
               <p class="text-xl">{{ category.name }}</p>

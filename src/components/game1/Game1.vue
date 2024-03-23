@@ -1,17 +1,16 @@
 <script setup>
-import { useRoute, useRouter } from "vue-router";
-const { params } = useRoute();
+import { useRoute } from "vue-router";
 const route = useRoute(); // using useRoute() hook to access the current route object
 
-import { categories } from "../../data/data.json";
+import { categories } from "../../../data/data.json";
 import { computed, ref } from "vue";
-import Card from "../components/game1/Card.vue";
-import CheckButton from "../components/game1/CheckButton.vue";
-import Setting from "../components/Setting.vue";
+import Card from "./Card.vue";
+import CheckButton from "./CheckButton.vue";
+import Setting from "../Setting.vue";
 
-const currentIndexCate = ref(1);
+const currentIndexCate = ref(route.params.cateIndex);
 const currentIndexUnit = ref(route.params.unit);
-const currentIndexItem = ref(route.params.unit);
+// const currentIndexItem = ref(route.params.itemIndex);
 const currentIndexQuestion = ref(0);
 
 const showColor = ref(false);
