@@ -1,107 +1,122 @@
 <script setup>
-import { ref, computed, defineProps } from 'vue'
-import data from '../../../data/data.json'
-import Setting from '../Setting.vue'
-import Answer_popup from './Answer_popup.vue'
-import SoundControl from '../SoundControl.vue'
+import { ref, computed, defineProps } from "vue";
+import data from "../../data/data.json";
+import Setting from "../components/Setting.vue";
+import Answer_popup from "../components/game2/Answer_popup.vue";
+import SoundControl from "../components/SoundControl.vue";
+import { useRouter, useRoute } from "vue-router";
 
-const answer = ref('')
-const options = ref([])
-const currentIndex = ref(0) //คำถามปัจจุบัน
-const showSetting = ref(false)
-const showPopup = ref(false)
-const checkStatus = ref(false)
+const router = useRouter();
+const route = useRoute();
 
-const props = defineProps({
-  categoryIndex: {
-    //เอาไว้ดึงข้อมูลของหมวดหมู่มาใช้
-    type: Number,
-    default: 0 //ให้เป็นที่ 0 ไว้ก่อน
-  },
-  unitIndex: {
-    //รับมาเพื่อที่จะเอาไว้ดึงข้อมูลของ unit อันนั้นๆมาใช้
-    type: Number,
-    default: 0 //ให้เป็นที่ 0 ไว้ก่อน
-  }
-})
+const answer = ref("");
+const options = ref([]);
+const currentIndex = ref(0); //คำถามปัจจุบัน
+const showSetting = ref(false);
+const showPopup = ref(false);
+const checkStatus = ref(false);
 
+const paramCateIndex = route.params.cateIndex - 1;
+const paramUnitIndex = route.params.unit - 1;
+
+const unitIndex = ref(paramUnitIndex);
+const categoryIndex = ref(paramCateIndex);
 //const items = category.categories[0].units[0].items
 
-const currentCategory = data.categories[props.categoryIndex]
-const items = currentCategory.units[props.unitIndex].items
+const currentCategory = data.categories[paramCateIndex];
+const items = currentCategory.units[paramUnitIndex].items;
 
 const audioOfOption = computed(() => {
-  return data.categories[props.categoryIndex].units[props.unitIndex].items[
+  return data.categories[categoryIndex.value].units[unitIndex.value].items[
     currentIndex.value
-  ].pronunciation
-})
+  ].pronunciation;
+});
 
 const currentQuiz = computed(() => {
   if (currentIndex.value === items.length - 1) {
-    console.log('Game Over!')
+    console.log("Game Over!");
   }
-  answer.value = items[currentIndex.value].meaning // กำหนดคำตอบจากข้อปัจจุบัน
-  options.value = generateOptions(answer.value)
-  return items[currentIndex.value].word // แสดงคำปัจจุบันที่กำลังเล่น
-})
+  answer.value = items[currentIndex.value].meaning; // กำหนดคำตอบจากข้อปัจจุบัน
+  options.value = generateOptions(answer.value);
+  return items[currentIndex.value].word; // แสดงคำปัจจุบันที่กำลังเล่น
+});
 
 const generateOptions = (answer) => {
-  const optionsArray = []
-  optionsArray.push({ id: 1, value: answer })
+  const optionsArray = [];
+  optionsArray.push({ id: 1, value: answer });
   while (optionsArray.length < 3) {
-    const randomIndex = Math.floor(Math.random() * items.length)
-    const randomWord = items[randomIndex].meaning
+    const randomIndex = Math.floor(Math.random() * items.length);
+    const randomWord = items[randomIndex].meaning;
     if (!optionsArray.some((option) => option.value === randomWord)) {
-      optionsArray.push({ id: optionsArray.length + 1, value: randomWord })
+      optionsArray.push({ id: optionsArray.length + 1, value: randomWord });
     }
   }
-  return shuffle(optionsArray)
-}
+  return shuffle(optionsArray);
+};
 
 const shuffle = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[array[i], array[j]] = [array[j], array[i]]
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
   }
-  return array
-}
+  return array;
+};
 
-const isSelected = ref(false)
-const colorOption = ref(false)
+const isSelected = ref(false);
+const colorOption = ref(false);
 
-const userSelected = ref('')
+const userSelected = ref("");
 const userAnswer = (userSelectedOption) => {
-  userSelected.value = userSelectedOption
-  isSelected.value = true
-}
+  userSelected.value = userSelectedOption;
+  isSelected.value = true;
+};
+
+// Pass to game 3
+const correctAnswers = ref([]);
+
+const passToGame3 = () => {
+  correctAnswers.value.push(answer.value);
+
+  if (correctAnswers.value.length === 3) {
+    router.push({
+      name: "Game3",
+      params: {
+        cateIndex: route.params.cateIndex,
+        unit: route.params.unit,
+      },
+    });
+  }
+};
 
 const checkAnswer = () => {
-  checkStatus.value = true
+  checkStatus.value = true;
 
   if (userSelected.value === answer.value) {
-    colorOption.value = true
-    isSelected.value = false
-    console.log('Correct!')
+    colorOption.value = true;
+    isSelected.value = false;
+    console.log("Correct!");
 
     setTimeout(() => {
-      currentIndex.value++
-      colorOption.value = false
-      answer.value = ''
-    }, 2000)
+      currentIndex.value++;
+      colorOption.value = false;
+      answer.value = "";
+    }, 2000);
+
+    passToGame3();
   } else {
-    console.log('Wrong!')
-    showPopup.value = true
+    console.log("Wrong!");
+    showPopup.value = true;
   }
-}
+};
 
 const closePopup = () => {
-  showPopup.value = !showPopup.value
-  currentIndex.value++
-}
+  showPopup.value = !showPopup.value;
+  currentIndex.value++;
+};
 
 const toggleSetting = () => {
-  showSetting.value = !showSetting.value
-}
+  showSetting.value = !showSetting.value;
+};
 </script>
 
 <template>
@@ -153,7 +168,7 @@ const toggleSetting = () => {
                 :class="{
                   'bg-correct-option': option.value === answer && colorOption,
                   'bg-selected-option-blue':
-                    option.value === userSelected && isSelected
+                    option.value === userSelected && isSelected,
                 }"
               >
                 {{ option.value }}

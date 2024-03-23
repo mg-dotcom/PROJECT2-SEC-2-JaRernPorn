@@ -1,29 +1,34 @@
 <script setup>
-import { ref, defineProps } from 'vue'
-import category from '../../../data/data.json'
-import SoundControl from '../SoundControl.vue'
-import Setting from '../Setting.vue'
+import { ref, defineProps } from "vue";
+import category from "../../data/data.json";
+import SoundControl from "../components/SoundControl.vue";
+import Setting from "../components/Setting.vue";
+import { useRouter, useRoute } from "vue-router";
 
-const props = defineProps({
-  categoryIndex: {
-    //เอาไว้ดึงข้อมูลของหมวดหมู่มาใช้
-    type: Number,
-    default: 0 //ให้เป็นที่ 0 ไว้ก่อน
-  },
-  unitIndex: {
-    //รับมาเพื่อที่จะเอาไว้ดึงข้อมูลของ unit อันนั้นๆมาใช้
-    type: Number,
-    default: 0 //ให้เป็นที่ 0 ไว้ก่อน
-  }
-})
+const route = useRoute();
+const router = useRouter();
 
-const showSetting = ref(false)
+const playAgain = () => {};
+
+const mainMenu = () => {
+  router.push({ name: "Categories" });
+};
+
+console.log();
+
+const paramCateIndex = route.params.cateIndex - 1;
+const paramUnitIndex = route.params.unit - 1;
+
+const unitIndex = ref(paramUnitIndex);
+const categoryIndex = ref(paramCateIndex);
+
+const showSetting = ref(false);
 const toggleSetting = () => {
-  showSetting.value = !showSetting.value
-}
+  showSetting.value = !showSetting.value;
+};
 
-const currentCategory = category.categories[props.categoryIndex]
-const items = currentCategory.units[props.unitIndex].items
+const currentCategory = category.categories[categoryIndex.value];
+const items = currentCategory.units[unitIndex.value].items;
 </script>
 
 <template>
@@ -39,11 +44,13 @@ const items = currentCategory.units[props.unitIndex].items
           />
         </div>
         <div class="font-semibold font-outfit text-title">
-          <img
-            src="/settingBtn/home.svg"
-            alt="home button"
-            class="cursor-pointer size-14"
-          />
+          <router-link to="/">
+            <img
+              src="/settingBtn/home.svg"
+              alt="home button"
+              class="cursor-pointer size-14"
+            />
+          </router-link>
         </div>
       </div>
 
@@ -78,8 +85,8 @@ const items = currentCategory.units[props.unitIndex].items
             class="border-solid border-b-2 border-black w-[230px] ml-7 mt-10"
           ></div>
           <h1 class="text-[24px] ml-10 mt-3">
-            {{ item.word.split(' ')[0] }} <br />
-            {{ item.word.split(' ').slice(1).join(' ') }}
+            {{ item.word.split(" ")[0] }} <br />
+            {{ item.word.split(" ").slice(1).join(" ") }}
           </h1>
         </div>
         <div class="absolute left-0 right-0 top-1/3" v-show="showSetting">
@@ -97,13 +104,13 @@ const items = currentCategory.units[props.unitIndex].items
           <div
             class="flex justify-center items-center bg-title rounded-lg font-Outfit font-semibold text-lg p-4 text-white text-center hover:bg-button-bgColor sm:text-lg sm:p-3 sm:w-40 h-16"
           >
-            <button class="uppercase">Play Again</button>
+            <button class="uppercase" @click="playAgain">Play Again</button>
           </div>
 
           <div
             class="flex justify-center items-center bg-title rounded-lg font-Outfit font-semibold text-lg p-4 text-white text-center hover:bg-button-bgColor sm:text-lg sm:p-3 sm:w-40 h-16"
           >
-            <button class="uppercase">Main Menu</button>
+            <button class="uppercase" @click="mainMenu">Main Menu</button>
           </div>
         </div>
       </div>

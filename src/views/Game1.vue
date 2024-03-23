@@ -1,16 +1,19 @@
 <script setup>
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 const route = useRoute(); // using useRoute() hook to access the current route object
-
-import { categories } from "../../../data/data.json";
+const router = useRouter();
+import { categories } from "../../data/data.json";
 import { computed, ref } from "vue";
-import Card from "./Card.vue";
-import CheckButton from "./CheckButton.vue";
-import Setting from "../Setting.vue";
+import Card from "../components/game1/Card.vue";
+import CheckButton from "../components/game1/CheckButton.vue";
+import Setting from "../components/Setting.vue";
 
-const currentIndexCate = ref(route.params.cateIndex);
-const currentIndexUnit = ref(route.params.unit);
-// const currentIndexItem = ref(route.params.itemIndex);
+const paramCateIndex = route.params.cateIndex - 1;
+const paramUnitIndex = route.params.unit - 1;
+
+
+const currentIndexCate = ref(paramCateIndex);
+const currentIndexUnit = ref(paramUnitIndex);
 const currentIndexQuestion = ref(0);
 
 const showColor = ref(false);
@@ -45,13 +48,6 @@ const currentQuestion = computed(() => {
   ].meaning;
 });
 
-//Item
-const currentItem = computed(() => {
-  return categories[currentIndexCate.value].units[currentIndexUnit.value].items[
-    currentIndexQuestion.value
-  ];
-});
-
 //Shuffle
 const shuffle = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -67,6 +63,31 @@ const threeChoices = computed(() => {
     categories[currentIndexCate.value].units[currentIndexUnit.value].items;
   return shuffle([...choices]);
 });
+
+//CollectAnswer
+const selectedAnswer = (item) => {
+  userAnswer.value = [];
+  userAnswer.value.push(item);
+};
+
+// Pass to game 2
+const correctAnswers = ref([]);
+
+const passToGame2 = () => {
+  correctAnswers.value.push(correctAnswer.value);
+  // console.log("correctAnswers: ", correctAnswers.value);
+
+  if (correctAnswers.value.length === 3) {
+    console.log("Pass to Game 2");
+    router.push({
+      name: "Game2",
+      params: {
+        cateIndex: route.params.cateIndex,
+        unit: route.params.unit,
+      },
+    });
+  }
+};
 
 //CheckAnswer
 const checkAnswer = (userAns) => {
@@ -88,11 +109,14 @@ const checkAnswer = (userAns) => {
         showColor.value = false;
         isCorrect.value = false;
         currentIndexQuestion.value++;
+        // loop 3 questions
         if (currentIndexQuestion.value > 2) {
           currentIndexQuestion.value = 0;
         }
       }, 1500);
     }, 0);
+
+    passToGame2();
   } else {
     console.log("Wrong!");
     userAnswerId.value = userAns[0].id;
@@ -114,12 +138,8 @@ const checkAnswer = (userAns) => {
 
   userAns.splice(0, 1);
   checkStatus.value = false;
-};
 
-//CollectAnswer
-const selectedAnswer = (item) => {
-  userAnswer.value = [];
-  userAnswer.value.push(item);
+  console.log(currentIndexQuestion.value);
 };
 </script>
 

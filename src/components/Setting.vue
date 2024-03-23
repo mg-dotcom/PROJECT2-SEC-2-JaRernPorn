@@ -7,7 +7,7 @@ const emits = defineEmits([
   "resumeGame",
   "goBackHome",
 ]);
-const isPlaying = ref(true);
+const isPlaying = ref(false);
 const player = ref("");
 const musicControl = () => {
   if (isPlaying.value) {
@@ -18,11 +18,6 @@ const musicControl = () => {
 };
 
 watch(isPlaying, () => {
-  musicControl();
-});
-
-onMounted(() => {
-  isPlaying.value = true;
   musicControl();
 });
 </script>

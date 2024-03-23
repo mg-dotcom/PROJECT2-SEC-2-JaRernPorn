@@ -1,7 +1,7 @@
 <script setup>
-import Options from "./Options.vue";
-import Setting from "../Setting.vue";
-import Topbar from "../Topbar.vue";
+import Options from "../components/game4/Options.vue";
+import Setting from "../components/Setting.vue";
+import Topbar from "../components/Topbar.vue";
 import { ref } from "vue";
 
 const settingPopup = ref(false);

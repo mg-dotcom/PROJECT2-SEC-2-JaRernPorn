@@ -1,13 +1,14 @@
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, defineProps } from "vue";
 import { useRoute } from "vue-router";
 const route = useRoute(); // using useRoute() hook to access the current route object
-
 import { categories } from "../../data/data.json";
 
-const currentIndexCate = ref(route.params.cateIndex);
-
 const unitPage = ref(true);
+
+const paramCateIndex = route.params.cateIndex - 1;
+
+const currentIndexCate = ref(paramCateIndex);
 
 const currentCategory = computed(() => {
   return categories[currentIndexCate.value].name;
@@ -47,9 +48,8 @@ const currentItem = computed(() => {
             v-for="(item, index) in currentItem"
             :key="item.id"
           >
-            <router-link :to="{ name: 'Game', params: { unit: index } }">
+            <router-link :to="{ name: 'Game1', params: { unit: index + 1 } }">
               <img :src="item.src" :alt="item.meaning" />
-              {{ index }}
             </router-link>
           </div>
         </div>
