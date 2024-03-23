@@ -54,7 +54,7 @@ const goBack = () => {
           <div
             class="categories text-title font-semibold font-outfit text-5xl flex items-center justify-center w-full px-17"
           >
-            Categories
+            Categories 
           </div>
         </div>
       </header>

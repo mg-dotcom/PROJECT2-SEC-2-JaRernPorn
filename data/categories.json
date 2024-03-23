@@ -410,7 +410,7 @@
     {
       "id": 1,
       "name": "Fruits",
-      "card": [
+      "cards": [
         { "id": 1, "word": "苹果 ", "pinyin": "píngguǒ", "meaning": "Apple" },
         {
           "id": 2,
