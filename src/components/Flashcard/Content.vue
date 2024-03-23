@@ -6,7 +6,7 @@ import { deleteFlashcard } from '../../libs/flashcard-libs/FlashCardModal.js'
 import Card from './Card.vue'
 import { editFlashcard } from '../../libs/flashcard-libs/FlashCardModal.js'
 
-import { getFlashcards, getCollections } from '@/libs/flashcard-libs/FetchUtils'
+import { getFlashcards } from '@/libs/flashcard-libs/FetchUtils'
 import Collection from '../collectionFlashcard/Collection.vue'
 
 const props = defineProps({
@@ -22,10 +22,9 @@ const props = defineProps({
 
 const flashcards = ref([])
 
-// onMounted(async () => {
-//   flashcards.value = await getFlashcards(import.meta.env.VITE_BASE_URL)
-//   console.log(flashcards.value)
-// })
+onMounted(async () => {
+  flashcards.value = await getFlashcards(import.meta.env.VITE_BASE_URL)
+})
 
 const computedFlashcards = computed(() => {
   return flashcards.value

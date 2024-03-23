@@ -12,7 +12,7 @@ async function getFlashcards(url) {
   try {
     const data = await fetch(url)
     const collections = await data.json()
-    const cards = collections[0].cards
+    const cards = collections
     return cards
   } catch (error) {
     console.error(error)
@@ -63,10 +63,29 @@ async function editCollection(url, editCol, id) {
   }
 }
 
+async function editFlashcard(url, editCol, id) {
+  try {
+    const res = await fetch(`${url}/${id}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        ...editCol
+      })
+    })
+    const editedCol = await res.json()
+    return editedCol
+  } catch (error) {
+    console.log(`error: ${error}`)
+  }
+}
+
 export {
   getCollections,
   getFlashcards,
   addNewCollection,
   deleteCollection,
-  editCollection
+  editCollection,
+  editFlashcard
 }
