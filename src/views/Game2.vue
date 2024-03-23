@@ -32,12 +32,17 @@ const audioOfOption = computed(() => {
   ].pronunciation;
 });
 
+const countCheck = ref(0);
+
 const currentQuiz = computed(() => {
-  if (currentIndex.value === items.length - 1) {
-    console.log("Game Over!");
+  if (countCheck.value === items.length) {
+    currentIndex.value = 0;
+    passToGame3();
   }
+
   answer.value = items[currentIndex.value].meaning; // กำหนดคำตอบจากข้อปัจจุบัน
   options.value = generateOptions(answer.value);
+
   return items[currentIndex.value].word; // แสดงคำปัจจุบันที่กำลังเล่น
 });
 
@@ -71,21 +76,14 @@ const userAnswer = (userSelectedOption) => {
   isSelected.value = true;
 };
 
-// Pass to game 3
-const correctAnswers = ref([]);
-
 const passToGame3 = () => {
-  correctAnswers.value.push(answer.value);
-
-  if (correctAnswers.value.length === 3) {
-    router.push({
-      name: "Game3",
-      params: {
-        cateIndex: route.params.cateIndex,
-        unit: route.params.unit,
-      },
-    });
-  }
+  router.push({
+    name: "Game3",
+    params: {
+      cateIndex: route.params.cateIndex,
+      unit: route.params.unit,
+    },
+  });
 };
 
 const checkAnswer = () => {
@@ -94,24 +92,24 @@ const checkAnswer = () => {
   if (userSelected.value === answer.value) {
     colorOption.value = true;
     isSelected.value = false;
-    console.log("Correct!");
-
     setTimeout(() => {
+      countCheck.value++;
       currentIndex.value++;
       colorOption.value = false;
+      isSelected.value = false;
       answer.value = "";
     }, 2000);
-
-    passToGame3();
   } else {
-    console.log("Wrong!");
     showPopup.value = true;
+    isSelected.value = false;
+    colorOption.value = false;
   }
 };
 
 const closePopup = () => {
   showPopup.value = !showPopup.value;
   currentIndex.value++;
+  countCheck.value++;
 };
 
 const toggleSetting = () => {
@@ -122,29 +120,33 @@ const toggleSetting = () => {
 <template>
   <div class="bg-main-bgColor h-screen w-full">
     <div class="font-outfit">
-      <div class="header flex justify-between p-12">
-        <div class="text-5xl font-semibold font-outfit text-title">
-          Category : {{ currentCategory.name }}
+      <header class="py-8 px-10 flex-grow-0">
+        <!-- Back to home Button -->
+        <div class="header flex justify-center items-center">
+          <div
+            class="categories text-title font-semibold font-outfit text-4xl flex items-center justify-start w-full"
+          >
+            Category: {{ currentCategory.name }}
+          </div>
         </div>
-
-        <div class="setting flex">
+        <div class="setting">
           <img
             src="/settingBtn/setting.svg"
             alt="setting button"
-            class="w-10 hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
+            class="w-10 absolute right-10 top-10 hover:scale-105 transition-all duration-300 ease-in-out"
             @click="toggleSetting"
           />
         </div>
-      </div>
+      </header>
 
-      <div class="flex justify-center">
+      <div class="flex flex-col justify-center items-center">
         <div class="flex flex-col items-center">
-          <div class="text-title text-4xl font-semibold py-5">
+          <div class="text-title text-4xl font-semibold py-2">
             Select this in English.
           </div>
 
           <div
-            class="flex justify-between items-center bg-white rounded-lg drop-shadow-lg w-80 py-5 px-5"
+            class="flex justify-between items-center bg-white rounded-lg drop-shadow-lg w-80 py-5 px-5 scale-90"
           >
             <div class="flex flex-col text-2xl text-title font-semibold mx-3">
               <h3>{{ currentQuiz }}</h3>
@@ -158,17 +160,16 @@ const toggleSetting = () => {
             </div>
           </div>
 
-          <div class="py-12 w-3/4">
-            <div class="grid grid-cols-1 gap-y-5 justify-center">
+          <div class="py-5 w-3/4">
+            <div class="grid grid-cols-1 gap-y-5 justify-center scale-90">
               <button
                 v-for="(option, index) in options"
                 :key="index"
                 @click="userAnswer(option.value)"
                 class="flex justify-center items-center bg-title text-white font-semiboldl text-2xl h-14 sm:h-20 rounded-lg hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
                 :class="{
-                  'bg-correct-option': option.value === answer && colorOption,
-                  'bg-selected-option-blue':
-                    option.value === userSelected && isSelected,
+                  'bg-green-500': option.value === answer && colorOption,
+                  'bg-blue-500': option.value === userSelected && isSelected,
                 }"
               >
                 {{ option.value }}

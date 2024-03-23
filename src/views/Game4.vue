@@ -6,9 +6,6 @@ import { ref } from "vue";
 
 const settingPopup = ref(false);
 
-const showSetting = (flag) => {
-  settingPopup.value = flag; //true
-};
 const closeSetting = (flag) => {
   settingPopup.value = flag; //false
 };
@@ -17,8 +14,6 @@ const closeSetting = (flag) => {
 <template>
   <!-- Game 4 page -->
   <div class="w-full h-screen bg-main-bgColor">
-    <Topbar @setting="showSetting" />
-
     <div class="flex justify-center py-8">
       <p
         class="font-outfit text-title text-2xl font-semibold sm:text-3xl lg:text-4xl"

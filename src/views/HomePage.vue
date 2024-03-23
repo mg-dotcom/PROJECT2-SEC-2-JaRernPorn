@@ -1,7 +1,7 @@
 <script setup>
 import { reactive, ref } from "vue";
 import { RouterLink } from "vue-router";
-import SettingHomepage from "../components/homepage/SettingHomepage.vue";
+import SettingHomepage from "../components/SettingHomepage.vue";
 
 const page = reactive({
   homePage: true,
@@ -23,7 +23,7 @@ const toggleSetting = () => {
           <img
             src="/settingBtn/setting.svg"
             alt="setting button"
-            class="w-10 absolute right-10 top-10 hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
+            class="w-10 absolute right-10 top-10 hover:scale-105 transition-all duration-300 ease-in-out"
             @click="toggleSetting"
           />
         </div>

@@ -37,19 +37,30 @@ const currentCategory = computed(() => {
   return data.categories[currentIndexCate.value].name;
 });
 
-const currentQuiz = computed(() => {
-  answerOfQuiz.value =
-    data.categories[currentIndexCate.value].units[currentIndexUnit.value].items[
-      randomQuiz.value
-    ].word;
-  meaning.value =
-    data.categories[currentIndexCate.value].units[currentIndexUnit.value].items[
-      randomQuiz.value
-    ].meaning;
+const countCheck = ref(0);
 
-  return data.categories[currentIndexCate.value].units[currentIndexUnit.value]
-    .items[randomQuiz.value].src;
+const currentQuiz = computed(() => {
+  if (
+    countCheck.value ===
+    data.categories[currentIndexCate.value].units[currentIndexUnit.value].items
+      .length
+  ) {
+    passToGame4();
+  } else {
+    answerOfQuiz.value =
+      data.categories[currentIndexCate.value].units[
+        currentIndexUnit.value
+      ].items[randomQuiz.value].word;
+    meaning.value =
+      data.categories[currentIndexCate.value].units[
+        currentIndexUnit.value
+      ].items[randomQuiz.value].meaning;
+
+    return data.categories[currentIndexCate.value].units[currentIndexUnit.value]
+      .items[randomQuiz.value].src;
+  }
 });
+
 //Shuffle
 const shuffle = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -81,24 +92,19 @@ const closePopup = () => {
   setColorOption.value = "";
   // answer.value=''
   // userSelected.value=''
+  countCheck.value++;
   isSelected.value = false;
   randomQuiz.value++;
 };
 
-const correctAnswers = ref([]);
-
 const passToGame4 = () => {
-  correctAnswers.value.push(answer.value);
-
-  if (correctAnswers.value.length === 3) {
-    router.push({
-      name: "Game4",
-      params: {
-        cateIndex: route.params.cateIndex,
-        unit: route.params.unit,
-      },
-    });
-  }
+  router.push({
+    name: "Game4",
+    params: {
+      cateIndex: route.params.cateIndex,
+      unit: route.params.unit,
+    },
+  });
 };
 
 const turnOnCheckStatus = () => {
@@ -108,6 +114,7 @@ const turnOnCheckStatus = () => {
     ].word;
   checkStatus.value = true;
   if (userSelected.value === answer.value && checkStatus.value) {
+    countCheck.value++;
     setColorOption.value = answer.value;
     userSelected.value = "";
     setTimeout(() => {
@@ -117,8 +124,6 @@ const turnOnCheckStatus = () => {
       randomQuiz.value++;
       console.log("correct!");
     }, 2000);
-
-    passToGame4();
   } else {
     answer.value = "";
     userSelected.value = "";
@@ -129,33 +134,39 @@ const turnOnCheckStatus = () => {
 
 <template>
   <div class="font-outfit bg-main-bgColor min-h-screen">
-    <div class="header flex justify-between p-16">
-      <div class="category-name text-title text-4xl font-semibold">
-        Category : {{ currentCategory }}
+    <header class="py-8 px-10 flex-grow-0">
+      <!-- Back to home Button -->
+      <div class="header flex justify-center items-center">
+        <div
+          class="categories text-title font-semibold font-outfit text-4xl flex items-center justify-start w-full"
+        >
+          Category: {{ currentCategory }}
+        </div>
       </div>
-      <div class="setting flex">
+      <div class="setting">
         <img
           src="/settingBtn/setting.svg"
           alt="setting button"
-          class="w-10 hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
+          class="w-10 absolute right-10 top-10 hover:scale-105 transition-all duration-300 ease-in-out"
           @click="toggleSetting"
         />
       </div>
-    </div>
+    </header>
     <div></div>
     <div class="flex justify-center">
       <div class="quiz flex flex-col items-center">
-        <div class="text-title text-3xl font-semibold py-5">
+        <div class="text-title text-4xl font-semibold py-2">
           Select the correct meaning.
         </div>
+
         <div
-          class="pic bg-white flex flex-col items-center rounded-lg drop-shadow-lg w-32 py-5"
+          class="pic bg-white flex flex-col items-center rounded-lg drop-shadow-lg w-32 py-5 m-5"
         >
           <img :src="currentQuiz" class="w-20" />
           <h3>{{ meaning }}</h3>
         </div>
 
-        <div class="options py-12 w-3/4">
+        <div class="options pt-5 w-3/4">
           <SoundControl :soundPath="audioOfOption">
             <Option
               :options="generateOption"
@@ -170,7 +181,7 @@ const turnOnCheckStatus = () => {
     </div>
     <div class="flex justify-center">
       <button
-        class="bg-title text-white p-2 rounded-lg hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
+        class="bg-title text-white p-2 mt-5 rounded-lg hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
         @click="turnOnCheckStatus"
       >
         Check

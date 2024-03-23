@@ -1,10 +1,10 @@
 <script setup>
-const props = defineProps(['soundPath'])
+const props = defineProps(["soundPath"]);
 
 const soundControl = () => {
-  const sound = new Audio(props.soundPath)
-  sound.play()
-}
+  const sound = new Audio(props.soundPath);
+  sound.play();
+};
 </script>
 
 <template>

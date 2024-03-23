@@ -2,7 +2,7 @@
 import { ref } from "vue";
 
 import { categories } from "../../data/data.json";
-import SettingHomepage from "../components/homepage/SettingHomepage.vue";
+import SettingHomepage from "../components/SettingHomepage.vue";
 
 const categoryPage = ref(true);
 
@@ -37,7 +37,7 @@ const toggleSetting = () => {
           <img
             src="/settingBtn/setting.svg"
             alt="setting button"
-            class="w-10 absolute right-10 top-10 hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
+            class="w-10 absolute right-10 top-10 hover:scale-105 transition-all duration-300 ease-in-out"
             @click="toggleSetting"
           />
         </div>

@@ -1,8 +1,9 @@
 <script setup>
 import { ref, computed, defineProps } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, RouterLink } from "vue-router";
 const route = useRoute(); // using useRoute() hook to access the current route object
 import { categories } from "../../data/data.json";
+import Categories from "./Categories.vue";
 
 const unitPage = ref(true);
 
@@ -23,35 +24,46 @@ const currentItem = computed(() => {
 
 <template>
   <section class="unit" v-if="unitPage">
-    <div class="bg-main-bgColor min-h-screen w-full">
-      <div class="flex justify-between">
-        <!-- Back to category -->
-        <router-link :to="{ name: 'Categories' }">
+    <div class="bg-main-bgColor min-h-screen w-full flex flex-col">
+      <!-- Back to category -->
+      <header class="py-7 px-7">
+        <!-- Back to home Button -->
+        <router-link to="/categories">
           <img
+            class="w-16 absolute hover:w-catePage-20 transition-all duration-300 ease-in-out cursor-pointer"
             src="/categories/icon/left-arrow.png"
-            alt="Arrow"
-            class="pt-20 pl-20 cursor-pointer size-40"
+            alt="left-arrow"
           />
         </router-link>
-        <h1
-          class="text-3xl text-wrongPopup-size font-semibold font-outfit text-title pt-28 pr-20"
-        >
-          {{ currentCategory }}
-        </h1>
-        <img src="/settingBtn/setting.svg" alt="Setting" class="pt-20 pr-20" />
-      </div>
 
-      <div class="flex justify-center pt-20">
-        <div class="flex flex-wrap justify-center gap-44 w-[800px] h-[500px]">
+        <div class="header flex justify-center items-center">
           <div
-            class="w-44 h-44 bg-[#F9D986] rounded-[50px] transition-all duration-300 ease-in-out transform hover:scale-110"
-            v-for="(item, index) in currentItem"
-            :key="item.id"
+            class="categories text-title font-semibold font-outfit text-5xl flex items-center justify-center w-full px-17"
           >
-            <router-link :to="{ name: 'Game1', params: { unit: index + 1 } }">
-              <img :src="item.src" :alt="item.meaning" />
-            </router-link>
+            {{ currentCategory }}
           </div>
+        </div>
+        <div class="setting">
+          <img
+            src="/settingBtn/setting.svg"
+            alt="setting button"
+            class="w-10 absolute right-10 top-10 hover:scale-105 transition-all duration-300 ease-in-out"
+            @click="toggleSetting"
+          />
+        </div>
+      </header>
+
+      <div
+        class="absolute left-0 right-0 xl:top-[33%] flex justify-center items-center xl:space-y-0 xl:flex-grow lg:top-1/3 gap-x-24 flex-wrap md:top-[15%] md:scale-75 md:space-y-8 sm:top-1/3 mobile:top-1/4"
+      >
+        <div
+          class="w-56 h-56 bg-[#F9D986] rounded-[50px] flex justify-center items-center transition-all duration-300 ease-in-out transform hover:scale-110"
+          v-for="(item, index) in currentItem"
+          :key="item.id"
+        >
+          <router-link :to="{ name: 'Game1', params: { unit: index + 1 } }">
+            <img class="w-52 h-52" :src="item.src" :alt="item.meaning" />
+          </router-link>
         </div>
       </div>
     </div>
