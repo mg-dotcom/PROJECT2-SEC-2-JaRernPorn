@@ -34,7 +34,7 @@ const toggleHowToPlay = () => {
   <section class="้HomePage" v-show="page.homePage">
     <div class="h-screen w-full bg-main-bgColor p-5">
       <div class="border-double border-8 border-title box-border h-full w-full">
-        <div class="setting flex justify-end pr-5">
+        <div class="setting flex justify-end pr-5 pt-4">
           <img
             src="/settingHomepage/Vector.svg"
             alt="setting button"
@@ -42,8 +42,9 @@ const toggleHowToPlay = () => {
             @click="toggleSetting"
           />
         </div>
+
         <div
-          class="logo-title text-center text-title pt-title sm:text-title-size mobile:text-mobile-title-size"
+          class="logo-title text-center text-title pt-5 sm:text-title-size mobile:text-mobile-title-size"
         >
           <div class="font-alkatra font-medium leading-title">HELLO !</div>
           <div class="font-alkatra font-medium leading-title">CHINESE</div>
@@ -59,7 +60,7 @@ const toggleHowToPlay = () => {
         <!-- Play Button -->
         <div id="home-page-button">
           <router-link :to="{ name: 'CategoriesUnits' }">
-            <div id="play-button" class="flex justify-center pt-12">
+            <div id="play-button" class="flex justify-center pt-8">
               <img
                 @click="showCategoryPage"
                 class="w-72 relative hover:w-80 transition-all duration-300 ease-in-out cursor-pointer"
@@ -98,13 +99,10 @@ const toggleHowToPlay = () => {
         </div>
       </div>
     </div>
-    <div class="absolute left-0 right-0 top-1/3" v-show="showSetting">
-      <SettingHomepage @closeSetting="toggleSetting" />
+    <div class="absolute left-0 right-0 top-0" v-show="showSetting">
+      <SettingHomePage @closeSetting="toggleSetting" />
     </div>
   </section>
-  <!-- <section>
-    <CategoriesUnits v-show="page.categoryPage"></CategoriesUnits>
-  </section> -->
 </template>
 
 <style scoped></style>
