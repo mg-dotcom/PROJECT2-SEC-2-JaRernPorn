@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
-import data from '../../../data/categories.json'
+import data from '../../../data/data.json'
 
 const currentIndexItem = ref(0)
 const currentIndexUnit = ref(0)

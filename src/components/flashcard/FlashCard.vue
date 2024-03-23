@@ -3,10 +3,6 @@ import { reactive, ref } from 'vue'
 import Header from '../Header.vue'
 import Content from './Content.vue'
 
-// import { reactive, ref } from 'vue'
-// import Header from '../Header.vue'
-// import Content from './ContentFcPage.vue'
-
 const showFlashCard = ref(true)
 
 const popup = reactive({

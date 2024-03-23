@@ -1,7 +1,7 @@
 <script setup>
-import Options from './Options.vue'
-import Setting from './Setting.vue'
-import Topbar from './Topbar.vue'
+import Options from './Options.vue
+import Setting from '../Setting.vue'
+import Topbar from '../Topbar.vue'
 import { ref } from 'vue'
 
 const settingPopup = ref(false)

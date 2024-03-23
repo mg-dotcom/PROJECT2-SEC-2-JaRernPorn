@@ -1,13 +1,13 @@
 <script setup>
 import Option from './Option.vue'
 import data from '../../../data/data.json'
-import Setting from './Setting.vue'
+import Setting from '../Setting.vue'
 import Answer_popup from './Answer_popup.vue'
 import { computed, ref } from 'vue'
-import SoundControl from './SoundControl.vue'
+import SoundControl from '../SoundControl.vue'
 
-const currentIndexCate = ref(0)
-const currentIndexUnit = ref(0)
+const currentIndexCate = ref(2)
+const currentIndexUnit = ref(1)
 
 const answer = ref()
 const meaning = ref()
@@ -115,7 +115,7 @@ const soundControl2 = (path) => {
       </div>
       <div class="setting flex">
         <img
-          src="/Vector.svg"
+          src="/settingBtn/setting.svg"
           alt="setting button"
           class="w-10 hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
           @click="toggleSetting"

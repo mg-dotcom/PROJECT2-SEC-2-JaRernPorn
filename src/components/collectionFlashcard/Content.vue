@@ -5,9 +5,7 @@ import Collection from '../collectionFlashcard/Collection.vue'
 import { editCollection } from '../../libs/flashcard-libs/CollectionModal.js'
 import { deleteCollection } from '../../libs/flashcard-libs/CollectionModal.js'
 import { addNewCollection } from '../../libs/flashcard-libs/CollectionModal.js'
-import { useRouter, useRoute } from 'vue-router'
-const router = useRouter()
-const { params } = useRoute()
+
 const props = defineProps({
   popup: {
     type: Object,
@@ -76,9 +74,7 @@ const toggleOptionCollection = (index) => {
 
     <div v-else-if="computedCollections.length > 0">
       <!-- change params to name -->
-      <!-- <router-link
-        :to="{ name: 'FlashCard', params: { id: 'index' } }"
-      ></router-link> -->
+
       <div
         class="grid grid-cols-1 gap-10 px-10 py-7 text-center lg:grid-cols-3 md:grid-cols-3 md:gap-17 sm:grid-cols-2 sm:gap-10"
         @click.self="closeOption"
