@@ -8,6 +8,10 @@ const props = defineProps({
   closeOption: {
     type: Function,
     required: true
+  },
+  title: {
+    type: String, // Assuming the title is a string
+    required: true
   }
 })
 
@@ -48,7 +52,7 @@ const goBack = () => {
       <h1
         class="text-4xl font-alkatra text-title font-semibold md:text-5xl lg:text-7xl"
       >
-        <slot name="title">Untitle</slot>
+        <slot name="title"> {{ title }}</slot>
       </h1>
     </div>
     <div>

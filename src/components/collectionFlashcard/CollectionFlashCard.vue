@@ -24,8 +24,8 @@ const closeOption = () => {
   <!-- Flashcard Page -->
   <section class="flashcard-page overflow-hidden" v-show="page.flashcard">
     <div class="min-h-screen w-screen bg-main-bgColor" @click.self="close">
-      <Header :closeOption="closeOption">
-        <template #title> Flashcard </template>
+      <Header :closeOption="closeOption" :title="'Flashcard'">
+        <template #title> </template>
       </Header>
       <Content :closeOption="closeOption" :popup="popup"> </Content>
     </div>

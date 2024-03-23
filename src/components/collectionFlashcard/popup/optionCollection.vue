@@ -1,25 +1,25 @@
 <script setup>
-import { defineProps, defineEmits } from "vue";
-import iconDelete from "../../icons/iconDelete.vue";
-import iconEdit from "../../icons/iconEdit.vue";
+import { defineProps, defineEmits } from 'vue'
+import iconDelete from '../../icons/iconDelete.vue'
+import iconEdit from '../../icons/iconEdit.vue'
 
 const props = defineProps({
   index: {
     type: Number,
-    required: true,
+    required: true
   },
   popup: {
     type: Object,
-    required: true,
-  },
-});
+    required: true
+  }
+})
 
 const showRenameCollection = () => {
-  props.popup.renameCollection = true;
-  props.popup.optionCollection = false;
-};
+  props.popup.renameCollection = true
+  props.popup.optionCollection = false
+}
 
-const emit = defineEmits(["deleteCollection"]);
+const emit = defineEmits(['deleteCollection'])
 </script>
 
 <template>

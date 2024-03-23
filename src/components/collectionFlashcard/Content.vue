@@ -73,8 +73,6 @@ const toggleOptionCollection = (index) => {
     </div>
 
     <div v-else-if="computedCollections.length > 0">
-      <!-- change params to name -->
-
       <div
         class="grid grid-cols-1 gap-10 px-10 py-7 text-center lg:grid-cols-3 md:grid-cols-3 md:gap-17 sm:grid-cols-2 sm:gap-10"
         @click.self="closeOption"
