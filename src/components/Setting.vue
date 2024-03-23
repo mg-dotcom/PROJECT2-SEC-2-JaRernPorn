@@ -1,30 +1,30 @@
 <script setup>
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref, watch } from "vue";
 
 const emits = defineEmits([
-  'closeSetting',
-  'restartGame',
-  'resumeGame',
-  'goBackHome'
-])
-const isPlaying = ref(true)
-const player = ref('')
+  "closeSetting",
+  "restartGame",
+  "resumeGame",
+  "goBackHome",
+]);
+const isPlaying = ref(true);
+const player = ref("");
 const musicControl = () => {
   if (isPlaying.value) {
-    player.value.play()
+    player.value.play();
   } else {
-    player.value.pause()
+    player.value.pause();
   }
-}
+};
 
 watch(isPlaying, () => {
-  musicControl()
-})
+  musicControl();
+});
 
 onMounted(() => {
-  isPlaying.value = true
-  musicControl()
-})
+  isPlaying.value = true;
+  musicControl();
+});
 </script>
 
 <template>
@@ -32,7 +32,7 @@ onMounted(() => {
     <div class="setting bg-white w-1/5 border border-black rounded-2xl">
       <div class="closebtn flex justify-end py-2 px-2 cursor-pointer">
         <img
-          src="/close.svg"
+          src="/settingBtn/close.svg"
           alt="close setting btn"
           class=""
           @click="$emit('closeSetting')"
@@ -59,7 +59,7 @@ onMounted(() => {
       <div class="btn flex m-5">
         <div class="restart">
           <img
-            src="/settingBtn/restartButton.png"
+            src="/settingBtn/replay.svg"
             alt="restart button"
             class="restart cursor-pointer"
             @click="$emit('restartGame')"
@@ -67,7 +67,7 @@ onMounted(() => {
         </div>
         <div class="play">
           <img
-            src="/settingBtn/resumeButton.png"
+            src="/settingBtn/resume.svg"
             alt="resume button"
             class="resume cursor-pointer"
             @click="$emit('resumeGame')"
@@ -75,7 +75,7 @@ onMounted(() => {
         </div>
         <div class="home">
           <img
-            src="/settingBtn/homebutton.png"
+            src="/settingBtn/home.svg"
             alt="home cursor-pointer"
             @click="$emit('goBackHome')"
           />

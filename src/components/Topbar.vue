@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import data from '../../data/categories.json'
+import data from '../../data/data.json'
 import Setting from '../components/Setting.vue'
 const currentIndexCate = ref(2)
 const showSetting = ref(false)
@@ -17,7 +17,7 @@ const toggleSetting = () => {
           Category: {{ data.categories[currentIndexCate].name }}
         </h1>
         <img
-          src="/Setting.svg"
+          src="/settingBtn/setting.svg"
           alt="setting"
           class="w-8 cursor-pointer hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out sm:w-10"
           @click="toggleSetting"
