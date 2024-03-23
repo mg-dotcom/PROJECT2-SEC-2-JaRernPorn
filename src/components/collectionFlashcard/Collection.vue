@@ -1,48 +1,53 @@
 <script setup>
-import { defineProps, defineEmits } from "vue";
+import { defineProps, defineEmits, onMounted } from 'vue'
 
-import renameCollection from "../collectionFlashcard/popup/renameCollection.vue";
-import optionCollection from "../collectionFlashcard/popup/optionCollection.vue";
+import renameCollection from '../collectionFlashcard/popup/renameCollection.vue'
+import optionCollection from '../collectionFlashcard/popup/optionCollection.vue'
+// import { getCollections } from '../../libs/flashcard-libs/FetchUtils' //destruct
 
 const props = defineProps({
   index: {
     type: Number,
-    required: true,
+    required: true
   },
   popup: {
     type: Object,
-    required: true,
+    required: true
   },
   computedCollections: {
-    required: true,
+    required: true
   },
   closeOption: {
     type: Function,
-    required: true,
+    required: true
   },
   SelectedIndex: {
     type: Number,
-    required: true,
-  },
-});
+    required: true
+  }
+})
 
 const showOption = (index, event) => {
-  emit("toggle-option-collection", index);
-};
+  emit('toggle-option-collection', index)
+}
 
 const emit = defineEmits([
-  "changeCollectionName",
-  "deleteCollection",
-  "toggle-option-collection",
-]);
+  'changeCollectionName',
+  'deleteCollection',
+  'toggle-option-collection'
+])
 
 const passDeleteCollection = (index) => {
-  emit("deleteCollection", index);
-};
+  emit('deleteCollection', index)
+}
 
 const passNewName = (newName, index) => {
-  emit("changeCollectionName", newName, index);
-};
+  emit('changeCollectionName', newName, index)
+}
+
+// onMounted(async () => {
+//   await getCollections(import.meta.env.VITE_BASE_URL)
+// })
 </script>
 
 <template>
