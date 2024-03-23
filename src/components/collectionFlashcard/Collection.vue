@@ -47,8 +47,10 @@ const passDeleteCollection = (index,id) => {
 }
 
 const passNewName = (index, newName,id) => {
-  console.log(id);
-  emit('changeCollectionName', index, newName,id)
+  // console.log(id);
+
+  emit('changeCollectionName', index, newName, id);
+
 }
 </script>
 

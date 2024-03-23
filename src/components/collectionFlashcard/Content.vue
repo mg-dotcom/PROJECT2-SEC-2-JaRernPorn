@@ -45,13 +45,18 @@ const computedCollections = computed(() => {
 const handleEditCollection = async (index, newName, id) => {
   const newNameTrim = newName.trim() // Trimmed to remove whitespace
   collections.value = editCollection(index, newNameTrim, collections.value)
-  const editedCollection = await editCollection(
+  
+  const editedCollection = await editCollectionName(
     import.meta.env.VITE_BASE_URL,
     id,
     {
+      id:id,
       name: newName
     }
   )
+  // collections.value=editedCollection
+  console.log('edit='+editedCollection);
+
   props.popup.renameCollection = false
   props.closeOption()
 }
