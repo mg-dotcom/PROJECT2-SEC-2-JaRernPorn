@@ -37,7 +37,7 @@ onMounted(async () => {
 // })
 
 const computedCollections = computed(() => {
-  return collections.value || []
+  return collections.value
 })
 
 const handleEditCollection = async (newName, id) => {
@@ -109,7 +109,7 @@ const toggleOptionCollection = (index) => {
       <Collection
         v-for="(collection, index) in computedCollections"
         :key="index"
-        :id="collection.id"
+        :id="collection.id.toString()"
         :index="index"
         :popup="popup"
         :computedCollections="computedCollections"

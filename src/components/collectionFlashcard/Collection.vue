@@ -41,8 +41,8 @@ const emit = defineEmits([
   'toggle-option-collection'
 ])
 
-const passDeleteCollection = (index, id) => {
-  emit('deleteCollection', index, id)
+const passDeleteCollection = (id) => {
+  emit('deleteCollection', id)
 }
 
 const passNewName = (newName, id) => {

@@ -22,7 +22,7 @@ const showRenameCollection = () => {
   props.popup.renameCollection = true
   props.popup.optionCollection = false
 }
-
+console.log(props.id)
 const emit = defineEmits(['deleteCollection'])
 </script>
 
