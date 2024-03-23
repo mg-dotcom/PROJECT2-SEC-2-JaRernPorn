@@ -1,10 +1,13 @@
 <script setup>
-import { defineProps, ref, computed } from 'vue'
+import { defineProps, ref, computed, onMounted } from 'vue'
 import newFlashcard from './popup/newFlashcard.vue'
 import { addNewFlashcard } from '../../libs/flashcard-libs/FlashCardModal.js'
 import { deleteFlashcard } from '../../libs/flashcard-libs/FlashCardModal.js'
 import Card from './Card.vue'
 import { editFlashcard } from '../../libs/flashcard-libs/FlashCardModal.js'
+
+import { getFlashcards, getCollections } from '@/libs/flashcard-libs/FetchUtils'
+import Collection from '../collectionFlashcard/Collection.vue'
 
 const props = defineProps({
   popup: {
@@ -18,6 +21,11 @@ const props = defineProps({
 })
 
 const flashcards = ref([])
+
+// onMounted(async () => {
+//   flashcards.value = await getFlashcards(import.meta.env.VITE_BASE_URL)
+//   console.log(flashcards.value)
+// })
 
 const computedFlashcards = computed(() => {
   return flashcards.value

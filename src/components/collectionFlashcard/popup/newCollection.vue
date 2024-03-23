@@ -1,37 +1,37 @@
 <script setup>
-import { defineProps, ref, defineEmits } from "vue";
-import closeIcon from "../../icons/iconClose.vue";
+import { defineProps, ref, defineEmits } from 'vue'
+import closeIcon from '../../icons/iconClose.vue'
 
 const props = defineProps({
   closeOption: {
     type: Function,
-    required: true,
+    required: true
   },
   popup: {
     type: Object,
-    required: true,
-  },
-});
+    required: true
+  }
+})
 
 const closeButton = () => {
-  props.popup.newCollection = false;
-  newCollectionName.value = "New Collection";
-};
+  props.popup.newCollection = false
+  newCollectionName.value = 'New Collection'
+}
 
 const addNewCollectionName = () => {
-  props.popup.newCollection = true;
-  props.closeOption();
-};
+  props.popup.newCollection = true
+  props.closeOption()
+}
 
-const emit = defineEmits(["addNewCollections"]);
+const emit = defineEmits(['addNewCollections'])
 
-const newCollectionName = ref("New Collection");
+const newCollectionName = ref('New Collection')
 
 const passAndClear = (name, event) => {
-  emit("addNewCollections", name);
-  newCollectionName.value = "New Collection";
-  props.popup.newCollection = false;
-};
+  emit('addNewCollections', name)
+  newCollectionName.value = 'New Collection'
+  props.popup.newCollection = false
+}
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, defineEmits, onMounted } from 'vue'
+import { defineProps, defineEmits } from 'vue'
 
 import renameCollection from '../collectionFlashcard/popup/renameCollection.vue'
 import optionCollection from '../collectionFlashcard/popup/optionCollection.vue'
@@ -44,10 +44,6 @@ const passDeleteCollection = (index) => {
 const passNewName = (newName, index) => {
   emit('changeCollectionName', newName, index)
 }
-
-// onMounted(async () => {
-//   await getCollections(import.meta.env.VITE_BASE_URL)
-// })
 </script>
 
 <template>

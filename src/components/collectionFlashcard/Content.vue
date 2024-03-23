@@ -4,8 +4,10 @@ import newCollection from '../collectionFlashcard/popup/newCollection.vue'
 import Collection from '../collectionFlashcard/Collection.vue'
 import { editCollection } from '../../libs/flashcard-libs/CollectionModal.js'
 import { deleteCollection } from '../../libs/flashcard-libs/CollectionModal.js'
-import { addNewCollection } from '../../libs/flashcard-libs/CollectionModal.js'
+// import { addNewCollection } from '../../libs/flashcard-libs/CollectionModal.js'
+
 import { getCollections } from '../../libs/flashcard-libs/FetchUtils' //destruct
+import { addNewCollection } from '../../libs/flashcard-libs/FetchUtils'
 
 const props = defineProps({
   popup: {
@@ -47,9 +49,29 @@ const handleDeleteCollection = (index) => {
   props.closeOption()
 }
 
-const handleAddNewCollection = (name) => {
+// const handleAddNewCollection = (name) => {
+//   const newColName = name.trim()
+//   addNewCollection(newColName, collections.value)
+//   props.popup.newCollection = false
+// }
+
+// const handleAddNewCollection = async (newCollections) => {
+//   try {
+//     await addNewCollection(import.meta.env.VITE_BASE_URL, newCollections)
+//     collections.value = await getCollections(import.meta.env.VITE_BASE_URL)
+//   } catch (error) {
+//     console.error(error)
+//   }
+//   props.popup.newCollection = false
+// }
+
+const handleAddNewCollection = async (name) => {
   const newColName = name.trim()
-  addNewCollection(newColName, collections.value)
+  const addNew = await addNewCollection(import.meta.env.VITE_BASE_URL, {
+    id: 88,
+    name: newColName
+  })
+  collections.value.push(addNew)
   props.popup.newCollection = false
 }
 
