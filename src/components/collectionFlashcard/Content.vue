@@ -1,59 +1,72 @@
 <script setup>
-import { defineProps, ref, computed, defineEmits } from "vue";
-import newCollection from "../collectionFlashcard/popup/newCollection.vue";
-import Collection from "../collectionFlashcard/Collection.vue";
-import { editCollection } from "../../libs/flashcard-libs/CollectionModal.js";
-import { deleteCollection } from "../../libs/flashcard-libs/CollectionModal.js";
-import { addNewCollection } from "../../libs/flashcard-libs/CollectionModal.js";
-
+import { defineProps, ref, computed, defineEmits, onMounted } from 'vue'
+import newCollection from '../collectionFlashcard/popup/newCollection.vue'
+import Collection from '../collectionFlashcard/Collection.vue'
+import { editCollection } from '../../libs/flashcard-libs/CollectionModal.js'
+import { deleteCollection } from '../../libs/flashcard-libs/CollectionModal.js'
+import { addNewCollection } from '../../libs/flashcard-libs/CollectionModal.js'
+import { getCollection,addCollection,deleteCollectionById } from '../../libs/fetchUtils.js'
 const props = defineProps({
   popup: {
     type: Object,
-    required: true,
+    required: true
   },
   closeOption: {
     type: Function,
-    required: true,
-  },
-});
+    required: true
+  }
+})
 
-const emit = defineEmits(["clearName", "toClearName"]);
+const emit = defineEmits(['clearName', 'toClearName'])
 
-const collections = ref([]);
-const localCollections = JSON.parse(localStorage.getItem("collections")) || [];
+const collections = ref([])
+//local
+// const localCollections = JSON.parse(localStorage.getItem("collections")) || [];
 
-localCollections.forEach((collection) => {
-  collections.value.push(collection);
-});
+// localCollections.forEach((collection) => {
+//   collections.value.push(collection);
+// });
+
+onMounted(async () => {
+  const col = await getCollection(import.meta.env.VITE_BASE_URL)
+  // gett all collection from database
+  collections.value=col
+})
 
 const computedCollections = computed(() => {
-  return collections.value;
-});
+  return collections.value
+})
 
 const handleEditCollection = (index, newName) => {
-  const newNameTrim = newName.trim(); // Trimmed to remove whitespace
-  collections.value = editCollection(index, newNameTrim, collections.value);
-  props.popup.renameCollection = false;
-  props.closeOption();
-};
+  const newNameTrim = newName.trim() // Trimmed to remove whitespace
+  collections.value = editCollection(index, newNameTrim, collections.value)
+  props.popup.renameCollection = false
+  props.closeOption()
+}
 
-const handleDeleteCollection = (index) => {
-  collections.value = deleteCollection(index, collections.value);
-  props.closeOption();
-};
+const handleDeleteCollection = async(index) => {
+  collections.value = deleteCollection(index, collections.value)
+  const statusCode=await deleteCollectionById(import.meta.env.VITE_BASE_URL,index)
+  props.closeOption()
+}
 
-const handleAddNewCollection = (name) => {
-  const newColName = name.trim();
-  addNewCollection(newColName, collections.value);
-  props.popup.newCollection = false;
-};
+const handleAddNewCollection = async(name) => {
+  const newColName = name.trim()
+  //BACKEND add
+  const newCollectionName=await addCollection(import.meta.env.VITE_BASE_URL,{
+    name:name
+  })
 
-const SelectedIndex = ref(0);
+  addNewCollection(newColName, collections.value)
+  props.popup.newCollection = false
+}
+
+const SelectedIndex = ref(0)
 
 const toggleOptionCollection = (index) => {
-  props.popup.optionCollection = !props.popup.optionCollection;
-  SelectedIndex.value = index;
-};
+  props.popup.optionCollection = !props.popup.optionCollection
+  SelectedIndex.value = index
+}
 </script>
 
 <template>
@@ -95,4 +108,3 @@ const toggleOptionCollection = (index) => {
 </template>
 
 <style scoped></style>
-

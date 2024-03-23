@@ -405,5 +405,31 @@
         }
       ]
     }
+  ],
+  "collections": [
+    {
+      "id": 1,
+      "name": "Fruits"
+    },
+    {
+      "id": 2,
+      "name": "Animals"
+    },
+    {
+      "id": 3,
+      "name": "Family"
+    },
+    {
+      "id": "5cb4",
+      "name": "bisbat"
+    },
+    {
+      "id": "d67a",
+      "name": "krabi"
+    },
+    {
+      "id": "e518",
+      "name": "ampz"
+    }
   ]
 }
