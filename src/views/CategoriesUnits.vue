@@ -1,42 +1,41 @@
 <script setup>
-import { ref, computed } from 'vue'
-import  data  from '../../../data/data.json'
+import { ref, computed } from "vue";
+import { RouterLink } from "vue-router";
+import { categories } from "../../data/data.json";
 
-const currentIndexCate = ref(0)
-const currentIndexUnit = ref(0)
+const currentIndexCate = ref(0);
+const currentIndexUnit = ref(0);
 
-const categoryPage = ref(true)
-const unitPage = ref(false)
+const categoryPage = ref(true);
+const unitPage = ref(false);
 
 const showUnit = (cateIndex) => {
-  currentIndexCate.value = cateIndex
-  currentIndexUnit.value = cateIndex
+  currentIndexCate.value = cateIndex;
+  currentIndexUnit.value = cateIndex;
 
-  console.log(cateIndex)
-  console.log(data[currentIndexCate.value].name)
-  console.log(data[currentIndexCate.value].units)
-  console.log(data[currentIndexCate.value].units[0])
+  console.log(cateIndex);
+  console.log(categories[currentIndexCate.value].name);
+  console.log(categories[currentIndexCate.value].units);
+  console.log(categories[currentIndexCate.value].units[0]);
 
-  unitPage.value = true
-  categoryPage.value = false
-}
+  unitPage.value = true;
+  categoryPage.value = false;
+};
 
 const backToCategory = () => {
-  unitPage.value = false
-  categoryPage.value = true
-}
+  unitPage.value = false;
+  categoryPage.value = true;
+};
 
 const currentCategory = computed(() => {
-  return data[currentIndexCate.value].name
-})
+  return categories[currentIndexCate.value].name;
+});
 
 const currentItem = computed(() => {
-  const currentUnit = data[currentIndexCate.value].units
-  const firstItem = currentUnit.map((unit) => unit.items[0])
-  return firstItem
-})
-
-
+  const currentUnit = categories[currentIndexCate.value].units;
+  const firstItem = currentUnit.map((unit) => unit.items[0]);
+  return firstItem;
+});
 </script>
 
 <template>
@@ -44,12 +43,13 @@ const currentItem = computed(() => {
     <div class="p-7 bg-main-bgColor min-h-screen">
       <header>
         <!-- Back to home Button -->
-        <img
-          class="w-16 absolute hover:w-catePage-20 transition-all duration-300 ease-in-out cursor-pointer"
-          src="/categories/icon/left-arrow.png"
-          alt="left-arrow"
-          @click="backToHome"
-        />
+        <RouterLink to="/">
+          <img
+            class="w-16 absolute hover:w-catePage-20 transition-all duration-300 ease-in-out cursor-pointer"
+            src="/categories/icon/left-arrow.png"
+            alt="left-arrow"
+          />
+        </RouterLink>
 
         <div class="header flex justify-center items-center">
           <div
@@ -68,7 +68,7 @@ const currentItem = computed(() => {
             class="md:flex md:space-x-32 md:flex-wrap md:w-3/4 md:justify-center"
           >
             <div
-              v-for="(category, cateIndex) in data"
+              v-for="(category, cateIndex) in categories"
               :key="category.name"
               class="category-item flex flex-col items-center md:mb-9 cursor-pointer"
             >

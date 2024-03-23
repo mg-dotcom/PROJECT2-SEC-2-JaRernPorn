@@ -1,7 +1,7 @@
 <script setup>
 import { reactive, ref } from "vue";
-import SettingHomepage from "./SettingHomepage.vue";
-import CategoriesUnits from "../category/CategoriesUnits.vue";
+import { RouterLink } from "vue-router";
+import SettingHomepage from "../components/homepage/SettingHomepage.vue";
 
 const page = reactive({
   homePage: true,
@@ -23,11 +23,12 @@ const toggleSetting = () => {
   <section class="HomePage" v-show="page.homePage">
     <div class="h-screen w-full bg-main-bgColor p-5">
       <div class="border-double border-8 border-title box-border h-full w-full">
-        <div class="setting flex justify-end pr-5">
+        <!-- Setting Button -->
+        <div class="setting">
           <img
             src="/settingBtn/setting.svg"
             alt="setting button"
-            class="w-10 hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
+            class="w-10 absolute right-10 top-10 hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
             @click="toggleSetting"
           />
         </div>
@@ -47,12 +48,13 @@ const toggleSetting = () => {
         <!-- Play Button -->
         <div id="home-page-button">
           <div id="play-button" class="flex justify-center pt-12">
-            <img
-              @click="showCategoryPage"
-              class="w-72 relative hover:w-80 transition-all duration-300 ease-in-out cursor-pointer"
-              src="/homePage-pic/play-button.svg"
-              alt="play-button"
-            />
+            <RouterLink to="/categories">
+              <img
+                class="w-72 relative hover:w-80 transition-all duration-300 ease-in-out cursor-pointer"
+                src="/homePage-pic/play-button.svg"
+                alt="play-button"
+              />
+            </RouterLink>
           </div>
           <!-- Flashcard Button -->
           <div id="Flashcard-button" class="flex justify-center pt-6">

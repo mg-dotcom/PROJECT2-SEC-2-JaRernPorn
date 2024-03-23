@@ -1,5 +1,5 @@
 <script setup>
-import HomePage from './components/homepage/HomePage.vue'
+import { RouterLink, RouterView } from "vue-router";
 // import CategoriesUnits from './components/category/CategoriesUnits.vue';
 // import Game1 from './components/game1/Game1.vue'
 // import Game1 from './components/game1/Game1.vue';
@@ -11,7 +11,8 @@ import HomePage from './components/homepage/HomePage.vue'
 
 <template>
   <div>
-    <HomePage />
+    <RouterView />
+    <!-- <HomePage /> -->
     <!-- <CategoriesUnits /> -->
     <!-- <Game1 /> -->
     <!-- <Game2 /> -->
