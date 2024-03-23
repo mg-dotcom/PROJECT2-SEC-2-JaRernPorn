@@ -1,7 +1,7 @@
 <script setup>
 import { reactive, ref } from "vue";
 import { RouterLink } from "vue-router";
-import SettingHomepage from "../components/homepage/SettingHomepage.vue";
+import SettingHomePage from "../components/SettingHomePage.vue";
 
 const page = reactive({
   homePage: true,
@@ -21,6 +21,9 @@ const toggleSetting = () => {
 
 <template>
   <section class="HomePage" v-show="page.homePage">
+    <div class="absolute left-0 right-0 z-40" v-show="showSetting">
+      <SettingHomePage @closeSetting="toggleSetting" />
+    </div>
     <div class="h-screen w-full bg-main-bgColor p-5">
       <div class="border-double border-8 border-title box-border h-full w-full">
         <!-- Setting Button -->
@@ -75,9 +78,6 @@ const toggleSetting = () => {
           </div>
         </div>
       </div>
-    </div>
-    <div class="absolute left-0 right-0 top-1/3" v-show="showSetting">
-      <SettingHomepage @closeSetting="toggleSetting" />
     </div>
   </section>
 </template>

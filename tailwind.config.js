@@ -88,4 +88,4 @@ export const theme = {
     }
   }
 }
-export const plugins = [require('daisyui')]
+export const plugins = [require('daisyui'), Filpping]
