@@ -49,6 +49,10 @@ const currentItem = computed(() => {
 //   props.homepage = true
 //   categoryPage.value = false
 // }
+
+const goToGame1 = () => {
+  unitPage.value = false
+}
 </script>
 
 <template>
@@ -103,8 +107,8 @@ const currentItem = computed(() => {
     </div>
   </section>
 
-  <section class="unit" v-if="unitPage">
-    <div class="bg-main-bgColor min-h-screen w-full">
+  <section class="unit">
+    <div class="bg-main-bgColor min-h-screen w-full" v-if="unitPage">
       <div class="flex justify-between">
         <img
           src="/categories/icon/left-arrow.png"
@@ -127,14 +131,19 @@ const currentItem = computed(() => {
             v-for="item in currentItem"
             :key="item.id"
           >
-            <img :src="item.src" :alt="item.meaning" />
+            <img
+              :src="item.src"
+              :alt="item.meaning"
+              class="cursor-pointer"
+              @click="goToGame1"
+            />
           </div>
         </div>
       </div>
     </div>
 
     <Game1
-      v-if="unitPage"
+      v-show="!unitPage && !categoryPage"
       :currentIndexCate="currentIndexCate"
       :currentIndexUnit="currentIndexUnit"
     ></Game1>

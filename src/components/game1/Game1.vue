@@ -10,7 +10,7 @@ const props = defineProps({
   currentIndexUnit: Number
 })
 
-const { currentIndexCate, currentIndexUnit } = props
+// const { currentIndexCate, currentIndexUnit } = props
 // const currentIndexCate = ref(0)
 // const currentIndexUnit = ref(0)
 const currentIndexItem = ref(0)
