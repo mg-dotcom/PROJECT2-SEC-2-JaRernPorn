@@ -42,14 +42,14 @@ const currentItem = computed(() => {
   <section class="category" v-if="categoryPage">
     <div class="bg-main-bgColor min-h-screen overflow-hidden">
       <header class="py-7 px-7">
-        <!-- Back to home Button -->
-        <RouterLink to="/">
+        <!-- Back to home -->
+        <router-link to="/">
           <img
             class="w-16 absolute hover:w-catePage-20 transition-all duration-300 ease-in-out cursor-pointer"
             src="/categories/icon/left-arrow.png"
             alt="left-arrow"
           />
-        </RouterLink>
+        </router-link>
 
         <div class="header flex justify-center items-center">
           <div
