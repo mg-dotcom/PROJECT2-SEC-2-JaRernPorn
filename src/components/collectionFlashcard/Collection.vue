@@ -11,7 +11,7 @@ const props = defineProps({
     required: true
   },
   id: {
-    type: Number,
+    type: String,
     required: true
   },
   popup: {
@@ -45,8 +45,8 @@ const passDeleteCollection = (index, id) => {
   emit('deleteCollection', index, id)
 }
 
-const passNewName = (newName, index) => {
-  emit('changeCollectionName', newName, index)
+const passNewName = (newName, id) => {
+  emit('changeCollectionName', id, newName)
 }
 </script>
 
@@ -90,6 +90,7 @@ const passNewName = (newName, index) => {
       v-show="props.popup.renameCollection && SelectedIndex === props.index"
       :index="index"
       :popup="popup"
+      :id="props.id"
       :computedCollections="computedCollections"
       :closeOption="closeOption"
       @changeCollectionName="passNewName"

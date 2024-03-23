@@ -1,42 +1,47 @@
 <script setup>
-import { ref } from "vue";
-import { defineProps, defineEmits, watch } from "vue";
-import closeIcon from "../../icons/iconClose.vue";
+import { ref } from 'vue'
+import { defineProps, defineEmits, watch } from 'vue'
+import closeIcon from '../../icons/iconClose.vue'
 
 const props = defineProps({
   popup: {
     type: Object,
-    required: true,
+    required: true
   },
   closeOption: {
     type: Function,
-    required: true,
+    required: true
   },
   computedCollections: {
-    required: true,
+    required: true
   },
   index: {
     type: Number,
-    required: true,
+    required: true
   },
-});
-const emit = defineEmits(["toUpdateName", "changeCollectionName"]);
-const renameCollectionName = ref(props.computedCollections[props.index].name);
+  id: {
+    type: String,
+    required: true
+  }
+})
+const emit = defineEmits(['toUpdateName', 'changeCollectionName'])
+const renameCollectionName = ref(props.computedCollections[props.index].name)
 
 watch(
   () => props.computedCollections[props.index],
   () => {
-    renameCollectionName.value = props.computedCollections[props.index].name;
+    renameCollectionName.value = props.computedCollections[props.index].name
   }
-);
+)
 
 const closeButton = () => {
-  props.popup.renameCollection = false;
-};
+  props.popup.renameCollection = false
+}
 
 const toUpdateName = () => {
-  emit("changeCollectionName", props.index, renameCollectionName.value);
-};
+  emit('changeCollectionName', props.id, renameCollectionName.value)
+}
+console.log(props.id)
 </script>
 
 <template>
@@ -69,7 +74,7 @@ const toUpdateName = () => {
                 class="text-2xl font-semibold font-outfit whitespace-normal break-all overflow-ellipsis max-h-[127px]"
               >
                 {{
-                  renameCollectionName !== ""
+                  renameCollectionName !== ''
                     ? renameCollectionName
                     : props.computedCollections[props.index].name
                 }}

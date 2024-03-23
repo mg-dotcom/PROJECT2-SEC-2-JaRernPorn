@@ -2,14 +2,15 @@
 import { defineProps, ref, computed, defineEmits, onMounted } from 'vue'
 import newCollection from '../collectionFlashcard/popup/newCollection.vue'
 import Collection from '../collectionFlashcard/Collection.vue'
-import { editCollection } from '../../libs/flashcard-libs/CollectionModal.js'
+// import { editCollection } from '../../libs/flashcard-libs/CollectionModal.js'
 // import { deleteCollection } from '../../libs/flashcard-libs/CollectionModal.js'
 // import { addNewCollection } from '../../libs/flashcard-libs/CollectionModal.js'
 
 import {
   getCollections,
   addNewCollection,
-  deleteCollection
+  deleteCollection,
+  editCollection
 } from '../../libs/flashcard-libs/FetchUtils' //destruct
 
 const props = defineProps({
@@ -36,31 +37,26 @@ onMounted(async () => {
 // })
 
 const computedCollections = computed(() => {
-  return collections.value
+  return collections.value || []
 })
 
-const handleEditCollection = (index, newName) => {
+const handleEditCollection = async (newName, id) => {
   const newNameTrim = newName.trim() // Trimmed to remove whitespace
-  collections.value = editCollection(index, newNameTrim, collections.value)
+  collections.value = await editCollection(
+    import.meta.env.VITE_BASE_URL,
+    {
+      name: newNameTrim
+    },
+    id
+  )
   props.popup.renameCollection = false
   props.closeOption()
 }
 
-// const handleDeleteCollection = (index) => {
-//   collections.value = deleteCollection(index, collections.value)
-//   props.closeOption()
-// }
-
-const handleDeleteCollection = async (index, id) => {
+const handleDeleteCollection = async (id) => {
   collections.value = await deleteCollection(import.meta.env.VITE_BASE_URL, id)
   props.closeOption()
 }
-
-// const handleAddNewCollection = (name) => {
-//   const newColName = name.trim()
-//   addNewCollection(newColName, collections.value)
-//   props.popup.newCollection = false
-// }
 
 // const handleAddNewCollection = async (newCollections) => {
 //   try {

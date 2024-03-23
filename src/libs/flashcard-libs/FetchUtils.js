@@ -45,4 +45,28 @@ async function deleteCollection(url, id) {
   }
 }
 
-export { getCollections, getFlashcards, addNewCollection, deleteCollection }
+async function editCollection(url, editCol, id) {
+  try {
+    const res = await fetch(`${url}/${id}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        ...editCol
+      })
+    })
+    const editedCol = await res.json()
+    return editedCol
+  } catch (error) {
+    console.log(`error: ${error}`)
+  }
+}
+
+export {
+  getCollections,
+  getFlashcards,
+  addNewCollection,
+  deleteCollection,
+  editCollection
+}

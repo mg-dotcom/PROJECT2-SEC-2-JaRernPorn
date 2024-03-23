@@ -9,7 +9,7 @@ const props = defineProps({
     required: true
   },
   id: {
-    type: Number,
+    type: String,
     required: true
   },
   popup: {
@@ -34,7 +34,7 @@ const emit = defineEmits(['deleteCollection'])
     <div
       id="deleteCollection"
       class="flex gap-3 hover:bg-gray-100 transition duration-[270ms] ease-in-out p-1 rounded-lg"
-      @click="$emit('deleteCollection', props.index, props.id)"
+      @click="$emit('deleteCollection', props.id)"
     >
       <iconDelete>
         <template #content>
