@@ -1,5 +1,5 @@
 <script setup>
-import { RouterLink, RouterView } from "vue-router";
+import { RouterView } from "vue-router";
 // import CategoriesUnits from './components/category/CategoriesUnits.vue';
 // import Game1 from './components/game1/Game1.vue'
 // import Game1 from './components/game1/Game1.vue';

@@ -1,123 +1,127 @@
 <script setup>
-import { categories } from '../../../data/data.json'
-import { computed, ref } from 'vue'
-import Card from './Card.vue'
-import CheckButton from './CheckButton.vue'
-import Setting from '../Setting.vue'
+import { useRoute, useRouter } from "vue-router";
+const { params } = useRoute();
+const route = useRoute(); // using useRoute() hook to access the current route object
 
-const currentIndexCate = ref(0)
-const currentIndexUnit = ref(0)
-const currentIndexItem = ref(0)
-const currentIndexQuestion = ref(0)
+import { categories } from "../../data/data.json";
+import { computed, ref } from "vue";
+import Card from "../components/game1/Card.vue";
+import CheckButton from "../components/game1/CheckButton.vue";
+import Setting from "../components/Setting.vue";
 
-const showColor = ref(false)
-const checkStatus = ref(false)
+const currentIndexCate = ref(1);
+const currentIndexUnit = ref(route.params.unit);
+const currentIndexItem = ref(route.params.unit);
+const currentIndexQuestion = ref(0);
+
+const showColor = ref(false);
+const checkStatus = ref(false);
 
 const correctAnswer = ref(
   categories[currentIndexCate.value].units[currentIndexUnit.value].items[
     currentIndexQuestion.value
   ]
-)
+);
 
-const isCorrect = ref(false)
-const isWrong = ref(false)
-const userAnswer = ref([])
-const userAnswerId = ref(null)
+const isCorrect = ref(false);
+const isWrong = ref(false);
+const userAnswer = ref([]);
+const userAnswerId = ref(null);
 
 //Setting
-const showSetting = ref(false)
+const showSetting = ref(false);
 const toggleSetting = () => {
-  showSetting.value = !showSetting.value
-}
+  showSetting.value = !showSetting.value;
+};
 
 //Category
 const currentCategory = computed(() => {
-  return categories[currentIndexCate.value].name
-})
+  return categories[currentIndexCate.value].name;
+});
 
 //Question
 const currentQuestion = computed(() => {
   return categories[currentIndexCate.value].units[currentIndexUnit.value].items[
     currentIndexQuestion.value
-  ].meaning
-})
+  ].meaning;
+});
 
 //Item
 const currentItem = computed(() => {
   return categories[currentIndexCate.value].units[currentIndexUnit.value].items[
     currentIndexQuestion.value
-  ]
-})
+  ];
+});
 
 //Shuffle
 const shuffle = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[array[i], array[j]] = [array[j], array[i]]
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
   }
-  return array
-}
+  return array;
+};
 
 //Chioces
 const threeChoices = computed(() => {
   const choices =
-    categories[currentIndexCate.value].units[currentIndexUnit.value].items
-  return shuffle([...choices])
-})
+    categories[currentIndexCate.value].units[currentIndexUnit.value].items;
+  return shuffle([...choices]);
+});
 
 //CheckAnswer
 const checkAnswer = (userAns) => {
-  checkStatus.value = true
+  checkStatus.value = true;
 
   correctAnswer.value =
     categories[currentIndexCate.value].units[currentIndexUnit.value].items[
       currentIndexQuestion.value
-    ]
+    ];
 
   if (userAns[0].id === correctAnswer.value.id) {
     // userAnswerId.value = userAnswer[0].id
-    console.log('Correct!')
-    isCorrect.value = true
+    console.log("Correct!");
+    isCorrect.value = true;
 
     setTimeout(() => {
-      showColor.value = true
+      showColor.value = true;
       setTimeout(() => {
-        showColor.value = false
-        isCorrect.value = false
-        currentIndexQuestion.value++
+        showColor.value = false;
+        isCorrect.value = false;
+        currentIndexQuestion.value++;
         if (currentIndexQuestion.value > 2) {
-          currentIndexQuestion.value = 0
+          currentIndexQuestion.value = 0;
         }
-      }, 1500)
-    }, 0)
+      }, 1500);
+    }, 0);
   } else {
-    console.log('Wrong!')
-    userAnswerId.value = userAns[0].id
-    isWrong.value = true
-    isCorrect.value = true
+    console.log("Wrong!");
+    userAnswerId.value = userAns[0].id;
+    isWrong.value = true;
+    isCorrect.value = true;
     setTimeout(() => {
-      showColor.value = true
+      showColor.value = true;
       setTimeout(() => {
-        showColor.value = false
-        isWrong.value = false
-        isCorrect.value = false
-        currentIndexQuestion.value++
+        showColor.value = false;
+        isWrong.value = false;
+        isCorrect.value = false;
+        currentIndexQuestion.value++;
         if (currentIndexQuestion.value > 2) {
-          currentIndexQuestion.value = 0
+          currentIndexQuestion.value = 0;
         }
-      }, 1500)
-    }, 0)
+      }, 1500);
+    }, 0);
   }
 
-  userAns.splice(0, 1)
-  checkStatus.value = false
-}
+  userAns.splice(0, 1);
+  checkStatus.value = false;
+};
 
 //CollectAnswer
 const selectedAnswer = (item) => {
-  userAnswer.value = []
-  userAnswer.value.push(item)
-}
+  userAnswer.value = [];
+  userAnswer.value.push(item);
+};
 </script>
 
 <template>

@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from "vue";
-import { RouterLink } from "vue-router";
+
 import { categories } from "../../data/data.json";
 
 const currentIndexCate = ref(0);
@@ -40,8 +40,8 @@ const currentItem = computed(() => {
 
 <template>
   <section class="category" v-if="categoryPage">
-    <div class="p-7 bg-main-bgColor min-h-screen">
-      <header>
+    <div class="bg-main-bgColor min-h-screen overflow-hidden">
+      <header class="py-7 px-7">
         <!-- Back to home Button -->
         <RouterLink to="/">
           <img
@@ -60,12 +60,12 @@ const currentItem = computed(() => {
         </div>
       </header>
 
-      <div class="flex content-center justify-center mt-14">
+      <div class="flex content-center justify-center scale-90 flex-grow">
         <div
           class="font-semibold text-black font-outfit md:flex md:justify-center"
         >
           <div
-            class="md:flex md:space-x-32 md:flex-wrap md:w-3/4 md:justify-center"
+            class="md:flex md:space-x-32 md:flex-wrap md:w-3/4 md:justify-center md:items-center"
           >
             <div
               v-for="(category, cateIndex) in categories"
@@ -73,7 +73,7 @@ const currentItem = computed(() => {
               class="category-item flex flex-col items-center md:mb-9 cursor-pointer"
             >
               <div
-                class="pic w-52 pb-2 hover:w-56 transition-all duration-300 ease-in-out"
+                class="pic w-52 pb-2 hover:scale-105 transition-all duration-300 ease-in-out"
               >
                 <img
                   :src="category.image"
@@ -112,10 +112,13 @@ const currentItem = computed(() => {
         <div class="flex flex-wrap justify-center gap-44 w-[800px] h-[500px]">
           <div
             class="w-44 h-44 bg-[#F9D986] rounded-[50px] transition-all duration-300 ease-in-out transform hover:scale-110"
-            v-for="item in currentItem"
+            v-for="(item, index) in currentItem"
             :key="item.id"
           >
-            <img :src="item.src" :alt="item.meaning" />
+            <router-link :to="{ name: 'Game1', params: { unit: index } }">
+              <img :src="item.src" :alt="item.meaning" />
+              {{ index }}
+            </router-link>
           </div>
         </div>
       </div>

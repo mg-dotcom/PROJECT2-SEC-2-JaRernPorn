@@ -1,12 +1,14 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomePage from "../views/HomePage.vue";
 import CategoriesUnits from "../views/CategoriesUnits.vue";
+import Game1 from "../views/Game1.vue";
 const history = createWebHistory();
+
 const routes = [
   // default route path
   {
     path: "/",
-    name: "home",
+    name: "Home",
     component: HomePage,
   },
   {
@@ -16,8 +18,13 @@ const routes = [
   },
   {
     path: "/categories",
-    name: "categories",
+    name: "Categories",
     component: CategoriesUnits,
+  },
+  {
+    path: "/game1/:unit",
+    name: "Game1",
+    component: Game1,
   },
 ];
 
