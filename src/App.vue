@@ -1,5 +1,7 @@
 <script setup>
 import { RouterView } from "vue-router";
+import CollectionFlashcard from "./components/collectionFlashcard/CollectionFlashCard.vue";
+import FlashCard from "./components/Flashcard/FlashCard.vue";
 // import CategoriesUnits from './components/category/CategoriesUnits.vue';
 // import Game1 from './components/game1/Game1.vue'
 // import Game1 from './components/game1/Game1.vue';
@@ -19,6 +21,8 @@ import { RouterView } from "vue-router";
     <!-- <Game3 /> -->
     <!-- <Game4 /> -->
     <!-- <Result/> -->
+    <CollectionFlashcard />
+    <!-- <FlashCard /> -->
   </div>
 </template>
 
