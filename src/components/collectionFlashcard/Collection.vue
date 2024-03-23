@@ -3,7 +3,6 @@ import { defineProps, defineEmits } from 'vue'
 
 import renameCollection from '../collectionFlashcard/popup/renameCollection.vue'
 import optionCollection from '../collectionFlashcard/popup/optionCollection.vue'
-import { useRouter } from 'vue-router'
 const props = defineProps({
   index: {
     type: Number,
@@ -25,11 +24,7 @@ const props = defineProps({
     required: true
   }
 })
-const router = useRouter()
-// router.push({
-//     name: 'FlashCard',
-//     params: { name: selectedCollection.name }
-//   })
+
 const showOption = (index, event) => {
   emit('toggle-option-collection', index)
 }

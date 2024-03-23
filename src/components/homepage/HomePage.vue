@@ -1,6 +1,6 @@
 <script setup>
 import { reactive, ref } from 'vue'
-import SettingHomepage from './SettingHomepage.vue'
+import SettingHomePage from '../SettingHomePage.vue'
 import CategoriesUnits from '../category/CategoriesUnits.vue'
 import HowToPlay from './HowToPlay.vue'
 
@@ -24,6 +24,9 @@ const showHowtoplay = () => {
 
 const toggleSetting = () => {
   showSetting.value = !showSetting.value
+}
+const toggleHowToPlay = () => {
+  page.howToPlay = !page.howToPlay
 }
 </script>
 
@@ -52,8 +55,8 @@ const toggleSetting = () => {
             LET'S PRACTICE YOUR CHINESE VOCABULARY
           </p>
         </div>
-        <!-- Play Button -->
 
+        <!-- Play Button -->
         <div id="home-page-button">
           <router-link :to="{ name: 'CategoriesUnits' }">
             <div id="play-button" class="flex justify-center pt-12">
@@ -64,6 +67,7 @@ const toggleSetting = () => {
                 alt="play-button"
               /></div
           ></router-link>
+
           <!-- Flashcard Button -->
           <router-link :to="{ name: 'CollectionFlashCard' }">
             <div id="Flashcard-button" class="flex justify-center pt-6">
@@ -73,6 +77,7 @@ const toggleSetting = () => {
                 alt="HTP-button"
               /></div
           ></router-link>
+
           <!-- How To Play Button -->
           <div id="HTP-button" class="flex justify-center pt-6">
             <img
@@ -85,7 +90,9 @@ const toggleSetting = () => {
           <section id="howToPlay">
             <HowToPlay
               v-show="page.howToPlay"
+              @click.self="toggleHowToPlay"
               @closeHowtoplay="page.howToPlay = false"
+              class="flex justify-center bg-black bg-opacity-50 absolute"
             ></HowToPlay>
           </section>
         </div>
