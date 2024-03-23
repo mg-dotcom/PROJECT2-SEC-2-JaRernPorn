@@ -19,6 +19,10 @@ const props = defineProps({
     type: Number,
     required: true,
   },
+  collectionId: {
+    type: String,
+    required: true
+  }
 });
 const emit = defineEmits(["toUpdateName", "changeCollectionName"]);
 const renameCollectionName = ref(props.computedCollections[props.index].name);
@@ -33,9 +37,9 @@ watch(
 const closeButton = () => {
   props.popup.renameCollection = false;
 };
-
+// console.log(props.collectionId);
 const toUpdateName = () => {
-  emit("changeCollectionName", props.index, renameCollectionName.value);
+  emit("changeCollectionName", props.index, renameCollectionName.value,props.collectionId);
 };
 </script>
 

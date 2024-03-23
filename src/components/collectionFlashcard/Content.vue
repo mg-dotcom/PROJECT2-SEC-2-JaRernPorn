@@ -5,7 +5,12 @@ import Collection from '../collectionFlashcard/Collection.vue'
 import { editCollection } from '../../libs/flashcard-libs/CollectionModal.js'
 import { deleteCollection } from '../../libs/flashcard-libs/CollectionModal.js'
 import { addNewCollection } from '../../libs/flashcard-libs/CollectionModal.js'
-import { getCollection,addCollection,deleteCollectionById } from '../../libs/fetchUtils.js'
+import {
+  getCollection,
+  addCollection,
+  deleteCollectionById,
+  editCollectionName
+} from '../../libs/fetchUtils.js'
 const props = defineProps({
   popup: {
     type: Object,
@@ -30,31 +35,42 @@ const collections = ref([])
 onMounted(async () => {
   const col = await getCollection(import.meta.env.VITE_BASE_URL)
   // gett all collection from database
-  collections.value=col
+  collections.value = col
 })
 
 const computedCollections = computed(() => {
   return collections.value
 })
 
-const handleEditCollection = (index, newName) => {
+const handleEditCollection = async (index, newName, id) => {
   const newNameTrim = newName.trim() // Trimmed to remove whitespace
   collections.value = editCollection(index, newNameTrim, collections.value)
+  const editedCollection = await editCollection(
+    import.meta.env.VITE_BASE_URL,
+    id,
+    {
+      name: newName
+    }
+  )
   props.popup.renameCollection = false
   props.closeOption()
 }
 
-const handleDeleteCollection = async(index) => {
+const handleDeleteCollection = async (index, id) => {
+  // console.log(id);
   collections.value = deleteCollection(index, collections.value)
-  const statusCode=await deleteCollectionById(import.meta.env.VITE_BASE_URL,index)
+  const statusCode = await deleteCollectionById(
+    import.meta.env.VITE_BASE_URL,
+    id
+  )
   props.closeOption()
 }
 
-const handleAddNewCollection = async(name) => {
+const handleAddNewCollection = async (name) => {
   const newColName = name.trim()
   //BACKEND add
-  const newCollectionName=await addCollection(import.meta.env.VITE_BASE_URL,{
-    name:name
+  const newCollectionName = await addCollection(import.meta.env.VITE_BASE_URL, {
+    name: name
   })
 
   addNewCollection(newColName, collections.value)
@@ -92,6 +108,7 @@ const toggleOptionCollection = (index) => {
     >
       <Collection
         v-for="(collection, index) in computedCollections"
+        :collectionId="collection.id"
         :key="index"
         :index="index"
         :popup="popup"

@@ -1,48 +1,55 @@
 <script setup>
-import { defineProps, defineEmits } from "vue";
+import { defineProps, defineEmits } from 'vue'
 
-import renameCollection from "../collectionFlashcard/popup/renameCollection.vue";
-import optionCollection from "../collectionFlashcard/popup/optionCollection.vue";
+import renameCollection from '../collectionFlashcard/popup/renameCollection.vue'
+import optionCollection from '../collectionFlashcard/popup/optionCollection.vue'
 
 const props = defineProps({
   index: {
     type: Number,
-    required: true,
+    required: true
   },
   popup: {
     type: Object,
-    required: true,
+    required: true
   },
   computedCollections: {
-    required: true,
+    required: true
   },
   closeOption: {
     type: Function,
-    required: true,
+    required: true
   },
   SelectedIndex: {
     type: Number,
-    required: true,
+    required: true
   },
-});
+  collectionId: {
+    type: String,
+    required: true
+  }
+})
+
+// console.log(props.collectionId);
 
 const showOption = (index, event) => {
-  emit("toggle-option-collection", index);
-};
+  emit('toggle-option-collection', index)
+}
 
 const emit = defineEmits([
-  "changeCollectionName",
-  "deleteCollection",
-  "toggle-option-collection",
-]);
+  'changeCollectionName',
+  'deleteCollection',
+  'toggle-option-collection'
+])
 
-const passDeleteCollection = (index) => {
-  emit("deleteCollection", index);
-};
+const passDeleteCollection = (index,id) => {
+  emit('deleteCollection', index,id)
+}
 
-const passNewName = (newName, index) => {
-  emit("changeCollectionName", newName, index);
-};
+const passNewName = (index, newName,id) => {
+  console.log(id);
+  emit('changeCollectionName', index, newName,id)
+}
 </script>
 
 <template>
@@ -77,6 +84,7 @@ const passNewName = (newName, index) => {
       v-show="props.popup.optionCollection && SelectedIndex === props.index"
       :index="index"
       :popup="popup"
+      :collectionId="props.collectionId"
       @deleteCollection="passDeleteCollection"
     ></optionCollection>
 
@@ -86,6 +94,7 @@ const passNewName = (newName, index) => {
       :popup="popup"
       :computedCollections="computedCollections"
       :closeOption="closeOption"
+      :collectionId="props.collectionId"
       @changeCollectionName="passNewName"
     ></renameCollection>
   </div>
