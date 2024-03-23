@@ -17,6 +17,7 @@ const userSelected = ref()
 const showAudio = ref(false)
 const showPopup = ref(false)
 const checkStatus = ref(false)
+const countCheck = ref(0)
 const audioOfOption = ref(
   data.categories[currentIndexCate.value].units[currentIndexUnit.value].items[
     randomQuiz.value
@@ -31,17 +32,25 @@ const currentCategory = computed(() => {
 })
 
 const currentQuiz = computed(() => {
-  answerOfQuiz.value =
-    data.categories[currentIndexCate.value].units[currentIndexUnit.value].items[
-      randomQuiz.value
-    ].word
-  meaning.value =
-    data.categories[currentIndexCate.value].units[currentIndexUnit.value].items[
-      randomQuiz.value
-    ].meaning
+  if (
+    countCheck.value ===
+    data.categories[currentIndexCate.value].units[currentIndexUnit.value].items
+      .length
+  ) {
+    console.log('end')
+  } else {
+    answerOfQuiz.value =
+      data.categories[currentIndexCate.value].units[
+        currentIndexUnit.value
+      ].items[randomQuiz.value].word
+    meaning.value =
+      data.categories[currentIndexCate.value].units[
+        currentIndexUnit.value
+      ].items[randomQuiz.value].meaning
 
-  return data.categories[currentIndexCate.value].units[currentIndexUnit.value]
-    .items[randomQuiz.value].src
+    return data.categories[currentIndexCate.value].units[currentIndexUnit.value]
+      .items[randomQuiz.value].src
+  }
 })
 //Shuffle
 const shuffle = (array) => {
@@ -74,6 +83,7 @@ const closePopup = () => {
   setColorOption.value = ''
   // answer.value=''
   // userSelected.value=''
+  countCheck.value++
   isSelected.value = false
   randomQuiz.value++
 }
@@ -84,6 +94,7 @@ const turnOnCheckStatus = () => {
     ].word
   checkStatus.value = true
   if (userSelected.value === answer.value && checkStatus.value) {
+    countCheck.value++
     setColorOption.value = answer.value
     userSelected.value = ''
     setTimeout(() => {
