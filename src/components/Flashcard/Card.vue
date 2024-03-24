@@ -100,24 +100,26 @@ const showMeaning = () => {
               <div
                 class="flex items-center justify-center font-medium break-all xl:text-5xl lg:text-5xl md:text-5xl sm:text-3xl"
                 :class="{ 
-                  'h-auto': props.computedFlashcards[props.index] && props.computedFlashcards[props.index].chineseWord && props.computedFlashcards[props.index].chineseWord.length > 10,
-                  'h-[140px]': props.computedFlashcards[props.index] && props.computedFlashcards[props.index].chineseWord && props.computedFlashcards[props.index].chineseWord.length <= 10,
+                  'h-auto': 
+                  props.computedFlashcards[props.index].chineseWord.length > 10,
+                  'h-[140px]': 
+                  props.computedFlashcards[props.index].chineseWord.length <= 10,
 }"
 
               >
-                {{ props.computedFlashcards[props.index]?.chineseWord }}
+                {{ props.computedFlashcards[props.index].chineseWord }}
               </div>
               <hr class="my-2 border-gray-300 dark:border-gray-700" />
               <div
                 class="flex items-center justify-center xl:text-2xl lg:text-2xl md:text-xl break-all"
                 :class="{
                   'h-auto':
-                    props.computedFlashcards[props.index]?.pinyin.length > 15,
+                    props.computedFlashcards[props.index].pinyin.length > 15,
                   'h-[42px]':
-                    props.computedFlashcards[props.index]?.pinyin.length <= 15,
+                    props.computedFlashcards[props.index].pinyin.length <= 15,
                 }"
               >
-                {{ props.computedFlashcards[props.index]?.pinyin }}
+                {{ props.computedFlashcards[props.index].pinyin }}
               </div>
             </div>
           </div>
@@ -129,7 +131,7 @@ const showMeaning = () => {
               <div
                 class="font-medium break-all text-center xl:text-xl lg:text-xl md:text-2xl"
               >
-                {{ props.computedFlashcards[props.index]?.meaning }}
+                {{ props.computedFlashcards[props.index].meaning }}
               </div>
             </div>
           </div>

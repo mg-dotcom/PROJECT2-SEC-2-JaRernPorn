@@ -112,7 +112,7 @@ watch(
                   'focus:border-red-600': chineseWordIsEmpty,
                   'border-black': !chineseWordIsEmpty,
                 }"
-                :placeholder="props.computedFlashcards[props.index]?.chineseWord"
+                :placeholder="props.computedFlashcards[props.index].chineseWord"
                 @keydown.enter="renameFlashcard(props.index)"
               />
               <div
@@ -136,7 +136,7 @@ watch(
                   'border-black': !pinyinIsEmpty,
                 }"
                 @input="pinyinIsEmpty = isEmpty(oldPinyin)"
-                :placeholder="props.computedFlashcards[props.index]?.pinyin"
+                :placeholder="props.computedFlashcards[props.index].pinyin"
                 @keydown.enter="renameFlashcard(props.index)"
               />
               <div
@@ -160,7 +160,7 @@ watch(
                   'border-black': !meaningIsEmpty,
                 }"
                 @input="meaningIsEmpty = isEmpty(oldMeaning)"
-                :placeholder="props.computedFlashcards[props.index]?.meaning"
+                :placeholder="props.computedFlashcards[props.index].meaning"
                 @keydown.enter="renameFlashcard(props.index)"
               />
               <div

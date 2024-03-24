@@ -414,25 +414,25 @@
       "cards": [
         {
           "id": 1,
-          "word": "苹果 ",
+          "chineseWord": "苹果 ",
           "pinyin": "píngguǒ",
           "meaning": "Apple"
         },
         {
           "id": 2,
-          "word": "草莓",
+          "chineseWord": "草莓",
           "pinyin": "cǎoméi",
           "meaning": "Strawberry"
         },
         {
           "id": 3,
-          "word": "香蕉 ",
+          "chineseWord": "香蕉 ",
           "pinyin": "xiāngjiāo",
           "meaning": "Banana"
         },
         {
           "id": 4,
-          "word": "葡萄 ",
+          "chineseWord": "葡萄 ",
           "pinyin": "pú táo",
           "meaning": "Grape"
         }
