@@ -82,7 +82,7 @@ const deleteFlashcard = async (url, id, cardIndex) => {
       body: JSON.stringify(...collections)
     })
 
-    return updateResponse
+    return await updateResponse.json()
   } catch (error) {
     console.error(error)
   }

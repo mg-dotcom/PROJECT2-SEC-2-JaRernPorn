@@ -1,6 +1,7 @@
 <script setup>
 import { defineProps, ref, computed, onMounted } from 'vue'
 import newFlashcard from './popup/newFlashcard.vue'
+import { useRouter } from 'vue-router'
 // import { addNewFlashcard } from '../../libs/flashcard-libs/FlashCardModal.js'
 // import { deleteFlashcard } from '../../libs/flashcard-libs/FlashCardModal.js'
 // import { editFlashcard } from '../../libs/flashcard-libs/FlashCardModal.js'
@@ -12,6 +13,8 @@ import {
   deleteFlashcard,
   editFlashcard
 } from '../../libs/fetchFlashcard.js'
+
+const router = useRouter()
 
 const props = defineProps({
   popup: {
@@ -82,9 +85,9 @@ const handelDeleteFlashcard = async (indexCard) => {
     props.currentCollectionId,
     indexCard
   )
-
   props.popup.renameFlashcard = false
   props.popup.optionFlashcard = false
+  router.go(0)
 }
 
 const handelEditFlashcard = async (chineseWord, pinyin, meaning, index) => {
