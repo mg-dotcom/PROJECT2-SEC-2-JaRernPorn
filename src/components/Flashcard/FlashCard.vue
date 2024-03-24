@@ -1,20 +1,38 @@
 <script setup>
-import { reactive, ref } from "vue";
-import Header from "../Header.vue";
-import Content from "./Content.vue";
-
-const showFlashCard = ref(true);
+import { onMounted, reactive, ref } from 'vue'
+import Header from '../Header.vue'
+import Content from './Content.vue'
+import {
+  getFlashcard,
+  addFlashcard,
+  deleteFlashcardById
+} from '../../libs/fetchFlashcard'
+import {
+  addNewFlashcard,
+  deleteFlashcard,
+  editFlashcard
+} from '../../libs/flashcard-libs/FlashCardModal.js'
+const showFlashCard = ref(true)
 
 const popup = reactive({
   newFlashcard: false,
   //Setting
   optionFlashcard: false,
-  renameFlashcard: false,
-});
+  renameFlashcard: false
+})
 
 const closeOption = () => {
-  popup.optionFlashcard = false;
-};
+  popup.optionFlashcard = false
+}
+
+const flashcards = ref(addNewFlashcard())
+
+// get ข้อมูลจาก backend http://localhost:5000/collections
+onMounted(async () => {
+  const items = await getFlashcard(import.meta.env.VITE_BASE_URL)
+  flashcards.value.addFlashcard(items)
+  console.log(items)
+})
 </script>
 
 <template>
