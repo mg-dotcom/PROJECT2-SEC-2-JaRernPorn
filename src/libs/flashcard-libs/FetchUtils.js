@@ -8,16 +8,6 @@ async function getCollections(url) {
   }
 }
 
-async function getFlashcards(url, id) {
-  try {
-    const data = await fetch(`${url}/${id}`)
-    const item = await data.json()
-    return item
-  } catch (error) {
-    console.log(`error: ${error}`)
-  }
-}
-
 async function addNewCollection(url, newCollection) {
   try {
     const res = await fetch(url, {
@@ -81,7 +71,6 @@ async function editFlashcard(url, editCol, id) {
 
 export {
   getCollections,
-  getFlashcards,
   addNewCollection,
   deleteCollection,
   editCollection,
