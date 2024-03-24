@@ -59,14 +59,16 @@ const handleAddNewFlashcard = async (
       import.meta.env.VITE_BASE_URL,
       props.currentCollectionId,
       {
-        id: newId,
+        id: computedFlashcards.value.length + 1,
         chineseWord: newChineseWord,
         pinyin: newPinyin,
         meaning: newMeaning,
       }
     );
-  }
 
+    flashcards.value.push(addedFlashcard);
+    console.log(flashcards.value);
+  }
   props.popup.optionFlashcard = false;
 };
 
