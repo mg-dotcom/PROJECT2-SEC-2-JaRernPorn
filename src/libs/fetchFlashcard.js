@@ -70,6 +70,10 @@ const deleteItem = async (url, id, index) => {
       (collection) => collection.id === id
     );
 
+    if (collectionIndex === -1) {
+      throw new Error("Collection not found");
+    }
+
     collections[collectionIndex].cards.splice(index, 1);
 
     const updateResponse = await fetch(`${url}/${id}`, {
@@ -80,16 +84,51 @@ const deleteItem = async (url, id, index) => {
       body: JSON.stringify(...collections),
     });
 
+    console.log(updateResponse.status);
+
     if (!updateResponse.ok) {
       throw new Error("Failed to update collection");
     }
 
-    const updatedCollection = await updateResponse.json();
-    return updatedCollection;
+    return updateResponse.status;
   } catch (error) {
     console.error("Error deleting card:", error);
     return null;
   }
 };
 
-export { getItem, addItem, deleteItem };
+const editItem = async (url, id, newFlashcard, cardIndex) => {
+  try {
+    const response = await fetch(`${url}`);
+    const collections = await response.json();
+
+    const collectionIndex = collections.findIndex(
+      (collection) => collection.id === id
+    );
+
+    if (collectionIndex === -1) {
+      throw new Error("Collection not found");
+    }
+
+    const nonEditCard = collections[collectionIndex].cards[cardIndex];
+
+    const updatedCard = { ...nonEditCard, ...newFlashcard };
+
+    collections[collectionIndex].cards[cardIndex] = updatedCard
+
+    const updateResponse = await fetch(`${url}/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(...collections)
+    });
+
+    const updateCollections = await updateResponse.json();
+    return updateCollections;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export { getItem, addItem, deleteItem, editItem };

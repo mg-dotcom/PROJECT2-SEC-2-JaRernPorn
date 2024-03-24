@@ -23,6 +23,16 @@ class FlashcardManagement {
     });
   }
 
+  removeFlashcard(index) {
+    this.flashcards.splice(index, 1);
+  }
+
+  editFlashcard(chineseWord, pinyin, meaning, index) {
+    this.flashcards[index].chineseWord = chineseWord;
+    this.flashcards[index].pinyin = pinyin;
+    this.flashcards[index].meaning = meaning;
+  }
+
   getFlashcards() {
     return this.flashcards;
   }

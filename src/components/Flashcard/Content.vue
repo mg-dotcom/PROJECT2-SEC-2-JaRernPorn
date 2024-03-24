@@ -5,7 +5,12 @@ import { addNewFlashcard } from "../../libs/flashcard-libs/FlashCardModal.js";
 import { deleteFlashcard } from "../../libs/flashcard-libs/FlashCardModal.js";
 import Card from "./Card.vue";
 import { editFlashcard } from "../../libs/flashcard-libs/FlashCardModal.js";
-import { getItem, addItem, deleteItem } from "../../libs/fetchFlashcard.js";
+import {
+  getItem,
+  addItem,
+  deleteItem,
+  editItem,
+} from "../../libs/fetchFlashcard.js";
 import { FlashcardManagement } from "../../components/Flashcard/FlashcardManagement.js";
 
 const props = defineProps({
@@ -46,7 +51,6 @@ const toggleOption = (index) => {
 const showRenameFlashcard = (index) => {
   props.popup.renameFlashcard = true;
   SelectedIndex.value = index;
-  // console.log("before select", SelectedIndex.value);
 };
 
 const handleAddNewFlashcard = async (
@@ -67,13 +71,13 @@ const handleAddNewFlashcard = async (
       }
     );
 
-    const lastCard = addedFlashcard.cards[addedFlashcard.cards.length - 1];
+    const lastCardAdded = addedFlashcard.cards[addedFlashcard.cards.length - 1];
 
     flashcards.value.addFlashcard(
-      lastCard.id,
-      lastCard.chineseWord,
-      lastCard.pinyin,
-      lastCard.meaning
+      lastCardAdded.id,
+      lastCardAdded.chineseWord,
+      lastCardAdded.pinyin,
+      lastCardAdded.meaning
     );
   }
 
@@ -81,22 +85,47 @@ const handleAddNewFlashcard = async (
 };
 
 const handelDeleteFlashcard = async (index) => {
-  flashcards.value = await deleteItem(
+  const statusCode = await deleteItem(
     import.meta.env.VITE_BASE_URL,
     props.currentCollectionId,
     index
   );
 
+  if (statusCode === 200) {
+    flashcards.value.removeFlashcard(index);
+  }
+
   props.popup.optionFlashcard = false;
 };
 
-const handelEditFlashcard = (chineseWord, pinyin, meaning, index) => {
-  editFlashcard(
-    chineseWord,
-    pinyin,
-    meaning,
-    SelectedIndex.value,
-    flashcards.value
+const handelEditFlashcard = async (
+  newChineseWord,
+  newPinyin,
+  newMeaning,
+  index
+) => {
+  console.log(newChineseWord, newPinyin, newMeaning, index);
+
+  const editedFlashcard = await editItem(
+    import.meta.env.VITE_BASE_URL,
+    props.currentCollectionId,
+    {
+      chineseWord: newChineseWord,
+      pinyin: newPinyin,
+      meaning: newMeaning,
+    },
+    index
+  );
+
+  const selectedCard = editedFlashcard.cards[index];
+
+  console.log(selectedCard);
+
+  flashcards.value.editFlashcard(
+    selectedCard.chineseWord,
+    selectedCard.pinyin,
+    selectedCard.meaning,
+    index
   );
 
   props.popup.renameFlashcard = false;
