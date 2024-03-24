@@ -29,6 +29,7 @@ onMounted(async () => {
     import.meta.env.VITE_BASE_URL,
     props.currentCollectionId
   )
+  console.log(flashcards.value)
 })
 
 const computedFlashcards = computed(() => {
@@ -48,15 +49,20 @@ const showRenameFlashcard = (index) => {
   // console.log("before select", SelectedIndex.value);
 }
 
-const handleAddNewFlashcard = async (chineseWord, pinyin, meaning) => {
-  const addedFlashcard = await addFlashcard(
-    import.meta.env.VITE_BASE_URL,
-    props.currentCollectionId,
-    { chineseWord, pinyin, meaning }
-  )
+const handleAddNewFlashcard = async (nchineseWord, npinyin, nmeaning) => {
+  try {
+    const addedFlashcard = await addFlashcard(
+      import.meta.env.VITE_BASE_URL,
+      props.currentCollectionId,
+      { chineseWord: nchineseWord, pinyin: npinyin, meaning: nmeaning }
+    )
 
-  flashcards.value.push(addedFlashcard)
-  props.popup.optionFlashcard = false
+    flashcards.value.push(addedFlashcard)
+
+    props.popup.optionFlashcard = false
+  } catch (error) {
+    console.error('Error adding new flashcard:', error)
+  }
 }
 
 const handelDeleteFlashcard = (index) => {

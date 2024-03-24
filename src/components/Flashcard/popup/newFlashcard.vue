@@ -1,76 +1,79 @@
 <script setup>
-import { defineProps, ref, defineEmits } from "vue";
-import closeIcon from "../../icons/iconClose.vue";
+import { defineProps, ref, defineEmits } from 'vue'
+import closeIcon from '../../icons/iconClose.vue'
 
 const props = defineProps({
   popup: {
     type: Object,
-    required: true,
+    required: true
   },
   closeOption: {
     type: Function,
-    required: true,
-  },
-});
+    required: true
+  }
+})
 
-const newChineseWord = ref("");
-const newPinyin = ref("");
-const newMeaning = ref("");
-const chineseWordIsEmpty = ref(false);
-const pinyinIsEmpty = ref(false);
-const meaningIsEmpty = ref(false);
+const newChineseWord = ref('')
+const newPinyin = ref('')
+const newMeaning = ref('')
+const chineseWordIsEmpty = ref(false)
+const pinyinIsEmpty = ref(false)
+const meaningIsEmpty = ref(false)
 
-const emit = defineEmits(["addNewFlashcard"]);
+const emit = defineEmits(['addNewFlashcard'])
 
 const showFlashCardAdd = () => {
-  props.popup.newFlashcard = true;
-};
+  props.popup.newFlashcard = true
+}
 
 const closeFlashCardAdd = () => {
-  props.popup.newFlashcard = false;
-  newChineseWord.value = "";
-  newPinyin.value = "";
-  newMeaning.value = "";
-  chineseWordIsEmpty.value = false;
-  pinyinIsEmpty.value = false;
-  meaningIsEmpty.value = false;
-};
+  props.popup.newFlashcard = false
+  newChineseWord.value = ''
+  newPinyin.value = ''
+  newMeaning.value = ''
+  chineseWordIsEmpty.value = false
+  pinyinIsEmpty.value = false
+  meaningIsEmpty.value = false
+}
 
 const addNewFlashcard = () => {
-  const chineseWordEmpty = newChineseWord.value.trim() === "";
-  const pinyinEmpty = newPinyin.value.trim() === "";
-  const meaningEmpty = newMeaning.value.trim() === "";
+  const chineseWordEmpty = newChineseWord.value.trim() === ''
+  const pinyinEmpty = newPinyin.value.trim() === ''
+  const meaningEmpty = newMeaning.value.trim() === ''
 
   // if any of the input is empty, set red border and message
   if (chineseWordEmpty || pinyinEmpty || meaningEmpty) {
-    chineseWordIsEmpty.value = chineseWordEmpty;
-    pinyinIsEmpty.value = pinyinEmpty;
-    meaningIsEmpty.value = meaningEmpty;
-    return;
+    chineseWordIsEmpty.value = chineseWordEmpty
+    pinyinIsEmpty.value = pinyinEmpty
+    meaningIsEmpty.value = meaningEmpty
+    return
   } else {
     emit(
-      "addNewFlashcard",
+      'addNewFlashcard',
       newChineseWord.value,
       newPinyin.value,
       newMeaning.value
-    );
-    props.popup.newFlashcard = false;
-    newChineseWord.value = "";
-    newPinyin.value = "";
-    newMeaning.value = "";
-    chineseWordIsEmpty.value = false;
-    pinyinIsEmpty.value = false;
-    meaningIsEmpty.value = false;
+    )
+    props.popup.newFlashcard = false
+    newChineseWord.value = ''
+    newPinyin.value = ''
+    newMeaning.value = ''
+    chineseWordIsEmpty.value = false
+    pinyinIsEmpty.value = false
+    meaningIsEmpty.value = false
   }
-};
+}
 
 const isEmpty = (value) => {
-  return value === "";
-};
+  return value === ''
+}
 </script>
 
 <template>
-  <div class="text-start font-outfit text-base font-semibold pb-2" @click="props.closeOption">
+  <div
+    class="text-start font-outfit text-base font-semibold pb-2"
+    @click="props.closeOption"
+  >
     <div>
       <h1
         class="cursor-pointer inline hover:bg-[#f4ead8] p-[4px] rounded-xl transition-all duration-[270ms]"
@@ -111,7 +114,7 @@ const isEmpty = (value) => {
                 :class="{
                   'border-red-600': chineseWordIsEmpty,
                   'focus:border-red-600': chineseWordIsEmpty,
-                  'border-black': !chineseWordIsEmpty,
+                  'border-black': !chineseWordIsEmpty
                 }"
                 @input="chineseWordIsEmpty = isEmpty(newChineseWord)"
                 @keydown.enter="addNewFlashcard"
@@ -134,7 +137,7 @@ const isEmpty = (value) => {
                 :class="{
                   'border-red-600': pinyinIsEmpty,
                   'focus:border-red-600': pinyinIsEmpty,
-                  'border-black': !pinyinIsEmpty,
+                  'border-black': !pinyinIsEmpty
                 }"
                 @input="pinyinIsEmpty = isEmpty(newPinyin)"
                 placeholder="Pinyin"
@@ -157,7 +160,7 @@ const isEmpty = (value) => {
                 :class="{
                   'border-red-600': meaningIsEmpty,
                   'focus:border-red-600': meaningIsEmpty,
-                  'border-black': !meaningIsEmpty,
+                  'border-black': !meaningIsEmpty
                 }"
                 @input="meaningIsEmpty = isEmpty(newMeaning)"
                 @keydown.enter="addNewFlashcard"

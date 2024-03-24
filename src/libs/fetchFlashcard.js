@@ -1,58 +1,48 @@
 async function getFlashcard(url, id) {
   try {
-    const data = await fetch(`${url}/${id}`) // Call API to fetch data
-    const response = await data.json() // Parse JSON data into an object
-
-    // Check if response has a 'cards' property
-    if (response.hasOwnProperty('cards')) {
-      // If 'cards' is an array, return it
-      if (Array.isArray(response.cards)) {
-        return response.cards
-      } else {
-        console.log("Error: The 'cards' property is not an array.")
-        return []
-      }
-    } else {
-      // If 'cards' doesn't exist, assume 'collections' is an array of objects with 'cards' arrays
-      const allCards = response.collections.flatMap(
-        (collection) => collection.cards
-      )
-      return allCards
-    }
+    const data = await fetch(`${url}/collections/${id}`)
+    const collection = await data.json()
+    const cards = collection.cards
+    return cards
   } catch (error) {
-    console.log(`Error: ${error}`)
-    return []
+    console.error(error)
   }
 }
 
-async function addFlashcard(url, id, newFlashcard) {
+// async function addFlashcard(url, id, nchineseWord, npinyin, nmeaning) {
+//   try {
+//     const res = await fetch(`${url}/collections/${id}`, {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify({
+//         chineseWord: nchineseWord,
+//         pinyin: npinyin,
+//         meaning: nmeaning
+//       })
+//     })
+//     return await res.json()
+//   } catch (error) {
+//     console.error(`Error: ${error}`)
+//   }
+// }
+
+async function addFlashcard(url, id, newData) {
   try {
-    // Fetch the collection data first to check if 'cards' property exists
-    const data = await fetch(`${url}/${id}`)
-    const response = await data.json()
-
-    // Check if response has a 'cards' property
-    if (response.hasOwnProperty('cards')) {
-      // If 'cards' is an array, proceed to add a new flashcard
-      if (Array.isArray(response.cards)) {
-        // Prepare the request to add a new flashcard
-        const res = await fetch(`${url}/${id}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(newFlashcard)
-        })
-
-        // Parse the response to get the added flashcard
-        const addedFlashcard = await res.json()
-        return addedFlashcard
-      } else {
-        console.log("Error: The 'cards' property is not an array.")
-        return null
-      }
+    const response = await fetch(`${url}/collections/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newData)
+    })
+    const data = await response.json()
+    console.log('Data added to collection:', data)
+    return data
+  } catch (error) {
+    console.error('Error adding data to collection:', error)
   }
-}
 }
 
 async function deleteFlashcardById(url, id) {
@@ -69,7 +59,7 @@ async function deleteFlashcardById(url, id) {
 async function editFlashcard(url, newFlashcard, collectionId, cardId) {
   try {
     const res = await fetch(`${url}/${collectionId}/${cardId}`, {
-      method: 'PUT',
+      method: 'POST',
       headers: {
         'content-type': 'application/json'
       },
