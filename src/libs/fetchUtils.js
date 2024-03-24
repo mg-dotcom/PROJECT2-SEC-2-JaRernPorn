@@ -26,14 +26,14 @@ async function addCollection(url, newCollection) {
   }
 }
 
-async function deleteCollectionById(url,id){
+async function deleteCollectionById(url, id) {
   // console.log(`${url}?id=${id}`);
-  try{
-    const res=await fetch(`${url}/${id}`,{
-      method:'DELETE'
+  try {
+    const res = await fetch(`${url}/${id}`, {
+      method: 'DELETE'
     })
     return res.status
-  }catch (error) {
+  } catch (error) {
     console.log(`error: ${error}`)
   }
 }
@@ -56,4 +56,9 @@ async function editCollectionName(url, id, editCollection) {
   }
 }
 
-export { getCollection, addCollection,deleteCollectionById,editCollectionName }
+export {
+  getCollection,
+  addCollection,
+  deleteCollectionById,
+  editCollectionName
+}
