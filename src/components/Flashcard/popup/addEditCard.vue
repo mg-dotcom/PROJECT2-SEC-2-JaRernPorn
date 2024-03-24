@@ -23,14 +23,12 @@ const chineseWordIsEmpty = ref(false);
 const pinyinIsEmpty = ref(false);
 const meaningIsEmpty = ref(false);
 
-const emit = defineEmits(["addNewFlashcard", "renameFlashcard"]);
-
-const isAddingFlashcard = ref(false); // เพิ่มตัวแปรสถานะสำหรับการเพิ่ม flashcard
-const isRenamingFlashcard = ref(false); // เพิ่มตัวแปรสถานะสำหรับการเปลี่ยนชื่อ flashcard
+const isAddingFlashcard = ref(false); // เช็คสถานะสำหรับการเพิ่ม flashcard
+const isRenamingFlashcard = ref(false); // เช็คสถานะสำหรับการเปลี่ยนชื่อ flashcard
 
 const closeFlashCardAdd = () => {
-  isAddingFlashcard.value = false; // ปิดการเพิ่ม flashcard
-  isRenamingFlashcard.value = false; // ปิดการเปลี่ยนชื่อ flashcard
+  isAddingFlashcard.value = false;
+  isRenamingFlashcard.value = false;
   resetValues();
 };
 
@@ -62,6 +60,8 @@ watch(
   }
 );
 
+const emit = defineEmits(["addNewFlashcard", "renameFlashcard"]);
+
 const renameFlashcard = () => {
   const chineseWordEmpty = oldChineseWord.value.trim() === "";
   const pinyinEmpty = oldPinyin.value.trim() === "";
@@ -82,6 +82,28 @@ const renameFlashcard = () => {
     closeFlashCardAdd();
   }
 };
+
+
+// const renameFlashcard = () => {
+//   const chineseWordEmpty = oldChineseWord.value.trim() === "";
+//   const pinyinEmpty = oldPinyin.value.trim() === "";
+//   const meaningEmpty = oldMeaning.value.trim() === "";
+//   if (chineseWordEmpty || pinyinEmpty || meaningEmpty) {
+//     chineseWordIsEmpty.value = chineseWordEmpty;
+//     pinyinIsEmpty.value = pinyinEmpty;
+//     meaningIsEmpty.value = meaningEmpty;
+//     return;
+//   } else {
+//     emit(
+//       "renameFlashcard",
+//       oldChineseWord.value,
+//       oldPinyin.value,
+//       oldMeaning.value,
+//       props.SelectedIndex
+//     );
+//     closeFlashCardAdd();
+//   }
+// };
 </script>
 
 <template>
@@ -103,8 +125,7 @@ const renameFlashcard = () => {
     'border-red-600': chineseWordIsEmpty,
     'focus:border-red-600': chineseWordIsEmpty,
     'border-black': !chineseWordIsEmpty,
-  }"
-                :placeholder="isRenamingFlashcard ? props.computedFlashcards[props.index].chineseWord : 'Chinese word'"
+  }" :placeholder="isRenamingFlashcard ? props.computedFlashcards[props.index].chineseWord : 'Chinese word'"
                 @keydown.enter="isRenamingFlashcard ? renameFlashcard(props.index) : addNewFlashcard" />
               <div v-if="chineseWordIsEmpty" class="absolute right-20 top-40 text-xs text-red-600">
                 Please fill value in form
@@ -119,10 +140,10 @@ const renameFlashcard = () => {
               <input type="text" :value="isRenamingFlashcard ? oldPinyin : newPinyin"
                 @input="isRenamingFlashcard ? oldPinyin = $event.target.value : newPinyin = $event.target.value"
                 class="border-[1.5px] border-black rounded-md p-2 w-[360px]" @focus="$event.target.select()" :class="{
-    'border-red-600': pinyinIsEmpty,
-    'focus:border-red-600': pinyinIsEmpty,
-    'border-black': !pinyinIsEmpty,
-  }" :placeholder="isRenamingFlashcard ? props.computedFlashcards[props.index].pinyin : 'Pinyin'"
+                'border-red-600': pinyinIsEmpty,
+                'focus:border-red-600': pinyinIsEmpty,
+                'border-black': !pinyinIsEmpty, }" 
+                :placeholder="isRenamingFlashcard ? props.computedFlashcards[props.index].pinyin : 'Pinyin'"
                 @keydown.enter="isRenamingFlashcard ? renameFlashcard(props.index) : addNewFlashcard" />
 
               <div v-if="pinyinIsEmpty" class="absolute right-20 top-[258px] text-xs text-red-600">
@@ -135,10 +156,10 @@ const renameFlashcard = () => {
               <div class="font-outfit text-start">Meaning</div>
               <input type="text" :value="isRenamingFlashcard ? oldMeaning : newMeaning"
                 class="border-[1.5px] border-black rounded-md p-2 w-[360px]" @focus="$event.target.select()" :class="{
-    'border-red-600': meaningIsEmpty,
-    'focus:border-red-600': meaningIsEmpty,
-    'border-black': !meaningIsEmpty,
-  }" @input="meaningIsEmpty = isEmpty(isRenamingFlashcard ? oldMeaning : newMeaning)"
+                  'border-red-600': meaningIsEmpty,
+                  'focus:border-red-600': meaningIsEmpty,
+                  'border-black': !meaningIsEmpty,}" 
+                  @input="meaningIsEmpty = isEmpty(isRenamingFlashcard ? oldMeaning : newMeaning)"
                 :placeholder="isRenamingFlashcard ? props.computedFlashcards[props.index].meaning : 'Meaning'"
                 @keydown.enter="isRenamingFlashcard ? renameFlashcard(props.index) : addNewFlashcard" />
               <div v-if="meaningIsEmpty" class="absolute right-20 top-[356px] text-xs text-red-600">
