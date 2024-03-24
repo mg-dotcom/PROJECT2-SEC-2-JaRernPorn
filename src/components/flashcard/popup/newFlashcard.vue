@@ -16,6 +16,7 @@ const props = defineProps({
 const newChineseWord = ref("");
 const newPinyin = ref("");
 const newMeaning = ref("");
+const id = ref(undefined);
 const chineseWordIsEmpty = ref(false);
 const pinyinIsEmpty = ref(false);
 const meaningIsEmpty = ref(false);
@@ -50,6 +51,7 @@ const addNewFlashcard = () => {
   } else {
     emit(
       "addNewFlashcard",
+      id.value,
       newChineseWord.value,
       newPinyin.value,
       newMeaning.value
@@ -70,7 +72,10 @@ const isEmpty = (value) => {
 </script>
 
 <template>
-  <div class="text-start font-outfit text-base font-semibold pb-2" @click="props.closeOption">
+  <div
+    class="text-start font-outfit text-base font-semibold pb-2"
+    @click="props.closeOption"
+  >
     <div>
       <h1
         class="cursor-pointer inline hover:bg-[#f4ead8] p-[4px] rounded-xl transition-all duration-[270ms]"

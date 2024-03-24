@@ -1,11 +1,11 @@
 <script setup>
-import { defineProps, ref, computed,onMounted } from "vue";
+import { defineProps, ref, computed, onMounted } from "vue";
 import newFlashcard from "./popup/newFlashcard.vue";
 import { addNewFlashcard } from "../../libs/flashcard-libs/FlashCardModal.js";
 import { deleteFlashcard } from "../../libs/flashcard-libs/FlashCardModal.js";
 import Card from "./Card.vue";
 import { editFlashcard } from "../../libs/flashcard-libs/FlashCardModal.js";
-import { getFlashcard } from "@/libs/fetchFlashcard";
+import { getFlashcard, addFlashcard } from "../../libs/fetchFlashcard.js";
 
 const props = defineProps({
   popup: {
@@ -16,17 +16,20 @@ const props = defineProps({
     type: Function,
     required: true,
   },
-  currentCollectionId:{
-    type:String,
-    required:true
-  }
+  currentCollectionId: {
+    type: String,
+    required: true,
+  },
 });
 
 const flashcards = ref([]);
 
 onMounted(async () => {
-  flashcards.value = await getFlashcard(import.meta.env.VITE_BASE_URL,props.currentCollectionId)
-})
+  flashcards.value = await getFlashcard(
+    import.meta.env.VITE_BASE_URL,
+    props.currentCollectionId
+  );
+});
 
 const computedFlashcards = computed(() => {
   return flashcards.value;
@@ -45,8 +48,21 @@ const showRenameFlashcard = (index) => {
   // console.log("before select", SelectedIndex.value);
 };
 
-const handleAddNewFlashcard = (chineseWord, pinyin, meaning) => {
-  addNewFlashcard(chineseWord, pinyin, meaning, flashcards.value);
+const handleAddNewFlashcard = async (
+  newId,
+  newChineseWord,
+  newPinyin,
+  newMeaning
+) => {
+  if (newId === undefined) {
+    const addedFlashcard = await addFlashcard(import.meta.env.VITE_BASE_URL, {
+      chineseWord: newChineseWord,
+      pinyin: newPinyin,
+      meaning: newMeaning,
+    });
+    console.log(addedFlashcard);
+  }
+
   props.popup.optionFlashcard = false;
 };
 
