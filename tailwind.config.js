@@ -86,6 +86,9 @@ export const theme = {
       list: '2.3',
       listMobile: '2'
     }
+  },
+  daisyui: {
+    themes: ['light', 'dark', 'cupcake']
   }
 }
 export const plugins = [require('daisyui'), Filpping]

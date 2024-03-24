@@ -1,7 +1,7 @@
 <script setup>
 import { reactive, ref, defineProps, watch } from 'vue'
-import Header from '../Header.vue'
-import Content from './Content.vue'
+import Header from '../components/Header.vue'
+import Content from '../components/Flashcard/Content.vue'
 import { useRoute } from 'vue-router'
 
 const showFlashCard = ref(true)

@@ -1,10 +1,11 @@
-import CategoriesUnits from '@/components/category/CategoriesUnits.vue'
-import HomePage from '@/components/homepage/HomePage.vue'
-import CollectionFlashCard from '@/components/collectionFlashcard/CollectionFlashCard.vue'
-import Units from '@/components/category/Units.vue'
-import NotFound from '@/views/NotFound.vue'
+import CategoriesUnits from '../views/CategoriesUnits.vue'
+import CollectionFlashCard from '../views/CollectionFlashCard.vue'
+import HomePage from '../views/HomePage.vue'
+import Units from '../components/category/Units.vue'
+import NotFound from '../views/NotFound.vue'
+import FlashCard from '../views/FlashCard.vue'
 import { createRouter, createWebHistory } from 'vue-router'
-import FlashCard from '@/components/Flashcard/FlashCard.vue'
+
 const history = createWebHistory()
 const routes = [
   { path: '/', redirect: '/home' },

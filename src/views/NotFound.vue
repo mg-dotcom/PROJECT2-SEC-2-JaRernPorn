@@ -20,7 +20,7 @@
         <div class="flex justify-center pt-6">
           <router-link :to="{ name: 'HomePage' }">
             <button
-              class="bg-title text-white font-outfit font-medium rounded-lg shadow-md p-2 hover:bg-button-bgColor"
+              class="bg-title text-white font-outfit font-medium rounded-lg shadow-md p-2 hover:bg-button-bgColor transition-all duration-100"
             >
               Go to homepage
             </button></router-link
