@@ -413,82 +413,47 @@
   ],
   "collections": [
     {
-      "0": {
-        "id": "2",
-        "name": "csacvsav",
-        "cards": [
-          {
-            "id": 1,
-            "chineseWord": "苹果 ",
-            "pinyin": "píngguǒ",
-            "meaning": "Apple"
-          },
-          {
-            "id": 2,
-            "chineseWord": "草莓",
-            "pinyin": "cǎoméi",
-            "meaning": "Strawberry"
-          },
-          {
-            "chineseWord": "a",
-            "pinyin": "a",
-            "meaning": "a"
-          }
-        ]
-      },
-      "1": {
-        "0": {
-          "id": "2",
-          "name": "csacvsav",
-          "cards": [
-            {
-              "id": 1,
-              "chineseWord": "苹果 ",
-              "pinyin": "píngguǒ",
-              "meaning": "Apple"
-            },
-            {
-              "id": 2,
-              "chineseWord": "草莓",
-              "pinyin": "cǎoméi",
-              "meaning": "Strawberry"
-            },
-            {
-              "chineseWord": "a",
-              "pinyin": "a",
-              "meaning": "a"
-            }
-          ]
+      "id": "2",
+      "name": "csacvsav",
+      "cards": [
+        {
+          "id": 1,
+          "chineseWord": "苹果 ",
+          "pinyin": "píngguǒ",
+          "meaning": "Apple"
         },
-        "id": "dc4a"
-      },
-      "id": "2"
-    },
-    {
-      "0": {
-        "id": "2",
-        "name": "csacvsav",
-        "cards": [
-          {
-            "id": 1,
-            "chineseWord": "苹果 ",
-            "pinyin": "píngguǒ",
-            "meaning": "Apple"
-          },
-          {
-            "id": 2,
-            "chineseWord": "草莓",
-            "pinyin": "cǎoméi",
-            "meaning": "Strawberry"
-          },
-          {
-            "chineseWord": "a",
-            "pinyin": "a",
-            "meaning": "a"
-          }
-        ]
-      },
-      "id": "dc4a"
+        {
+          "id": 2,
+          "chineseWord": "草莓",
+          "pinyin": "cǎoméi",
+          "meaning": "Strawberry"
+        },
+        {
+          "chineseWord": "ad",
+          "pinyin": "a",
+          "meaning": "dd"
+        },
+        {
+          "chineseWord": "Amp",
+          "pinyin": "MG",
+          "meaning": "YASSSSSSSSsss"
+        },
+        {
+          "chineseWord": "a",
+          "pinyin": "a",
+          "meaning": "a"
+        },
+        {
+          "chineseWord": "a",
+          "pinyin": "a",
+          "meaning": "a"
+        },
+        {
+          "chineseWord": "asd",
+          "pinyin": "asd",
+          "meaning": "asd"
+        }
+      ]
     }
   ]
 }

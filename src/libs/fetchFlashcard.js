@@ -26,20 +26,40 @@ async function getFlashcard(url, id) {
   }
 }
 
-const addFlashcard = async (url, id, card) => {
+const addFlashcard = async (url, id, newCard) => {
   try {
-    const data = await fetch(`${url}/${id}`, {
-      method: "POST",
+    const response = await fetch(`${url}`);
+    const collections = await response.json();
+
+    const collectionIndex = collections.findIndex(
+      (collection) => collection.id === "2"
+    );
+
+    if (collectionIndex === -1) {
+      throw new Error("Collection not found");
+    }
+
+    collections[collectionIndex].cards.push(newCard);
+
+    const updateResponse = await fetch(`${url}/${id}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(card),
+      body: JSON.stringify(...collections),
     });
-    const response = await data.json();
-    return response;
+
+    console.log(newCard);
+
+    if (!updateResponse.ok) {
+      throw new Error("Failed to update collection");
+    }
+
+    const updatedCollections = await updateResponse.json();
+    return updatedCollections;
   } catch (error) {
-    console.log(`Error: ${error}`);
-    return [];
+    console.error("Error adding new card:", error);
+    return null;
   }
 };
 
