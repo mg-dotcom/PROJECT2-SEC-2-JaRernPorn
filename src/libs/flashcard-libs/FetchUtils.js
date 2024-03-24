@@ -8,15 +8,13 @@ async function getCollections(url) {
   }
 }
 
-async function getFlashcards(url) {
+async function getFlashcards(url, id) {
   try {
-    const data = await fetch(url)
-    const collections = await data.json()
-    const cards = collections
-    return cards
+    const data = await fetch(`${url}/${id}`)
+    const item = await data.json()
+    return item
   } catch (error) {
-    console.error(error)
-    throw error
+    console.log(`error: ${error}`)
   }
 }
 
