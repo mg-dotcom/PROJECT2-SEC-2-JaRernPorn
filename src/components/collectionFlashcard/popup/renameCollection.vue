@@ -53,7 +53,9 @@ const toUpdateName = () => {
           @click="closeButton"
         />
         <div class="flex flex-col items-center justify-center">
-          <div class="text-center text-3xl font-mono font-bold">
+          <div
+            class="text-center text-title text-3xl font-outfit font-semibold"
+          >
             Rename collection
           </div>
           <div class="my-7 flex flex-col items-center justify-center">

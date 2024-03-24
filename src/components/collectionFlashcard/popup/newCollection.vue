@@ -64,7 +64,9 @@ const passAndClear = (name, event) => {
           @click="closeButton"
         />
         <div class="flex flex-col items-center justify-center">
-          <div class="text-center text-3xl font-outfit text-title font-medium">
+          <div
+            class="text-center text-3xl font-outfit text-title font-semibold"
+          >
             Add new collection
           </div>
           <div class="my-7 flex flex-col items-center justify-center">
