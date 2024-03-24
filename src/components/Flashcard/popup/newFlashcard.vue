@@ -16,6 +16,7 @@ const props = defineProps({
 const newChineseWord = ref("");
 const newPinyin = ref("");
 const newMeaning = ref("");
+const cardId = ref(undefined);
 const chineseWordIsEmpty = ref(false);
 const pinyinIsEmpty = ref(false);
 const meaningIsEmpty = ref(false);
@@ -50,6 +51,7 @@ const addNewFlashcard = () => {
   } else {
     emit(
       "addNewFlashcard",
+      cardId.value,
       newChineseWord.value,
       newPinyin.value,
       newMeaning.value

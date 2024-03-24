@@ -1,15 +1,11 @@
 <script setup>
 import { defineProps, ref, computed, onMounted } from "vue";
 import newFlashcard from "./popup/newFlashcard.vue";
-import Card from "./Card.vue";
 import { addNewFlashcard } from "../../libs/flashcard-libs/FlashCardModal.js";
 import { deleteFlashcard } from "../../libs/flashcard-libs/FlashCardModal.js";
+import Card from "./Card.vue";
 import { editFlashcard } from "../../libs/flashcard-libs/FlashCardModal.js";
-import {
-  getFlashcard,
-  addFlashcard,
-  deleteFlashcardById,
-} from '../../libs/fetchFlashcard.js'
+import { getFlashcard, addFlashcard, deleteFlashcardById } from "../../libs/fetchFlashcard";
 
 const props = defineProps({
   popup: {
@@ -20,12 +16,16 @@ const props = defineProps({
     type: Function,
     required: true,
   },
+  currentCollectionId: {
+    type: String,
+    required: true
+  }
 });
 
 const flashcards = ref([]);
 
 onMounted(async () => {
-  flashcards.value = await getFlashcard(import.meta.env.VITE_BASE_URL);
+  flashcards.value = await getFlashcard(import.meta.env.VITE_BASE_URL, props.currentCollectionId)
 })
 
 const computedFlashcards = computed(() => {
@@ -45,19 +45,61 @@ const showRenameFlashcard = (index) => {
   // console.log("before select", SelectedIndex.value);
 };
 
-const handleAddNewFlashcard =async (chineseWord, pinyin, meaning) => {
-  // add in backend
-  const newFlashcard = await addFlashcard(import.meta.env.VITE_BASE_URL, {
-      chineseWord: chineseWord,
-      pinyin: pinyin,
-      meaning: meaning
-    });
+// const handleAddNewFlashcard = async (chineseWord, pinyin, meaning) => {
+//   // เตรียมข้อมูลใหม่ของการ์ด
+//   const newFlashcard = {
+//     chineseWord: chineseWord,
+//     pinyin: pinyin,
+//     meaning: meaning
+//   };
 
-  addNewFlashcard(chineseWord, pinyin, meaning, flashcards.value);
-  props.popup.optionFlashcard = false;
+//   // try {
+//   // เพิ่มการ์ดลงในคอลเล็กชันที่ระบุด้วย addFlashcard
+//   const addedFlashcard = await addFlashcard(
+//     import.meta.env.VITE_BASE_URL,
+//     props.currentCollectionId,
+//   );
+
+//   // เพิ่มการ์ดลงใน flashcards.value เพื่อให้แสดงผลทันที
+//   flashcards.value.push(addedFlashcard);
+
+//   // ปิด popup
+//   props.popup.optionFlashcard = false;
+//   // } catch (error) {
+//   //   console.log(`Error adding flashcard: ${error}`);
+//   // }
+
+//   // addNewFlashcard(chineseWord, pinyin, meaning, flashcards.value);
+//   // props.popup.optionFlashcard = false;
+// };
+const handleAddNewFlashcard = async (chineseWord, pinyin, meaning) => {
+    // เตรียมข้อมูลใหม่ของการ์ด
+    const newFlashcard = {
+        chineseWord: chineseWord,
+        pinyin: pinyin,
+        meaning: meaning
+    };
+
+    // try {
+        // เพิ่มการ์ดลงในคอลเล็กชันที่ระบุด้วย addFlashcard
+        const addedFlashcard = await addFlashcard(
+            import.meta.env.VITE_BASE_URL,
+            props.currentCollectionId,
+            newFlashcard // ส่งข้อมูลการ์ดใหม่ไปด้วย
+        );
+
+        // เพิ่มการ์ดลงใน flashcards.value เพื่อให้แสดงผลทันที
+        flashcards.value.push(addedFlashcard);
+
+        // ปิด popup
+        props.popup.optionFlashcard = false;
+    // } catch (error) {
+    //     console.log(`Error adding flashcard: ${error}`);
+    // }
 };
 
-const handelDeleteFlashcard = (index, id) => {
+
+const handelDeleteFlashcard = (index) => {
   deleteFlashcard(index, flashcards.value);
   props.popup.optionFlashcard = false;
 };
@@ -82,7 +124,7 @@ const handelEditFlashcard = (chineseWord, pinyin, meaning, index) => {
     :popup="popup" 
     :closeOption="closeOption" 
     @addNewFlashcard="handleAddNewFlashcard">
-  </newFlashcard>
+    </newFlashcard>
 
     <div v-if="computedFlashcards.length === 0" class="flex-grow flex justify-center items-center text-center h-[70vh]">
       <div class="text-gray-300 text-sm">No flashcard added yet</div>
@@ -92,18 +134,10 @@ const handelEditFlashcard = (chineseWord, pinyin, meaning, index) => {
     <div v-else-if="computedFlashcards.length > 0"
       class="grid grid-cols-1 px-10 py-7 text-center xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 md:gap-17 sm:grid-cols-2 sm:gap-10"
       @click.self="closeOption">
-      <Card v-for="(card, index) in computedFlashcards" 
-      :card="card" 
-      :index="index" 
-      :key="index" 
-      :popup="popup"  
-      :SelectedIndex="SelectedIndex" 
-      :computedFlashcards="computedFlashcards" 
-      @toggle-option-flashcard="toggleOption"
-      @deleteFlashcard="handelDeleteFlashcard" 
-      @showRenameFlashcard="showRenameFlashcard"
-      @renameFlashcard="handelEditFlashcard">
-    </Card>
+      <Card v-for="(card, index) in computedFlashcards" :card="card" :index="index" :key="index" :popup="popup"
+        :SelectedIndex="SelectedIndex" :computedFlashcards="computedFlashcards" @toggle-option-flashcard="toggleOption"
+        @deleteFlashcard="handelDeleteFlashcard" @showRenameFlashcard="showRenameFlashcard"
+        @renameFlashcard="handelEditFlashcard"></Card>
     </div>
   </div>
 </template>

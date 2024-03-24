@@ -409,29 +409,29 @@
   
   "collections": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Fruits",
       "cards": [
         {
-          "id": 1,
+          "id": "1",
           "chineseWord": "苹果 ",
           "pinyin": "píngguǒ",
           "meaning": "Apple"
         },
         {
-          "id": 2,
+          "id": "2",
           "chineseWord": "草莓",
           "pinyin": "cǎoméi",
           "meaning": "Strawberry"
         },
         {
-          "id": 3,
+          "id": "3",
           "chineseWord": "香蕉 ",
           "pinyin": "xiāngjiāo",
           "meaning": "Banana"
         },
         {
-          "id": 4,
+          "id": "4",
           "chineseWord": "葡萄 ",
           "pinyin": "pú táo",
           "meaning": "Grape"
