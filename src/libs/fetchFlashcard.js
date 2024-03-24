@@ -38,9 +38,9 @@ async function deleteFlashcardById(url, id) {
   }
 }
 
-async function editFlashcard(url, newFlashcard, id) {
+async function editFlashcard(url, newFlashcard, collectionId, cardId) {
   try {
-    const res = await fetch(`${url}/${id}`, {
+    const res = await fetch(`${url}/${collectionId}/${cardId}`, {
       method: 'PUT',
       headers: {
         'content-type': 'application/json'

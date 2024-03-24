@@ -67,12 +67,12 @@ const handelEditFlashcard = async (
   newChineseWord,
   newPinyin,
   newMeaning,
-  id
+  cardId
 ) => {
   flashcards.value = await editFlashcard(
     import.meta.env.VITE_BASE_URL,
     { chineseWord: newChineseWord, pinyin: newPinyin, meaning: newMeaning },
-    id
+    cardId
   )
 
   props.popup.renameFlashcard = false
