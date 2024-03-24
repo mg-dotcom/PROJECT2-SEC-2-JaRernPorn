@@ -74,12 +74,14 @@ const handleAddNewFlashcard = async (
   props.popup.optionFlashcard = false
 }
 
-const handelDeleteFlashcard = async (cardId) => {
+const handelDeleteFlashcard = async (indexCard) => {
   flashcards.value = await deleteFlashcard(
     import.meta.env.VITE_BASE_URL,
     props.currentCollectionId,
-    cardId
+    indexCard
   )
+
+  console.log(cardId)
 
   props.popup.optionFlashcard = false
 }

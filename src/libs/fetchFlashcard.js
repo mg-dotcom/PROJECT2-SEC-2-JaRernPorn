@@ -63,17 +63,13 @@ const addFlashcard = async (url, id, newCard) => {
   }
 }
 
-const deleteFlashcard = async (url, id, cardIdGonnaDelete) => {
+const deleteFlashcard = async (url, id, cardIndex) => {
   try {
     const response = await fetch(`${url}`)
     const collections = await response.json()
 
     const collectionIndex = collections.findIndex(
       (collection) => collection.id === id
-    )
-
-    const cardIndex = collections[collectionIndex].cards.findIndex(
-      (card) => card.id === cardIdGonnaDelete
     )
 
     collections[collectionIndex].cards.splice(cardIndex, 1)
@@ -83,7 +79,7 @@ const deleteFlashcard = async (url, id, cardIdGonnaDelete) => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(collections[collectionIndex])
+      body: JSON.stringify(...collections)
     })
 
     if (!updateResponse.ok) {
