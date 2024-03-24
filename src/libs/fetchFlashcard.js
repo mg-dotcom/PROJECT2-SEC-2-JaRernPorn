@@ -27,26 +27,7 @@ async function addFlashcard(url, collectionId, newFlashcard) {
   }
 }
 
-// async function addFlashcard(url, newFlashcard) {
-//     try {
-//         const res = await fetch(url, {
-//             method: 'POST',
-//             headers: {
-//                 'content-type': 'application/json'
-//             },
-//             body: JSON.stringify({
-//                 ...newFlashcard
-//             })
-//         })
-//         const addedFlashcard = await res.json()
-//         return addedFlashcard
-//     } catch (error) {
-//         console.log(`error: ${error}`)
-//     }
-// }
-
 async function deleteFlashcardById(url, id) {
-  // console.log(`${url}?id=${id}`);
   try {
     const res = await fetch(`${url}/${id}`, {
       method: 'DELETE'
@@ -57,4 +38,23 @@ async function deleteFlashcardById(url, id) {
   }
 }
 
-export { getFlashcard, addFlashcard, deleteFlashcardById }
+async function editFlashcard(url, newChineseWord, newPinyin, newMeaning, id) {
+  try {
+    const res = await fetch(`${url}/${id}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        ...newChineseWord,
+        ...newPinyin,
+        ...newMeaning
+      })
+    })
+    const editedFlashcard = await res.json()
+    return editedFlashcard
+  } catch (error) {
+    console.log(`error: ${error}`)
+  }
+}
+export { getFlashcard, addFlashcard, deleteFlashcardById, editFlashcard }

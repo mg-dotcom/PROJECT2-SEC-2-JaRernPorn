@@ -51,7 +51,6 @@ const renameFlashcard = () => {
       oldChineseWord.value,
       oldPinyin.value,
       oldMeaning.value,
-      props.SelectedIndex,
       props.id
     )
     props.popup.renameFlashcard = false
@@ -117,7 +116,7 @@ watch(
                   'border-black': !chineseWordIsEmpty
                 }"
                 :placeholder="props.computedFlashcards[props.index].chineseWord"
-                @keydown.enter="renameFlashcard(props.index)"
+                @keydown.enter="renameFlashcard(props.id)"
               />
               <div
                 v-if="chineseWordIsEmpty"
@@ -141,7 +140,7 @@ watch(
                 }"
                 @input="pinyinIsEmpty = isEmpty(oldPinyin)"
                 :placeholder="props.computedFlashcards[props.index].pinyin"
-                @keydown.enter="renameFlashcard(props.index)"
+                @keydown.enter="renameFlashcard(props.id)"
               />
               <div
                 v-if="pinyinIsEmpty"
@@ -165,7 +164,7 @@ watch(
                 }"
                 @input="meaningIsEmpty = isEmpty(oldMeaning)"
                 :placeholder="props.computedFlashcards[props.index].meaning"
-                @keydown.enter="renameFlashcard(props.index)"
+                @keydown.enter="renameFlashcard(props.id)"
               />
               <div
                 v-if="meaningIsEmpty"
@@ -184,7 +183,7 @@ watch(
               </button>
               <button
                 class="bg-[#4096ff] text-white rounded-md w-20 font-outfit font-medium"
-                @click="renameFlashcard(props.index)"
+                @click="renameFlashcard(props.id)"
               >
                 OK
               </button>

@@ -4,11 +4,12 @@ import newFlashcard from './popup/newFlashcard.vue'
 import Card from './Card.vue'
 import { addNewFlashcard } from '../../libs/flashcard-libs/FlashCardModal.js'
 import { deleteFlashcard } from '../../libs/flashcard-libs/FlashCardModal.js'
-import { editFlashcard } from '../../libs/flashcard-libs/FlashCardModal.js'
+// import { editFlashcard } from '../../libs/flashcard-libs/FlashCardModal.js'
 import {
   getFlashcard,
   addFlashcard,
-  deleteFlashcardById
+  deleteFlashcardById,
+  editFlashcard
 } from '../../libs/fetchFlashcard.js'
 
 const props = defineProps({
@@ -62,14 +63,14 @@ const handelDeleteFlashcard = (index, id) => {
   props.popup.optionFlashcard = false
 }
 
-const handelEditFlashcard = (chineseWord, pinyin, meaning, index, id) => {
-  editFlashcard(
-    chineseWord,
-    pinyin,
-    meaning,
-    SelectedIndex.value,
-    flashcards.value
-  )
+const handelEditFlashcard = async (chineseWord, pinyin, meaning, id) => {
+  console.log(flashcards.value)
+  flashcards.value = await editFlashcard(import.meta.env.VITE_BASE_URL, {
+    id: id,
+    chineseWord: chineseWord,
+    pinyin: pinyin,
+    meaning: meaning
+  })
 
   props.popup.renameFlashcard = false
   props.popup.optionFlashcard = false
