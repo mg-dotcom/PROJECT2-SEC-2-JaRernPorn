@@ -88,4 +88,29 @@ const deleteFlashcard = async (url, id, cardIndex) => {
   }
 }
 
-export { getFlashcard, addFlashcard, deleteFlashcard }
+const editFlashcard = async (url, id, newFlashcard, cardIndex) => {
+  try {
+    const response = await fetch(url)
+    const collections = await response.json()
+
+    const collectionIndex = collections.findIndex(
+      (collection) => collection.id === id
+    )
+
+    collections[collectionIndex].cards[cardIndex] = newFlashcard
+
+    const updateResponse = await fetch(`${url}/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(...collections)
+    })
+
+    return updateResponse
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export { getFlashcard, addFlashcard, deleteFlashcard, editFlashcard }

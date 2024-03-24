@@ -417,9 +417,46 @@
       "name": "csacvsav",
       "cards": [
         {
-          "chineseWord": "2",
-          "pinyin": "2",
-          "meaning": "2"
+          "id": 1,
+          "chineseWord": "苹果 ",
+          "pinyin": "píngguǒ",
+          "meaning": "Apple"
+        },
+        {
+          "id": 2,
+          "chineseWord": "草莓",
+          "pinyin": "cǎoméi",
+          "meaning": "Strawberry"
+        },
+        {
+          "chineseWord": "sadsadsa",
+          "pinyin": "dsadasds",
+          "meaning": "ads"
+        },
+        {
+          "chineseWord": "Amp",
+          "pinyin": "MG",
+          "meaning": "YASSSSSSSSsss"
+        },
+        {
+          "chineseWord": "a",
+          "pinyin": "a",
+          "meaning": "a"
+        },
+        {
+          "chineseWord": "adsads",
+          "pinyin": "adsadsa",
+          "meaning": "dsad"
+        },
+        {
+          "chineseWord": "asd",
+          "pinyin": "asd",
+          "meaning": "asd"
+        },
+        {
+          "chineseWord": "sad",
+          "pinyin": "ssdas",
+          "meaning": "dsad"
         }
       ]
     }

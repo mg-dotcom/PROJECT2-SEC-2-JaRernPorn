@@ -1,14 +1,16 @@
 <script setup>
 import { defineProps, ref, computed, onMounted } from 'vue'
 import newFlashcard from './popup/newFlashcard.vue'
-import { addNewFlashcard } from '../../libs/flashcard-libs/FlashCardModal.js'
+// import { addNewFlashcard } from '../../libs/flashcard-libs/FlashCardModal.js'
 // import { deleteFlashcard } from '../../libs/flashcard-libs/FlashCardModal.js'
+// import { editFlashcard } from '../../libs/flashcard-libs/FlashCardModal.js'
 import Card from './Card.vue'
-import { editFlashcard } from '../../libs/flashcard-libs/FlashCardModal.js'
+
 import {
   getFlashcard,
   addFlashcard,
-  deleteFlashcard
+  deleteFlashcard,
+  editFlashcard
 } from '../../libs/fetchFlashcard.js'
 
 const props = defineProps({
@@ -81,18 +83,20 @@ const handelDeleteFlashcard = async (indexCard) => {
     indexCard
   )
 
-  console.log(cardId)
-
+  props.popup.renameFlashcard = false
   props.popup.optionFlashcard = false
 }
 
-const handelEditFlashcard = (chineseWord, pinyin, meaning, index) => {
+const handelEditFlashcard = async (chineseWord, pinyin, meaning, index) => {
   editFlashcard(
-    chineseWord,
-    pinyin,
-    meaning,
-    SelectedIndex.value,
-    flashcards.value
+    import.meta.env.VITE_BASE_URL,
+    props.currentCollectionId,
+    {
+      chineseWord: chineseWord,
+      pinyin: pinyin,
+      meaning: meaning
+    },
+    index
   )
 
   props.popup.renameFlashcard = false
