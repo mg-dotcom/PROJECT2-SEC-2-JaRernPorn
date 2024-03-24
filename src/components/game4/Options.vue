@@ -74,15 +74,6 @@ const isMatching = () => {
     ) {
       checkBtn.value = false;
       continueBtn.value = true;
-      setTimeout(() => {
-        router.push({
-          name: "Result",
-          params: {
-            cateIndex: route.params.cateIndex,
-            unit: route.params.unit,
-          },
-        });
-      }, 1000);
     }
   } else {
     wrongWord.value.push(wordId);
@@ -110,7 +101,7 @@ const isMatching = () => {
           :class="{
             'border-2 border-selected-option-blue':
               clickedWordId && clickedWordId === wordOption.id,
-            'bg-green-500 border-green-border': wordArray.includes(
+            'bg-green-400 border-green-border': wordArray.includes(
               wordOption.id
             ),
             'bg-wrong-option-red': wrongWord.includes(wordOption.id),
@@ -129,7 +120,7 @@ const isMatching = () => {
           :class="{
             'border border-selected-option-blue':
               clickedMeaningId && clickedMeaningId === meaningOption.id,
-            'bg-green-500 border-green-border': meaningArray.includes(
+            'bg-green-400 border-green-border': meaningArray.includes(
               meaningOption.id
             ),
             'bg-wrong-option-red': wrongMeaning.includes(meaningOption.id),
@@ -142,10 +133,18 @@ const isMatching = () => {
     </div>
     <div class="flex justify-end px-6 lg:px-32">
       <button
+        v-show="checkBtn"
         @click="isMatching"
         class="bg-title rounded-2xl text-white font-outfit font-semibold w-20 h-8 sm:text-2xl sm:w-28 sm:h-14 sm:rounded-3xl hover:bg-button-bgColor lg:w-36 lg:h-12"
       >
-        {{ continueBtn ? "Continue" : "Check" }}
+        Check
+      </button>
+      <button
+        v-show="continueBtn"
+        @click="router.push({ name: 'Result' })"
+        class="bg-title rounded-2xl text-white font-outfit font-semibold w-20 h-8 sm:text-2xl sm:w-28 sm:h-14 sm:rounded-3xl hover:bg-button-bgColor lg:w-36 lg:h-12"
+      >
+        Continue
       </button>
     </div>
   </div>
