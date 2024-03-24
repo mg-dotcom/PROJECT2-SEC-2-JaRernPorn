@@ -1,20 +1,22 @@
 <script setup>
-import { reactive, ref } from "vue";
-import Header from "../Header.vue";
-import Content from "./Content.vue";
+import { reactive, ref } from 'vue'
+import Header from '../Header.vue'
+import Content from './Content.vue'
 
-const showFlashCard = ref(true);
+const showFlashCard = ref(true)
 
 const popup = reactive({
   newFlashcard: false,
   //Setting
   optionFlashcard: false,
-  renameFlashcard: false,
-});
+  renameFlashcard: false
+})
+
+const currentCollectionId = ref('2')
 
 const closeOption = () => {
-  popup.optionFlashcard = false;
-};
+  popup.optionFlashcard = false
+}
 </script>
 
 <template>
@@ -24,7 +26,11 @@ const closeOption = () => {
         <template #title> </template>
       </Header>
 
-      <Content :popup="popup" :closeOption="closeOption"></Content>
+      <Content
+        :popup="popup"
+        :closeOption="closeOption"
+        :currentCollectionId="currentCollectionId"
+      ></Content>
     </section>
   </div>
 </template>

@@ -1,16 +1,11 @@
 <script setup>
 import { defineProps, ref, computed, onMounted } from 'vue'
 import newFlashcard from './popup/newFlashcard.vue'
-import Card from './Card.vue'
-import { addNewFlashcard } from '../../libs/flashcard-libs/FlashCardModal.js'
+// import { addNewFlashcard } from '../../libs/flashcard-libs/FlashCardModal.js'
 import { deleteFlashcard } from '../../libs/flashcard-libs/FlashCardModal.js'
-// import { editFlashcard } from '../../libs/flashcard-libs/FlashCardModal.js'
-import {
-  getFlashcard,
-  addFlashcard,
-  deleteFlashcardById,
-  editFlashcard
-} from '../../libs/fetchFlashcard.js'
+import Card from './Card.vue'
+import { editFlashcard } from '../../libs/flashcard-libs/FlashCardModal.js'
+import { getFlashcard, addFlashcard } from '@/libs/fetchFlashcard'
 
 const props = defineProps({
   popup: {
@@ -20,13 +15,20 @@ const props = defineProps({
   closeOption: {
     type: Function,
     required: true
+  },
+  currentCollectionId: {
+    type: String,
+    required: true
   }
 })
 
 const flashcards = ref([])
 
 onMounted(async () => {
-  flashcards.value = await getFlashcard(import.meta.env.VITE_BASE_URL)
+  flashcards.value = await getFlashcard(
+    import.meta.env.VITE_BASE_URL,
+    props.currentCollectionId
+  )
 })
 
 const computedFlashcards = computed(() => {
@@ -47,32 +49,28 @@ const showRenameFlashcard = (index) => {
 }
 
 const handleAddNewFlashcard = async (chineseWord, pinyin, meaning) => {
-  // add in backend
-  const newFlashcard = await addFlashcard(import.meta.env.VITE_BASE_URL, {
-    chineseWord: chineseWord,
-    pinyin: pinyin,
-    meaning: meaning
-  })
+  const addedFlashcard = await addFlashcard(
+    import.meta.env.VITE_BASE_URL,
+    props.currentCollectionId,
+    { chineseWord, pinyin, meaning }
+  )
 
-  addNewFlashcard(chineseWord, pinyin, meaning, flashcards.value)
+  flashcards.value.push(addedFlashcard)
   props.popup.optionFlashcard = false
 }
 
-const handelDeleteFlashcard = (index, id) => {
+const handelDeleteFlashcard = (index) => {
   deleteFlashcard(index, flashcards.value)
   props.popup.optionFlashcard = false
 }
 
-const handelEditFlashcard = async (
-  newChineseWord,
-  newPinyin,
-  newMeaning,
-  cardId
-) => {
-  flashcards.value = await editFlashcard(
-    import.meta.env.VITE_BASE_URL,
-    { chineseWord: newChineseWord, pinyin: newPinyin, meaning: newMeaning },
-    cardId
+const handelEditFlashcard = (chineseWord, pinyin, meaning, index) => {
+  editFlashcard(
+    chineseWord,
+    pinyin,
+    meaning,
+    SelectedIndex.value,
+    flashcards.value
   )
 
   props.popup.renameFlashcard = false
@@ -86,8 +84,7 @@ const handelEditFlashcard = async (
       :popup="popup"
       :closeOption="closeOption"
       @addNewFlashcard="handleAddNewFlashcard"
-    >
-    </newFlashcard>
+    ></newFlashcard>
 
     <div
       v-if="computedFlashcards.length === 0"
@@ -115,8 +112,7 @@ const handelEditFlashcard = async (
         @deleteFlashcard="handelDeleteFlashcard"
         @showRenameFlashcard="showRenameFlashcard"
         @renameFlashcard="handelEditFlashcard"
-      >
-      </Card>
+      ></Card>
     </div>
   </div>
 </template>
