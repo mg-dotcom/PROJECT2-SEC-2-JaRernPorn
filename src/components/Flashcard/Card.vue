@@ -19,16 +19,20 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+
 });
 
+// แสดงตัวเลือกของ ลบ หรือ แก้ flashcard
 const showOption = (index, event) => {
   emit("toggle-option-flashcard", index);
 };
 
+// ลบ flashcard
 const deleteFlashcard = (index) => {
   emit("deleteFlashcard", index);
 };
 
+// แสดง Popup แก้ไขชื่อ flashcard
 const showRenameFlashcard = (index) => {
   emit("showRenameFlashcard", index);
   props.popup.optionFlashcard = false;
@@ -41,14 +45,18 @@ const emit = defineEmits([
   "renameFlashcard",
 ]);
 
+// แก้ไขชื่อ flashcard
 const renameFlashcard = (chineseWord, pinyin, meaning, index) => {
   emit("renameFlashcard", chineseWord, pinyin, meaning, index);
 };
-const isClicked = ref(false);
 
+// ตัวแปรควบคุมการแสดงผลข้อมูล
+const isClicked = ref(false);
+// ฟังก์ชันแสดงความหมายของข้อมูล flashcard
 const showMeaning = () => {
   isClicked.value = !isClicked.value;
 };
+
 </script>
 
 <template>
@@ -91,28 +99,25 @@ const showMeaning = () => {
             <div class="flex flex-col h-full justify-center">
               <div
                 class="flex items-center justify-center font-medium break-all xl:text-5xl lg:text-5xl md:text-5xl sm:text-3xl"
-                :class="{
-                  'h-auto':
-                    props.computedFlashcards[props.index].chineseWord.length >
-                    10,
-                  'h-[140px]':
-                    props.computedFlashcards[props.index].chineseWord.length <=
-                    10,
-                }"
+                :class="{ 
+                  'h-auto': props.computedFlashcards[props.index] && props.computedFlashcards[props.index].chineseWord && props.computedFlashcards[props.index].chineseWord.length > 10,
+                  'h-[140px]': props.computedFlashcards[props.index] && props.computedFlashcards[props.index].chineseWord && props.computedFlashcards[props.index].chineseWord.length <= 10,
+}"
+
               >
-                {{ props.computedFlashcards[props.index].chineseWord }}
+                {{ props.computedFlashcards[props.index]?.chineseWord }}
               </div>
               <hr class="my-2 border-gray-300 dark:border-gray-700" />
               <div
                 class="flex items-center justify-center xl:text-2xl lg:text-2xl md:text-xl break-all"
                 :class="{
                   'h-auto':
-                    props.computedFlashcards[props.index].pinyin.length > 15,
+                    props.computedFlashcards[props.index]?.pinyin.length > 15,
                   'h-[42px]':
-                    props.computedFlashcards[props.index].pinyin.length <= 15,
+                    props.computedFlashcards[props.index]?.pinyin.length <= 15,
                 }"
               >
-                {{ props.computedFlashcards[props.index].pinyin }}
+                {{ props.computedFlashcards[props.index]?.pinyin }}
               </div>
             </div>
           </div>
@@ -124,7 +129,7 @@ const showMeaning = () => {
               <div
                 class="font-medium break-all text-center xl:text-xl lg:text-xl md:text-2xl"
               >
-                {{ props.computedFlashcards[props.index].meaning }}
+                {{ props.computedFlashcards[props.index]?.meaning }}
               </div>
             </div>
           </div>
