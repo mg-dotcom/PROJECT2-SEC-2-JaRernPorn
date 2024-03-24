@@ -1,83 +1,87 @@
 <script setup>
-import { defineProps, ref, defineEmits, computed, watch } from "vue";
-import closeIcon from "../../icons/iconClose.vue";
+import { defineProps, ref, defineEmits, computed, watch } from 'vue'
+import closeIcon from '../../icons/iconClose.vue'
 
 const props = defineProps({
   popup: {
     type: Object,
-    required: true,
+    required: true
   },
   computedFlashcards: {
-    required: true,
+    required: true
   },
   index: {
     type: Number,
-    required: true,
+    required: true
   },
   SelectedIndex: {
-    required: true,
+    required: true
   },
-});
+  id: {
+    type: String,
+    required: true
+  }
+})
+const chineseWordIsEmpty = ref(false)
+const pinyinIsEmpty = ref(false)
+const meaningIsEmpty = ref(false)
 
-const chineseWordIsEmpty = ref(false);
-const pinyinIsEmpty = ref(false);
-const meaningIsEmpty = ref(false);
-
-const emit = defineEmits(["renameFlashcard"]);
+const emit = defineEmits(['renameFlashcard'])
 
 const closeFlashCardAdd = () => {
-  props.popup.renameFlashcard = false;
-  props.popup.optionFlashcard = false;
-  chineseWordIsEmpty.value = false;
-  pinyinIsEmpty.value = false;
-  meaningIsEmpty.value = false;
-};
+  props.popup.renameFlashcard = false
+  props.popup.optionFlashcard = false
+  chineseWordIsEmpty.value = false
+  pinyinIsEmpty.value = false
+  meaningIsEmpty.value = false
+}
 
 const renameFlashcard = () => {
-  const chineseWordEmpty = oldChineseWord.value.trim() === "";
-  const pinyinEmpty = oldPinyin.value.trim() === "";
-  const meaningEmpty = oldMeaning.value.trim() === "";
+  const chineseWordEmpty = oldChineseWord.value.trim() === ''
+  const pinyinEmpty = oldPinyin.value.trim() === ''
+  const meaningEmpty = oldMeaning.value.trim() === ''
   if (chineseWordEmpty || pinyinEmpty || meaningEmpty) {
-    chineseWordIsEmpty.value = chineseWordEmpty;
-    pinyinIsEmpty.value = pinyinEmpty;
-    meaningIsEmpty.value = meaningEmpty;
-    return;
+    chineseWordIsEmpty.value = chineseWordEmpty
+    pinyinIsEmpty.value = pinyinEmpty
+    meaningIsEmpty.value = meaningEmpty
+    return
   } else {
     emit(
-      "renameFlashcard",
+      'renameFlashcard',
       oldChineseWord.value,
       oldPinyin.value,
       oldMeaning.value,
-      props.SelectedIndex
-    );
-    props.popup.renameFlashcard = false;
-    props.popup.optionFlashcard = false;
-    chineseWordIsEmpty.value = false;
-    pinyinIsEmpty.value = false;
-    meaningIsEmpty.value = false;
+      props.SelectedIndex,
+      props.id
+    )
+    props.popup.renameFlashcard = false
+    props.popup.optionFlashcard = false
+    chineseWordIsEmpty.value = false
+    pinyinIsEmpty.value = false
+    meaningIsEmpty.value = false
   }
-};
+}
 
 const isEmpty = (value) => {
-  return value === "";
-};
+  return value === ''
+}
 
 const oldChineseWord = ref(
   props.computedFlashcards[props.SelectedIndex].chineseWord
-);
-const oldPinyin = ref(props.computedFlashcards[props.SelectedIndex].pinyin);
-const oldMeaning = ref(props.computedFlashcards[props.SelectedIndex].meaning);
+)
+const oldPinyin = ref(props.computedFlashcards[props.SelectedIndex].pinyin)
+const oldMeaning = ref(props.computedFlashcards[props.SelectedIndex].meaning)
 
 watch(
   () => props.computedFlashcards[props.SelectedIndex],
   () => {
     oldChineseWord.value =
-      props.computedFlashcards[props.SelectedIndex].chineseWord;
-    oldPinyin.value = props.computedFlashcards[props.SelectedIndex].pinyin;
-    oldMeaning.value = props.computedFlashcards[props.SelectedIndex].meaning;
-    console.log(props.computedFlashcards[props.SelectedIndex]);
+      props.computedFlashcards[props.SelectedIndex].chineseWord
+    oldPinyin.value = props.computedFlashcards[props.SelectedIndex].pinyin
+    oldMeaning.value = props.computedFlashcards[props.SelectedIndex].meaning
+    console.log(props.computedFlashcards[props.SelectedIndex])
   }
-);
+)
 </script>
 
 <template>
@@ -110,7 +114,7 @@ watch(
                 :class="{
                   'border-red-600': chineseWordIsEmpty,
                   'focus:border-red-600': chineseWordIsEmpty,
-                  'border-black': !chineseWordIsEmpty,
+                  'border-black': !chineseWordIsEmpty
                 }"
                 :placeholder="props.computedFlashcards[props.index].chineseWord"
                 @keydown.enter="renameFlashcard(props.index)"
@@ -133,7 +137,7 @@ watch(
                 :class="{
                   'border-red-600': pinyinIsEmpty,
                   'focus:border-red-600': pinyinIsEmpty,
-                  'border-black': !pinyinIsEmpty,
+                  'border-black': !pinyinIsEmpty
                 }"
                 @input="pinyinIsEmpty = isEmpty(oldPinyin)"
                 :placeholder="props.computedFlashcards[props.index].pinyin"
@@ -157,7 +161,7 @@ watch(
                 :class="{
                   'border-red-600': meaningIsEmpty,
                   'focus:border-red-600': meaningIsEmpty,
-                  'border-black': !meaningIsEmpty,
+                  'border-black': !meaningIsEmpty
                 }"
                 @input="meaningIsEmpty = isEmpty(oldMeaning)"
                 :placeholder="props.computedFlashcards[props.index].meaning"

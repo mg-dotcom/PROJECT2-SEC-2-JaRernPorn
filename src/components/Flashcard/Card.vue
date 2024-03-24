@@ -1,62 +1,64 @@
 <script setup>
-import { defineProps, defineEmits, ref } from "vue";
-import optionFlashcard from "./popup/optionFlashcard.vue";
-import ranameFlashcard from "./popup/ranameFlashcard.vue";
+import { defineProps, defineEmits, ref } from 'vue'
+import optionFlashcard from './popup/optionFlashcard.vue'
+import ranameFlashcard from './popup/ranameFlashcard.vue'
 
 const props = defineProps({
   computedFlashcards: {
-    required: true,
+    required: true
   },
   index: {
     type: Number,
-    required: true,
+    required: true
   },
   SelectedIndex: {
     type: Number,
-    required: true,
+    required: true
   },
   popup: {
     type: Object,
-    required: true,
+    required: true
   },
-
-});
+  id: {
+    type: String,
+    required: true
+  }
+})
 
 // แสดงตัวเลือกของ ลบ หรือ แก้ flashcard
 const showOption = (index, event) => {
-  emit("toggle-option-flashcard", index);
-};
+  emit('toggle-option-flashcard', index)
+}
 
 // ลบ flashcard
 const deleteFlashcard = (index) => {
-  emit("deleteFlashcard", index);
-};
+  emit('deleteFlashcard', index)
+}
 
 // แสดง Popup แก้ไขชื่อ flashcard
 const showRenameFlashcard = (index) => {
-  emit("showRenameFlashcard", index);
-  props.popup.optionFlashcard = false;
-};
+  emit('showRenameFlashcard', index)
+  props.popup.optionFlashcard = false
+}
 
 const emit = defineEmits([
-  "toggle-option-flashcard",
-  "deleteFlashcard",
-  "showRenameFlashcard",
-  "renameFlashcard",
-]);
+  'toggle-option-flashcard',
+  'deleteFlashcard',
+  'showRenameFlashcard',
+  'renameFlashcard'
+])
 
 // แก้ไขชื่อ flashcard
 const renameFlashcard = (chineseWord, pinyin, meaning, index) => {
-  emit("renameFlashcard", chineseWord, pinyin, meaning, index);
-};
+  emit('renameFlashcard', chineseWord, pinyin, meaning, index)
+}
 
 // ตัวแปรควบคุมการแสดงผลข้อมูล
-const isClicked = ref(false);
+const isClicked = ref(false)
 // ฟังก์ชันแสดงความหมายของข้อมูล flashcard
 const showMeaning = () => {
-  isClicked.value = !isClicked.value;
-};
-
+  isClicked.value = !isClicked.value
+}
 </script>
 
 <template>
@@ -72,6 +74,7 @@ const showMeaning = () => {
 
       <ranameFlashcard
         v-show="props.popup.renameFlashcard && SelectedIndex === props.index"
+        :id="id"
         :index="index"
         :popup="popup"
         :computedFlashcards="computedFlashcards"
@@ -99,13 +102,14 @@ const showMeaning = () => {
             <div class="flex flex-col h-full justify-center">
               <div
                 class="flex items-center justify-center font-medium break-all xl:text-5xl lg:text-5xl md:text-5xl sm:text-3xl"
-                :class="{ 
-                  'h-auto': 
-                  props.computedFlashcards[props.index].chineseWord.length > 10,
-                  'h-[140px]': 
-                  props.computedFlashcards[props.index].chineseWord.length <= 10,
-}"
-
+                :class="{
+                  'h-auto':
+                    props.computedFlashcards[props.index].chineseWord.length >
+                    10,
+                  'h-[140px]':
+                    props.computedFlashcards[props.index].chineseWord.length <=
+                    10
+                }"
               >
                 {{ props.computedFlashcards[props.index].chineseWord }}
               </div>
@@ -116,7 +120,7 @@ const showMeaning = () => {
                   'h-auto':
                     props.computedFlashcards[props.index].pinyin.length > 15,
                   'h-[42px]':
-                    props.computedFlashcards[props.index].pinyin.length <= 15,
+                    props.computedFlashcards[props.index].pinyin.length <= 15
                 }"
               >
                 {{ props.computedFlashcards[props.index].pinyin }}
