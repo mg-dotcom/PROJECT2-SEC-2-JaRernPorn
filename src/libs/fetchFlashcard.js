@@ -65,7 +65,7 @@ const addFlashcard = async (url, id, newCard) => {
 
 const deleteFlashcard = async (url, id, cardIndex) => {
   try {
-    const response = await fetch(`${url}`)
+    const response = await fetch(url)
     const collections = await response.json()
 
     const collectionIndex = collections.findIndex(
@@ -82,15 +82,9 @@ const deleteFlashcard = async (url, id, cardIndex) => {
       body: JSON.stringify(...collections)
     })
 
-    if (!updateResponse.ok) {
-      throw new Error('Failed to update collection')
-    }
-
-    const updatedCollection = await updateResponse.json()
-    return updatedCollection
+    return updateResponse
   } catch (error) {
-    console.error('Error deleting card:', error)
-    return null
+    console.error(error)
   }
 }
 
