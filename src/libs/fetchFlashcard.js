@@ -26,29 +26,21 @@ async function getFlashcard(url, id) {
   }
 }
 
-async function addFlashcard(url, newCard) {
+const addFlashcard = async (url, id, card) => {
   try {
-    const data = await fetch(`${url}`); // Call API to fetch data
-    const response = await data.json();
-
-    const res = await fetch(url, {
+    const data = await fetch(`${url}/${id}`, {
       method: "POST",
       headers: {
-        "content-type": "application/json",
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        ...response.find((collection) => {
-          if (collection.id === "2") {
-            return {};
-          }
-        }),
-      }),
+      body: JSON.stringify(card),
     });
-    const addedFlashcard = await res.json();
-    return addedFlashcard;
+    const response = await data.json();
+    return response;
   } catch (error) {
-    console.log(`error: ${error}`);
+    console.log(`Error: ${error}`);
+    return [];
   }
-}
+};
 
 export { getFlashcard, addFlashcard };

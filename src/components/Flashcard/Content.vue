@@ -55,11 +55,15 @@ const handleAddNewFlashcard = async (
   newMeaning
 ) => {
   if (newId === undefined) {
-    const addedFlashcard = await addFlashcard(import.meta.env.VITE_BASE_URL, {
-      chineseWord: newChineseWord,
-      pinyin: newPinyin,
-      meaning: newMeaning,
-    });
+    const addedFlashcard = await addFlashcard(
+      import.meta.env.VITE_BASE_URL,
+      props.currentCollectionId,
+      {
+        chineseWord: newChineseWord,
+        pinyin: newPinyin,
+        meaning: newMeaning,
+      }
+    );
     console.log(addedFlashcard);
   }
 
