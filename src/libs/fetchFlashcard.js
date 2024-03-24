@@ -1,5 +1,5 @@
 // เอา Collection By ID เเละ เข้าไปเอา Card ทั้งหมดใน Collection นั้นๆ
-async function getFlashcard(url, id) {
+async function getItem(url, id) {
   try {
     const data = await fetch(`${url}/${id}`); // Call API to fetch data
     const response = await data.json(); // Parse JSON data into an object
@@ -26,7 +26,7 @@ async function getFlashcard(url, id) {
   }
 }
 
-const addFlashcard = async (url, id, newCard) => {
+const addItem = async (url, id, newCard) => {
   try {
     const response = await fetch(`${url}`);
     const collections = await response.json();
@@ -49,8 +49,6 @@ const addFlashcard = async (url, id, newCard) => {
       body: JSON.stringify(...collections),
     });
 
-    console.log(newCard);
-
     if (!updateResponse.ok) {
       throw new Error("Failed to update collection");
     }
@@ -63,4 +61,35 @@ const addFlashcard = async (url, id, newCard) => {
   }
 };
 
-export { getFlashcard, addFlashcard };
+const deleteItem = async (url, id, index) => {
+  try {
+    const response = await fetch(`${url}`);
+    const collections = await response.json();
+
+    const collectionIndex = collections.findIndex(
+      (collection) => collection.id === id
+    );
+
+    collections[collectionIndex].cards.splice(index, 1);
+
+    const updateResponse = await fetch(`${url}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(...collections),
+    });
+
+    if (!updateResponse.ok) {
+      throw new Error("Failed to update collection");
+    }
+
+    const updatedCollection = await updateResponse.json();
+    return updatedCollection;
+  } catch (error) {
+    console.error("Error deleting card:", error);
+    return null;
+  }
+};
+
+export { getItem, addItem, deleteItem };

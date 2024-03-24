@@ -418,15 +418,21 @@
       "cards": [
         {
           "id": 1,
-          "chineseWord": "苹果 ",
-          "pinyin": "píngguǒ",
-          "meaning": "Apple"
+          "chineseWord": "1",
+          "pinyin": "1",
+          "meaning": "1"
         },
         {
           "id": 2,
-          "chineseWord": "草莓",
-          "pinyin": "cǎoméi",
-          "meaning": "Strawberry"
+          "chineseWord": "2",
+          "pinyin": "2",
+          "meaning": "2"
+        },
+        {
+          "id": 3,
+          "chineseWord": "3",
+          "pinyin": "3",
+          "meaning": "3"
         }
       ]
     }

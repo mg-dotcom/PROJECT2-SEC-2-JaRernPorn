@@ -5,7 +5,8 @@ import { addNewFlashcard } from "../../libs/flashcard-libs/FlashCardModal.js";
 import { deleteFlashcard } from "../../libs/flashcard-libs/FlashCardModal.js";
 import Card from "./Card.vue";
 import { editFlashcard } from "../../libs/flashcard-libs/FlashCardModal.js";
-import { getFlashcard, addFlashcard } from "../../libs/fetchFlashcard.js";
+import { getItem, addItem, deleteItem } from "../../libs/fetchFlashcard.js";
+import { FlashcardManagement } from "../../components/Flashcard/FlashcardManagement.js";
 
 const props = defineProps({
   popup: {
@@ -22,17 +23,17 @@ const props = defineProps({
   },
 });
 
-const flashcards = ref([]);
+// const flashcards = ref([]);
+
+const flashcards = ref(new FlashcardManagement());
 
 onMounted(async () => {
-  flashcards.value = await getFlashcard(
+  const flashcardsData = await getItem(
     import.meta.env.VITE_BASE_URL,
     props.currentCollectionId
   );
-});
 
-const computedFlashcards = computed(() => {
-  return flashcards.value;
+  flashcards.value.addAllFlashcards(flashcardsData);
 });
 
 const SelectedIndex = ref(0);
@@ -55,25 +56,37 @@ const handleAddNewFlashcard = async (
   newMeaning
 ) => {
   if (newId === undefined) {
-    const addedFlashcard = await addFlashcard(
+    const addedFlashcard = await addItem(
       import.meta.env.VITE_BASE_URL,
       props.currentCollectionId,
       {
-        id: computedFlashcards.value.length + 1,
+        id: flashcards.value.getFlashcards().length + 1,
         chineseWord: newChineseWord,
         pinyin: newPinyin,
         meaning: newMeaning,
       }
     );
 
-    flashcards.value.push(addedFlashcard);
-    console.log(flashcards.value);
+    const lastCard = addedFlashcard.cards[addedFlashcard.cards.length - 1];
+
+    flashcards.value.addFlashcard(
+      lastCard.id,
+      lastCard.chineseWord,
+      lastCard.pinyin,
+      lastCard.meaning
+    );
   }
+
   props.popup.optionFlashcard = false;
 };
 
-const handelDeleteFlashcard = (index) => {
-  deleteFlashcard(index, flashcards.value);
+const handelDeleteFlashcard = async (index) => {
+  flashcards.value = await deleteItem(
+    import.meta.env.VITE_BASE_URL,
+    props.currentCollectionId,
+    index
+  );
+
   props.popup.optionFlashcard = false;
 };
 
@@ -100,7 +113,7 @@ const handelEditFlashcard = (chineseWord, pinyin, meaning, index) => {
     ></newFlashcard>
 
     <div
-      v-if="computedFlashcards.length === 0"
+      v-if="flashcards.getFlashcards().length === 0"
       class="flex-grow flex justify-center items-center text-center h-[70vh]"
     >
       <div class="text-gray-300 text-sm">No flashcard added yet</div>
@@ -108,18 +121,18 @@ const handelEditFlashcard = (chineseWord, pinyin, meaning, index) => {
 
     <!-- All Flashcard -->
     <div
-      v-else-if="computedFlashcards.length > 0"
+      v-else-if="flashcards.getFlashcards().length > 0"
       class="grid grid-cols-1 px-10 py-7 text-center xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 md:gap-17 sm:grid-cols-2 sm:gap-10"
       @click.self="closeOption"
     >
       <Card
-        v-for="(card, index) in computedFlashcards"
+        v-for="(card, index) in flashcards.getFlashcards()"
         :card="card"
         :index="index"
         :key="index"
         :popup="popup"
         :SelectedIndex="SelectedIndex"
-        :computedFlashcards="computedFlashcards"
+        :computedFlashcards="flashcards.getFlashcards()"
         @toggle-option-flashcard="toggleOption"
         @deleteFlashcard="handelDeleteFlashcard"
         @showRenameFlashcard="showRenameFlashcard"
