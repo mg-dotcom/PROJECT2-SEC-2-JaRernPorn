@@ -1,5 +1,4 @@
 const addNewFlashcard = (chineseWord, pinyin, meaning, flashcards) => {
-  flashcards = []
   flashcards.push({
     id: flashcards.length + 1,
     chineseWord: chineseWord,

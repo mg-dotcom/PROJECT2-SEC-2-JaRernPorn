@@ -31,8 +31,20 @@ const flashcards = ref(addNewFlashcard())
 onMounted(async () => {
   const items = await getFlashcard(import.meta.env.VITE_BASE_URL)
   flashcards.value.addFlashcard(items)
-  console.log(items)
 })
+
+// // flow => front ส่ง req to backend if status ok
+// const removeCard = async (removeId) => {
+//   //backend, deleteItemById(url, id)
+//   const statusCode = await deleteFlashcardById(
+//     import.meta.env.VITE_BASE_URL,
+//     removeId
+//   )
+//   if (statusCode === 200) {
+//     //frontend updates myTodos
+//     myTodos.value.removeTodo(removeId)
+//   }
+// }
 </script>
 
 <template>
