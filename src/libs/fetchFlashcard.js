@@ -1,61 +1,83 @@
-async function getFlashcard(url) {
-    try {
-        const data = await fetch(url) // เรียก API เพื่อดึงข้อมูล
-        const collections = await data.json() // แปลงข้อมูล JSON เป็น object
-        const allCards = collections.flatMap(collection => collection.cards); // ดึงข้อมูล cards ในทุก collection แล้วแมพเข้าด้วยกัน
-        return allCards; // คืนค่าข้อมูล cards
+// เอา Collection By ID เเละ เข้าไปเอา Card ทั้งหมดใน Collection นั้นๆ
+async function getFlashcard(url, id) {
+  console.log(`${url}/${id}`)
 
-    } catch (error) {
-        console.log(`error: ${error})`)
+  try {
+    const data = await fetch(`${url}/${id}`) // Call API to fetch data
+    const response = await data.json() // Parse JSON data into an object
+
+    // Check if response has a 'cards' property
+    if (response.hasOwnProperty('cards')) {
+      // If 'cards' is an array, return it
+      if (Array.isArray(response.cards)) {
+        return response.cards
+      } else {
+        console.log("Error: The 'cards' property is not an array.")
+        return []
+      }
+    } else {
+      // If 'cards' doesn't exist, assume 'collections' is an array of objects with 'cards' arrays
+      const allCards = response.collections.flatMap(
+        (collection) => collection.cards
+      )
+      return allCards
+    }
+  } catch (error) {
+    console.log(`Error: ${error}`)
+    return []
+  }
+}
+
+const addFlashcard = async (url, id, newCard) => {
+  console.log(`${url}/${id}`)
+  try {
+    const response = await fetch(`${url}`)
+    const collections = await response.json()
+
+    const collectionIndex = collections.findIndex(
+      (collection) => collection.id === '2'
+    )
+
+    if (collectionIndex === -1) {
+      throw new Error('Collection not found')
     }
 }
 
-async function addFlashcard(url, collectionId, newFlashcard) {
-    try {
-        const res = await fetch(`${url}/${collectionId}/cards`, {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify({
-                ...newFlashcard
-            })
-        })
-        const addedFlashcard = await res.json()
-        return addedFlashcard
-    } catch (error) {
-        console.log(`error: ${error}`)
+    collections[collectionIndex].cards.push(newCard)
+
+    const updateResponse = await fetch(`${url}/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(...collections)
+    })
+
+    console.log(newCard)
+
+    if (!updateResponse.ok) {
+      throw new Error('Failed to update collection')
     }
 }
 
-// async function addFlashcard(url, newFlashcard) {
-//     try {
-//         const res = await fetch(url, {
-//             method: 'POST',
-//             headers: {
-//                 'content-type': 'application/json'
-//             },
-//             body: JSON.stringify({
-//                 ...newFlashcard
-//             })
-//         })
-//         const addedFlashcard = await res.json()
-//         return addedFlashcard
-//     } catch (error) {
-//         console.log(`error: ${error}`)
-//     }
-// }
+    const updatedCollections = await updateResponse.json()
+    return updatedCollections
+  } catch (error) {
+    console.error('Error adding new card:', error)
+    return null
+  }
+}
 
-async function deleteFlashcardById(url, id) {
-    // console.log(`${url}?id=${id}`);
-    try {
-        const res = await fetch(`${url}/${id}`, {
-            method: 'DELETE'
-        })
-        return res.status
-    } catch (error) {
-        console.log(`error: ${error}`)
-    }
+const deleteFlashcardById = async (url, id) => {
+  console.log(`${url}/${id}`)
+  try {
+    const res = await fetch(`${url}/${id}`, {
+      method: 'DELETE'
+    })
+    return res.status
+  } catch (error) {
+    console.log(`error: ${error}`)
+  }
 }
 
 export { getFlashcard, addFlashcard, deleteFlashcardById }

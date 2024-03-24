@@ -2,6 +2,15 @@
 import { defineProps, ref, computed, onMounted } from 'vue'
 import newFlashcard from './popup/newFlashcard.vue'
 import Card from './Card.vue'
+import { addNewFlashcard } from '../../libs/flashcard-libs/FlashCardModal.js'
+import { deleteFlashcard } from '../../libs/flashcard-libs/FlashCardModal.js'
+import Card from './Card.vue'
+import { editFlashcard } from '../../libs/flashcard-libs/FlashCardModal.js'
+import {
+  getFlashcard,
+  addFlashcard,
+  deleteFlashcardById
+} from '../../libs/fetchFlashcard.js'
 
 const props = defineProps({
   popup: {
@@ -11,10 +20,21 @@ const props = defineProps({
   closeOption: {
     type: Function,
     required: true
+  },
+  currentCollectionId: {
+    type: String,
+    required: true
   }
 })
 
 const flashcards = ref([])
+
+onMounted(async () => {
+  flashcards.value = await getFlashcard(
+    import.meta.env.VITE_BASE_URL,
+    props.currentCollectionId
+  )
+})
 
 const computedFlashcards = computed(() => {
   return flashcards.value
@@ -30,37 +50,59 @@ const toggleOption = (index) => {
 const showRenameFlashcard = (index) => {
   props.popup.renameFlashcard = true
   SelectedIndex.value = index
+  // console.log("before select", SelectedIndex.value);
 }
 
-// const handleAddNewFlashcard = async (chineseWord, pinyin, meaning) => {
-//   // add in backend
-//   const newFlashcard = await addFlashcard(import.meta.env.VITE_BASE_URL, {
-//     chineseWord: chineseWord,
-//     pinyin: pinyin,
-//     meaning: meaning
-//   })
+const handleAddNewFlashcard = async (
+  newId,
+  newChineseWord,
+  newPinyin,
+  newMeaning
+) => {
+  if (newId === undefined) {
+    const addedFlashcard = await addFlashcard(
+      import.meta.env.VITE_BASE_URL,
+      props.currentCollectionId,
+      {
+        id: flashcards.value.length + 1,
+        chineseWord: newChineseWord,
+        pinyin: newPinyin,
+        meaning: newMeaning
+      }
+    )
+  }
 
-//   addNewFlashcard(chineseWord, pinyin, meaning, flashcards.value)
-//   props.popup.optionFlashcard = false
-// }
+  props.popup.optionFlashcard = false
+}
 
-// const handelDeleteFlashcard = (index, id) => {
-//   deleteFlashcard(index, flashcards.value)
-//   props.popup.optionFlashcard = false
-// }
+const handelDeleteFlashcard = async (flashcardIndex) => {
+  //backend, deleteFlashcardById = async (url, id, flashcardIndex)
+  const statusCode = await deleteFlashcardById(
+    import.meta.env.VITE_BASE_URL,
+    props.currentCollectionId
+  )
+  if (statusCode === 200) {
+    //frontend updates flashcard
+    // deleteFlashcard(flashcardIndex)
+    // flashcards.value.splice(flashcardIndex, 1) // Corrected this line
+  }
 
-// const handelEditFlashcard = (chineseWord, pinyin, meaning, index) => {
-//   editFlashcard(
-//     chineseWord,
-//     pinyin,
-//     meaning,
-//     SelectedIndex.value,
-//     flashcards.value
-//   )
+  // deleteFlashcard(index, flashcards.value)
+  props.popup.optionFlashcard = false
+}
 
-//   props.popup.renameFlashcard = false
-//   props.popup.optionFlashcard = false
-// }
+const handelEditFlashcard = (chineseWord, pinyin, meaning, index) => {
+  editFlashcard(
+    chineseWord,
+    pinyin,
+    meaning,
+    SelectedIndex.value,
+    flashcards.value
+  )
+
+  props.popup.renameFlashcard = false
+  props.popup.optionFlashcard = false
+}
 </script>
 
 <template>
