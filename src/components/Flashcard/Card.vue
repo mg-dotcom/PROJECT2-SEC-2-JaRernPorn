@@ -49,8 +49,8 @@ const emit = defineEmits([
 ])
 
 // แก้ไขชื่อ flashcard
-const renameFlashcard = (chineseWord, pinyin, meaning, index) => {
-  emit('renameFlashcard', chineseWord, pinyin, meaning, index)
+const renameFlashcard = (chineseWord, pinyin, meaning, id) => {
+  emit('renameFlashcard', chineseWord, pinyin, meaning, props.id)
 }
 
 // ตัวแปรควบคุมการแสดงผลข้อมูล
@@ -74,7 +74,7 @@ const showMeaning = () => {
 
       <ranameFlashcard
         v-show="props.popup.renameFlashcard && SelectedIndex === props.index"
-        :id="id"
+        :id="props.id"
         :index="index"
         :popup="popup"
         :computedFlashcards="computedFlashcards"

@@ -27,7 +27,6 @@ const pinyinIsEmpty = ref(false)
 const meaningIsEmpty = ref(false)
 
 const emit = defineEmits(['renameFlashcard'])
-
 const closeFlashCardAdd = () => {
   props.popup.renameFlashcard = false
   props.popup.optionFlashcard = false
@@ -78,7 +77,6 @@ watch(
       props.computedFlashcards[props.SelectedIndex].chineseWord
     oldPinyin.value = props.computedFlashcards[props.SelectedIndex].pinyin
     oldMeaning.value = props.computedFlashcards[props.SelectedIndex].meaning
-    console.log(props.computedFlashcards[props.SelectedIndex])
   }
 )
 </script>

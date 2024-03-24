@@ -38,7 +38,7 @@ async function deleteFlashcardById(url, id) {
   }
 }
 
-async function editFlashcard(url, newChineseWord, newPinyin, newMeaning, id) {
+async function editFlashcard(url, newFlashcard, id) {
   try {
     const res = await fetch(`${url}/${id}`, {
       method: 'PUT',
@@ -46,9 +46,7 @@ async function editFlashcard(url, newChineseWord, newPinyin, newMeaning, id) {
         'content-type': 'application/json'
       },
       body: JSON.stringify({
-        ...newChineseWord,
-        ...newPinyin,
-        ...newMeaning
+        ...newFlashcard
       })
     })
     const editedFlashcard = await res.json()

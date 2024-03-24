@@ -63,14 +63,17 @@ const handelDeleteFlashcard = (index, id) => {
   props.popup.optionFlashcard = false
 }
 
-const handelEditFlashcard = async (chineseWord, pinyin, meaning, id) => {
-  console.log(flashcards.value)
-  flashcards.value = await editFlashcard(import.meta.env.VITE_BASE_URL, {
-    id: id,
-    chineseWord: chineseWord,
-    pinyin: pinyin,
-    meaning: meaning
-  })
+const handelEditFlashcard = async (
+  newChineseWord,
+  newPinyin,
+  newMeaning,
+  id
+) => {
+  flashcards.value = await editFlashcard(
+    import.meta.env.VITE_BASE_URL,
+    { chineseWord: newChineseWord, pinyin: newPinyin, meaning: newMeaning },
+    id
+  )
 
   props.popup.renameFlashcard = false
   props.popup.optionFlashcard = false
