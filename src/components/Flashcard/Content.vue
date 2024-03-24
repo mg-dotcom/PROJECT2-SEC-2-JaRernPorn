@@ -1,10 +1,11 @@
 <script setup>
-import { defineProps, ref, computed } from "vue";
+import { defineProps, ref, computed,onMounted } from "vue";
 import newFlashcard from "./popup/newFlashcard.vue";
 import { addNewFlashcard } from "../../libs/flashcard-libs/FlashCardModal.js";
 import { deleteFlashcard } from "../../libs/flashcard-libs/FlashCardModal.js";
 import Card from "./Card.vue";
 import { editFlashcard } from "../../libs/flashcard-libs/FlashCardModal.js";
+import { getFlashcard } from "@/libs/fetchFlashcard";
 
 const props = defineProps({
   popup: {
@@ -15,9 +16,17 @@ const props = defineProps({
     type: Function,
     required: true,
   },
+  currentCollectionId:{
+    type:String,
+    required:true
+  }
 });
 
 const flashcards = ref([]);
+
+onMounted(async () => {
+  flashcards.value = await getFlashcard(import.meta.env.VITE_BASE_URL,props.currentCollectionId)
+})
 
 const computedFlashcards = computed(() => {
   return flashcards.value;

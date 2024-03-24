@@ -18,7 +18,7 @@ const props = defineProps({
   popup: {
     type: Object,
     required: true,
-  },
+  }
 });
 
 const showOption = (index, event) => {

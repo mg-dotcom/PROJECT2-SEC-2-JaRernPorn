@@ -12,6 +12,8 @@ const popup = reactive({
   renameFlashcard: false,
 });
 
+const currentCollectionId=ref("2")
+
 const closeOption = () => {
   popup.optionFlashcard = false;
 };
@@ -24,7 +26,7 @@ const closeOption = () => {
         <template #title> </template>
       </Header>
 
-      <Content :popup="popup" :closeOption="closeOption"></Content>
+      <Content :popup="popup" :closeOption="closeOption" :currentCollectionId="currentCollectionId"></Content>
     </section>
   </div>
 </template>

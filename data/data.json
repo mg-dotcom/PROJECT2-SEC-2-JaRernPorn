@@ -414,7 +414,21 @@
   "collections": [
     {
       "id": "2",
-      "name": "csacvsav"
+      "name": "csacvsav",
+      "cards": [
+        {
+          "id": 1,
+          "chineseWord": "苹果 ",
+          "pinyin": "píngguǒ",
+          "meaning": "Apple"
+        },
+        {
+          "id": 2,
+          "chineseWord": "草莓",
+          "pinyin": "cǎoméi",
+          "meaning": "Strawberry"
+        }
+      ]
     },
     {
       "id": "3",
