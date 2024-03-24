@@ -1,52 +1,56 @@
 <script setup>
-import { defineProps, ref, computed, onMounted } from "vue";
-import newFlashcard from "./popup/newFlashcard.vue";
-import { addNewFlashcard } from "../../libs/flashcard-libs/FlashCardModal.js";
-import { deleteFlashcard } from "../../libs/flashcard-libs/FlashCardModal.js";
-import Card from "./Card.vue";
-import { editFlashcard } from "../../libs/flashcard-libs/FlashCardModal.js";
-import { getFlashcard, addFlashcard } from "../../libs/fetchFlashcard.js";
+import { defineProps, ref, computed, onMounted } from 'vue'
+import newFlashcard from './popup/newFlashcard.vue'
+import { addNewFlashcard } from '../../libs/flashcard-libs/FlashCardModal.js'
+// import { deleteFlashcard } from '../../libs/flashcard-libs/FlashCardModal.js'
+import Card from './Card.vue'
+import { editFlashcard } from '../../libs/flashcard-libs/FlashCardModal.js'
+import {
+  getFlashcard,
+  addFlashcard,
+  deleteFlashcard
+} from '../../libs/fetchFlashcard.js'
 
 const props = defineProps({
   popup: {
     type: Object,
-    required: true,
+    required: true
   },
   closeOption: {
     type: Function,
-    required: true,
+    required: true
   },
   currentCollectionId: {
     type: String,
-    required: true,
-  },
-});
+    required: true
+  }
+})
 
-const flashcards = ref([]);
+const flashcards = ref([])
 
 onMounted(async () => {
   flashcards.value = await getFlashcard(
     import.meta.env.VITE_BASE_URL,
     props.currentCollectionId
-  );
-});
+  )
+})
 
 const computedFlashcards = computed(() => {
-  return flashcards.value;
-});
+  return flashcards.value
+})
 
-const SelectedIndex = ref(0);
+const SelectedIndex = ref(0)
 
 const toggleOption = (index) => {
-  props.popup.optionFlashcard = !props.popup.optionFlashcard;
-  SelectedIndex.value = index;
-};
+  props.popup.optionFlashcard = !props.popup.optionFlashcard
+  SelectedIndex.value = index
+}
 
 const showRenameFlashcard = (index) => {
-  props.popup.renameFlashcard = true;
-  SelectedIndex.value = index;
+  props.popup.renameFlashcard = true
+  SelectedIndex.value = index
   // console.log("before select", SelectedIndex.value);
-};
+}
 
 const handleAddNewFlashcard = async (
   newId,
@@ -62,18 +66,22 @@ const handleAddNewFlashcard = async (
         id: newId,
         chineseWord: newChineseWord,
         pinyin: newPinyin,
-        meaning: newMeaning,
+        meaning: newMeaning
       }
-    );
+    )
   }
 
-  props.popup.optionFlashcard = false;
-};
+  props.popup.optionFlashcard = false
+}
 
-const handelDeleteFlashcard = (index) => {
-  deleteFlashcard(index, flashcards.value);
-  props.popup.optionFlashcard = false;
-};
+const handelDeleteFlashcard = async (cardId) => {
+  flashcards.value = deleteFlashcard(
+    import.meta.env.VITE_BASE_URL,
+    props.currentCollectionId,
+    cardId
+  )
+  props.popup.optionFlashcard = false
+}
 
 const handelEditFlashcard = (chineseWord, pinyin, meaning, index) => {
   editFlashcard(
@@ -82,11 +90,11 @@ const handelEditFlashcard = (chineseWord, pinyin, meaning, index) => {
     meaning,
     SelectedIndex.value,
     flashcards.value
-  );
+  )
 
-  props.popup.renameFlashcard = false;
-  props.popup.optionFlashcard = false;
-};
+  props.popup.renameFlashcard = false
+  props.popup.optionFlashcard = false
+}
 </script>
 
 <template>
