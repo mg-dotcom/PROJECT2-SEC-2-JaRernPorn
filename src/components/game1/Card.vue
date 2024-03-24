@@ -17,7 +17,7 @@ const emits = defineEmits(['selected'])
 </script>
 
 <template>
-  <div class="flex flex-row gap-16 justify-center mt-10">
+  <div class="flex flex-row gap-16 justify-center mt-0">
     <div
       class="h-[400px] w-[300px] rounded-3xl shadow-md bg-white cursor-pointer hover:border-8 border-slate-200"
       :class="{
