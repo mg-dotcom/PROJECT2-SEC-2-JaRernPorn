@@ -413,14 +413,16 @@
   ],
   "collections": [
     {
-      "id": "103d",
+      "id": "5608",
       "name": "New Collection",
-      "cards": []
-    },
-    {
-      "id": "2ae5",
-      "name": "New Collection",
-      "cards": []
+      "cards": [
+        {
+          "id": 1,
+          "chineseWord": "Bisbat",
+          "pinyin": "binotgrinch",
+          "meaning": "mg"
+        }
+      ]
     }
   ]
 }

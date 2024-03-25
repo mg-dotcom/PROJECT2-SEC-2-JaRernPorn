@@ -2,20 +2,32 @@
 import { reactive, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import SettingHomePage from '../components/SettingHomePage.vue'
+import HowToPlay from '../components/HowToPlay.vue'
 
 const page = reactive({
   homePage: true,
-  categoryPage: false
+  categoryPage: false,
+  howToPlay: false
 })
 const showSetting = ref(false)
 
 const showCategoryPage = () => {
   page.homePage = false
   page.categoryPage = true
+  page.howToPlay = false
+}
+
+const showHowtoplay = () => {
+  page.homePage = true
+  page.categoryPage = false
+  page.howToPlay = true
 }
 
 const toggleSetting = () => {
   showSetting.value = !showSetting.value
+}
+const toggleHowToPlay = () => {
+  page.howToPlay = !page.howToPlay
 }
 </script>
 
@@ -72,11 +84,20 @@ const toggleSetting = () => {
           <!-- How To Play Button -->
           <div id="HTP-button" class="flex justify-center pt-6">
             <img
-              class="absolute right-10 bottom-10 hover:scale-110 transition-transform duration-300"
+              @click="showHowtoplay"
+              class="absolute right-10 bottom-10 hover:scale-110 transition-transform duration-300 cursor-pointer"
               src="/homePage-pic/HTP-button.svg"
               alt="HTP-button"
             />
           </div>
+          <section id="howToPlay">
+            <HowToPlay
+              v-show="page.howToPlay"
+              @click.self="toggleHowToPlay"
+              @closeHowtoplay="page.howToPlay = false"
+              class="flex justify-center bg-black bg-opacity-50 absolute"
+            ></HowToPlay>
+          </section>
         </div>
       </div>
     </div>
