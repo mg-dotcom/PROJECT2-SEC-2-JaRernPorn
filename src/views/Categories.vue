@@ -2,7 +2,7 @@
 import { ref } from "vue";
 
 import { categories } from "../../data/data.json";
-import SettingHomepage from "../components/SettingHomepage.vue";
+import SettingHomePage from "../components/SettingHomePage.vue";
 
 const categoryPage = ref(true);
 
@@ -16,6 +16,9 @@ const toggleSetting = () => {
 <template>
   <section class="category" v-if="categoryPage">
     <div class="bg-main-bgColor min-h-screen overflow-hidden">
+      <div class="absolute left-0 right-0 z-40" v-show="showSetting">
+        <SettingHomePage @closeSetting="toggleSetting" />
+      </div>
       <header class="py-7 px-7">
         <!-- Back to home Button -->
         <router-link to="/">
@@ -82,10 +85,6 @@ const toggleSetting = () => {
       </div>
     </div>
   </section>
-
-  <div class="absolute left-0 right-0 top-1/3" v-show="showSetting">
-    <SettingHomepage @closeSetting="toggleSetting" />
-  </div>
 </template>
 
 <style scoped></style>
