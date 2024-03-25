@@ -181,7 +181,7 @@ const turnOnCheckStatus = () => {
     </div>
     <div class="flex justify-center">
       <button
-        class="bg-title text-white p-2 mt-5 rounded-lg hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
+        class="bg-title text-white text-2xl rounded-xl px-4 py-2 mt-5 hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
         @click="turnOnCheckStatus"
       >
         Check

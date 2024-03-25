@@ -107,13 +107,13 @@ const items = currentCategory.units[unitIndex.value].items
       <div class="flex flex-wrap justify-center mt-1">
         <div class="flex justify-center gap-6">
           <div
-            class="flex justify-center items-center bg-title rounded-lg font-Outfit font-semibold text-lg p-2 text-white text-center hover:bg-button-bgColor sm:text-lg sm:p-3 sm:w-40 h-14"
+            class="flex justify-center items-center font-outfit bg-title rounded-lg font-Outfit font-semibold text-lg p-2 text-white text-center hover:bg-button-bgColor sm:text-lg sm:p-3 sm:w-40 h-14"
           >
             <button class="uppercase" @click="playAgain">Play Again</button>
           </div>
 
           <div
-            class="flex justify-center items-center bg-title rounded-lg font-Outfit font-semibold text-lg p-4 text-white text-center hover:bg-button-bgColor sm:text-lg sm:p-3 sm:w-40 h-14"
+            class="flex justify-center items-center font-outfit bg-title rounded-lg font-Outfit font-semibold text-lg p-4 text-white text-center hover:bg-button-bgColor sm:text-lg sm:p-3 sm:w-40 h-14"
           >
             <button class="uppercase" @click="mainMenu">Main Menu</button>
           </div>
