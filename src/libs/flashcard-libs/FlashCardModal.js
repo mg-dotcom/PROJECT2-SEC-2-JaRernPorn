@@ -18,8 +18,9 @@ class FlashcardModal {
     this.flashcards.push({
       id: id,
       chineseWord: chineseWord,
-      meaning: meaning,
+
       pinyin: pinyin,
+      meaning: meaning,
     });
   }
 
