@@ -413,42 +413,14 @@
   ],
   "collections": [
     {
-      "id": "2",
-      "name": "csacvsav",
-      "cards": [
-        {
-          "id": 1,
-          "chineseWord": "苹果 ",
-          "pinyin": "píngguǒ",
-          "meaning": "Apple"
-        },
-        {
-          "id": 2,
-          "chineseWord": "草莓",
-          "pinyin": "cǎoméi",
-          "meaning": "Strawberry"
-        }
-      ]
+      "id": "c4e5",
+      "name": "mg love kbv",
+      "cards": []
     },
     {
-      "id": "3",
-      "name": "Family"
-    },
-    {
-      "id": "5cb4",
-      "name": "bisbat"
-    },
-    {
-      "id": "d67a",
-      "name": "krabi"
-    },
-    {
-      "id": "4e31",
-      "name": "ok"
-    },
-    {
-      "id": "7066",
-      "name": "ampz"
+      "id": "efe2",
+      "name": "New Collection",
+      "cards": []
     }
   ]
 }
