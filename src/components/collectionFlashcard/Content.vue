@@ -67,7 +67,7 @@ const handleAddNewCollection = async (name) => {
   const newColName = name.trim()
   //BACKEND add
   const newCollectionName = await addCollectionItem(import.meta.env.VITE_BASE_URL, {
-    name: name,
+    name: newColName,
     cards:[]
   })
 
