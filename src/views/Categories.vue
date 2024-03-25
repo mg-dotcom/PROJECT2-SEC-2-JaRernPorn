@@ -1,17 +1,30 @@
-<script setup></script>
+<script setup>
+import { ref } from "vue";
+
+import { categories } from "../../data/data.json";
+import SettingHomepage from "../components/SettingHomepage.vue";
+
+const categoryPage = ref(true);
+
+const showSetting = ref(false);
+
+const toggleSetting = () => {
+  showSetting.value = !showSetting.value;
+};
+</script>
 
 <template>
   <section class="category" v-if="categoryPage">
     <div class="bg-main-bgColor min-h-screen overflow-hidden">
       <header class="py-7 px-7">
         <!-- Back to home Button -->
-        <RouterLink to="/">
+        <router-link to="/">
           <img
             class="w-16 absolute hover:w-catePage-20 transition-all duration-300 ease-in-out cursor-pointer"
             src="/categories/icon/left-arrow.png"
             alt="left-arrow"
           />
-        </RouterLink>
+        </router-link>
 
         <div class="header flex justify-center items-center">
           <div
@@ -19,6 +32,14 @@
           >
             Categories
           </div>
+        </div>
+        <div class="setting">
+          <img
+            src="/settingBtn/setting.svg"
+            alt="setting button"
+            class="w-10 absolute right-10 top-10 hover:scale-105 transition-all duration-300 ease-in-out"
+            @click="toggleSetting"
+          />
         </div>
       </header>
 
@@ -37,12 +58,21 @@
               <div
                 class="pic w-52 pb-2 hover:scale-105 transition-all duration-300 ease-in-out"
               >
-                <img
-                  :src="category.image"
-                  :alt="category.name"
-                  class="hover:drop-shadow-lg"
-                  @click="showUnit(cateIndex)"
-                />
+                <router-link
+                  :to="{
+                    name: 'CategoriesUnits',
+                    params: {
+                      category: category.name.toLowerCase(),
+                      cateIndex: cateIndex + 1,
+                    },
+                  }"
+                >
+                  <img
+                    :src="category.image"
+                    :alt="category.name"
+                    class="hover:drop-shadow-lg"
+                  />
+                </router-link>
               </div>
 
               <p class="text-xl">{{ category.name }}</p>
@@ -52,6 +82,10 @@
       </div>
     </div>
   </section>
+
+  <div class="absolute left-0 right-0 top-1/3" v-show="showSetting">
+    <SettingHomepage @closeSetting="toggleSetting" />
+  </div>
 </template>
 
 <style scoped></style>

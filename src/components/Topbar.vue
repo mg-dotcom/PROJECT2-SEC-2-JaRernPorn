@@ -1,12 +1,12 @@
 <script setup>
-import { ref } from 'vue'
-import data from '../../data/data.json'
-import Setting from '../components/Setting.vue'
-const currentIndexCate = ref(2)
-const showSetting = ref(false)
+import { ref } from "vue";
+import data from "../../data/data.json";
+import Setting from "../components/Setting.vue";
+const currentIndexCate = ref(2);
+const showSetting = ref(false);
 const toggleSetting = () => {
-  showSetting.value = !showSetting.value
-}
+  showSetting.value = !showSetting.value;
+};
 </script>
 
 <template>

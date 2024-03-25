@@ -3,9 +3,9 @@ const props = defineProps({
   options: Array,
   correctOption: String,
   isSelected: Boolean,
-  userSelected: String
-})
-const emits = defineEmits(['optionClicked'])
+  userSelected: String,
+});
+const emits = defineEmits(["optionClicked"]);
 // console.log('from option.vue = ' + props.isSelected)
 </script>
 
@@ -14,10 +14,10 @@ const emits = defineEmits(['optionClicked'])
     v-for="(option, index) in options"
     :key="index"
     @click="$emit('optionClicked', option)"
-    class="bg-title mb-3 text-center text-white text-lg font-normal p-2 rounded-xl hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
+    class="bg-title mb-3 text-center text-white text-lg font-normal p-3 rounded-xl hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
     :class="{
-      'bg-green-900': option.word === props.correctOption,
-      'bg-blue-900': props.isSelected && option.word === props.userSelected
+      'bg-green-500': option.word === props.correctOption,
+      'bg-blue-500': props.isSelected && option.word === props.userSelected,
     }"
   >
     {{ option.word }}

@@ -1,34 +1,21 @@
 <script setup>
-import { reactive, ref } from 'vue'
-import { RouterLink } from 'vue-router'
-import SettingHomePage from '../components/SettingHomePage.vue'
-import HowToPlay from '../components/HowToPlay.vue'
+import { reactive, ref } from "vue";
+import { RouterLink } from "vue-router";
+import SettingHomepage from "../components/SettingHomePage.vue";
 
 const page = reactive({
   homePage: true,
   categoryPage: false,
-  howToPlay: false
-})
-const showSetting = ref(false)
-
-const showCategoryPage = () => {
-  page.homePage = false
-  page.categoryPage = true
-  page.howToPlay = false
-}
-
-const showHowtoplay = () => {
-  page.homePage = true
-  page.categoryPage = false
-  page.howToPlay = true
-}
+  howToPlay: false,
+});
+const showSetting = ref(false);
 
 const toggleSetting = () => {
-  showSetting.value = !showSetting.value
-}
+  showSetting.value = !showSetting.value;
+};
 const toggleHowToPlay = () => {
-  page.howToPlay = !page.howToPlay
-}
+  page.howToPlay = !page.howToPlay;
+};
 </script>
 
 <template>
@@ -43,7 +30,7 @@ const toggleHowToPlay = () => {
           <img
             src="/settingBtn/setting.svg"
             alt="setting button"
-            class="w-10 absolute right-10 top-10 hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
+            class="w-10 absolute right-10 top-10 hover:scale-105 transition-all duration-300 ease-in-out"
             @click="toggleSetting"
           />
         </div>
@@ -63,14 +50,15 @@ const toggleHowToPlay = () => {
 
         <!-- Play Button -->
         <div id="home-page-button">
-          <router-link :to="{ name: 'CategoriesUnits' }">
-            <div id="play-button" class="flex justify-center pt-12">
+          <div id="play-button" class="flex justify-center pt-12">
+            <router-link :to="{ name: 'Categories' }">
               <img
                 class="w-72 relative hover:w-80 transition-all duration-300 ease-in-out cursor-pointer"
                 src="/homePage-pic/play-button.svg"
                 alt="play-button"
-              /></div
-          ></router-link>
+              />
+            </router-link>
+          </div>
           <!-- Flashcard Button -->
           <router-link :to="{ name: 'CollectionFlashCard' }">
             <div id="Flashcard-button" class="flex justify-center pt-6">

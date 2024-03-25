@@ -1,5 +1,5 @@
 <script setup>
-import SoundControl from '../SoundControl.vue'
+import SoundControl from "../SoundControl.vue";
 
 const props = defineProps({
   choices: Object,
@@ -10,19 +10,19 @@ const props = defineProps({
   userAnswer: Array,
   correctAnswer: Object,
   currentItem: String,
-  userAnswerId: Number
-})
+  userAnswerId: Number,
+});
 
-const emits = defineEmits(['selected'])
+const emits = defineEmits(["selected"]);
 </script>
 
 <template>
-  <div class="flex flex-row gap-16 justify-center mt-10">
+  <div class="flex flex-row gap-16 justify-center items-center">
     <div
       class="h-[400px] w-[300px] rounded-3xl shadow-md bg-white cursor-pointer hover:border-8 border-slate-200"
       :class="{
-        'bg-[#d0ffa3]': showColor && item.id === correctAnswer.id && isCorrect,
-        'bg-[#faa09b]': showColor && item.id === userAnswerId && isWrong
+        'bg-[#cef9a6]': showColor && item.id === correctAnswer.id && isCorrect,
+        'bg-[#fea29d]': showColor && item.id === userAnswerId && isWrong,
       }"
       v-for="(item, itemIndex) in choices"
       :key="itemIndex"
@@ -46,8 +46,8 @@ const emits = defineEmits(['selected'])
         class="border-solid border-b-2 border-black w-[230px] ml-7 mt-10"
       ></div>
       <h1 class="text-[24px] ml-10 mt-3">
-        {{ item.word.split(' ')[0] }} <br />
-        {{ item.word.split(' ').slice(1).join(' ') }}
+        {{ item.word.split(" ")[0] }} <br />
+        {{ item.word.split(" ").slice(1).join(" ") }}
       </h1>
     </div>
   </div>

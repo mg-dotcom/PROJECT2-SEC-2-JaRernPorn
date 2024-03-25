@@ -1,31 +1,15 @@
 <script setup>
-import { ref, computed } from "vue";
-
+import { ref, computed, defineProps } from "vue";
+import { useRoute, RouterLink } from "vue-router";
+const route = useRoute(); // using useRoute() hook to access the current route object
 import { categories } from "../../data/data.json";
+import Categories from "./Categories.vue";
 
-const currentIndexCate = ref(0);
-const currentIndexUnit = ref(0);
+const unitPage = ref(true);
 
-const categoryPage = ref(true);
-const unitPage = ref(false);
+const paramCateIndex = route.params.cateIndex - 1;
 
-const showUnit = (cateIndex) => {
-  currentIndexCate.value = cateIndex;
-  currentIndexUnit.value = cateIndex;
-
-  console.log(cateIndex);
-  console.log(categories[currentIndexCate.value].name);
-  console.log(categories[currentIndexCate.value].units);
-  console.log(categories[currentIndexCate.value].units[0]);
-
-  unitPage.value = true;
-  categoryPage.value = false;
-};
-
-const backToCategory = () => {
-  unitPage.value = false;
-  categoryPage.value = true;
-};
+const currentIndexCate = ref(paramCateIndex);
 
 const currentCategory = computed(() => {
   return categories[currentIndexCate.value].name;
@@ -39,87 +23,47 @@ const currentItem = computed(() => {
 </script>
 
 <template>
-  <section class="category" v-if="categoryPage">
-    <div class="bg-main-bgColor min-h-screen overflow-hidden">
+  <section class="unit" v-if="unitPage">
+    <div class="bg-main-bgColor min-h-screen w-full flex flex-col">
+      <!-- Back to category -->
       <header class="py-7 px-7">
         <!-- Back to home Button -->
-        <RouterLink to="/">
+        <router-link to="/categories">
           <img
             class="w-16 absolute hover:w-catePage-20 transition-all duration-300 ease-in-out cursor-pointer"
             src="/categories/icon/left-arrow.png"
             alt="left-arrow"
           />
-        </RouterLink>
+        </router-link>
 
         <div class="header flex justify-center items-center">
           <div
             class="categories text-title font-semibold font-outfit text-5xl flex items-center justify-center w-full px-17"
           >
-            Categories
+            {{ currentCategory }}
           </div>
+        </div>
+        <div class="setting">
+          <img
+            src="/settingBtn/setting.svg"
+            alt="setting button"
+            class="w-10 absolute right-10 top-10 hover:scale-105 transition-all duration-300 ease-in-out"
+            @click="toggleSetting"
+          />
         </div>
       </header>
 
-      <div class="flex content-center justify-center scale-90 flex-grow">
+      <div
+        class="absolute left-0 right-0 xl:top-[33%] flex justify-center items-center xl:space-y-0 xl:flex-grow lg:top-1/3 gap-x-24 flex-wrap md:top-[15%] md:scale-75 md:space-y-8 sm:top-1/3 mobile:top-1/4"
+      >
         <div
-          class="font-semibold text-black font-outfit md:flex md:justify-center"
+          class="w-56 h-56 bg-[#F9D986] rounded-[50px] flex justify-center items-center transition-all duration-300 ease-in-out transform hover:scale-110"
+          v-for="(item, index) in currentItem"
+          :key="item.id"
         >
-          <div
-            class="md:flex md:space-x-32 md:flex-wrap md:w-3/4 md:justify-center md:items-center"
-          >
-            <div
-              v-for="(category, cateIndex) in categories"
-              :key="category.name"
-              class="category-item flex flex-col items-center md:mb-9 cursor-pointer"
-            >
-              <div
-                class="pic w-52 pb-2 hover:scale-105 transition-all duration-300 ease-in-out"
-              >
-                <img
-                  :src="category.image"
-                  :alt="category.name"
-                  class="hover:drop-shadow-lg"
-                  @click="showUnit(cateIndex)"
-                />
-              </div>
-
-              <p class="text-xl">{{ category.name }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="unit" v-if="unitPage">
-    <div class="bg-main-bgColor min-h-screen w-full">
-      <div class="flex justify-between">
-        <img
-          src="/categories/icon/left-arrow.png"
-          alt="Arrow"
-          class="pt-20 pl-20 cursor-pointer size-40"
-          @click="backToCategory"
-        />
-        <h1
-          class="text-3xl text-wrongPopup-size font-semibold font-outfit text-title pt-28 pr-20"
-        >
-          {{ currentCategory }}
-        </h1>
-        <img src="/settingBtn/setting.svg" alt="Setting" class="pt-20 pr-20" />
-      </div>
-
-      <div class="flex justify-center pt-20">
-        <div class="flex flex-wrap justify-center gap-44 w-[800px] h-[500px]">
-          <div
-            class="w-44 h-44 bg-[#F9D986] rounded-[50px] transition-all duration-300 ease-in-out transform hover:scale-110"
-            v-for="(item, index) in currentItem"
-            :key="item.id"
-          >
-            <router-link :to="{ name: 'Game1', params: { unit: index } }">
-              <img :src="item.src" :alt="item.meaning" />
-              {{ index }}
-            </router-link>
-          </div>
+          <router-link :to="{ name: 'Game1', params: { unit: index + 1 } }">
+            <img class="w-52 h-52" :src="item.src" :alt="item.meaning" />
+          </router-link>
         </div>
       </div>
     </div>

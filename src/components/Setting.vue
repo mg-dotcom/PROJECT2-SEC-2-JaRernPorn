@@ -21,14 +21,16 @@ watch(isPlaying, () => {
   musicControl();
 });
 
+
 // onMounted(() => {
 //   isPlaying.value = true;
 //   musicControl();
 // });
+
 </script>
 
 <template>
-  <div class="flex justify-center">
+  <div class="flex justify-center z-30">
     <div class="setting bg-white w-1/5 border border-black rounded-2xl">
       <div class="closebtn flex justify-end py-2 px-2 cursor-pointer">
         <img

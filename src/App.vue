@@ -9,12 +9,11 @@ import { RouterView } from 'vue-router'
 // import Game3 from './components/game3/Game3.vue'
 // import Game4 from './components/game4/Game4.vue';
 // import Result from './components/resultpage/Result.vue';
+// import Topbar from "./components/Topbar.vue";
 </script>
 
 <template>
   <div>
-    <!-- <CollectionFlashcard /> -->
-    <!-- <FlashCard/> -->
     <RouterView />
   </div>
 </template>
