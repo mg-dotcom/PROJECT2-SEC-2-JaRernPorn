@@ -69,7 +69,6 @@ const selectedAnswer = (item) => {
   clickedChoice.value = true
   userAnswer.value = []
   userAnswer.value.push(item)
-  console.log(userAnswer.value)
 }
 
 // Pass to game 2
