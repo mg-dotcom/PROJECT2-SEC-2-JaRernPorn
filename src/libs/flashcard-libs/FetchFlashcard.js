@@ -51,25 +51,17 @@ const addItem = async (url, id, newCard) => {
 
 const deleteItem = async (url, id, index) => {
   try {
-    const response = await fetch(`${url}`);
+    const response = await fetch(`${url}/${id}`);
     const collections = await response.json();
 
-    const collectionIndex = collections.findIndex(
-      (collection) => collection.id === id
-    );
-
-    if (collectionIndex === -1) {
-      throw new Error("Collection not found");
-    }
-
-    collections[collectionIndex].cards.splice(index, 1);
+    collections.cards.splice(index, 1);
 
     const updateResponse = await fetch(`${url}/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(...collections),
+      body: JSON.stringify(collections),
     });
 
     console.log(updateResponse.status);
@@ -87,29 +79,21 @@ const deleteItem = async (url, id, index) => {
 
 const editItem = async (url, id, newFlashcard, cardIndex) => {
   try {
-    const response = await fetch(`${url}`);
+    const response = await fetch(`${url}/${id}`);
     const collections = await response.json();
 
-    const collectionIndex = collections.findIndex(
-      (collection) => collection.id === id
-    );
-
-    if (collectionIndex === -1) {
-      throw new Error("Collection not found");
-    }
-
-    const nonEditCard = collections[collectionIndex].cards[cardIndex];
+    const nonEditCard = collections.cards[cardIndex];
 
     const updatedCard = { ...nonEditCard, ...newFlashcard };
 
-    collections[collectionIndex].cards[cardIndex] = updatedCard;
+    collections.cards[cardIndex] = updatedCard;
 
     const updateResponse = await fetch(`${url}/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(...collections),
+      body: JSON.stringify(collections),
     });
 
     const updateCollections = await updateResponse.json();
