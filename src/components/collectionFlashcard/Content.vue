@@ -10,8 +10,7 @@ import {
   editCollectionItem
 } from '../../libs/flashcard-libs/FetchCollection.js'
 
-const collections=ref(new CollectionModal())
-
+const collections = ref(new CollectionModal())
 
 const props = defineProps({
   popup: {
@@ -36,17 +35,15 @@ const computedCollections = computed(() => {
 })
 
 const handleEditCollection = async (index, newName, id) => {
-  
   const editedCollection = await editCollectionItem(
     import.meta.env.VITE_BASE_URL,
     id,
     {
-      
       name: newName.trim()
     }
   )
 
-  collections.value.editCollection(editedCollection.name,index)
+  collections.value.editCollection(editedCollection.name, index)
 
   props.popup.renameCollection = false
   props.closeOption()
@@ -57,7 +54,7 @@ const handleDeleteCollection = async (index, id) => {
     import.meta.env.VITE_BASE_URL,
     id
   )
-  if(statusCode===200){
+  if (statusCode === 200) {
     collections.value.removeCollection(index)
   }
   props.closeOption()
@@ -66,12 +63,19 @@ const handleDeleteCollection = async (index, id) => {
 const handleAddNewCollection = async (name) => {
   const newColName = name.trim()
   //BACKEND add
-  const newCollectionName = await addCollectionItem(import.meta.env.VITE_BASE_URL, {
-    name: newColName,
-    cards:[]
-  })
+  const newCollectionName = await addCollectionItem(
+    import.meta.env.VITE_BASE_URL,
+    {
+      name: newColName,
+      cards: []
+    }
+  )
 
-  collections.value.addCollection(newCollectionName.id,newCollectionName.name,newCollectionName.crads)
+  collections.value.addCollection(
+    newCollectionName.id,
+    newCollectionName.name,
+    newCollectionName.crads
+  )
   props.popup.newCollection = false
 }
 
@@ -122,4 +126,5 @@ const toggleOptionCollection = (index) => {
   </div>
 </template>
 
-<style scoped></style>../../libs/fetchCollection.js
+<style scoped></style>
+../../libs/fetchCollection.js

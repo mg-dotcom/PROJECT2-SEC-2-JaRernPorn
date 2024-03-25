@@ -1,32 +1,33 @@
-import { createRouter, createWebHistory } from "vue-router";
-import HomePage from "../views/HomePage.vue";
-import CategoriesUnits from "../views/CategoriesUnits.vue";
-import Game1 from "../views/Game1.vue";
-const history = createWebHistory();
+import CategoriesUnits from '../views/CategoriesUnits.vue'
+import CollectionFlashCard from '../views/CollectionFlashCard.vue'
+import HomePage from '../views/HomePage.vue'
+// import Units from '../components/category/Units.vue'
+import NotFound from '../views/NotFound.vue'
+import FlashCard from '../views/FlashCard.vue'
+
+import { createRouter, createWebHistory } from 'vue-router'
+const history = createWebHistory()
 
 const routes = [
-  // default route path
+  { path: '/', redirect: '/home' },
   {
-    path: "/",
-    name: "Home",
-    component: HomePage,
+    path: '/:notfound(.*)',
+    component: NotFound
+  },
+  { path: '/home', name: 'HomePage', component: HomePage },
+  { path: '/category', name: 'CategoriesUnits', component: CategoriesUnits },
+  ,
+  {
+    path: '/flashcard-collection',
+    name: 'CollectionFlashCard',
+    component: CollectionFlashCard
   },
   {
-    // default route path
-    path: "/",
-    redirect: "/",
-  },
-  {
-    path: "/categories",
-    name: "Categories",
-    component: CategoriesUnits,
-  },
-  {
-    path: "/game1/:unit",
-    name: "Game1",
-    component: Game1,
-  },
-];
+    path: '/flashcard-collection/:name/:id/flashcards',
+    name: 'FlashCard',
+    component: FlashCard
+  }
+]
 
-const router = createRouter({ history, routes });
-export default router;
+const router = createRouter({ history, routes })
+export default router

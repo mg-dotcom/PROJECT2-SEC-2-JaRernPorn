@@ -1,22 +1,22 @@
 <script setup>
-import { reactive, ref } from "vue";
-import { RouterLink } from "vue-router";
-import SettingHomePage from "../components/SettingHomePage.vue";
+import { reactive, ref } from 'vue'
+import { RouterLink } from 'vue-router'
+import SettingHomePage from '../components/SettingHomePage.vue'
 
 const page = reactive({
   homePage: true,
-  categoryPage: false,
-});
-const showSetting = ref(false);
+  categoryPage: false
+})
+const showSetting = ref(false)
 
 const showCategoryPage = () => {
-  page.homePage = false;
-  page.categoryPage = true;
-};
+  page.homePage = false
+  page.categoryPage = true
+}
 
 const toggleSetting = () => {
-  showSetting.value = !showSetting.value;
-};
+  showSetting.value = !showSetting.value
+}
 </script>
 
 <template>
@@ -48,25 +48,26 @@ const toggleSetting = () => {
             LET'S PRACTICE YOUR CHINESE VOCABULARY
           </p>
         </div>
+
         <!-- Play Button -->
         <div id="home-page-button">
-          <div id="play-button" class="flex justify-center pt-12">
-            <RouterLink to="/categories">
+          <router-link :to="{ name: 'CategoriesUnits' }">
+            <div id="play-button" class="flex justify-center pt-12">
               <img
                 class="w-72 relative hover:w-80 transition-all duration-300 ease-in-out cursor-pointer"
                 src="/homePage-pic/play-button.svg"
                 alt="play-button"
-              />
-            </RouterLink>
-          </div>
+              /></div
+          ></router-link>
           <!-- Flashcard Button -->
-          <div id="Flashcard-button" class="flex justify-center pt-6">
-            <img
-              class="w-72 relative hover:w-80 transition-all duration-300 ease-in-out cursor-pointer"
-              src="/homePage-pic/flashcard-button.svg"
-              alt="HTP-button"
-            />
-          </div>
+          <router-link :to="{ name: 'CollectionFlashCard' }">
+            <div id="Flashcard-button" class="flex justify-center pt-6">
+              <img
+                class="w-72 relative hover:w-80 transition-all duration-300 ease-in-out cursor-pointer"
+                src="/homePage-pic/flashcard-button.svg"
+                alt="HTP-button"
+              /></div
+          ></router-link>
 
           <!-- How To Play Button -->
           <div id="HTP-button" class="flex justify-center pt-6">
