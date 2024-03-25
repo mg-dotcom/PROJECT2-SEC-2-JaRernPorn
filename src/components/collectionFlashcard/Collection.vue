@@ -83,7 +83,6 @@ const passNewName = (index, newName, id) => {
           class="absolute inset-[16px] flex items-center justify-center overflow-hidden cursor-pointer text-3xl font-medium font-outfit whitespace-normal break-all overflow-ellipsis z-10 md:text-2xl lg:text-4xl"
         >
           {{ props.computedCollections[props.index].name }}
-          <!-- <div class=""></div> -->
         </div>
       </div></router-link
     >
@@ -92,6 +91,7 @@ const passNewName = (index, newName, id) => {
       v-show="props.popup.optionCollection && SelectedIndex === props.index"
       :index="index"
       :popup="popup"
+      :collection-id="collectionId"
       @deleteCollection="passDeleteCollection"
     ></optionCollection>
 
@@ -99,6 +99,7 @@ const passNewName = (index, newName, id) => {
       v-show="props.popup.renameCollection && SelectedIndex === props.index"
       :index="index"
       :popup="popup"
+      :collection-id="collectionId"
       :computedCollections="computedCollections"
       :closeOption="closeOption"
       @changeCollectionName="passNewName"
