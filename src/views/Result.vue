@@ -48,23 +48,24 @@ const items = currentCategory.units[unitIndex.value].items
     </div>
 
     <div class="border-double border-8 border-title box-border h-full w-full">
-      <div class="">
-        <div class="setting flex">
-          <img
-            src="/settingBtn/setting.svg"
-            alt="setting button"
-            class="w-10 cursor-pointer absolute right-14 top-10 hover:scale-105 transition-all duration-300 ease-in-out"
-            @click="toggleSetting"
-          />
-        </div>
-        <div class="font-semibold font-outfit text-title">
+      <div class="setting flex justify-between items-center mx-6 my-3">
+        <div class="flex">
           <router-link to="/">
             <img
               src="/settingBtn/home.svg"
               alt="home button"
-              class="cursor-pointer size-14 absolute left-14 top-10 hover:scale-105 transition-all duration-300 ease-in-out"
+              class="cursor-pointer size-14 hover:scale-105 transition-all duration-300 ease-in-out"
             />
           </router-link>
+        </div>
+
+        <div class="flex">
+          <img
+            src="/settingBtn/setting.svg"
+            alt="setting button"
+            class="w-10 cursor-pointer hover:scale-105 transition-all duration-300 ease-in-out"
+            @click="toggleSetting"
+          />
         </div>
       </div>
 
