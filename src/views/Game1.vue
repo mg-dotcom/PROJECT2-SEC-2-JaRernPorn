@@ -28,7 +28,7 @@ const isCorrect = ref(false)
 const isWrong = ref(false)
 const userAnswer = ref([])
 const userAnswerId = ref(null)
-
+const clickedChoice = ref(false)
 //Setting
 const showSetting = ref(false)
 
@@ -66,13 +66,12 @@ const threeChoices = computed(() => {
 
 //CollectAnswer
 const selectedAnswer = (item) => {
+  clickedChoice.value = true
   userAnswer.value = []
   userAnswer.value.push(item)
 }
 
 // Pass to game 2
-const correctAnswers = ref([])
-
 const passToGame2 = () => {
   router.push({
     name: 'Game2',
@@ -83,8 +82,10 @@ const passToGame2 = () => {
   })
 }
 
+const correctAnswers = ref([])
 //CheckAnswer
 const checkAnswer = (userAns) => {
+  clickedChoice.value = false
   checkStatus.value = true
 
   correctAnswer.value =
@@ -202,6 +203,7 @@ const restartGame = () => {
             :correctAnswer="correctAnswer"
             :userAnswerId="userAnswerId"
             :checkStatus="checkStatus"
+            :clickedChoice="clickedChoice"
             @selected="selectedAnswer"
           ></Card>
           <div class="flex justify-end absolute top-[420px] -right-52">

@@ -1,9 +1,9 @@
 <script setup>
 const props = defineProps({
-  answer:String
+  answer: String
 })
-const emits=defineEmits(['closePopup'])
-console.log(props.answer);
+const emits = defineEmits(['closePopup'])
+console.log(props.answer)
 </script>
 
 <template>
@@ -24,7 +24,8 @@ console.log(props.answer);
         >
           The answer is<br />
           <div
-            class="text-greenTest font-NotoSansSC font-medium lowercase text-sm relative sm:text-2xl md:text-4xl mobile:text-[20px]"
+            class="option font-NotoSansSC font-medium lowercase text-sm relative sm:text-2xl md:text-4xl mobile:text-[20px]"
+            style="color: #32a028"
           >
             {{ props.answer }}
           </div>
@@ -40,4 +41,8 @@ console.log(props.answer);
   </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+.correct-option-green {
+  color: #42d134;
+}
+</style>

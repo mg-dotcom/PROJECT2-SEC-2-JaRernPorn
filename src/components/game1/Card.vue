@@ -11,18 +11,24 @@ const props = defineProps({
   userAnswer: Array,
   correctAnswer: Object,
   currentItem: String,
-  userAnswerId: Number
+  userAnswerId: Number,
+  clickedChoice: Boolean
 })
+
 const emits = defineEmits(['selected'])
 </script>
 
 <template>
   <div class="flex flex-row gap-16 justify-center items-center">
+    <div class=""></div>
     <div
-      class="h-[400px] w-[300px] rounded-3xl shadow-md bg-white cursor-pointer hover:border-8 border-slate-200"
+      class="h-[400px] w-[300px] rounded-3xl shadow-md bg-white border-1 cursor-pointer hover:border-8 border-slate-200"
       :class="{
-        'bg-[#cef9a6]': showColor && item.id === correctAnswer.id && isCorrect,
-        'bg-[#fea29d]': showColor && item.id === userAnswerId && isWrong
+        'bg-correct-option-green':
+          showColor && item.id === correctAnswer.id && isCorrect,
+        'bg-wrong-option-red': showColor && item.id === userAnswerId && isWrong,
+        'border-selected-option-blue':
+          clickedChoice && item.id === userAnswer[0].id
       }"
       v-for="(item, itemIndex) in choices"
       :key="itemIndex"
@@ -53,4 +59,14 @@ const emits = defineEmits(['selected'])
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.bg-correct-option-green {
+  background-color: #d2ffab;
+}
+.bg-wrong-option-red {
+  background-color: #ff9e94;
+}
+.border-selected-option-blue {
+  border: solid 8px #b7d9fc;
+}
+</style>

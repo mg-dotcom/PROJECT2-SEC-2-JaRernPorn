@@ -1,120 +1,120 @@
 <script setup>
-import { ref, computed, defineProps } from "vue";
-import data from "../../data/data.json";
-import Setting from "../components/Setting.vue";
-import Answer_popup from "../components/game2/Answer_popup.vue";
-import SoundControl from "../components/SoundControl.vue";
-import { useRouter, useRoute } from "vue-router";
+import { ref, computed, defineProps } from 'vue'
+import data from '../../data/data.json'
+import Setting from '../components/Setting.vue'
+import Answer_popup from '../components/game2/Answer_popup.vue'
+import SoundControl from '../components/SoundControl.vue'
+import { useRouter, useRoute } from 'vue-router'
 
-const router = useRouter();
-const route = useRoute();
+const router = useRouter()
+const route = useRoute()
 
-const answer = ref("");
-const options = ref([]);
-const currentIndex = ref(0); //คำถามปัจจุบัน
-const showSetting = ref(false);
-const showPopup = ref(false);
-const checkStatus = ref(false);
+const answer = ref('')
+const options = ref([])
+const currentIndex = ref(0) //คำถามปัจจุบัน
+const showSetting = ref(false)
+const showPopup = ref(false)
+const checkStatus = ref(false)
 
-const paramCateIndex = route.params.cateIndex - 1;
-const paramUnitIndex = route.params.unit - 1;
+const paramCateIndex = route.params.cateIndex - 1
+const paramUnitIndex = route.params.unit - 1
 
-const unitIndex = ref(paramUnitIndex);
-const categoryIndex = ref(paramCateIndex);
+const unitIndex = ref(paramUnitIndex)
+const categoryIndex = ref(paramCateIndex)
 //const items = category.categories[0].units[0].items
 
-const currentCategory = data.categories[paramCateIndex];
-const items = currentCategory.units[paramUnitIndex].items;
+const currentCategory = data.categories[paramCateIndex]
+const items = currentCategory.units[paramUnitIndex].items
 
 const audioOfOption = computed(() => {
   return data.categories[categoryIndex.value].units[unitIndex.value].items[
     currentIndex.value
-  ].pronunciation;
-});
+  ].pronunciation
+})
 
-const countCheck = ref(0);
+const countCheck = ref(0)
 
 const currentQuiz = computed(() => {
   if (countCheck.value === items.length) {
-    currentIndex.value = 0;
-    passToGame3();
+    currentIndex.value = 0
+    passToGame3()
   }
 
-  answer.value = items[currentIndex.value].meaning; // กำหนดคำตอบจากข้อปัจจุบัน
-  options.value = generateOptions(answer.value);
+  answer.value = items[currentIndex.value].meaning // กำหนดคำตอบจากข้อปัจจุบัน
+  options.value = generateOptions(answer.value)
 
-  return items[currentIndex.value].word; // แสดงคำปัจจุบันที่กำลังเล่น
-});
+  return items[currentIndex.value].word // แสดงคำปัจจุบันที่กำลังเล่น
+})
 
 const generateOptions = (answer) => {
-  const optionsArray = [];
-  optionsArray.push({ id: 1, value: answer });
+  const optionsArray = []
+  optionsArray.push({ id: 1, value: answer })
   while (optionsArray.length < 3) {
-    const randomIndex = Math.floor(Math.random() * items.length);
-    const randomWord = items[randomIndex].meaning;
+    const randomIndex = Math.floor(Math.random() * items.length)
+    const randomWord = items[randomIndex].meaning
     if (!optionsArray.some((option) => option.value === randomWord)) {
-      optionsArray.push({ id: optionsArray.length + 1, value: randomWord });
+      optionsArray.push({ id: optionsArray.length + 1, value: randomWord })
     }
   }
-  return shuffle(optionsArray);
-};
+  return shuffle(optionsArray)
+}
 
 const shuffle = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[array[i], array[j]] = [array[j], array[i]]
   }
-  return array;
-};
+  return array
+}
 
-const isSelected = ref(false);
-const colorOption = ref(false);
+const isSelected = ref(false)
+const colorOption = ref(false)
 
-const userSelected = ref("");
+const userSelected = ref('')
 const userAnswer = (userSelectedOption) => {
-  userSelected.value = userSelectedOption;
-  isSelected.value = true;
-};
+  userSelected.value = userSelectedOption
+  isSelected.value = true
+}
 
 const passToGame3 = () => {
   router.push({
-    name: "Game3",
+    name: 'Game3',
     params: {
       cateIndex: route.params.cateIndex,
-      unit: route.params.unit,
-    },
-  });
-};
+      unit: route.params.unit
+    }
+  })
+}
 
 const checkAnswer = () => {
-  checkStatus.value = true;
+  checkStatus.value = true
 
   if (userSelected.value === answer.value) {
-    colorOption.value = true;
-    isSelected.value = false;
+    colorOption.value = true
+    isSelected.value = false
     setTimeout(() => {
-      countCheck.value++;
-      currentIndex.value++;
-      colorOption.value = false;
-      isSelected.value = false;
-      answer.value = "";
-    }, 2000);
+      countCheck.value++
+      currentIndex.value++
+      colorOption.value = false
+      isSelected.value = false
+      answer.value = ''
+    }, 2000)
   } else {
-    showPopup.value = true;
-    isSelected.value = false;
-    colorOption.value = false;
+    showPopup.value = true
+    isSelected.value = false
+    colorOption.value = false
   }
-};
+}
 
 const closePopup = () => {
-  showPopup.value = !showPopup.value;
-  currentIndex.value++;
-  countCheck.value++;
-};
+  showPopup.value = !showPopup.value
+  currentIndex.value++
+  countCheck.value++
+}
 
 const toggleSetting = () => {
-  showSetting.value = !showSetting.value;
-};
+  showSetting.value = !showSetting.value
+}
 </script>
 
 <template>
@@ -168,8 +168,10 @@ const toggleSetting = () => {
                 @click="userAnswer(option.value)"
                 class="flex justify-center items-center bg-title text-white font-semiboldl text-2xl h-14 sm:h-20 rounded-lg hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
                 :class="{
-                  'bg-green-500': option.value === answer && colorOption,
-                  'bg-blue-500': option.value === userSelected && isSelected,
+                  'bg-correct-option-green':
+                    option.value === answer && colorOption,
+                  'bg-selected-option-blue':
+                    option.value === userSelected && isSelected
                 }"
               >
                 {{ option.value }}
@@ -197,8 +199,8 @@ const toggleSetting = () => {
           name: 'Game1',
           params: {
             cateIndex: route.params.cateIndex,
-            unit: route.params.unit,
-          },
+            unit: route.params.unit
+          }
         })
       "
       @resumeGame="toggleSetting"
@@ -211,4 +213,11 @@ const toggleSetting = () => {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.bg-correct-option-green {
+  background-color: #42d134;
+}
+.bg-selected-option-blue {
+  background-color: #186cc7;
+}
+</style>

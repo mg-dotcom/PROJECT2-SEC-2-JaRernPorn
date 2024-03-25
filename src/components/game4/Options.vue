@@ -99,9 +99,9 @@ const isMatching = () => {
           :key="index"
           @click="handleWordClick(wordOption.id, wordOption.pronunciation)"
           :class="{
-            'border-2 border-selected-option-blue':
+            'border border-bg-selected-option-blue':
               clickedWordId && clickedWordId === wordOption.id,
-            'bg-green-400 border-green-border': wordArray.includes(
+            'bg-correct-option-green border-green-border': wordArray.includes(
               wordOption.id
             ),
             'bg-wrong-option-red': wrongWord.includes(wordOption.id)
@@ -118,11 +118,10 @@ const isMatching = () => {
           :key="index"
           @click="handleMeaningClick(meaningOption.id)"
           :class="{
-            'border border-selected-option-blue':
+            'border border-bg-selected-option-blue':
               clickedMeaningId && clickedMeaningId === meaningOption.id,
-            'bg-green-400 border-green-border': meaningArray.includes(
-              meaningOption.id
-            ),
+            'bg-correct-option-green border-green-border':
+              meaningArray.includes(meaningOption.id),
             'bg-wrong-option-red': wrongMeaning.includes(meaningOption.id)
           }"
           class="bg-white text-black rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-20 md:w-96 md:text-2xl lg:rounded-2xl"
@@ -150,4 +149,17 @@ const isMatching = () => {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.bg-correct-option-green {
+  background-color: #d2ffab;
+}
+.bg-wrong-option-red {
+  background-color: #ff9e94;
+}
+.bg-selected-option-blue {
+  background-color: #186cc7;
+}
+.border-bg-selected-option-blue {
+  border-color: #186cc7;
+}
+</style>
