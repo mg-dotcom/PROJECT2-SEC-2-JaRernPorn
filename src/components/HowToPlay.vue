@@ -1,5 +1,5 @@
 <script setup>
-const emits = defineEmits(["howToPlay", "closeHowtoplay"]);
+const emits = defineEmits(['howToPlay', 'closeHowtoplay'])
 </script>
 
 <template>
@@ -10,7 +10,7 @@ const emits = defineEmits(["howToPlay", "closeHowtoplay"]);
         class="grid grid-cols-1 bg-white w-[650px] max-h-[600px] overflow-y-auto rounded-xl p-5 shadow-md"
       >
         <div @click="$emit('closeHowtoplay', false)" class="flex justify-end">
-          <img src="/close.svg" alt="close" class="w-3 cursor-pointer" />
+          <img src="/close.svg" alt="close" class="w-4 cursor-pointer" />
         </div>
         <div
           class="text-4xl font-alkatra text-title font-semibold flex justify-center uppercase"
