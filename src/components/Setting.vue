@@ -81,7 +81,7 @@ watch(isPlaying, () => {
           />
         </div>
 
-        <div class="home">
+        <div class="category">
           <img
             src="/settingBtn/category.svg"
             alt="home"

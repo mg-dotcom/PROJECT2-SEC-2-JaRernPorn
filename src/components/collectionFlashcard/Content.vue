@@ -8,7 +8,7 @@ import {
   addCollectionItem,
   deleteCollectionItem,
   editCollectionItem
-} from '../../libs/flashcard-libs/fetchCollection'
+} from '../../libs/flashcard-libs/FetchCollection'
 
 const collections = ref(new CollectionModal())
 

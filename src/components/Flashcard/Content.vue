@@ -8,7 +8,7 @@ import {
   deleteItem,
   editItem
 } from '../../libs/flashcard-libs/FetchFlashcard.js'
-import { FlashcardModal } from '../../libs/flashcard-libs/FlashCardModal.js'
+import { FlashcardModal } from '../../libs/flashcard-libs/FlashcardModal.js'
 
 const props = defineProps({
   popup: {
