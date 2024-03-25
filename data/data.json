@@ -418,21 +418,15 @@
       "cards": [
         {
           "id": 1,
-          "chineseWord": "1",
-          "pinyin": "1",
-          "meaning": "1"
-        },
-        {
-          "id": 2,
-          "chineseWord": "2",
+          "chineseWord": "fff",
           "pinyin": "2",
           "meaning": "2"
         },
         {
-          "id": 3,
-          "chineseWord": "3",
-          "pinyin": "3",
-          "meaning": "3"
+          "id": 2,
+          "chineseWord": "r",
+          "pinyin": "2",
+          "meaning": "2"
         }
       ]
     }
