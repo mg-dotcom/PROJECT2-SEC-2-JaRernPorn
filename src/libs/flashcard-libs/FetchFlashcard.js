@@ -1,12 +1,9 @@
-// เอา Collection By ID เเละ เข้าไปเอา Card ทั้งหมดใน Collection นั้นๆ
 async function getItem(url, id) {
   try {
-    const data = await fetch(`${url}/${id}`); // Call API to fetch data
-    const response = await data.json(); // Parse JSON data into an object
+    const data = await fetch(`${url}/${id}`);
+    const response = await data.json();
 
-    // Check if response has a 'cards' property
     if (response.hasOwnProperty("cards")) {
-      // If 'cards' is an array, return it
       if (Array.isArray(response.cards)) {
         return response.cards;
       } else {
@@ -14,7 +11,6 @@ async function getItem(url, id) {
         return [];
       }
     } else {
-      // If 'cards' doesn't exist, assume 'collections' is an array of objects with 'cards' arrays
       const allCards = response.collections.flatMap(
         (collection) => collection.cards
       );
@@ -28,19 +24,20 @@ async function getItem(url, id) {
 
 const addItem = async (url, id, newCard) => {
   try {
-    const response = await fetch(`${url}`);
+    const response = await fetch(`${url}/${id}`);
     const collections = await response.json();
 
-    const collectionIndex = collections.findIndex(
-      (collection) => collection.id === "2"
-    );
+    // const collectionIndex = collections.findIndex(
+    //   (collection) => collection.id === "2"
+    // );
 
-    if (collectionIndex === -1) {
-      throw new Error("Collection not found");
-    }
-
-    collections[collectionIndex].cards.push(newCard);
-
+    // if (collectionIndex === -1) {
+    //   throw new Error("Collection not found");
+    // }
+    console.log(collections.cards);
+    collections.cards.push(newCard);
+    console.log(collections);
+  
     const updateResponse = await fetch(`${url}/${id}`, {
       method: "PUT",
       headers: {
@@ -114,14 +111,14 @@ const editItem = async (url, id, newFlashcard, cardIndex) => {
 
     const updatedCard = { ...nonEditCard, ...newFlashcard };
 
-    collections[collectionIndex].cards[cardIndex] = updatedCard
+    collections[collectionIndex].cards[cardIndex] = updatedCard;
 
     const updateResponse = await fetch(`${url}/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(...collections)
+      body: JSON.stringify(...collections),
     });
 
     const updateCollections = await updateResponse.json();

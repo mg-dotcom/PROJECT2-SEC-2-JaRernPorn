@@ -168,3 +168,4 @@ const handelEditFlashcard = async (
 
 <style scoped></style>
 ../../libs/flashcard-libs/FlashcardManagement.js../../libs/flashcard-libs/fetchFlashcard.js
+../../libs/flashcard-libs/FlashcardModal.js
