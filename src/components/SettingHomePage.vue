@@ -2,7 +2,7 @@
 import { onMounted, ref, watch, defineEmits } from "vue";
 
 const emits = defineEmits(["closeSetting", "close"]);
-const isPlaying = ref(true);
+const isPlaying = ref(false);
 
 const player = ref("");
 
@@ -18,10 +18,10 @@ watch(isPlaying, () => {
   musicControl();
 });
 
-onMounted(() => {
-  isPlaying.value = true;
-  musicControl();
-});
+// onMounted(() => {
+//   isPlaying.value = true;
+//   musicControl();
+// });
 </script>
 
 <template>

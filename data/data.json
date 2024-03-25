@@ -411,18 +411,5 @@
       "id": "b98c"
     }
   ],
-  "collections": [
-    {
-      "id": "5608",
-      "name": "New Collection",
-      "cards": [
-        {
-          "id": 1,
-          "chineseWord": "Bisbat",
-          "pinyin": "binotgrinch",
-          "meaning": "mg"
-        }
-      ]
-    }
-  ]
+  "collections": []
 }

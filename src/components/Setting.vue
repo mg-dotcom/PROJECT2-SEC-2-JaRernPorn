@@ -85,7 +85,7 @@ watch(isPlaying, () => {
         <div class="home">
           <img
             src="/settingBtn/home.svg"
-            alt="home "
+            alt="home"
             class="home cursor-pointer"
             @click="$emit('goCategories')"
           />

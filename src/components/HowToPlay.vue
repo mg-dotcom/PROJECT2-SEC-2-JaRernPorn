@@ -1,5 +1,5 @@
 <script setup>
-const emits = defineEmits(['howToPlay', 'closeHowtoplay'])
+const emits = defineEmits(["howToPlay", "closeHowtoplay"]);
 </script>
 
 <template>
@@ -7,7 +7,7 @@ const emits = defineEmits(['howToPlay', 'closeHowtoplay'])
     <div class="flex justify-center content-center items-center">
       <div
         @click="$emit('howToPlay', true)"
-        class="grid grid-cols-1 bg-white w-full max-w-md max-h-96 overflow-y-auto rounded-xl p-5 shadow-md"
+        class="grid grid-cols-1 bg-white w-[650px] max-h-[600px] overflow-y-auto rounded-xl p-5 shadow-md"
       >
         <div @click="$emit('closeHowtoplay', false)" class="flex justify-end">
           <img src="/close.svg" alt="close" class="w-3 cursor-pointer" />
@@ -17,7 +17,7 @@ const emits = defineEmits(['howToPlay', 'closeHowtoplay'])
         >
           How To Play
         </div>
-        <div class="flex flex-col gap-4 py-3">
+        <div class="flex flex-col gap-4 py-3 justify-center items-center">
           <div class="text-black font-outfit">
             1. Select the category.
             <div class="py-2">
@@ -31,9 +31,9 @@ const emits = defineEmits(['howToPlay', 'closeHowtoplay'])
             </div>
           </div>
           <div class="text-black font-outfit">
-            3. To play the game, select the correct answer to the following
-            question. If you selected the wrong option, the answer will appear
-            in the example below.
+            3. To play the game, select the correct answer to the<br />
+            following question. If you selected the wrong option,<br />
+            the answer will appear in the example below.
             <div class="py-2">
               <img
                 src="/homePage-pic/howtoplay-3.svg"
@@ -59,7 +59,7 @@ const emits = defineEmits(['howToPlay', 'closeHowtoplay'])
         >
           Flashcard
         </div>
-        <div class="flex flex-col gap-4 py-3">
+        <div class="flex flex-col gap-4 py-3 justify-center items-center">
           <div class="text-black font-outfit">
             1. Create a collection of your vocabulary.
             <div class="py-2">
@@ -79,8 +79,8 @@ const emits = defineEmits(['howToPlay', 'closeHowtoplay'])
             </div>
           </div>
           <div class="text-black font-outfit">
-            4. You can also create, update, and delete both collections and
-            flashcards.
+            4. You can also create, update, and delete both<br />
+            collections and flashcards.
             <div class="py-2">
               <img src="/homePage-pic/flashcard-4.svg" alt="flashcard-4" />
             </div>
