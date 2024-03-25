@@ -1,31 +1,31 @@
 <script setup>
-import { ref, computed, defineProps } from "vue";
-import { useRoute, RouterLink } from "vue-router";
-const route = useRoute(); // using useRoute() hook to access the current route object
-import { categories } from "../../data/data.json";
-import SettingHomePage from "@/components/SettingHomePage.vue";
+import { ref, computed, defineProps } from 'vue'
+import { useRoute, RouterLink } from 'vue-router'
+const route = useRoute() // using useRoute() hook to access the current route object
+import { categories } from '../../data/data.json'
+import SettingHomePage from '@/components/SettingHomePage.vue'
 
-const unitPage = ref(true);
+const unitPage = ref(true)
 
-const paramCateIndex = route.params.cateIndex - 1;
+const paramCateIndex = route.params.cateIndex - 1
 
-const currentIndexCate = ref(paramCateIndex);
+const currentIndexCate = ref(paramCateIndex)
 
 const currentCategory = computed(() => {
-  return categories[currentIndexCate.value].name;
-});
+  return categories[currentIndexCate.value].name
+})
 
 const currentItem = computed(() => {
-  const currentUnit = categories[currentIndexCate.value].units;
-  const firstItem = currentUnit.map((unit) => unit.items[0]);
-  return firstItem;
-});
+  const currentUnit = categories[currentIndexCate.value].units
+  const firstItem = currentUnit.map((unit) => unit.items[0])
+  return firstItem
+})
 
-const showSetting = ref(false);
+const showSetting = ref(false)
 
 const toggleSetting = () => {
-  showSetting.value = !showSetting.value;
-};
+  showSetting.value = !showSetting.value
+}
 </script>
 
 <template>
@@ -56,7 +56,7 @@ const toggleSetting = () => {
           <img
             src="/settingBtn/setting.svg"
             alt="setting button"
-            class="w-10 absolute right-10 top-10 hover:scale-105 transition-all duration-300 ease-in-out"
+            class="w-10 absolute right-10 top-10 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
             @click="toggleSetting"
           />
         </div>
