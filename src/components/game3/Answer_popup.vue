@@ -1,11 +1,11 @@
 <script setup>
-import { defineProps, defineEmits } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { defineProps, defineEmits } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
 const props = defineProps({
-  answer: String,
-});
-const emits = defineEmits(["closePopup"]);
+  answer: String
+})
+const emits = defineEmits(['closePopup'])
 </script>
 
 <template>
@@ -27,6 +27,7 @@ const emits = defineEmits(["closePopup"]);
           The answer is<br />
           <div
             class="text-greenTest font-NotoSansSC font-medium lowercase text-sm relative sm:text-2xl md:text-4xl mobile:text-[20px]"
+            style="color: #42d134"
           >
             {{ props.answer }}
           </div>

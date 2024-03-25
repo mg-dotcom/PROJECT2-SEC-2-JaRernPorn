@@ -24,7 +24,8 @@ console.log(props.answer)
         >
           The answer is<br />
           <div
-            class="text-greenTest font-NotoSansSC font-medium lowercase text-sm relative sm:text-2xl md:text-4xl mobile:text-[20px]"
+            class="option font-NotoSansSC font-medium lowercase text-sm relative sm:text-2xl md:text-4xl mobile:text-[20px]"
+            style="color: #42d134"
           >
             {{ props.answer }}
           </div>
@@ -41,13 +42,7 @@ console.log(props.answer)
 </template>
 
 <style scoped>
-.bg-correct-option-green {
-  background-color: #d2ffab;
-}
-.bg-wrong-option-red {
-  background-color: #ff9e94;
-}
-.bg-selected-option-blue {
-  background-color: #186cc7;
+.correct-option-green {
+  color: #42d134;
 }
 </style>
