@@ -16,7 +16,7 @@ const toggleSetting = () => {
 <template>
   <section class="category" v-if="categoryPage">
     <div class="bg-main-bgColor min-h-screen overflow-hidden">
-      <div class="absolute left-0 right-0 z-40" v-show="showSetting">
+      <div class="fixed left-0 right-0 z-40" v-show="showSetting">
         <SettingHomePage @closeSetting="toggleSetting" />
       </div>
       <header class="py-7 px-7">

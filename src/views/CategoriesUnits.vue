@@ -3,7 +3,7 @@ import { ref, computed, defineProps } from "vue";
 import { useRoute, RouterLink } from "vue-router";
 const route = useRoute(); // using useRoute() hook to access the current route object
 import { categories } from "../../data/data.json";
-import Categories from "./Categories.vue";
+import SettingHomePage from "@/components/SettingHomePage.vue";
 
 const unitPage = ref(true);
 
@@ -20,11 +20,20 @@ const currentItem = computed(() => {
   const firstItem = currentUnit.map((unit) => unit.items[0]);
   return firstItem;
 });
+
+const showSetting = ref(false);
+
+const toggleSetting = () => {
+  showSetting.value = !showSetting.value;
+};
 </script>
 
 <template>
   <section class="unit" v-if="unitPage">
     <div class="bg-main-bgColor min-h-screen w-full flex flex-col">
+      <div class="fixed left-0 right-0 z-40" v-show="showSetting">
+        <SettingHomePage @closeSetting="toggleSetting" />
+      </div>
       <!-- Back to category -->
       <header class="py-7 px-7">
         <!-- Back to home Button -->

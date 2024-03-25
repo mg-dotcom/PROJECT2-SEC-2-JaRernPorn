@@ -31,7 +31,7 @@ watch(isPlaying, () => {
 
 <template>
   <div class="flex justify-center z-30">
-    <div class="setting bg-white w-1/5 border border-black rounded-2xl">
+    <div class="setting bg-white border border-black rounded-2xl">
       <div class="closebtn flex justify-end py-2 px-2 cursor-pointer">
         <img
           src="/settingBtn/close.svg"
@@ -63,7 +63,7 @@ watch(isPlaying, () => {
 
       <hr class="mx-5 border border-b-1 border-slate-200" />
 
-      <div class="btn flex m-5">
+      <div class="flex m-5 gap-x-4">
         <div class="restart">
           <img
             src="/settingBtn/replay.svg"
@@ -85,7 +85,8 @@ watch(isPlaying, () => {
         <div class="home">
           <img
             src="/settingBtn/home.svg"
-            alt="home cursor-pointer"
+            alt="home "
+            class="home cursor-pointer"
             @click="$emit('goCategories')"
           />
         </div>

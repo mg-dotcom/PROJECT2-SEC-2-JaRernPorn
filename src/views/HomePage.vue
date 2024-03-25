@@ -25,7 +25,7 @@ const showHowtoplay = () => {
 
 <template>
   <section class="HomePage" v-show="page.homePage">
-    <div class="absolute left-0 right-0 z-40" v-show="showSetting">
+    <div class="fixed left-0 right-0 z-40" v-show="showSetting">
       <SettingHomePage @closeSetting="toggleSetting" />
     </div>
     <div class="h-screen w-full bg-main-bgColor p-5">

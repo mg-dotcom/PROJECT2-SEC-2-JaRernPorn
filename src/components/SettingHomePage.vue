@@ -26,7 +26,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="bg-black bg-opacity-50 min-h-screen w-screen"
+    class="bg-black bg-opacity-50 min-h-screen w-full"
     @click.self="emits('closeSetting')"
   >
     <div
