@@ -26,25 +26,24 @@ async function addCollectionItem(url, newCollection) {
   }
 }
 
-async function deleteCollectionItem(url,id){
+async function deleteCollectionItem(url, id) {
   // console.log(`${url}?id=${id}`);
-  try{
-    const res=await fetch(`${url}/${id}`,{
-      method:'DELETE'
+  try {
+    const res = await fetch(`${url}/${id}`, {
+      method: 'DELETE'
     })
     return res.status
-  }catch (error) {
+  } catch (error) {
     console.log(`error: ${error}`)
   }
 }
 
 async function editCollectionItem(url, id, editCollection) {
   try {
-    const response=await fetch(`${url}/${id}`)
-    const selectedCollection=response.json()
-    console.log(editCollection.name);
-    console.log(selectedCollection);
-    const updatedCollection={...selectedCollection,...editCollection}
+    const response = await fetch(`${url}/${id}`)
+    const selectedCollection = await response.json()
+    console.log(selectedCollection)
+    const updatedCollection = { ...selectedCollection, ...editCollection }
     const res = await fetch(`${url}/${id}`, {
       method: 'PUT',
       headers: {
@@ -61,4 +60,9 @@ async function editCollectionItem(url, id, editCollection) {
   }
 }
 
-export { getCollectionItem, addCollectionItem,deleteCollectionItem,editCollectionItem }
+export {
+  getCollectionItem,
+  addCollectionItem,
+  deleteCollectionItem,
+  editCollectionItem
+}

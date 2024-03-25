@@ -3,9 +3,6 @@ import { defineProps, ref, computed, defineEmits, onMounted } from 'vue'
 import newCollection from '../collectionFlashcard/popup/newCollection.vue'
 import Collection from '../collectionFlashcard/Collection.vue'
 import { CollectionModal } from '../../libs/flashcard-libs/CollectionModal.js'
-// import { editCollection } from '../../libs/flashcard-libs/CollectionModal.js'
-// import { deleteCollection } from '../../libs/flashcard-libs/CollectionModal.js'
-// import { addNewCollection } from '../../libs/flashcard-libs/CollectionModal.js'
 import {
   getCollectionItem,
   addCollectionItem,
@@ -29,17 +26,8 @@ const props = defineProps({
 
 const emit = defineEmits(['clearName', 'toClearName'])
 
-// const collections = ref([])
-//local
-// const localCollections = JSON.parse(localStorage.getItem("collections")) || [];
-
-// localCollections.forEach((collection) => {
-//   collections.value.push(collection);
-// });
-
 onMounted(async () => {
   const col = await getCollectionItem(import.meta.env.VITE_BASE_URL)
-  // gett all collection from database
   collections.value.addAllCollection(col)
 })
 
@@ -48,28 +36,23 @@ const computedCollections = computed(() => {
 })
 
 const handleEditCollection = async (index, newName, id) => {
-  const newNameTrim = newName.trim() // Trimmed to remove whitespace
-  // collections.value = editCollection(index, newNameTrim, collections.value)
   
   const editedCollection = await editCollectionItem(
     import.meta.env.VITE_BASE_URL,
     id,
     {
-      name: newName
+      
+      name: newName.trim()
     }
   )
 
   collections.value.editCollection(editedCollection.name,index)
-  // collections.value=editedCollection
-  // console.log('edit='+editedCollection);
 
   props.popup.renameCollection = false
   props.closeOption()
 }
 
 const handleDeleteCollection = async (index, id) => {
-  // console.log(id);
-  // collections.value = deleteCollection(index, collections.value)
   const statusCode = await deleteCollectionItem(
     import.meta.env.VITE_BASE_URL,
     id
@@ -89,7 +72,6 @@ const handleAddNewCollection = async (name) => {
   })
 
   collections.value.addCollection(newCollectionName.id,newCollectionName.name,newCollectionName.crads)
-  // addNewCollection(newColName, collections.value)
   props.popup.newCollection = false
 }
 
