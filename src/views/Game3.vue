@@ -56,9 +56,9 @@ const currentQuiz = computed(() => {
         currentIndexUnit.value
       ].items[randomQuiz.value].meaning
 
-    return data.categories[currentIndexCate.value].units[currentIndexUnit.value]
-      .items[randomQuiz.value].src
   }
+  return data.categories[currentIndexCate.value].units[currentIndexUnit.value]
+      .items[randomQuiz.value].src
 })
 
 //Shuffle
