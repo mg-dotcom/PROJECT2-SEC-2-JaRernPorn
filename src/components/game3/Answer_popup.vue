@@ -27,7 +27,7 @@ const emits = defineEmits(['closePopup'])
           The answer is<br />
           <div
             class="text-greenTest font-NotoSansSC font-medium lowercase text-sm relative sm:text-2xl md:text-4xl mobile:text-[20px]"
-            style="color: #42d134"
+            style="color: #32a028"
           >
             {{ props.answer }}
           </div>
