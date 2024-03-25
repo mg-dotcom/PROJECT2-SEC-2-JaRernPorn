@@ -69,7 +69,7 @@ const handleEditCollection = async (index, newName, id) => {
 
 const handleDeleteCollection = async (index, id) => {
   // console.log(id);
-  collections.value = deleteCollection(index, collections.value)
+  // collections.value = deleteCollection(index, collections.value)
   const statusCode = await deleteCollectionItem(
     import.meta.env.VITE_BASE_URL,
     id
