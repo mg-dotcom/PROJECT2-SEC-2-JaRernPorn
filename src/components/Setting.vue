@@ -1,42 +1,41 @@
-[15:42] BAITONG SAE-KOW
 <script setup>
-import { onMounted, ref, watch } from "vue";
+import { ref, watch } from 'vue'
 
 const emits = defineEmits([
-  "closeSetting",
+  'closeSetting',
 
-  "restartGame",
+  'restartGame',
 
-  "resumeGame",
+  'resumeGame',
 
-  "goCategories",
-]);
+  'goCategories'
+])
 
-const isPlaying = ref(false);
+const isPlaying = ref(false)
 
-const player = ref("");
+const player = ref('')
 
 const musicControl = () => {
   if (isPlaying.value) {
-    player.value.play();
+    player.value.play()
   } else {
-    player.value.pause();
+    player.value.pause()
   }
-};
+}
 
 watch(isPlaying, () => {
-  musicControl();
-});
+  musicControl()
+})
 </script>
 
 <template>
   <div class="flex justify-center z-30">
     <div class="setting bg-white border border-black rounded-2xl">
-      <div class="closebtn flex justify-end py-2 px-2 cursor-pointer">
+      <div class="closebtn flex justify-end p-3 cursor-pointer">
         <img
           src="/settingBtn/close.svg"
           alt="close setting btn"
-          class=""
+          class="cursor-pointer w-4"
           @click="$emit('closeSetting')"
         />
       </div>
@@ -84,7 +83,7 @@ watch(isPlaying, () => {
 
         <div class="home">
           <img
-            src="/settingBtn/home.svg"
+            src="/settingBtn/category.svg"
             alt="home"
             class="home cursor-pointer"
             @click="$emit('goCategories')"

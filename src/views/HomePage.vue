@@ -1,26 +1,26 @@
 <script setup>
-import { reactive, ref } from "vue";
-import { RouterLink } from "vue-router";
-import SettingHomePage from "../components/SettingHomePage.vue";
-import HowToPlay from "../components/HowToPlay.vue";
+import { reactive, ref } from 'vue'
+import { RouterLink } from 'vue-router'
+import SettingHomePage from '../components/SettingHomePage.vue'
+import HowToPlay from '../components/HowToPlay.vue'
 
 const page = reactive({
   homePage: true,
   categoryPage: false,
-  howToPlay: false,
-});
-const showSetting = ref(false);
+  howToPlay: false
+})
+const showSetting = ref(false)
 
 const toggleSetting = () => {
-  showSetting.value = !showSetting.value;
-};
+  showSetting.value = !showSetting.value
+}
 const toggleHowToPlay = () => {
-  page.howToPlay = !page.howToPlay;
-};
+  page.howToPlay = !page.howToPlay
+}
 
 const showHowtoplay = () => {
-  page.howToPlay = true;
-};
+  page.howToPlay = true
+}
 </script>
 
 <template>
@@ -35,7 +35,7 @@ const showHowtoplay = () => {
           <img
             src="/settingBtn/setting.svg"
             alt="setting button"
-            class="w-10 absolute right-10 top-10 hover:scale-105 transition-all duration-300 ease-in-out"
+            class="w-10 absolute right-10 top-10 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
             @click="toggleSetting"
           />
         </div>

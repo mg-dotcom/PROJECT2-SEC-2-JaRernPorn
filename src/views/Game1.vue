@@ -1,156 +1,156 @@
 <script setup>
-import { useRoute, useRouter } from "vue-router";
-const route = useRoute(); // using useRoute() hook to access the current route object
-const router = useRouter();
-import { categories } from "../../data/data.json";
-import { computed, ref } from "vue";
-import Card from "../components/game1/Card.vue";
-import CheckButton from "../components/game1/CheckButton.vue";
-import Setting from "../components/Setting.vue";
+import { useRoute, useRouter } from 'vue-router'
+const route = useRoute() // using useRoute() hook to access the current route object
+const router = useRouter()
+import { categories } from '../../data/data.json'
+import { computed, ref } from 'vue'
+import Card from '../components/game1/Card.vue'
+import CheckButton from '../components/game1/CheckButton.vue'
+import Setting from '../components/Setting.vue'
 
-const paramCateIndex = route.params.cateIndex - 1;
-const paramUnitIndex = route.params.unit - 1;
+const paramCateIndex = route.params.cateIndex - 1
+const paramUnitIndex = route.params.unit - 1
 
-const currentIndexCate = ref(paramCateIndex);
-const currentIndexUnit = ref(paramUnitIndex);
-const currentIndexQuestion = ref(0);
+const currentIndexCate = ref(paramCateIndex)
+const currentIndexUnit = ref(paramUnitIndex)
+const currentIndexQuestion = ref(0)
 
-const showColor = ref(false);
-const checkStatus = ref(false);
+const showColor = ref(false)
+const checkStatus = ref(false)
 
 const correctAnswer = ref(
   categories[currentIndexCate.value].units[currentIndexUnit.value].items[
     currentIndexQuestion.value
   ]
-);
+)
 
-const isCorrect = ref(false);
-const isWrong = ref(false);
-const userAnswer = ref([]);
-const userAnswerId = ref(null);
+const isCorrect = ref(false)
+const isWrong = ref(false)
+const userAnswer = ref([])
+const userAnswerId = ref(null)
 
 //Setting
-const showSetting = ref(false);
+const showSetting = ref(false)
 
 const toggleSetting = () => {
-  showSetting.value = !showSetting.value;
-};
+  showSetting.value = !showSetting.value
+}
 
 //Category
 const currentCategory = computed(() => {
-  return categories[currentIndexCate.value].name;
-});
+  return categories[currentIndexCate.value].name
+})
 
 //Question
 const currentQuestion = computed(() => {
   return categories[currentIndexCate.value].units[currentIndexUnit.value].items[
     currentIndexQuestion.value
-  ].meaning;
-});
+  ].meaning
+})
 
 //Shuffle
 const shuffle = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[array[i], array[j]] = [array[j], array[i]]
   }
-  return array;
-};
+  return array
+}
 
 //Chioces
 const threeChoices = computed(() => {
   const choices =
-    categories[currentIndexCate.value].units[currentIndexUnit.value].items;
-  return shuffle([...choices]);
-});
+    categories[currentIndexCate.value].units[currentIndexUnit.value].items
+  return shuffle([...choices])
+})
 
 //CollectAnswer
 const selectedAnswer = (item) => {
-  userAnswer.value = [];
-  userAnswer.value.push(item);
-};
+  userAnswer.value = []
+  userAnswer.value.push(item)
+}
 
 // Pass to game 2
-const correctAnswers = ref([]);
+const correctAnswers = ref([])
 
 const passToGame2 = () => {
   router.push({
-    name: "Game2",
+    name: 'Game2',
     params: {
       cateIndex: route.params.cateIndex,
-      unit: route.params.unit,
-    },
-  });
-};
+      unit: route.params.unit
+    }
+  })
+}
 
 //CheckAnswer
 const checkAnswer = (userAns) => {
-  checkStatus.value = true;
+  checkStatus.value = true
 
   correctAnswer.value =
     categories[currentIndexCate.value].units[currentIndexUnit.value].items[
       currentIndexQuestion.value
-    ];
+    ]
 
   if (userAns[0].id === correctAnswer.value.id) {
     // userAnswerId.value = userAnswer[0].id
-    console.log("Correct!");
-    isCorrect.value = true;
+    console.log('Correct!')
+    isCorrect.value = true
 
     setTimeout(() => {
-      showColor.value = true;
+      showColor.value = true
       setTimeout(() => {
-        showColor.value = false;
-        isCorrect.value = false;
-        currentIndexQuestion.value++; // 3
+        showColor.value = false
+        isCorrect.value = false
+        currentIndexQuestion.value++ // 3
         // loop 3 questions
         if (currentIndexQuestion.value > 2) {
-          currentIndexQuestion.value = 0;
-          passToGame2();
+          currentIndexQuestion.value = 0
+          passToGame2()
         }
-      }, 1500);
-    }, 0);
+      }, 1500)
+    }, 0)
   } else {
-    console.log("Wrong!");
-    userAnswerId.value = userAns[0].id;
-    isWrong.value = true;
-    isCorrect.value = true;
+    console.log('Wrong!')
+    userAnswerId.value = userAns[0].id
+    isWrong.value = true
+    isCorrect.value = true
     setTimeout(() => {
-      showColor.value = true;
+      showColor.value = true
       setTimeout(() => {
-        showColor.value = false;
-        isWrong.value = false;
-        isCorrect.value = false;
-        currentIndexQuestion.value++;
+        showColor.value = false
+        isWrong.value = false
+        isCorrect.value = false
+        currentIndexQuestion.value++
         if (currentIndexQuestion.value > 2) {
-          currentIndexQuestion.value = 0;
-          passToGame2();
+          currentIndexQuestion.value = 0
+          passToGame2()
         }
-      }, 1500);
-    }, 0);
+      }, 1500)
+    }, 0)
   }
 
-  userAns.splice(0, 1);
-  checkStatus.value = false;
+  userAns.splice(0, 1)
+  checkStatus.value = false
 
-  console.log(currentIndexQuestion.value);
-};
+  console.log(currentIndexQuestion.value)
+}
 
 const restartGame = () => {
   // Check if the current route name is "Game1"
-  if (router.currentRoute.value.name === "Game1") {
+  if (router.currentRoute.value.name === 'Game1') {
     // Reload the current route
-    router.go(0);
+    router.go(0)
   } else {
     router.push({
-      name: "Game1",
+      name: 'Game1',
       params: {
         cateIndex: route.params.cateIndex,
-        unit: route.params.unit,
-      },
-    });
+        unit: route.params.unit
+      }
+    })
   }
-};
+}
 </script>
 
 <template>

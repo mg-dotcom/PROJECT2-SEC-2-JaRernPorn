@@ -1,22 +1,22 @@
 <script setup>
-import { onMounted, ref, watch, defineEmits } from "vue";
+import { onMounted, ref, watch, defineEmits } from 'vue'
 
-const emits = defineEmits(["closeSetting", "close"]);
-const isPlaying = ref(false);
+const emits = defineEmits(['closeSetting', 'close'])
+const isPlaying = ref(false)
 
-const player = ref("");
+const player = ref('')
 
 const musicControl = () => {
   if (isPlaying.value) {
-    player.value.play();
+    player.value.play()
   } else {
-    player.value.pause();
+    player.value.pause()
   }
-};
+}
 
 watch(isPlaying, () => {
-  musicControl();
-});
+  musicControl()
+})
 
 // onMounted(() => {
 //   isPlaying.value = true;
@@ -33,22 +33,22 @@ watch(isPlaying, () => {
       class="relative top-5 flex justify-center"
       @click.self="emits('closeSetting')"
     >
-      <div class="setting bg-white w-1/5 border border-black rounded-2xl">
-        <div class="closebtn flex justify-end py-2 px-2">
+      <div class="setting bg-white w-1/5 border rounded-2xl">
+        <div class="closebtn flex justify-end p-4">
           <img
             src="/close.svg"
             alt="close setting btn"
-            class="cursor-pointer"
+            class="cursor-pointer w-4"
             @click="$emit('closeSetting')"
           />
         </div>
         <div
-          class="header text-center text-4xl font-alkatra text-title font-semibold"
+          class="header text-center text-5xl font-alkatra text-title font-semibold"
         >
           <h1>Setting</h1>
         </div>
-        <div class="musicToggle flex justify-between m-5">
-          <div class="font-alkatra text-2xl">Music</div>
+        <div class="musicToggle flex justify-between items-center m-5">
+          <div class="font-alkatra text-3xl">Music</div>
           <div class="form-control">
             <input
               type="checkbox"

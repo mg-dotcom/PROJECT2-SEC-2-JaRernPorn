@@ -1,7 +1,6 @@
 <script setup>
 import { defineProps, ref } from 'vue'
-import settingButton from './icons/setting-button.vue'
-import settingPopup from './Setting.vue'
+import SettingHomePage from '../components/SettingHomePage.vue'
 import { useRouter } from 'vue-router'
 const props = defineProps({
   closeOption: {
@@ -27,7 +26,7 @@ const goBack = () => {
     class="z-50 fixed top-0 left-0 w-screen min-h-screen"
     v-show="showSetting"
   >
-    <settingPopup @closeSetting="toggleSetting" />
+    <SettingHomePage @closeSetting="toggleSetting" />
   </div>
 
   <div
@@ -52,7 +51,12 @@ const goBack = () => {
       </h1>
     </div>
     <div>
-      <settingButton @click="toggleSetting" />
+      <img
+        src="/settingBtn/setting.svg"
+        alt="setting"
+        class="w-12 cursor-pointer hover:scale-110 transition-transform duration-300 sm:scale-100 mobile:scale-90"
+        @click="toggleSetting"
+      />
     </div>
   </div>
 </template>
