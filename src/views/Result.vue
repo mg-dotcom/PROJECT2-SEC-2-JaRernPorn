@@ -1,43 +1,52 @@
 <script setup>
-import { ref, defineProps } from "vue";
-import category from "../../data/data.json";
-import SoundControl from "../components/SoundControl.vue";
-import Setting from "../components/Setting.vue";
-import { useRouter, useRoute } from "vue-router";
+import { ref, defineProps } from 'vue'
+import category from '../../data/data.json'
+import SoundControl from '../components/SoundControl.vue'
+import SettingHomePage from '../components/SettingHomePage.vue'
+import { useRouter, useRoute } from 'vue-router'
 
-const route = useRoute();
-const router = useRouter();
+const route = useRoute()
+const router = useRouter()
 
 const playAgain = () => {
   router.push({
-    name: "Game1",
-    params: { cateIndex: route.params.cateIndex, unit: route.params.unit },
-  });
-};
+    name: 'Game1',
+    params: { cateIndex: route.params.cateIndex, unit: route.params.unit }
+  })
+}
 
 const mainMenu = () => {
-  router.push({ name: "Categories" });
-};
+  router.push({ name: 'Categories' })
+}
 
-console.log();
+console.log()
 
-const paramCateIndex = route.params.cateIndex - 1;
-const paramUnitIndex = route.params.unit - 1;
+const paramCateIndex = route.params.cateIndex - 1
+const paramUnitIndex = route.params.unit - 1
 
-const unitIndex = ref(paramUnitIndex);
-const categoryIndex = ref(paramCateIndex);
+const unitIndex = ref(paramUnitIndex)
+const categoryIndex = ref(paramCateIndex)
 
-const showSetting = ref(false);
+const showSetting = ref(false)
 const toggleSetting = () => {
-  showSetting.value = !showSetting.value;
-};
+  showSetting.value = !showSetting.value
+}
 
-const currentCategory = category.categories[categoryIndex.value];
-const items = currentCategory.units[unitIndex.value].items;
+const currentCategory = category.categories[categoryIndex.value]
+const items = currentCategory.units[unitIndex.value].items
 </script>
 
 <template>
   <div class="bg-main-bgColor h-screen w-full p-5">
+    <div class="fixed left-0 right-0 top-0 bottom-0 z-40" v-show="showSetting">
+      <SettingHomePage
+        @closeSetting="toggleSetting"
+        @restartGame=""
+        @resumeGame=""
+        @goBackHome=""
+      />
+    </div>
+
     <div class="border-double border-8 border-title box-border h-full w-full">
       <div class="">
         <div class="setting flex">
@@ -65,15 +74,6 @@ const items = currentCategory.units[unitIndex.value].items;
         </h1>
       </div>
 
-      <div class="absolute left-0 right-0 top-1/3 z-20" v-show="showSetting">
-        <Setting
-          @closeSetting="toggleSetting"
-          @restartGame=""
-          @resumeGame=""
-          @goBackHome=""
-        />
-      </div>
-
       <div class="flex flex-row gap-16 justify-center mt-5 scale-75">
         <div
           class="h-[400px] w-[300px] rounded-3xl shadow-md bg-white cursor-pointer hover:border-8 border-slate-200"
@@ -98,8 +98,8 @@ const items = currentCategory.units[unitIndex.value].items;
             class="border-solid border-b-2 border-black w-[230px] ml-7 mt-10"
           ></div>
           <h1 class="text-[24px] ml-10 mt-3">
-            {{ item.word.split(" ")[0] }} <br />
-            {{ item.word.split(" ").slice(1).join(" ") }}
+            {{ item.word.split(' ')[0] }} <br />
+            {{ item.word.split(' ').slice(1).join(' ') }}
           </h1>
         </div>
       </div>
