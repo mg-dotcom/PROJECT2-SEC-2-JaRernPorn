@@ -13,13 +13,12 @@ const popup = reactive({
   renameFlashcard: false
 })
 
-const currentCollectionId = ref(route.params.id)
-
 const closeOption = () => {
   popup.optionFlashcard = false
 }
 
 const route = useRoute()
+const currentCollectionId = ref(route.params.id)
 const collectionName = ref(route.params.name)
 
 watch(
@@ -33,8 +32,8 @@ watch(
 <template>
   <div class="bg-main-bgColor min-h-screen w-full" @click.self="closeOption">
     <section v-if="showFlashCard" @click.self="closeOption">
-      <Header :closeOption="closeOption" :title="collectionName">
-        <template #title> {{ title }} </template>
+      <Header :closeOption="closeOption">
+        <template #title> {{ collectionName }} </template>
       </Header>
 
       <Content

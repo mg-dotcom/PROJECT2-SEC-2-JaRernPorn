@@ -127,4 +127,3 @@ const toggleOptionCollection = (index) => {
 </template>
 
 <style scoped></style>
-../../libs/fetchCollection.js
