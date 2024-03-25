@@ -166,7 +166,7 @@ const toggleSetting = () => {
                 v-for="(option, index) in options"
                 :key="index"
                 @click="userAnswer(option.value)"
-                class="flex justify-center items-center bg-title text-white font-outfit font-medium text-2xl h-14 sm:h-20 rounded-lg hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
+                class="flex justify-center items-center bg-title text-white font-semiboldl text-2xl h-14 sm:h-20 rounded-lg hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
                 :class="{
                   'bg-correct-option-green':
                     option.value === answer && colorOption,
@@ -182,7 +182,7 @@ const toggleSetting = () => {
       </div>
       <div class="flex justify-center">
         <button
-          class="bg-title text-2xl rounded-xl px-4 py-2 text-white hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
+          class="bg-title text-white p-2 rounded-lg hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
           @click="checkAnswer"
         >
           Check

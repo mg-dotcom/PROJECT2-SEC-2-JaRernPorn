@@ -1,57 +1,57 @@
 <script setup>
-import { defineProps, ref, onMounted } from 'vue'
-import newFlashcard from './popup/newFlashcard.vue'
-import Card from './Card.vue'
+import { defineProps, ref, onMounted } from "vue";
+import newFlashcard from "./popup/newFlashcard.vue";
+import Card from "./Card.vue";
 import {
   getItem,
   addItem,
   deleteItem,
-  editItem
-} from '../../libs/flashcard-libs/FetchFlashcard.js'
-import { FlashcardModal } from '../../libs/flashcard-libs/FlashCardModal.js'
+  editItem,
+} from "../../libs/flashcard-libs/FetchFlashcard.js";
+import { FlashcardModal } from "../../libs/flashcard-libs/FlashcardModal.js";
 
 const props = defineProps({
   popup: {
     type: Object,
-    required: true
+    required: true,
   },
   closeOption: {
     type: Function,
-    required: true
+    required: true,
   },
   currentCollectionId: {
     type: String,
-    required: true
-  }
-})
+    required: true,
+  },
+});
 
 // const flashcards = ref([]);
 
-const flashcards = ref(new FlashcardModal())
+const flashcards = ref(new FlashcardModal());
 
 onMounted(async () => {
   const flashcardsData = await getItem(
     import.meta.env.VITE_BASE_URL,
     props.currentCollectionId
-  )
-  console.log(flashcardsData)
+  );
+  console.log(flashcardsData);
 
-  flashcards.value.addAllFlashcards(flashcardsData)
+  flashcards.value.addAllFlashcards(flashcardsData);
 
-  console.log(flashcards.value.getFlashcards())
-})
+  console.log(flashcards.value.getFlashcards());
+});
 
-const SelectedIndex = ref(0)
+const SelectedIndex = ref(0);
 
 const toggleOption = (index) => {
-  props.popup.optionFlashcard = !props.popup.optionFlashcard
-  SelectedIndex.value = index
-}
+  props.popup.optionFlashcard = !props.popup.optionFlashcard;
+  SelectedIndex.value = index;
+};
 
 const showRenameFlashcard = (index) => {
-  props.popup.renameFlashcard = true
-  SelectedIndex.value = index
-}
+  props.popup.renameFlashcard = true;
+  SelectedIndex.value = index;
+};
 
 const handleAddNewFlashcard = async (
   newId,
@@ -67,36 +67,36 @@ const handleAddNewFlashcard = async (
         id: flashcards.value.getFlashcards().length + 1,
         chineseWord: newChineseWord,
         pinyin: newPinyin,
-        meaning: newMeaning
+        meaning: newMeaning,
       }
-    )
+    );
 
-    const lastCardAdded = addedFlashcard.cards[addedFlashcard.cards.length - 1]
+    const lastCardAdded = addedFlashcard.cards[addedFlashcard.cards.length - 1];
 
     flashcards.value.addFlashcard(
       lastCardAdded.id,
       lastCardAdded.chineseWord,
       lastCardAdded.pinyin,
       lastCardAdded.meaning
-    )
+    );
   }
 
-  props.popup.optionFlashcard = false
-}
+  props.popup.optionFlashcard = false;
+};
 
 const handelDeleteFlashcard = async (index) => {
   const statusCode = await deleteItem(
     import.meta.env.VITE_BASE_URL,
     props.currentCollectionId,
     index
-  )
+  );
 
   if (statusCode === 200) {
-    flashcards.value.removeFlashcard(index)
+    flashcards.value.removeFlashcard(index);
   }
 
-  props.popup.optionFlashcard = false
-}
+  props.popup.optionFlashcard = false;
+};
 
 const handelEditFlashcard = async (
   newChineseWord,
@@ -104,7 +104,7 @@ const handelEditFlashcard = async (
   newMeaning,
   index
 ) => {
-  console.log(newChineseWord, newPinyin, newMeaning, index)
+  console.log(newChineseWord, newPinyin, newMeaning, index);
 
   const editedFlashcard = await editItem(
     import.meta.env.VITE_BASE_URL,
@@ -112,23 +112,23 @@ const handelEditFlashcard = async (
     {
       chineseWord: newChineseWord,
       pinyin: newPinyin,
-      meaning: newMeaning
+      meaning: newMeaning,
     },
     index
-  )
+  );
 
-  const selectedCard = editedFlashcard.cards[index]
+  const selectedCard = editedFlashcard.cards[index];
 
   flashcards.value.editFlashcard(
     selectedCard.chineseWord,
     selectedCard.pinyin,
     selectedCard.meaning,
     index
-  )
+  );
 
-  props.popup.renameFlashcard = false
-  props.popup.optionFlashcard = false
-}
+  props.popup.renameFlashcard = false;
+  props.popup.optionFlashcard = false;
+};
 </script>
 
 <template>
