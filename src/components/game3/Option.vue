@@ -17,7 +17,8 @@ const emits = defineEmits(['optionClicked'])
     class="bg-title mb-3 text-center text-white text-lg font-normal p-3 rounded-xl hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
     :class="{
       'bg-correct-option-green': option.word === props.correctOption,
-      'bg-selected-option-blue': props.isSelected && option.word === props.userSelected
+      'bg-selected-option-blue':
+        props.isSelected && option.word === props.userSelected
     }"
   >
     {{ option.word }}
