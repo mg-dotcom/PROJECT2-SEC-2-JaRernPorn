@@ -24,20 +24,19 @@ async function getItem(url, id) {
 
 const addItem = async (url, id, newCard) => {
   try {
-    const response = await fetch(`${url}/${id}`);
+    const response = await fetch(`${url}`);
     const collections = await response.json();
 
-    // const collectionIndex = collections.findIndex(
-    //   (collection) => collection.id === "2"
-    // );
+    const collectionIndex = collections.findIndex(
+      (collection) => collection.id === "2"
+    );
 
-    // if (collectionIndex === -1) {
-    //   throw new Error("Collection not found");
-    // }
-    console.log(collections.cards);
-    collections.cards.push(newCard);
-    console.log(collections);
-  
+    if (collectionIndex === -1) {
+      throw new Error("Collection not found");
+    }
+
+    collections[collectionIndex].cards.push(newCard);
+
     const updateResponse = await fetch(`${url}/${id}`, {
       method: "PUT",
       headers: {

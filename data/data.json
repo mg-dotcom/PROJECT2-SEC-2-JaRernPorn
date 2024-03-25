@@ -417,22 +417,16 @@
       "name": "csacvsav",
       "cards": [
         {
+          "id": 1,
+          "chineseWord": "a",
+          "pinyin": "dddddd d",
+          "meaning": "a"
+        },
+        {
           "id": 2,
-          "chineseWord": "2",
-          "pinyin": "2",
-          "meaning": "2"
-        },
-        {
-          "id": 3,
-          "chineseWord": "3",
-          "pinyin": "3",
-          "meaning": "3"
-        },
-        {
-          "id": 3,
-          "chineseWord": "22",
-          "pinyin": "22",
-          "meaning": "22"
+          "chineseWord": "as",
+          "pinyin": "             d",
+          "meaning": "d"
         }
       ]
     }

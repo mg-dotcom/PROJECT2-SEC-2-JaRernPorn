@@ -63,10 +63,10 @@ const isEmpty = (value) => {
 };
 
 const oldChineseWord = ref(
-  props.computedFlashcards[props.SelectedIndex].chineseWord
+  props.computedFlashcards[props.SelectedIndex].chineseWord.trim()
 );
-const oldPinyin = ref(props.computedFlashcards[props.SelectedIndex].pinyin);
-const oldMeaning = ref(props.computedFlashcards[props.SelectedIndex].meaning);
+const oldPinyin = ref(props.computedFlashcards[props.SelectedIndex].pinyin.trim());
+const oldMeaning = ref(props.computedFlashcards[props.SelectedIndex].meaning.trim());
 
 watch(
   () => props.computedFlashcards[props.SelectedIndex],
