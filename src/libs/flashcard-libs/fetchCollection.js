@@ -1,4 +1,4 @@
-async function getCollection(url) {
+async function getCollectionItem(url) {
   try {
     const data = await fetch(url)
     const collections = await data.json()
@@ -8,7 +8,7 @@ async function getCollection(url) {
   }
 }
 
-async function addCollection(url, newCollection) {
+async function addCollectionItem(url, newCollection) {
   try {
     const res = await fetch(url, {
       method: 'POST',
@@ -26,7 +26,7 @@ async function addCollection(url, newCollection) {
   }
 }
 
-async function deleteCollectionById(url,id){
+async function deleteCollectionItem(url,id){
   // console.log(`${url}?id=${id}`);
   try{
     const res=await fetch(`${url}/${id}`,{
@@ -38,15 +38,20 @@ async function deleteCollectionById(url,id){
   }
 }
 
-async function editCollectionName(url, id, editCollection) {
+async function editCollectionItem(url, id, editCollection) {
   try {
+    const response=await fetch(`${url}/${id}`)
+    const selectedCollection=response.json()
+    console.log(editCollection.name);
+    console.log(selectedCollection);
+    const updatedCollection={...selectedCollection,...editCollection}
     const res = await fetch(`${url}/${id}`, {
       method: 'PUT',
       headers: {
         'content-type': 'application/json'
       },
       body: JSON.stringify({
-        ...editCollection
+        ...updatedCollection
       })
     })
     const editedItem = await res.json()
@@ -56,4 +61,4 @@ async function editCollectionName(url, id, editCollection) {
   }
 }
 
-export { getCollection, addCollection,deleteCollectionById,editCollectionName }
+export { getCollectionItem, addCollectionItem,deleteCollectionItem,editCollectionItem }

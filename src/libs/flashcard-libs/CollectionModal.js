@@ -1,33 +1,37 @@
-function addNewCollection(newCollectionName, collections) {
-  if (newCollectionName === "") {
-    return alert("Please enter a collection name");
-  } else {
-    collections.push({
-      // collectionId:
-      name: newCollectionName.trim(),
-      //for testing
-      items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+class CollectionModal {
+  constructor() {
+    this.collections = [];
+  }
+ 
+  addAllCollection(collections) {
+    collections.forEach((collection) => {
+      this.addCollection(
+        collection.id,
+        collection.name,
+        collection.cards,
+      );
     });
-    // localStorage.setItem("collections", JSON.stringify(collections));
+  }
+ 
+  addCollection(id, name,cards) {
+    this.collections.push({
+      id: id,
+      name: name,
+      cards: cards
+    });
+  }
+ 
+  removeCollection(index) {
+    this.collections.splice(index, 1);
+  }
+ 
+  editCollection(name, index) {
+    this.collections[index].name = name;
+  }
+ 
+  getCollections() {
+    return this.collections;
   }
 }
-
-function deleteCollection(collectionId, collections) {
-  collections.splice(collectionId, 1);
-  localStorage.setItem("collections", JSON.stringify(collections));
-  return collections;
-}
-
-function editCollection(index, newName, collections) {
-  if (!newName.trim()) {
-    alert("Please enter a new collection name");
-
-    return collections; // orginal collections
-  }
-  collections[index].name = newName.trim();
-  localStorage.setItem("collections", JSON.stringify(collections));
-
-  return collections;
-}
-
-export { addNewCollection, deleteCollection, editCollection };
+ 
+export { CollectionModal };
