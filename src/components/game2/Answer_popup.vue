@@ -1,9 +1,9 @@
 <script setup>
 const props = defineProps({
-  answer:String
+  answer: String
 })
-const emits=defineEmits(['closePopup'])
-console.log(props.answer);
+const emits = defineEmits(['closePopup'])
+console.log(props.answer)
 </script>
 
 <template>
@@ -40,4 +40,14 @@ console.log(props.answer);
   </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+.bg-correct-option-green {
+  background-color: #d2ffab;
+}
+.bg-wrong-option-red {
+  background-color: #ff9e94;
+}
+.bg-selected-option-blue {
+  background-color: #186cc7;
+}
+</style>

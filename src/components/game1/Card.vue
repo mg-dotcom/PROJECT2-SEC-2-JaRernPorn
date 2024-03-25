@@ -1,5 +1,5 @@
 <script setup>
-import SoundControl from "../SoundControl.vue";
+import SoundControl from '../SoundControl.vue'
 
 const props = defineProps({
   choices: Object,
@@ -9,11 +9,11 @@ const props = defineProps({
   isWrong: Boolean,
   userAnswer: Array,
   correctAnswer: Object,
-  currentItem: String,
   userAnswerId: Number,
-});
+  clickedChoice: Boolean
+})
 
-const emits = defineEmits(["selected"]);
+const emits = defineEmits(['selected'])
 </script>
 
 <template>
@@ -21,8 +21,10 @@ const emits = defineEmits(["selected"]);
     <div
       class="h-[400px] w-[300px] rounded-3xl shadow-md bg-white cursor-pointer hover:border-8 border-slate-200"
       :class="{
-        'bg-[#cef9a6]': showColor && item.id === correctAnswer.id && isCorrect,
-        'bg-[#fea29d]': showColor && item.id === userAnswerId && isWrong,
+        'bg-correct-option-green':
+          showColor && item.id === correctAnswer.id && isCorrect,
+        'bg-wrong-option-red': showColor && item.id === userAnswerId && isWrong,
+        'bg-selected-option-blue': clickedChoice && item.id === userAnswer[0].id
       }"
       v-for="(item, itemIndex) in choices"
       :key="itemIndex"
@@ -46,11 +48,21 @@ const emits = defineEmits(["selected"]);
         class="border-solid border-b-2 border-black w-[230px] ml-7 mt-10"
       ></div>
       <h1 class="text-[24px] ml-10 mt-3">
-        {{ item.word.split(" ")[0] }} <br />
-        {{ item.word.split(" ").slice(1).join(" ") }}
+        {{ item.word.split(' ')[0] }} <br />
+        {{ item.word.split(' ').slice(1).join(' ') }}
       </h1>
     </div>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.bg-correct-option-green {
+  background-color: #d2ffab;
+}
+.bg-wrong-option-red {
+  background-color: #ff9e94;
+}
+.bg-selected-option-blue {
+  background-color: #a8cef6;
+}
+</style>
