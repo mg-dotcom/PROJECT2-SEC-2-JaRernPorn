@@ -18,13 +18,15 @@ const emits = defineEmits(['selected'])
 
 <template>
   <div class="flex flex-row gap-16 justify-center items-center">
+    <div class=""></div>
     <div
-      class="h-[400px] w-[300px] rounded-3xl shadow-md bg-white cursor-pointer hover:border-8 border-slate-200"
+      class="h-[400px] w-[300px] rounded-3xl shadow-md bg-white border-1 cursor-pointer hover:border-8 border-slate-200"
       :class="{
         'bg-correct-option-green':
           showColor && item.id === correctAnswer.id && isCorrect,
         'bg-wrong-option-red': showColor && item.id === userAnswerId && isWrong,
-        'bg-selected-option-blue': clickedChoice && item.id === userAnswer[0].id
+        'border-selected-option-blue':
+          clickedChoice && item.id === userAnswer[0].id
       }"
       v-for="(item, itemIndex) in choices"
       :key="itemIndex"
@@ -62,7 +64,7 @@ const emits = defineEmits(['selected'])
 .bg-wrong-option-red {
   background-color: #ff9e94;
 }
-.bg-selected-option-blue {
-  background-color: #a8cef6;
+.border-selected-option-blue {
+  border: solid 8px #b7d9fc;
 }
 </style>
