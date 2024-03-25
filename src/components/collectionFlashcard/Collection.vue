@@ -1,7 +1,6 @@
 <script setup>
 import { defineProps, defineEmits } from 'vue'
 
-import { useRouter } from 'vue-router'
 import renameCollection from '../collectionFlashcard/popup/renameCollection.vue'
 import optionCollection from '../collectionFlashcard/popup/optionCollection.vue'
 
@@ -57,38 +56,31 @@ const passNewName = (index, newName,id) => {
 
 <template>
   <!-- Each Folder Collection -->
-  <div class="relative flex flex-col items-center">
-    <img
-      class="z-40 opacity-70 hover:bg-gray-400 rounded-full w-10 h-10 lg:p-2 md:scale-[60%] md:p-2 lg:scale-[75%] cursor-pointer absolute transition-all duration-[270ms] lg:top-[19px] lg:right-[5px] md:top-[1px] md:right-[-11px] sm:top-[8px] sm:right-[-9px] mobile:scale-[70%] mobile:p-2 mobile:top-[7px] mobile:right-[-5px]"
-      src="/img/flashcard-pic/option.svg"
-      alt="option"
-      @click="showOption(props.index, $event)"
-    /><router-link
-      :to="{
-        name: 'FlashCard',
-        params: {
-          name: props.computedCollections[props.index].name,
-          id: props.index + 1
-        }
-      }"
+  <div class="relative flex flex-col items-center font-outfit">
+    <div
+      class="collection hover:shadow-lg rounded-3xl transition-all duration-[270ms]"
     >
+      <img
+        class="cursor-pointer scale-[105%] sm:scale-[110%] md:scale-[117%] lg:scale-100"
+        src="/img/flashcard-pic/collection.svg"
+        alt="collection"
+      />
+      <img
+        class="z-40 opacity-70 hover:bg-gray-400 rounded-full w-10 h-10 lg:p-2 md:scale-[60%] md:p-2 lg:scale-[75%] cursor-pointer absolute transition-all duration-[270ms] lg:top-[19px] lg:right-[5px] md:top-[1px] md:right-[-11px] sm:top-[8px] sm:right-[-9px] mobile:scale-[70%] mobile:p-2 mobile:top-[7px] mobile:right-[-5px]"
+        src="/img/flashcard-pic/option.svg"
+        alt="option"
+        @click="showOption(props.index, $event)"
+      />
       <div
-        class="collection hover:shadow-lg rounded-3xl transition-all duration-[270ms]"
+        class="absolute inset-[16px] flex items-center justify-center overflow-hidden cursor-pointer"
       >
-        <img
-          class="cursor-pointer scale-[105%] sm:scale-[110%] md:scale-[117%] lg:scale-100"
-          src="/img/flashcard-pic/collection.svg"
-          alt="collection"
-        />
-
         <div
-          class="absolute inset-[16px] flex items-center justify-center overflow-hidden cursor-pointer text-3xl font-medium font-outfit whitespace-normal break-all overflow-ellipsis z-10 md:text-2xl lg:text-4xl"
+          class="w-[75%] text-3xl font-medium whitespace-normal break-all overflow-ellipsis z-10 md:text-2xl lg:text-4xl"
         >
           {{ props.computedCollections[props.index].name }}
-          <!-- <div class=""></div> -->
         </div>
-      </div></router-link
-    >
+      </div>
+    </div>
 
     <optionCollection
       v-show="props.popup.optionCollection && SelectedIndex === props.index"
