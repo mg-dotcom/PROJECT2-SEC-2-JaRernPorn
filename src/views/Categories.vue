@@ -1,16 +1,16 @@
 <script setup>
-import { ref } from "vue";
+import { ref } from 'vue'
 
-import { categories } from "../../data/data.json";
-import SettingHomePage from "../components/SettingHomePage.vue";
+import { categories } from '../../data/data.json'
+import SettingHomePage from '../components/SettingHomePage.vue'
 
-const categoryPage = ref(true);
+const categoryPage = ref(true)
 
-const showSetting = ref(false);
+const showSetting = ref(false)
 
 const toggleSetting = () => {
-  showSetting.value = !showSetting.value;
-};
+  showSetting.value = !showSetting.value
+}
 </script>
 
 <template>
@@ -40,7 +40,7 @@ const toggleSetting = () => {
           <img
             src="/settingBtn/setting.svg"
             alt="setting button"
-            class="w-10 absolute right-10 top-10 hover:scale-105 transition-all duration-300 ease-in-out"
+            class="w-10 absolute right-10 top-10 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
             @click="toggleSetting"
           />
         </div>
@@ -66,8 +66,8 @@ const toggleSetting = () => {
                     name: 'CategoriesUnits',
                     params: {
                       category: category.name.toLowerCase(),
-                      cateIndex: cateIndex + 1,
-                    },
+                      cateIndex: cateIndex + 1
+                    }
                   }"
                 >
                   <img
