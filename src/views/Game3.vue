@@ -40,32 +40,22 @@ const currentCategory = computed(() => {
 const countCheck = ref(0)
 
 const currentQuiz = computed(() => {
-  if (
-    countCheck.value ===
-    data.categories[currentIndexCate.value].units[currentIndexUnit.value].items
-      .length
-  ) {
-    setTimeout(passToGame4, 2000) //สีขึ้นแต่รูปหาย
+  if (countCheck.value === data.categories[currentIndexCate.value].units[currentIndexUnit.value].items.length) {
+    setTimeout(passToGame4, 2000)
   } else {
-    answerOfQuiz.value =
-      data.categories[currentIndexCate.value].units[
-        currentIndexUnit.value
-      ].items[randomQuiz.value].word
-    meaning.value =
-      data.categories[currentIndexCate.value].units[
-        currentIndexUnit.value
-      ].items[randomQuiz.value].meaning
+    answerOfQuiz.value = data.categories[currentIndexCate.value].units[currentIndexUnit.value].items[randomQuiz.value].word
+    meaning.value = data.categories[currentIndexCate.value].units[currentIndexUnit.value ].items[randomQuiz.value].meaning
 
-    return data.categories[currentIndexCate.value].units[currentIndexUnit.value]
-      .items[randomQuiz.value].src
   }
+  
+  return data.categories[currentIndexCate.value].units[currentIndexUnit.value].items[randomQuiz.value].src
 })
 
 //Shuffle
 const shuffle = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
-    ;[array[i], array[j]] = [array[j], array[i]]
+      ;[array[i], array[j]] = [array[j], array[i]]
   }
   return array
 }
@@ -137,19 +127,14 @@ const turnOnCheckStatus = () => {
     <header class="py-8 px-10 flex-grow-0">
       <!-- Back to home Button -->
       <div class="header flex justify-center items-center">
-        <div
-          class="categories text-title font-semibold font-outfit text-4xl flex items-center justify-start w-full"
-        >
+        <div class="categories text-title font-semibold font-outfit text-4xl flex items-center justify-start w-full">
           Category: {{ currentCategory }}
         </div>
       </div>
       <div class="setting">
-        <img
-          src="/settingBtn/setting.svg"
-          alt="setting button"
+        <img src="/settingBtn/setting.svg" alt="setting button"
           class="w-10 absolute right-10 top-10 hover:scale-105 transition-all duration-300 ease-in-out"
-          @click="toggleSetting"
-        />
+          @click="toggleSetting" />
       </div>
     </header>
     <div></div>
@@ -159,22 +144,15 @@ const turnOnCheckStatus = () => {
           Select the correct meaning.
         </div>
 
-        <div
-          class="pic bg-white flex flex-col items-center rounded-lg drop-shadow-lg w-32 py-5 m-5"
-        >
+        <div class="pic bg-white flex flex-col items-center rounded-lg drop-shadow-lg w-32 py-5 m-5">
           <img :src="currentQuiz" class="w-20" />
           <h3>{{ meaning }}</h3>
         </div>
 
         <div class="options pt-5 w-3/4">
           <SoundControl :soundPath="audioOfOption">
-            <Option
-              :options="generateOption"
-              :correctOption="answer"
-              :isSelected="isSelected"
-              :userSelected="userSelected"
-              @optionClicked="checkAnswer"
-            />
+            <Option :options="generateOption" :correctOption="answer" :isSelected="isSelected"
+              :userSelected="userSelected" @optionClicked="checkAnswer" />
           </SoundControl>
         </div>
       </div>
@@ -182,27 +160,21 @@ const turnOnCheckStatus = () => {
     <div class="flex justify-center">
       <button
         class="bg-title text-white p-2 mt-5 rounded-lg hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
-        @click="turnOnCheckStatus"
-      >
+        @click="turnOnCheckStatus">
         Check
       </button>
     </div>
   </div>
   <div class="absolute left-0 right-0 top-1/3" v-show="showSetting">
-    <Setting
-      @closeSetting="toggleSetting"
-      @restartGame="
-        router.push({
-          name: 'Game1',
-          params: {
-            cateIndex: route.params.cateIndex,
-            unit: route.params.unit
-          }
-        })
-      "
-      @resumeGame="toggleSetting"
-      @goCategories="router.push({ name: 'Categories' })"
-    />
+    <Setting @closeSetting="toggleSetting" @restartGame="
+            router.push({
+              name: 'Game1',
+              params: {
+                cateIndex: route.params.cateIndex,
+                unit: route.params.unit
+              }
+            })
+            " @resumeGame="toggleSetting" @goCategories="router.push({ name: 'Categories' })" />
   </div>
   <div class="" v-show="showPopup">
     <Answer_popup :answer="answerOfQuiz" @closePopup="closePopup" />
