@@ -1,21 +1,30 @@
 <script setup>
-import { defineProps, ref } from "vue";
-import settingButton from "./icons/setting-button.vue";
-import settingPopup from "./Setting.vue";
+import { useRoute, useRouter } from 'vue-router'
+import { defineProps, ref } from 'vue'
+import settingButton from './icons/setting-button.vue'
+import settingPopup from './Setting.vue'
 
 const props = defineProps({
   closeOption: {
     type: Function,
-    required: true,
+    required: true
   },
+  title: {
+    type: String, // Assuming the title is a string
+    required: true
+  }
+})
 
-});
-
-const showSetting = ref(false);
+const showSetting = ref(false)
 
 const toggleSetting = () => {
-  showSetting.value = !showSetting.value;
-};
+  showSetting.value = !showSetting.value
+}
+
+const router = useRouter()
+const goBack = () => {
+  router.go(-1)
+}
 </script>
 
 <template>
@@ -37,13 +46,14 @@ const toggleSetting = () => {
         src="/img/flashcard-pic/back-button.svg"
         alt="back button"
         class="w-16 cursor-pointer lg:w-20"
+        @click="goBack"
       />
     </div>
     <div>
       <h1
         class="text-4xl font-alkatra text-title font-semibold md:text-5xl lg:text-7xl"
       >
-        <slot name="title">Untitle</slot>
+        <slot name="title"> {{ title }}</slot>
       </h1>
     </div>
     <div>

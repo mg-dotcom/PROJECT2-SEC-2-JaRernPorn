@@ -138,7 +138,11 @@ const toggleSetting = () => {
               class="flex flex-col hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
             >
               <SoundControl :soundPath="audioOfOption">
+                <<<<<<< HEAD
+                <img src="../../../SoundButton.svg" alt="SoundButton" />
+                =======
                 <img src="/SoundButton.svg" alt="SoundButton" />
+                >>>>>>> dev5
               </SoundControl>
             </div>
           </div>
