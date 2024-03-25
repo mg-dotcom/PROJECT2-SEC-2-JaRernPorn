@@ -411,5 +411,16 @@
       "id": "b98c"
     }
   ],
-  "collections": []
+  "collections": [
+    {
+      "id": "103d",
+      "name": "New Collection",
+      "cards": []
+    },
+    {
+      "id": "2ae5",
+      "name": "New Collection",
+      "cards": []
+    }
+  ]
 }
