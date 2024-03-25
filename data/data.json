@@ -413,22 +413,19 @@
   ],
   "collections": [
     {
-      "id": "2",
-      "name": "csacvsav",
-      "cards": [
-        {
-          "id": 1,
-          "chineseWord": "a",
-          "pinyin": "dddddd d",
-          "meaning": "a"
-        },
-        {
-          "id": 2,
-          "chineseWord": "as",
-          "pinyin": "             d",
-          "meaning": "d"
-        }
-      ]
+      "id": "54a0",
+      "name": "          kkk",
+      "cards": []
+    },
+    {
+      "id": "8379",
+      "name": "bisbat",
+      "cards": []
+    },
+    {
+      "id": "8d9f",
+      "name": "vvvv",
+      "cards": []
     }
   ]
 }
