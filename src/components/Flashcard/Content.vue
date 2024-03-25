@@ -8,7 +8,7 @@ import {
   deleteItem,
   editItem,
 } from "../../libs/flashcard-libs/FetchFlashcard.js";
-import { FlashcardManagement } from "../../libs/flashcard-libs/FlashcardModal.js";
+import { FlashcardModal } from "../../libs/flashcard-libs/FlashcardModal.js";
 
 const props = defineProps({
   popup: {
@@ -27,7 +27,7 @@ const props = defineProps({
 
 // const flashcards = ref([]);
 
-const flashcards = ref(new FlashcardManagement());
+const flashcards = ref(new FlashcardModal());
 
 onMounted(async () => {
   const flashcardsData = await getItem(

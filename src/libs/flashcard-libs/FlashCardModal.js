@@ -1,4 +1,4 @@
-class FlashcardManagement {
+class FlashcardModal {
   constructor() {
     this.flashcards = [];
   }
@@ -38,4 +38,4 @@ class FlashcardManagement {
   }
 }
 
-export { FlashcardManagement };
+export { FlashcardModal };
