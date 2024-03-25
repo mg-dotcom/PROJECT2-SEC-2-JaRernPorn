@@ -1,55 +1,55 @@
 <script setup>
-import { defineProps, defineEmits, ref } from 'vue'
-import optionFlashcard from './popup/optionFlashcard.vue'
-import ranameFlashcard from './popup/ranameFlashcard.vue'
-import newFlashcard from './popup/newFlashcard.vue'
+import { defineProps, defineEmits, ref } from "vue";
+import optionFlashcard from "./popup/optionFlashcard.vue";
+import ranameFlashcard from "./popup/ranameFlashcard.vue";
+import newFlashcard from "./popup/newFlashcard.vue";
 
 const props = defineProps({
   computedFlashcards: {
-    required: true
+    required: true,
   },
   index: {
     type: Number,
-    required: true
+    required: true,
   },
   SelectedIndex: {
     type: Number,
-    required: true
+    required: true,
   },
   popup: {
     type: Object,
-    required: true
-  }
-})
+    required: true,
+  },
+});
 
 const showOption = (index, event) => {
-  emit('toggle-option-flashcard', index)
-}
+  emit("toggle-option-flashcard", index);
+};
 
 const deleteFlashcard = (index) => {
-  emit('deleteFlashcard', index)
-}
+  emit("deleteFlashcard", index);
+};
 
 const showRenameFlashcard = (index) => {
-  emit('showRenameFlashcard', index)
-  props.popup.optionFlashcard = false
-}
+  emit("showRenameFlashcard", index);
+  props.popup.optionFlashcard = false;
+};
 
 const emit = defineEmits([
-  'toggle-option-flashcard',
-  'deleteFlashcard',
-  'showRenameFlashcard',
-  'renameFlashcard'
-])
+  "toggle-option-flashcard",
+  "deleteFlashcard",
+  "showRenameFlashcard",
+  "renameFlashcard",
+]);
 
 const renameFlashcard = (chineseWord, pinyin, meaning, index) => {
-  emit('renameFlashcard', chineseWord, pinyin, meaning, index)
-}
-const isClicked = ref(false)
+  emit("renameFlashcard", chineseWord, pinyin, meaning, index);
+};
+const isClicked = ref(false);
 
 const showMeaning = () => {
-  isClicked.value = !isClicked.value
-}
+  isClicked.value = !isClicked.value;
+};
 </script>
 
 <template>
@@ -98,7 +98,7 @@ const showMeaning = () => {
                     10,
                   'h-[140px]':
                     props.computedFlashcards[props.index].chineseWord.length <=
-                    10
+                    10,
                 }"
               >
                 {{ props.computedFlashcards[props.index].chineseWord }}
@@ -110,7 +110,7 @@ const showMeaning = () => {
                   'h-auto':
                     props.computedFlashcards[props.index].pinyin.length > 15,
                   'h-[42px]':
-                    props.computedFlashcards[props.index].pinyin.length <= 15
+                    props.computedFlashcards[props.index].pinyin.length <= 15,
                 }"
               >
                 {{ props.computedFlashcards[props.index].pinyin }}

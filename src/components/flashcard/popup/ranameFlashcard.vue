@@ -65,8 +65,12 @@ const isEmpty = (value) => {
 const oldChineseWord = ref(
   props.computedFlashcards[props.SelectedIndex].chineseWord.trim()
 );
-const oldPinyin = ref(props.computedFlashcards[props.SelectedIndex].pinyin.trim());
-const oldMeaning = ref(props.computedFlashcards[props.SelectedIndex].meaning.trim());
+const oldPinyin = ref(
+  props.computedFlashcards[props.SelectedIndex].pinyin.trim()
+);
+const oldMeaning = ref(
+  props.computedFlashcards[props.SelectedIndex].meaning.trim()
+);
 
 watch(
   () => props.computedFlashcards[props.SelectedIndex],
@@ -112,6 +116,7 @@ watch(
                   'focus:border-red-600': chineseWordIsEmpty,
                   'border-black': !chineseWordIsEmpty,
                 }"
+                @input="chineseWordIsEmpty = isEmpty(oldChineseWord)"
                 :placeholder="props.computedFlashcards[props.index].chineseWord"
                 @keydown.enter="renameFlashcard(props.index)"
               />

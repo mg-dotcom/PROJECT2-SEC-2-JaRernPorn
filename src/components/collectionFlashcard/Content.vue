@@ -74,7 +74,7 @@ const handleAddNewCollection = async (name) => {
   collections.value.addCollection(
     newCollectionName.id,
     newCollectionName.name,
-    newCollectionName.crads
+    newCollectionName.cards
   )
   props.popup.newCollection = false
 }

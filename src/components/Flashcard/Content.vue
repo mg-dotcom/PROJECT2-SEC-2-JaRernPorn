@@ -34,8 +34,11 @@ onMounted(async () => {
     import.meta.env.VITE_BASE_URL,
     props.currentCollectionId
   );
+  console.log(flashcardsData);
 
   flashcards.value.addAllFlashcards(flashcardsData);
+
+  console.log(flashcards.value.getFlashcards());
 });
 
 const SelectedIndex = ref(0);
