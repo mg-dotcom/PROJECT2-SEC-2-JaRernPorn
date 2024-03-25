@@ -56,7 +56,10 @@ const passNewName = (newName, index) => {
     /><router-link
       :to="{
         name: 'FlashCard',
-        params: { name: props.computedCollections[props.index].name }
+        params: {
+          name: props.computedCollections[props.index].name,
+          id: props.index + 1
+        }
       }"
     >
       <div

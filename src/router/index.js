@@ -26,7 +26,7 @@ const routes = [
     component: CollectionFlashCard
   },
   {
-    path: '/flashcard-collection/:name',
+    path: '/flashcard-collection/:name/:id/flashcards',
     name: 'FlashCard',
     component: FlashCard
   }

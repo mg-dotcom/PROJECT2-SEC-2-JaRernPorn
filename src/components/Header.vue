@@ -20,6 +20,7 @@ const showSetting = ref(false)
 const toggleSetting = () => {
   showSetting.value = !showSetting.value
 }
+
 const router = useRouter()
 const goBack = () => {
   router.go(-1)
