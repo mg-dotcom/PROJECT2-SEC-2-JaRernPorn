@@ -119,9 +119,7 @@ const handelEditFlashcard = async (
 
   const selectedCard = editedFlashcard.cards[index];
 
-  console.log(selectedCard);
-
-  flashcards.value.editFlashcard(
+  flashcards.value.addFlashcard(
     selectedCard.chineseWord,
     selectedCard.pinyin,
     selectedCard.meaning,

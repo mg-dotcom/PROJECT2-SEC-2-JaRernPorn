@@ -2,6 +2,7 @@
 import { defineProps, defineEmits, ref } from "vue";
 import optionFlashcard from "./popup/optionFlashcard.vue";
 import ranameFlashcard from "./popup/ranameFlashcard.vue";
+import newFlashcard from "./popup/newFlashcard.vue";
 
 const props = defineProps({
   computedFlashcards: {
@@ -18,7 +19,7 @@ const props = defineProps({
   popup: {
     type: Object,
     required: true,
-  }
+  },
 });
 
 const showOption = (index, event) => {
