@@ -8,13 +8,11 @@ function addNewCollection(newCollectionName, collections) {
       //for testing
       items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     });
-    // localStorage.setItem("collections", JSON.stringify(collections));
   }
 }
 
 function deleteCollection(collectionId, collections) {
   collections.splice(collectionId, 1);
-  localStorage.setItem("collections", JSON.stringify(collections));
   return collections;
 }
 

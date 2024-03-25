@@ -1,17 +1,14 @@
 <script setup>
-import { defineProps, ref, computed, onMounted } from "vue";
+import { defineProps, ref, onMounted } from "vue";
 import newFlashcard from "./popup/newFlashcard.vue";
-import { addNewFlashcard } from "../../libs/flashcard-libs/FlashCardModal.js";
-import { deleteFlashcard } from "../../libs/flashcard-libs/FlashCardModal.js";
 import Card from "./Card.vue";
-import { editFlashcard } from "../../libs/flashcard-libs/FlashCardModal.js";
 import {
   getItem,
   addItem,
   deleteItem,
   editItem,
-} from "../../libs/fetchFlashcard.js";
-import { FlashcardManagement } from "../../components/Flashcard/FlashcardManagement.js";
+} from "../../libs/flashcard-libs/FetchFlashcard.js";
+import { FlashcardManagement } from "../../libs/flashcard-libs/FlashcardModal.js";
 
 const props = defineProps({
   popup: {
@@ -170,3 +167,4 @@ const handelEditFlashcard = async (
 </template>
 
 <style scoped></style>
+../../libs/flashcard-libs/FlashcardManagement.js../../libs/flashcard-libs/fetchFlashcard.js

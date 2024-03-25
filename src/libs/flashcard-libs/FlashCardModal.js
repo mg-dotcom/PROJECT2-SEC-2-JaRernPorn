@@ -1,24 +1,41 @@
-const addNewFlashcard = (chineseWord, pinyin, meaning, flashcards) => {
-  flashcards.push({
-    id: flashcards.length + 1,
-    chineseWord: chineseWord,
-    pinyin: pinyin,
-    meaning: meaning,
-  });
+class FlashcardManagement {
+  constructor() {
+    this.flashcards = [];
+  }
 
-  return flashcards;
-};
+  addAllFlashcards(flashcards) {
+    flashcards.forEach((flashcard) => {
+      this.addFlashcard(
+        flashcard.id,
+        flashcard.chineseWord,
+        flashcard.meaning,
+        flashcard.pinyin
+      );
+    });
+  }
 
-const deleteFlashcard = (index, flashcards) => {
-  flashcards.splice(index, 1);
-  return flashcards;
-};
+  addFlashcard(id, chineseWord, meaning, pinyin) {
+    this.flashcards.push({
+      id: id,
+      chineseWord: chineseWord,
+      meaning: meaning,
+      pinyin: pinyin,
+    });
+  }
 
-const editFlashcard = (chineseWord, pinyin, meaning, index, flashcards) => {
-  flashcards[index].chineseWord = chineseWord;
-  flashcards[index].pinyin = pinyin;
-  flashcards[index].meaning = meaning;
-  return flashcards;
-};
+  removeFlashcard(index) {
+    this.flashcards.splice(index, 1);
+  }
 
-export { addNewFlashcard, deleteFlashcard, editFlashcard };
+  editFlashcard(chineseWord, pinyin, meaning, index) {
+    this.flashcards[index].chineseWord = chineseWord;
+    this.flashcards[index].pinyin = pinyin;
+    this.flashcards[index].meaning = meaning;
+  }
+
+  getFlashcards() {
+    return this.flashcards;
+  }
+}
+
+export { FlashcardManagement };
