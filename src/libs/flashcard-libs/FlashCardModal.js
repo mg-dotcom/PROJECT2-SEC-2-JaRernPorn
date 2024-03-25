@@ -8,8 +8,9 @@ class FlashcardModal {
       this.addFlashcard(
         flashcard.id,
         flashcard.chineseWord,
-        flashcard.meaning,
-        flashcard.pinyin
+
+        flashcard.pinyin,
+        flashcard.meaning
       );
     });
   }
@@ -18,7 +19,6 @@ class FlashcardModal {
     this.flashcards.push({
       id: id,
       chineseWord: chineseWord,
-
       pinyin: pinyin,
       meaning: meaning,
     });
