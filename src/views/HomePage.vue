@@ -1,7 +1,8 @@
 <script setup>
 import { reactive, ref } from "vue";
 import { RouterLink } from "vue-router";
-import SettingHomepage from "../components/SettingHomePage.vue";
+import SettingHomePage from "../components/SettingHomePage.vue";
+import HowToPlay from "../components/HowToPlay.vue";
 
 const page = reactive({
   homePage: true,
@@ -15,6 +16,10 @@ const toggleSetting = () => {
 };
 const toggleHowToPlay = () => {
   page.howToPlay = !page.howToPlay;
+};
+
+const showHowtoplay = () => {
+  page.howToPlay = true;
 };
 </script>
 

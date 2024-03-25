@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 import CollectionFlashCard from "../views/CollectionFlashCard.vue";
-import HomePage from "../views/HomePage.vue";
 import NotFound from "../views/NotFound.vue";
 import FlashCard from "../views/FlashCard.vue";
 import HomePage from "../views/HomePage.vue";

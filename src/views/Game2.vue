@@ -193,16 +193,16 @@ const toggleSetting = () => {
     <Setting
       @closeSetting="toggleSetting"
       @restartGame="
-          router.push({
-            name: 'Game1',
-            params: {
-              cateIndex: route.params.cateIndex,
-              unit: route.params.unit,
-            },
-          })
-        "
+        router.push({
+          name: 'Game1',
+          params: {
+            cateIndex: route.params.cateIndex,
+            unit: route.params.unit,
+          },
+        })
+      "
       @resumeGame="toggleSetting"
-      @goBackHome="router.push('/')"
+      @goCategories="router.push({ name: 'Categories' })"
     />
   </div>
 

@@ -1,14 +1,21 @@
+[15:42] BAITONG SAE-KOW
 <script setup>
 import { onMounted, ref, watch } from "vue";
 
 const emits = defineEmits([
   "closeSetting",
+
   "restartGame",
+
   "resumeGame",
-  "goBackHome",
+
+  "goCategories",
 ]);
+
 const isPlaying = ref(false);
+
 const player = ref("");
+
 const musicControl = () => {
   if (isPlaying.value) {
     player.value.play();
@@ -20,13 +27,6 @@ const musicControl = () => {
 watch(isPlaying, () => {
   musicControl();
 });
-
-
-// onMounted(() => {
-//   isPlaying.value = true;
-//   musicControl();
-// });
-
 </script>
 
 <template>
@@ -40,13 +40,16 @@ watch(isPlaying, () => {
           @click="$emit('closeSetting')"
         />
       </div>
+
       <div
         class="header text-center text-4xl font-alkatra text-title font-semibold"
       >
         <h1>Setting</h1>
       </div>
+
       <div class="musicToggle flex justify-between m-5">
         <div class="font-alkatra text-2xl">Music</div>
+
         <div class="form-control">
           <input
             type="checkbox"
@@ -57,7 +60,9 @@ watch(isPlaying, () => {
           />
         </div>
       </div>
+
       <hr class="mx-5 border border-b-1 border-slate-200" />
+
       <div class="btn flex m-5">
         <div class="restart">
           <img
@@ -67,6 +72,7 @@ watch(isPlaying, () => {
             @click="$emit('restartGame')"
           />
         </div>
+
         <div class="play">
           <img
             src="/settingBtn/resume.svg"
@@ -75,11 +81,12 @@ watch(isPlaying, () => {
             @click="$emit('resumeGame')"
           />
         </div>
+
         <div class="home">
           <img
             src="/settingBtn/home.svg"
             alt="home cursor-pointer"
-            @click="$emit('goBackHome')"
+            @click="$emit('goCategories')"
           />
         </div>
       </div>

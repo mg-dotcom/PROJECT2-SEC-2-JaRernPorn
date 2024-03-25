@@ -201,7 +201,7 @@ const turnOnCheckStatus = () => {
           })
         "
       @resumeGame="toggleSetting"
-      @goBackHome="router.push('/')"
+      @goCategories="router.push({ name: 'Categories' })"
     />
   </div>
   <div class="" v-show="showPopup">
