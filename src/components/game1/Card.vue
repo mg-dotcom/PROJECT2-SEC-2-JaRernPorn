@@ -21,7 +21,6 @@ const emits = defineEmits(['selected'])
     <div
       class="h-[400px] w-[300px] rounded-3xl shadow-md bg-white cursor-pointer hover:border-8 border-slate-200"
       :class="{
-        'bg-[#186cc7]': showColor && item.id,
         'bg-[#cef9a6]': showColor && item.id === correctAnswer.id && isCorrect,
         'bg-[#fea29d]': showColor && item.id === userAnswerId && isWrong
       }"
