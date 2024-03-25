@@ -1,56 +1,56 @@
 <script setup>
-import { defineProps, defineEmits } from 'vue'
+import { defineProps, defineEmits } from "vue";
 
-import renameCollection from '../collectionFlashcard/popup/renameCollection.vue'
-import optionCollection from '../collectionFlashcard/popup/optionCollection.vue'
+import renameCollection from "../collectionFlashcard/popup/renameCollection.vue";
+import optionCollection from "../collectionFlashcard/popup/optionCollection.vue";
 
 const props = defineProps({
   index: {
     type: Number,
-    required: true
+    required: true,
   },
   popup: {
     type: Object,
-    required: true
+    required: true,
   },
   computedCollections: {
-    required: true
+    required: true,
   },
   closeOption: {
     type: Function,
-    required: true
+    required: true,
   },
   SelectedIndex: {
     type: Number,
-    required: true
+    required: true,
   },
   collectionId: {
     type: String,
-    required: true
-  }
-})
+    required: true,
+  },
+});
 
 // console.log(props.collectionId);
 
 const showOption = (index, event) => {
-  emit('toggle-option-collection', index)
-}
+  emit("toggle-option-collection", index);
+};
 
 const emit = defineEmits([
-  'changeCollectionName',
-  'deleteCollection',
-  'toggle-option-collection'
-])
+  "changeCollectionName",
+  "deleteCollection",
+  "toggle-option-collection",
+]);
 
 const passDeleteCollection = (index, id) => {
-  emit('deleteCollection', index, id)
-}
+  emit("deleteCollection", index, id);
+};
 
 const passNewName = (index, newName, id) => {
   // console.log(id);
 
-  emit('changeCollectionName', index, newName, id)
-}
+  emit("changeCollectionName", index, newName, id);
+};
 </script>
 
 <template>
@@ -66,12 +66,12 @@ const passNewName = (index, newName, id) => {
         name: 'FlashCard',
         params: {
           name: props.computedCollections[props.index].name,
-          id: collectionId
-        }
+          id: collectionId,
+        },
       }"
     >
       <div
-        class="collection hover:shadow-lg rounded-3xl transition-all duration-[270ms]"
+        class="collection hover:shadow-lg rounded-3xl transition-all duration-[270ms] hover:scale-105"
       >
         <img
           class="cursor-pointer scale-[105%] sm:scale-[110%] md:scale-[117%] lg:scale-100"
