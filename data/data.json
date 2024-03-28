@@ -411,26 +411,5 @@
       "id": "b98c"
     }
   ],
-  "collections": [
-    {
-      "id": "67e9",
-      "name": "a",
-      "cards": []
-    },
-    {
-      "id": "259e",
-      "name": "New Collection",
-      "cards": []
-    },
-    {
-      "id": "6abf",
-      "name": "asd",
-      "cards": []
-    },
-    {
-      "id": "effb",
-      "name": "asd",
-      "cards": []
-    }
-  ]
+  "collections": []
 }

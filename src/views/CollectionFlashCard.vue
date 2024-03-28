@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted, reactive } from "vue";
+import { ref, onMounted, reactive } from "vue";
 import Header from "../components/Header.vue";
 import addEditCollection from "../components/collectionFlashcard/AddEditCollection.vue";
 import Collection from "../components/collectionFlashcard/Collection.vue";
@@ -22,6 +22,16 @@ const popup = reactive({
   optionEditDelete: false,
 });
 
+const SelectedIndex = ref(undefined);
+
+// เมื่อกดปุ่ม option ของแต่ละ collection ให้แสดง popup เเก้ไขชื่อ collection หรือลบ collection
+// เเละเก็บ index ของ collection ที่กดไว้ใน SelectedIndex
+const toggleOptionCollection = (index) => {
+  popup.optionEditDelete = !popup.optionEditDelete;
+  SelectedIndex.value = index;
+};
+
+// ปิด popup ทั้งหมด ที่เปิดอยู่ เเละ reset SelectedIndex ให้เป็น undefined
 const closeOption = () => {
   popup.optionCollection = false;
   SelectedIndex.value = undefined;
@@ -62,7 +72,6 @@ const handleDeleteCollection = async (index, id) => {
 
 const handleAddNewCollection = async (name) => {
   const newColName = name.trim();
-  //BACKEND add
   const newCollectionName = await addCollectionItem(
     import.meta.env.VITE_BASE_URL,
     {
@@ -77,13 +86,6 @@ const handleAddNewCollection = async (name) => {
     newCollectionName.cards
   );
   popup.newCollection = false;
-};
-
-const SelectedIndex = ref(undefined);
-
-const toggleOptionCollection = (index) => {
-  popup.optionEditDelete = !popup.optionEditDelete;
-  SelectedIndex.value = index;
 };
 
 const addNewCollectionName = () => {
