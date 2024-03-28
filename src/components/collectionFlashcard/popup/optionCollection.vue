@@ -1,29 +1,32 @@
 <script setup>
-import { defineProps, defineEmits } from 'vue'
-import iconDelete from '../../icons/iconDelete.vue'
-import iconEdit from '../../icons/iconEdit.vue'
+import { defineProps, defineEmits } from "vue";
+import iconDelete from "../../icons/iconDelete.vue";
+import iconEdit from "../../icons/iconEdit.vue";
 
 const props = defineProps({
   index: {
     type: Number,
-    required: true
+    required: true,
   },
   popup: {
     type: Object,
-    required: true
+    required: true,
   },
   collectionId: {
     type: String,
-    required: true
-  }
-})
+    required: true,
+  },
+  SelectedIndex: {
+    type: Number,
+  },
+});
 // console.log(props.popup);
 const showRenameCollection = () => {
-  props.popup.renameCollection = true
-  props.popup.optionCollection = false
-}
+  props.popup.addEditCollection = true;
+  props.popup.optionCollection = false;
+};
 
-const emit = defineEmits(['deleteCollection'])
+const emit = defineEmits(["deleteCollection"]);
 </script>
 
 <template>
@@ -34,7 +37,7 @@ const emit = defineEmits(['deleteCollection'])
     <div
       id="deleteCollection"
       class="flex gap-3 hover:bg-gray-100 transition duration-[270ms] ease-in-out p-1 rounded-lg"
-      @click="$emit('deleteCollection', props.index,props.collectionId)"
+      @click="$emit('deleteCollection', props.index, props.collectionId)"
     >
       <iconDelete>
         <template #content>

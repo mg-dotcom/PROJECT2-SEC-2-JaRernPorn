@@ -1,68 +1,73 @@
 <script setup>
-import { defineProps, ref, defineEmits } from "vue";
-import closeIcon from "../../icons/iconClose.vue";
+import { defineProps, ref, defineEmits, watch } from "vue";
+import closeIcon from "../icons/iconClose.vue";
 
 const props = defineProps({
-  closeOption: {
-    type: Function,
-    required: true,
-  },
   popup: {
     type: Object,
     required: true,
   },
+  SelectedCollection: {
+    type: Object,
+    default: { id: undefined, name: undefined, cards: [] },
+  },
 });
 
 const closeButton = () => {
-  props.popup.newCollection = false;
-  newCollectionName.value = "";
+  props.popup.addEditCollection = false;
 };
-
-const addNewCollectionName = () => {
-  props.popup.newCollection = true;
-  props.closeOption();
-};
-
-const emit = defineEmits(["addNewCollections"]);
 
 const newCollectionName = ref("New Collection");
 const emptyCollectionName = ref(false);
 
 const passAndClear = (name) => {
-  console.log(name, name.length);
   if (name.length === 0) {
     emptyCollectionName.value = true;
     return;
   } else {
     emit("addNewCollections", name);
-    newCollectionName.value = "";
-    props.popup.newCollection = false;
+    props.popup.addEditCollection = false;
   }
 };
+
+const emit = defineEmits([
+  "addNewCollections",
+  "toUpdateName",
+  "changeCollectionName",
+]);
 
 const isEmpty = (name) => {
   return name === "";
 };
+
+const renameCollectionName = ref(props.SelectedCollection.name);
+
+watch(
+  () => props.SelectedCollection,
+  () => {
+    renameCollectionName.value = props.SelectedCollection.name;
+  }
+);
+
+const toUpdateName = () => {
+  if (renameCollectionName.value.length === 0) {
+    emptyCollectionName.value = true;
+    return;
+  } else {
+    emit(
+      "changeCollectionName",
+      props.index,
+      renameCollectionName.value,
+      props.collectionId
+    );
+  }
+};
 </script>
 
 <template>
-  <!-- Add New Collection -->
-  <div class="text-start font-outfit text-base font-semibold pb-2">
-    <div @click.self="props.closeOption">
-      <h1
-        class="cursor-pointer inline hover:bg-[#f4ead8] p-[4px] rounded-xl transition-all duration-[270ms]"
-        @click="addNewCollectionName"
-      >
-        Add new +
-      </h1>
-    </div>
-  </div>
-  <hr class="border-gray-300" />
-
-  <!-- Popup -->
   <section
     class="popup-newCollection z-50 fixed top-0 left-0"
-    v-show="props.popup.newCollection"
+    v-show="props.popup.addEditCollection"
   >
     <div
       class="bg-black bg-opacity-50 flex items-center justify-center min-h-screen w-screen"
@@ -76,7 +81,8 @@ const isEmpty = (name) => {
         />
         <div class="flex flex-col items-center justify-center">
           <div class="text-center text-3xl font-mono font-semibold">
-            Add new collection
+            {{ props.SelectedCollection.id === undefined ? "Add new" : "Edit" }}
+            collection
           </div>
           <div class="my-7 flex flex-col items-center justify-center">
             <img
@@ -90,7 +96,11 @@ const isEmpty = (name) => {
               <div
                 class="text-2xl font-outfit font-medium whitespace-normal break-all overflow-ellipsis max-h-[122px]"
               >
-                {{ newCollectionName }}
+                {{
+                  props.SelectedCollection.id === undefined
+                    ? newCollectionName
+                    : props.SelectedCollection.name
+                }}
               </div>
             </div>
           </div>
@@ -98,6 +108,7 @@ const isEmpty = (name) => {
           <div class="flex gap-3">
             <div class="flex flex-col items-end gap-1">
               <input
+                v-if="props.SelectedCollection.id === undefined"
                 type="text"
                 v-model.trim="newCollectionName"
                 class="border-2 border-[#4096ff] rounded-md p-2 w-[400px] focus:outline-none focus:ring-2 focus:ring-[#4096ff] focus:border-transparent transition-all duration-[270ms]"
@@ -112,6 +123,22 @@ const isEmpty = (name) => {
                 @focus="$event.target.select()"
               />
 
+              <input
+                v-else="props.SelectedCollection.id !== undefined"
+                type="text"
+                v-model.trim="renameCollectionName"
+                class="border-2 border-[#4096ff] rounded-md p-2 w-[400px] focus:outline-none focus:ring-2 focus:ring-[#4096ff] focus:border-transparent transition-all duration-[270ms]"
+                :class="{
+                  'border-red-600': emptyCollectionName,
+                  'focus:border-red-600': emptyCollectionName,
+                  'border-[#4096ff]': !emptyCollectionName,
+                }"
+                :placeholder="props.SelectedCollection.name"
+                @keydown.enter="toUpdateName"
+                @input="emptyCollectionName = isEmpty(renameCollectionName)"
+                @focus="$event.target.select()"
+              />
+
               <div v-if="emptyCollectionName" class="text-xs text-red-600 mr-1">
                 Please fill value in form
               </div>
@@ -119,10 +146,18 @@ const isEmpty = (name) => {
 
             <div>
               <button
+                v-if="props.SelectedCollection.id !== undefined"
                 class="bg-[#4096ff] text-white rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#4096ff] focus:border-transparent transition-all duration-[270ms]"
                 @click="passAndClear(newCollectionName)"
               >
                 ADD
+              </button>
+              <button
+                v-else="props.SelectedCollection.id === undefined"
+                class="bg-[#4096ff] text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#4096ff] focus:border-transparent transition-all duration-[270ms]"
+                @click="toUpdateName"
+              >
+                OK
               </button>
             </div>
           </div>

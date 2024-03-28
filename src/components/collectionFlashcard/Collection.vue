@@ -1,7 +1,6 @@
 <script setup>
 import { defineProps, defineEmits } from "vue";
 
-import renameCollection from "../collectionFlashcard/popup/renameCollection.vue";
 import optionCollection from "../collectionFlashcard/popup/optionCollection.vue";
 
 const props = defineProps({
@@ -22,7 +21,6 @@ const props = defineProps({
   },
   SelectedIndex: {
     type: Number,
-    required: true,
   },
   collectionId: {
     type: String,
@@ -91,19 +89,10 @@ const passNewName = (index, newName, id) => {
       v-show="props.popup.optionCollection && SelectedIndex === props.index"
       :index="index"
       :popup="popup"
+      :SelectedIndex="SelectedIndex"
       :collection-id="collectionId"
       @deleteCollection="passDeleteCollection"
     ></optionCollection>
-
-    <renameCollection
-      v-show="props.popup.renameCollection && SelectedIndex === props.index"
-      :index="index"
-      :popup="popup"
-      :collection-id="collectionId"
-      :computedCollections="computedCollections"
-      :closeOption="closeOption"
-      @changeCollectionName="passNewName"
-    ></renameCollection>
   </div>
 </template>
 
