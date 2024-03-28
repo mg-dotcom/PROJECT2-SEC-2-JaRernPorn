@@ -16,12 +16,10 @@ const page = reactive({
 });
 
 const popup = reactive({
-  newCollection: false,
-  optionCollection: false,
-  editCollection: false,
-  renameCollection: false,
   Setting: false,
+  newCollection: false,
   addEditCollection: false,
+  optionEditDelete: false,
 });
 
 const closeOption = () => {
@@ -84,7 +82,7 @@ const handleAddNewCollection = async (name) => {
 const SelectedIndex = ref(undefined);
 
 const toggleOptionCollection = (index) => {
-  popup.optionCollection = !popup.optionCollection;
+  popup.optionEditDelete = !popup.optionEditDelete;
   SelectedIndex.value = index;
 };
 
@@ -122,6 +120,8 @@ const addNewCollectionName = () => {
           :popup="popup"
           @addNewCollections="handleAddNewCollection"
           :SelectedCollection="collections.getCollections()[SelectedIndex]"
+          :SelectedIndex="SelectedIndex"
+          @changeCollectionName="handleEditCollection"
         />
 
         <!-- All Collections -->
@@ -143,7 +143,7 @@ const addNewCollectionName = () => {
             :key="index"
             :index="index"
             :popup="popup"
-            :computedCollections="collections.getCollections()"
+            :allCollections="collections.getCollections()"
             :closeOption="closeOption"
             :SelectedIndex="SelectedIndex"
             @changeCollectionName="handleEditCollection"

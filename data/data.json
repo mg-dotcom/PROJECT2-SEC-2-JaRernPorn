@@ -413,35 +413,23 @@
   ],
   "collections": [
     {
-      "id": "5fdf",
-      "name": "New Collection",
-      "cards": [
-        {
-          "id": 1,
-          "chineseWord": "a",
-          "pinyin": "a",
-          "meaning": "a"
-        }
-      ]
+      "id": "67e9",
+      "name": "a",
+      "cards": []
     },
     {
-      "id": "e9af",
+      "id": "259e",
       "name": "New Collection",
       "cards": []
     },
     {
-      "id": "abb0",
-      "name": "dasf",
+      "id": "6abf",
+      "name": "asd",
       "cards": []
     },
     {
-      "id": "8f62",
-      "name": "New Collection",
-      "cards": []
-    },
-    {
-      "id": "8b48",
-      "name": "New Collection",
+      "id": "effb",
+      "name": "asd",
       "cards": []
     }
   ]

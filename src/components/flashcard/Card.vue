@@ -2,7 +2,7 @@
 import { defineProps, defineEmits, ref } from "vue";
 import optionFlashcard from "./popup/optionFlashcard.vue";
 import ranameFlashcard from "./popup/ranameFlashcard.vue";
-import newFlashcard from "./popup/newFlashcard.vue";
+import OptionEditDelete from "../optionEditDelete.vue";
 
 const props = defineProps({
   computedFlashcards: {
@@ -55,13 +55,13 @@ const showMeaning = () => {
 <template>
   <div class="flex flex-row">
     <div class="cards relative">
-      <optionFlashcard
+      <OptionEditDelete
         v-show="props.popup.optionFlashcard && SelectedIndex === props.index"
         :index="index"
         :popup="popup"
         @deleteCollection="deleteFlashcard(props.index)"
         @showRenameFlashcard="showRenameFlashcard"
-      ></optionFlashcard>
+      ></OptionEditDelete>
 
       <ranameFlashcard
         v-show="props.popup.renameFlashcard && SelectedIndex === props.index"

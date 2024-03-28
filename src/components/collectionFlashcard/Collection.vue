@@ -1,7 +1,7 @@
 <script setup>
 import { defineProps, defineEmits } from "vue";
 
-import optionCollection from "../collectionFlashcard/popup/optionCollection.vue";
+import optionEditDelete from "../optionEditDelete.vue";
 
 const props = defineProps({
   index: {
@@ -12,11 +12,7 @@ const props = defineProps({
     type: Object,
     required: true,
   },
-  computedCollections: {
-    required: true,
-  },
-  closeOption: {
-    type: Function,
+  allCollections: {
     required: true,
   },
   SelectedIndex: {
@@ -30,7 +26,7 @@ const props = defineProps({
 
 // console.log(props.collectionId);
 
-const showOption = (index, event) => {
+const showOption = (index) => {
   emit("toggle-option-collection", index);
 };
 
@@ -42,12 +38,6 @@ const emit = defineEmits([
 
 const passDeleteCollection = (index, id) => {
   emit("deleteCollection", index, id);
-};
-
-const passNewName = (index, newName, id) => {
-  // console.log(id);
-
-  emit("changeCollectionName", index, newName, id);
 };
 </script>
 
@@ -63,7 +53,7 @@ const passNewName = (index, newName, id) => {
       :to="{
         name: 'FlashCard',
         params: {
-          name: props.computedCollections[props.index].name,
+          name: props.allCollections[props.index].name,
           id: collectionId,
         },
       }"
@@ -80,19 +70,19 @@ const passNewName = (index, newName, id) => {
         <div
           class="absolute inset-[16px] flex items-center justify-center overflow-hidden cursor-pointer text-3xl font-medium font-outfit whitespace-normal break-all overflow-ellipsis z-10 md:text-2xl lg:text-4xl"
         >
-          {{ props.computedCollections[props.index].name }}
+          {{ props.allCollections[props.index].name }}
         </div>
       </div></router-link
     >
 
-    <optionCollection
-      v-show="props.popup.optionCollection && SelectedIndex === props.index"
+    <optionEditDelete
+      v-show="props.popup.optionEditDelete && SelectedIndex === props.index"
       :index="index"
       :popup="popup"
       :SelectedIndex="SelectedIndex"
       :collection-id="collectionId"
       @deleteCollection="passDeleteCollection"
-    ></optionCollection>
+    ></optionEditDelete>
   </div>
 </template>
 

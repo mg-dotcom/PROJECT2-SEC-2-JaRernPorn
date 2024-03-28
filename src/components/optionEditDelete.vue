@@ -1,7 +1,7 @@
 <script setup>
 import { defineProps, defineEmits } from "vue";
-import iconDelete from "../../icons/iconDelete.vue";
-import iconEdit from "../../icons/iconEdit.vue";
+import iconDelete from "./icons/iconDelete.vue";
+import iconEdit from "./icons/iconEdit.vue";
 
 const props = defineProps({
   index: {
@@ -14,16 +14,15 @@ const props = defineProps({
   },
   collectionId: {
     type: String,
-    required: true,
   },
   SelectedIndex: {
     type: Number,
   },
 });
-// console.log(props.popup);
-const showRenameCollection = () => {
+
+const showRename = () => {
   props.popup.addEditCollection = true;
-  props.popup.optionCollection = false;
+  props.popup.optionEditDelete = false;
 };
 
 const emit = defineEmits(["deleteCollection"]);
@@ -50,7 +49,7 @@ const emit = defineEmits(["deleteCollection"]);
     <div
       id="editCollection"
       class="flex gap-3 hover:bg-gray-100 transition duration-[270ms] ease-in-out p-1 rounded-lg"
-      @click="showRenameCollection"
+      @click="showRename"
     >
       <iconEdit>
         <template #content>

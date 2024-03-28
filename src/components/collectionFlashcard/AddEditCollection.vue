@@ -11,6 +11,10 @@ const props = defineProps({
     type: Object,
     default: { id: undefined, name: undefined, cards: [] },
   },
+  SelectedIndex: {
+    type: Number,
+    default: undefined,
+  },
 });
 
 const closeButton = () => {
@@ -21,11 +25,13 @@ const newCollectionName = ref("New Collection");
 const emptyCollectionName = ref(false);
 
 const passAndClear = (name) => {
+  console.log(name);
   if (name.length === 0) {
     emptyCollectionName.value = true;
     return;
   } else {
     emit("addNewCollections", name);
+    emptyCollectionName.value = false;
     props.popup.addEditCollection = false;
   }
 };
@@ -49,17 +55,20 @@ watch(
   }
 );
 
-const toUpdateName = () => {
-  if (renameCollectionName.value.length === 0) {
+const toUpdateName = (name) => {
+  console.log(name);
+  if (name.length === 0) {
     emptyCollectionName.value = true;
     return;
   } else {
     emit(
       "changeCollectionName",
-      props.index,
-      renameCollectionName.value,
-      props.collectionId
+      props.SelectedIndex,
+      name,
+      props.SelectedCollection.id
     );
+    emptyCollectionName.value = false;
+    props.popup.addEditCollection = false;
   }
 };
 </script>
@@ -99,7 +108,7 @@ const toUpdateName = () => {
                 {{
                   props.SelectedCollection.id === undefined
                     ? newCollectionName
-                    : props.SelectedCollection.name
+                    : renameCollectionName
                 }}
               </div>
             </div>
@@ -146,16 +155,17 @@ const toUpdateName = () => {
 
             <div>
               <button
-                v-if="props.SelectedCollection.id !== undefined"
+                v-if="props.SelectedCollection.id === undefined"
                 class="bg-[#4096ff] text-white rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#4096ff] focus:border-transparent transition-all duration-[270ms]"
                 @click="passAndClear(newCollectionName)"
               >
                 ADD
               </button>
+
               <button
-                v-else="props.SelectedCollection.id === undefined"
+                v-else="props.SelectedCollection.id !== undefined"
                 class="bg-[#4096ff] text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#4096ff] focus:border-transparent transition-all duration-[270ms]"
-                @click="toUpdateName"
+                @click="toUpdateName(renameCollectionName)"
               >
                 OK
               </button>
