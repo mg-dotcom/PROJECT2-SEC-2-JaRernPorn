@@ -48,7 +48,7 @@ const passDeleteCollection = (index, id) => {
       class="z-40 opacity-70 hover:bg-gray-400 rounded-full w-10 h-10 lg:p-2 md:scale-[60%] md:p-2 lg:scale-[75%] cursor-pointer absolute transition-all duration-[270ms] lg:top-[19px] lg:right-[5px] md:top-[1px] md:right-[-11px] sm:top-[8px] sm:right-[-9px] mobile:scale-[70%] mobile:p-2 mobile:top-[7px] mobile:right-[-5px]"
       src="/img/flashcard-pic/option.svg"
       alt="option"
-      @click="showOption(props.index, $event)"
+      @click="showOption(props.index)"
     /><router-link
       :to="{
         name: 'FlashCard',

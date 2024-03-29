@@ -417,18 +417,17 @@
       "name": "Fruits",
       "cards": [
         {
-          "id": 1,
-          "chineseWord": "a",
-          "pinyin": "a",
-          "meaning": "a"
-        },
-        {
           "id": 2,
-          "chineseWord": "a",
-          "pinyin": "a",
+          "chineseWord": "asd",
+          "pinyin": "asd",
           "meaning": "asd"
         }
       ]
+    },
+    {
+      "id": "a5db",
+      "name": "New Collection",
+      "cards": []
     }
   ]
 }

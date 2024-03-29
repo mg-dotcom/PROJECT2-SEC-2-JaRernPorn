@@ -25,17 +25,6 @@ const popup = reactive({
   optionEditDelete: false,
 });
 
-const toggleOption = (index) => {
-  popup.optionEditDelete = !popup.optionEditDelete;
-  SelectedIndex.value = index;
-  console.log("fsdfsdf");
-};
-
-const closeOption = () => {
-  popup.optionFlashcard = false;
-  SelectedIndex.value = undefined;
-};
-
 watch(
   () => route.params.name,
   (newName) => {
@@ -50,6 +39,16 @@ const showRenameFlashcard = (index) => {
 };
 
 const SelectedIndex = ref(undefined);
+
+const toggleOption = (index) => {
+  popup.optionEditDelete = !popup.optionEditDelete;
+  SelectedIndex.value = index;
+};
+
+const closeOption = () => {
+  popup.optionFlashcard = false;
+  SelectedIndex.value = undefined;
+};
 
 const flashcards = ref(new FlashcardModal());
 

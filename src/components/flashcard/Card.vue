@@ -1,6 +1,6 @@
 <script setup>
 import { defineProps, defineEmits, ref } from "vue";
-import OptionEditDelete from "../optionEditDelete.vue";
+import OptionEditDelete from "../OptionEditDelete.vue";
 
 const props = defineProps({
   allFlashcards: {
@@ -19,7 +19,7 @@ const props = defineProps({
   },
 });
 
-const showOption = (index, event) => {
+const showOption = (index) => {
   emit("toggle-option-flashcard", index);
 };
 
@@ -29,7 +29,7 @@ const deleteFlashcard = (index) => {
 
 const showRenameFlashcard = (index) => {
   emit("showRenameFlashcard", index);
-  props.popup.OptionEditDelete = false;
+  props.popup.optionEditDelete = false;
 };
 
 const emit = defineEmits([
@@ -49,14 +49,6 @@ const showMeaning = () => {
 <template>
   <div class="flex flex-row">
     <div class="cards relative">
-      <OptionEditDelete
-        v-show="props.popup.OptionEditDelete && SelectedIndex === props.index"
-        :index="index"
-        :popup="popup"
-        @deleteCollection="deleteFlashcard(props.index)"
-        @showRenameFlashcard="showRenameFlashcard"
-      ></OptionEditDelete>
-
       <img
         class="z-40 bg-amber-200 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] hover:bg-amber-300 rounded-full w-5 h-10 p-2 scale-[75%] absolute xl:top-0 xl:-right-[19px] lg:top-3 lg:-right-[8px] md:top-0 md:-right-[19px] transition-all duration-[270ms]"
         src="/img/flashcard-pic/option.svg"
@@ -113,6 +105,17 @@ const showMeaning = () => {
           </div>
         </div>
       </div>
+
+      <OptionEditDelete
+        v-show="
+          props.popup.optionEditDelete && props.SelectedIndex === props.index
+        "
+        :index="index"
+        :popup="popup"
+        :SelectedIndex="SelectedIndex"
+        @deleteCollection="deleteFlashcard(props.index)"
+        @showRenameFlashcard="showRenameFlashcard"
+      />
     </div>
   </div>
 </template>
