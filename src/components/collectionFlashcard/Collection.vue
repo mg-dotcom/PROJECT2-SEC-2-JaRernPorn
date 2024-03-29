@@ -24,8 +24,6 @@ const props = defineProps({
   },
 });
 
-// console.log(props.collectionId);
-
 const showOption = (index) => {
   emit("toggle-option-collection", index);
 };
