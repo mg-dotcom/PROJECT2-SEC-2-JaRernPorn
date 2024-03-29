@@ -1,6 +1,5 @@
 <script setup>
 import { defineProps, ref } from 'vue'
-import SettingHomePage from '../components/SettingHomePage.vue'
 import { useRouter } from 'vue-router'
 const props = defineProps({
   closeOption: {
@@ -22,12 +21,6 @@ const goBack = () => {
 </script>
 
 <template>
-  <div
-    class="z-50 fixed top-0 left-0 w-screen min-h-screen"
-    v-show="showSetting"
-  >
-    <SettingHomePage @closeSetting="toggleSetting" />
-  </div>
 
   <div
     class="flex justify-between items-center p-2 md:p-4 lg:px-10 lg:py-7"

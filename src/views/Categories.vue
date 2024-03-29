@@ -2,23 +2,15 @@
 import { ref } from 'vue'
 
 import { categories } from '../../data/data.json'
-import SettingHomePage from '../components/SettingHomePage.vue'
 
 const categoryPage = ref(true)
 
-const showSetting = ref(false)
-
-const toggleSetting = () => {
-  showSetting.value = !showSetting.value
-}
 </script>
 
 <template>
   <section class="category" v-if="categoryPage">
     <div class="bg-main-bgColor min-h-screen overflow-hidden">
-      <div class="fixed left-0 right-0 z-40" v-show="showSetting">
-        <SettingHomePage @closeSetting="toggleSetting" />
-      </div>
+
       <header class="py-7 px-7">
         <!-- Back to home Button -->
         <router-link to="/">
@@ -35,14 +27,6 @@ const toggleSetting = () => {
           >
             Categories
           </div>
-        </div>
-        <div class="setting">
-          <img
-            src="/settingBtn/setting.svg"
-            alt="setting button"
-            class="w-10 absolute right-10 top-10 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
-            @click="toggleSetting"
-          />
         </div>
       </header>
 

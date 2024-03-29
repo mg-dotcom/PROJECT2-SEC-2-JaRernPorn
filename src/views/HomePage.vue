@@ -1,7 +1,7 @@
 <script setup>
 import { reactive, ref } from 'vue'
 import { RouterLink } from 'vue-router'
-import SettingHomePage from '../components/SettingHomePage.vue'
+
 import HowToPlay from '../components/HowToPlay.vue'
 
 const page = reactive({
@@ -9,11 +9,7 @@ const page = reactive({
   categoryPage: false,
   howToPlay: false
 })
-const showSetting = ref(false)
 
-const toggleSetting = () => {
-  showSetting.value = !showSetting.value
-}
 const toggleHowToPlay = () => {
   page.howToPlay = !page.howToPlay
 }
@@ -25,20 +21,8 @@ const showHowtoplay = () => {
 
 <template>
   <section class="HomePage" v-show="page.homePage">
-    <div class="fixed left-0 right-0 z-40" v-show="showSetting">
-      <SettingHomePage @closeSetting="toggleSetting" />
-    </div>
     <div class="h-screen w-full bg-main-bgColor p-5">
       <div class="border-double border-8 border-title box-border h-full w-full">
-        <!-- Setting Button -->
-        <div class="setting">
-          <img
-            src="/settingBtn/setting.svg"
-            alt="setting button"
-            class="w-10 absolute right-10 top-10 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
-            @click="toggleSetting"
-          />
-        </div>
         <div
           class="logo-title text-center text-title pt-title sm:text-title-size mobile:text-mobile-title-size"
         >

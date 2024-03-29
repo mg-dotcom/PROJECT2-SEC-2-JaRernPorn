@@ -1,5 +1,4 @@
 <script setup>
-import { ref, watch } from 'vue'
 
 const emits = defineEmits([
   'closeSetting',
@@ -11,21 +10,6 @@ const emits = defineEmits([
   'goCategories'
 ])
 
-const isPlaying = ref(false)
-
-const player = ref('')
-
-const musicControl = () => {
-  if (isPlaying.value) {
-    player.value.play()
-  } else {
-    player.value.pause()
-  }
-}
-
-watch(isPlaying, () => {
-  musicControl()
-})
 </script>
 
 <template>
@@ -45,22 +29,6 @@ watch(isPlaying, () => {
       >
         <h1>Setting</h1>
       </div>
-
-      <div class="musicToggle flex justify-between m-5">
-        <div class="font-alkatra text-2xl">Music</div>
-
-        <div class="form-control">
-          <input
-            type="checkbox"
-            class="toggle cursor-pointer"
-            v-model="isPlaying"
-            @click="isPlaying = !isPlaying"
-            @change="musicControl"
-          />
-        </div>
-      </div>
-
-      <hr class="mx-5 border border-b-1 border-slate-200" />
 
       <div class="flex m-5 gap-x-4">
         <div class="restart">
@@ -91,10 +59,6 @@ watch(isPlaying, () => {
         </div>
       </div>
     </div>
-
-    <audio controls loop class="hidden" ref="player">
-      <source src="/background-music.mp3" type="audio/mp3" />
-    </audio>
   </div>
 </template>
 

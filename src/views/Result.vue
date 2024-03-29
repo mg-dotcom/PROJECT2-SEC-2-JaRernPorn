@@ -2,7 +2,6 @@
 import { ref, defineProps } from 'vue'
 import category from '../../data/data.json'
 import SoundControl from '../components/SoundControl.vue'
-import SettingHomePage from '../components/SettingHomePage.vue'
 import { useRouter, useRoute } from 'vue-router'
 
 const route = useRoute()
@@ -38,25 +37,9 @@ const items = currentCategory.units[unitIndex.value].items
 
 <template>
   <div class="bg-main-bgColor h-screen w-full p-5">
-    <div class="fixed left-0 right-0 top-0 bottom-0 z-40" v-show="showSetting">
-      <SettingHomePage
-        @closeSetting="toggleSetting"
-        @restartGame=""
-        @resumeGame=""
-        @goBackHome=""
-      />
-    </div>
 
     <div class="border-double border-8 border-title box-border h-full w-full">
       <div class="">
-        <div class="setting flex">
-          <img
-            src="/settingBtn/setting.svg"
-            alt="setting button"
-            class="w-10 cursor-pointer hover:scale-105 transition-all duration-300 ease-in-out"
-            @click="toggleSetting"
-          />
-        </div>
         <div class="font-semibold font-outfit text-title">
           <router-link to="/">
             <img
