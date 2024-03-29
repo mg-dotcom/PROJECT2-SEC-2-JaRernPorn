@@ -1,11 +1,9 @@
 <script setup>
 import { defineProps, defineEmits, ref } from "vue";
-import optionFlashcard from "./popup/optionFlashcard.vue";
-import ranameFlashcard from "./popup/ranameFlashcard.vue";
 import OptionEditDelete from "../optionEditDelete.vue";
 
 const props = defineProps({
-  computedFlashcards: {
+  allFlashcards: {
     required: true,
   },
   index: {
@@ -14,7 +12,6 @@ const props = defineProps({
   },
   SelectedIndex: {
     type: Number,
-    required: true,
   },
   popup: {
     type: Object,
@@ -32,7 +29,7 @@ const deleteFlashcard = (index) => {
 
 const showRenameFlashcard = (index) => {
   emit("showRenameFlashcard", index);
-  props.popup.optionFlashcard = false;
+  props.popup.OptionEditDelete = false;
 };
 
 const emit = defineEmits([
@@ -42,9 +39,6 @@ const emit = defineEmits([
   "renameFlashcard",
 ]);
 
-const renameFlashcard = (chineseWord, pinyin, meaning, index) => {
-  emit("renameFlashcard", chineseWord, pinyin, meaning, index);
-};
 const isClicked = ref(false);
 
 const showMeaning = () => {
@@ -56,21 +50,12 @@ const showMeaning = () => {
   <div class="flex flex-row">
     <div class="cards relative">
       <OptionEditDelete
-        v-show="props.popup.optionFlashcard && SelectedIndex === props.index"
+        v-show="props.popup.OptionEditDelete && SelectedIndex === props.index"
         :index="index"
         :popup="popup"
         @deleteCollection="deleteFlashcard(props.index)"
         @showRenameFlashcard="showRenameFlashcard"
       ></OptionEditDelete>
-
-      <ranameFlashcard
-        v-show="props.popup.renameFlashcard && SelectedIndex === props.index"
-        :index="index"
-        :popup="popup"
-        :computedFlashcards="computedFlashcards"
-        :SelectedIndex="SelectedIndex"
-        @renameFlashcard="renameFlashcard"
-      ></ranameFlashcard>
 
       <img
         class="z-40 bg-amber-200 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] hover:bg-amber-300 rounded-full w-5 h-10 p-2 scale-[75%] absolute xl:top-0 xl:-right-[19px] lg:top-3 lg:-right-[8px] md:top-0 md:-right-[19px] transition-all duration-[270ms]"
@@ -94,26 +79,23 @@ const showMeaning = () => {
                 class="flex items-center justify-center font-medium break-all xl:text-5xl lg:text-5xl md:text-5xl sm:text-3xl"
                 :class="{
                   'h-auto':
-                    props.computedFlashcards[props.index].chineseWord.length >
-                    10,
+                    props.allFlashcards[props.index].chineseWord.length > 10,
                   'h-[140px]':
-                    props.computedFlashcards[props.index].chineseWord.length <=
-                    10,
+                    props.allFlashcards[props.index].chineseWord.length <= 10,
                 }"
               >
-                {{ props.computedFlashcards[props.index].chineseWord }}
+                {{ props.allFlashcards[props.index].chineseWord }}
               </div>
               <hr class="my-2 border-gray-300 dark:border-gray-700" />
               <div
                 class="flex items-center justify-center xl:text-2xl lg:text-2xl md:text-xl break-all"
                 :class="{
-                  'h-auto':
-                    props.computedFlashcards[props.index].pinyin.length > 15,
+                  'h-auto': props.allFlashcards[props.index].pinyin.length > 15,
                   'h-[42px]':
-                    props.computedFlashcards[props.index].pinyin.length <= 15,
+                    props.allFlashcards[props.index].pinyin.length <= 15,
                 }"
               >
-                {{ props.computedFlashcards[props.index].pinyin }}
+                {{ props.allFlashcards[props.index].pinyin }}
               </div>
             </div>
           </div>
@@ -125,7 +107,7 @@ const showMeaning = () => {
               <div
                 class="font-medium break-all text-center xl:text-xl lg:text-xl md:text-2xl"
               >
-                {{ props.computedFlashcards[props.index].meaning }}
+                {{ props.allFlashcards[props.index].meaning }}
               </div>
             </div>
           </div>
