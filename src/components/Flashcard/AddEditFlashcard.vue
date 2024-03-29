@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, ref, defineEmits, watch } from "vue";
+import { defineProps, defineEmits, ref, computed } from "vue";
 import closeIcon from "../icons/iconClose.vue";
 
 const props = defineProps({
@@ -22,10 +22,8 @@ const props = defineProps({
   },
 });
 
-const newChineseWord = ref("");
-const newPinyin = ref("");
-const newMeaning = ref("");
-const id = ref(undefined);
+const previousFlashcard = computed(() => props.SelectedFlashcard)
+
 const chineseWordIsEmpty = ref(false);
 const pinyinIsEmpty = ref(false);
 const meaningIsEmpty = ref(false);
@@ -33,21 +31,24 @@ const meaningIsEmpty = ref(false);
 const emit = defineEmits(["addNewFlashcard", "renameFlashcard"]);
 
 const closeButton = () => {
-  props.popup.addEditFlashcard = false;
-  newChineseWord.value = "";
-  newPinyin.value = "";
-  newMeaning.value = "";
+  previousFlashcard.value = {
+    id: undefined,
+    chineseWord: "",
+    pinyin: "",
+    meaning: "",
+  };
   chineseWordIsEmpty.value = false;
   pinyinIsEmpty.value = false;
   meaningIsEmpty.value = false;
+  props.popup.addEditFlashcard = false;
 };
 
-const addNewFlashcard = () => {
-  const chineseWordEmpty = newChineseWord.value.trim() === "";
-  const pinyinEmpty = newPinyin.value.trim() === "";
-  const meaningEmpty = newMeaning.value.trim() === "";
 
-  // if any of the input is empty, set red border and message
+const addNewFlashcard = () => {
+  const chineseWordEmpty = previousFlashcard.value.chineseWord === "";
+  const pinyinEmpty = previousFlashcard.value.pinyin === "";
+  const meaningEmpty = previousFlashcard.value.meaning === "";
+
   if (chineseWordEmpty || pinyinEmpty || meaningEmpty) {
     chineseWordIsEmpty.value = chineseWordEmpty;
     pinyinIsEmpty.value = pinyinEmpty;
@@ -56,15 +57,18 @@ const addNewFlashcard = () => {
   } else {
     emit(
       "addNewFlashcard",
-      id.value,
-      newChineseWord.value,
-      newPinyin.value,
-      newMeaning.value
+      previousFlashcard.value.id,
+      previousFlashcard.value.chineseWord,
+      previousFlashcard.value.pinyin,
+      previousFlashcard.value.meaning
     );
     props.popup.addEditFlashcard = false;
-    newChineseWord.value = "";
-    newPinyin.value = "";
-    newMeaning.value = "";
+    previousFlashcard.value = {
+      id: undefined,
+      chineseWord: "",
+      pinyin: "",
+      meaning: "",
+    };
     chineseWordIsEmpty.value = false;
     pinyinIsEmpty.value = false;
     meaningIsEmpty.value = false;
@@ -76,9 +80,10 @@ const isEmpty = (value) => {
 };
 
 const renameFlashcard = () => {
-  const chineseWordEmpty = oldChineseWord.value.trim() === "";
-  const pinyinEmpty = oldPinyin.value.trim() === "";
-  const meaningEmpty = oldMeaning.value.trim() === "";
+  const chineseWordEmpty = previousFlashcard.value.chineseWord === "";
+  const pinyinEmpty = previousFlashcard.value.pinyin === "";
+  const meaningEmpty = previousFlashcard.value.meaning === "";
+
   if (chineseWordEmpty || pinyinEmpty || meaningEmpty) {
     chineseWordIsEmpty.value = chineseWordEmpty;
     pinyinIsEmpty.value = pinyinEmpty;
@@ -87,30 +92,32 @@ const renameFlashcard = () => {
   } else {
     emit(
       "renameFlashcard",
-      oldChineseWord.value,
-      oldPinyin.value,
-      oldMeaning.value,
+      previousFlashcard.value.chineseWord,
+      previousFlashcard.value.pinyin,
+      previousFlashcard.value.meaning,
       props.SelectedIndex
     );
     props.popup.addEditFlashcard = false;
+    previousFlashcard.value = {
+      id: undefined,
+      chineseWord: "",
+      pinyin: "",
+      meaning: "",
+    };
     chineseWordIsEmpty.value = false;
     pinyinIsEmpty.value = false;
     meaningIsEmpty.value = false;
   }
 };
 
-const oldChineseWord = ref(props.SelectedFlashcard.chineseWord.trim());
-const oldPinyin = ref(props.SelectedFlashcard.pinyin.trim());
-const oldMeaning = ref(props.SelectedFlashcard.meaning.trim());
-
-watch(
-  () => props.SelectedFlashcard,
-  () => {
-    oldChineseWord.value = props.SelectedFlashcard.chineseWord;
-    oldPinyin.value = props.SelectedFlashcard.pinyin;
-    oldMeaning.value = props.SelectedFlashcard.meaning;
+const addOrEditFlashcard = () => {
+  if (previousFlashcard.value.id === undefined) {
+    addNewFlashcard();
+  } else {
+    renameFlashcard();
   }
-);
+};
+
 </script>
 
 <template>
@@ -130,24 +137,23 @@ watch(
         />
         <div class="flex flex-col items-center justify-center">
           <div class="text-center text-4xl font-mono font-semibold">
-            {{ props.SelectedFlashcard.id === undefined ? "Add new" : "Edit" }}
+            {{ previousFlashcard.id === undefined ? "Add new" : "Edit" }}
             collection
           </div>
-          <div v-if="props.SelectedFlashcard.id === undefined">
             <div class="my-6 flex flex-col items-center justify-center gap-y-7">
               <div class="chinese-word input-box gap-y-1 flex flex-col">
                 <div class="font-outfit">Chinese word</div>
                 <input
                   type="text"
-                  v-model="newChineseWord"
+                  v-model.trim="previousFlashcard.chineseWord"
                   class="border-[1.5px] rounded-md p-2 w-[360px]"
                   :class="{
                     'border-red-600': chineseWordIsEmpty,
                     'focus:border-red-600': chineseWordIsEmpty,
                     'border-black': !chineseWordIsEmpty,
                   }"
-                  @input="chineseWordIsEmpty = isEmpty(newChineseWord)"
-                  @keydown.enter="addNewFlashcard"
+                  @input="chineseWordIsEmpty = isEmpty(previousFlashcard.chineseWord)"
+                  @keydown.enter="addOrEditFlashcard"
                   placeholder="Chinese word"
                 />
                 <div
@@ -162,16 +168,16 @@ watch(
                 <div class="font-outfit">Pinyin</div>
                 <input
                   type="text"
-                  v-model="newPinyin"
+                  v-model.trim="previousFlashcard.pinyin"
                   class="border-[1.5px] rounded-md p-2 w-[360px] focus:outline-1 focus:ring-5 border-black"
                   :class="{
                     'border-red-600': pinyinIsEmpty,
                     'focus:border-red-600': pinyinIsEmpty,
                     'border-black': !pinyinIsEmpty,
                   }"
-                  @input="pinyinIsEmpty = isEmpty(newPinyin)"
+                  @input="pinyinIsEmpty = isEmpty(previousFlashcard.pinyin)"
                   placeholder="Pinyin"
-                  @keydown.enter="addNewFlashcard"
+                  @keydown.enter="addOrEditFlashcard"
                 />
                 <div
                   v-if="pinyinIsEmpty"
@@ -185,15 +191,15 @@ watch(
                 <div class="font-outfit">Meaning</div>
                 <input
                   type="text"
-                  v-model="newMeaning"
+                  v-model.trim="previousFlashcard.meaning"
                   class="border-[1.5px] border-black rounded-md p-2 w-[360px] focus:outline-1 focus:ring-5"
                   :class="{
                     'border-red-600': meaningIsEmpty,
                     'focus:border-red-600': meaningIsEmpty,
                     'border-black': !meaningIsEmpty,
                   }"
-                  @input="meaningIsEmpty = isEmpty(newMeaning)"
-                  @keydown.enter="addNewFlashcard"
+                  @input="meaningIsEmpty = isEmpty(previousFlashcard.meaning)"
+                  @keydown.enter="addOrEditFlashcard"
                   placeholder="Meaning"
                 />
                 <div
@@ -206,109 +212,19 @@ watch(
               <div class="flex flex-row gap-5 py-2">
                 <button
                   class="bg-red-600 text-white rounded-md w-20 h-9 font-outfit font-medium"
-                  @click="closeFlashCardAdd"
+                  @click="closeButton"
                 >
                   CANCEL
                 </button>
                 <button
                   class="bg-[#4096ff] text-white rounded-md w-20 font-outfit font-medium"
-                  @click="addNewFlashcard"
+                  @click="addOrEditFlashcard"
                 >
-                  ADD
+                {{ previousFlashcard.id === undefined ? 'ADD' : 'OK' }}
                 </button>
               </div>
             </div>
-          </div>
-          <div v-else="props.SelectedFlashcard.id !== undefined">
-            <div class="my-6 flex flex-col items-center justify-center gap-y-7">
-              <div class="chinese-word input-box gap-y-1 flex flex-col">
-                <div class="font-outfit text-start">Chinese word</div>
-                <input
-                  type="text"
-                  v-model="oldChineseWord"
-                  class="border-[1.5px] rounded-md p-2 w-[360px]"
-                  @focus="$event.target.select()"
-                  :class="{
-                    'border-red-600': chineseWordIsEmpty,
-                    'focus:border-red-600': chineseWordIsEmpty,
-                    'border-black': !chineseWordIsEmpty,
-                  }"
-                  @input="chineseWordIsEmpty = isEmpty(oldChineseWord)"
-                  :placeholder="props.SelectedFlashcard.chineseWord"
-                  @keydown.enter="renameFlashcard(props.index)"
-                />
-                <div
-                  v-if="chineseWordIsEmpty"
-                  class="absolute right-20 top-40 text-xs text-red-600"
-                >
-                  Please fill value in form
-                </div>
-              </div>
-
-              <div class="chinese-word input-box gap-y-1 flex flex-col">
-                <div class="font-outfit text-start">Pinyin</div>
-                <input
-                  type="text"
-                  v-model="oldPinyin"
-                  class="border-[1.5px] border-black rounded-md p-2 w-[360px]"
-                  @focus="$event.target.select()"
-                  :class="{
-                    'border-red-600': pinyinIsEmpty,
-                    'focus:border-red-600': pinyinIsEmpty,
-                    'border-black': !pinyinIsEmpty,
-                  }"
-                  @input="pinyinIsEmpty = isEmpty(oldPinyin)"
-                  :placeholder="props.SelectedFlashcard.pinyin"
-                  @keydown.enter="renameFlashcard(props.index)"
-                />
-                <div
-                  v-if="pinyinIsEmpty"
-                  class="absolute right-20 top-[258px] text-xs text-red-600"
-                >
-                  Please fill value in form
-                </div>
-              </div>
-
-              <div class="chinese-word input-box gap-y-1 flex flex-col">
-                <div class="font-outfit text-start">Meaning</div>
-                <input
-                  type="text"
-                  v-model="oldMeaning"
-                  class="border-[1.5px] border-black rounded-md p-2 w-[360px]"
-                  @focus="$event.target.select()"
-                  :class="{
-                    'border-red-600': meaningIsEmpty,
-                    'focus:border-red-600': meaningIsEmpty,
-                    'border-black': !meaningIsEmpty,
-                  }"
-                  @input="meaningIsEmpty = isEmpty(oldMeaning)"
-                  :placeholder="props.SelectedFlashcard.meaning"
-                  @keydown.enter="renameFlashcard(props.index)"
-                />
-                <div
-                  v-if="meaningIsEmpty"
-                  class="absolute right-20 top-[356px] text-xs text-red-600"
-                >
-                  Please fill value in form
-                </div>
-              </div>
-
-              <div class="flex flex-row gap-5 py-2">
-                <button
-                  class="bg-red-600 text-white rounded-md w-20 h-9 font-outfit font-medium"
-                  @click="closeFlashCardAdd"
-                >
-                  CANCEL
-                </button>
-                <button
-                  class="bg-[#4096ff] text-white rounded-md w-20 font-outfit font-medium"
-                  @click="renameFlashcard(props.index)"
-                >
-                  OK
-                </button>
-              </div>
-            </div>
-          </div>
+          
         </div>
       </div>
     </div>
