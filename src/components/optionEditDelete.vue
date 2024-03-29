@@ -22,6 +22,7 @@ const props = defineProps({
 
 const showRename = () => {
   props.popup.addEditCollection = true;
+  props.popup.addEditFlashcard = true;
   props.popup.optionEditDelete = false;
 };
 

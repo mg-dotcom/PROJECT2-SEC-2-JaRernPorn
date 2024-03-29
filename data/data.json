@@ -411,23 +411,5 @@
       "id": "b98c"
     }
   ],
-  "collections": [
-    {
-      "id": "fc66",
-      "name": "Fruits",
-      "cards": [
-        {
-          "id": 2,
-          "chineseWord": "asd",
-          "pinyin": "asd",
-          "meaning": "asd"
-        }
-      ]
-    },
-    {
-      "id": "a5db",
-      "name": "New Collection",
-      "cards": []
-    }
-  ]
+  "collections": []
 }
