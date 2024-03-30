@@ -411,5 +411,26 @@
       "id": "b98c"
     }
   ],
-  "collections": []
+  "collections": [
+    {
+      "id": "9c89",
+      "name": "Fruits",
+      "cards": []
+    },
+    {
+      "id": "d226",
+      "name": "-",
+      "cards": []
+    },
+    {
+      "id": "7adf",
+      "name": "new",
+      "cards": []
+    },
+    {
+      "id": "1014",
+      "name": "KOK",
+      "cards": []
+    }
+  ]
 }

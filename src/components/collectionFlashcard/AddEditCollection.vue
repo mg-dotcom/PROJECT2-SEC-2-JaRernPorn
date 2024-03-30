@@ -36,6 +36,7 @@ const passAndClear = (name) => {
     return;
   } else {
     emit("addNewCollections", name);
+    newCollectionName.value = "New Collection";
     emptyCollectionName.value = false;
     props.popup.addEditCollection = false;
   }
@@ -62,7 +63,6 @@ watch(
 );
 
 const toUpdateName = (name) => {
-  console.log(name);
   if (name.length === 0) {
     emptyCollectionName.value = true;
     return;
@@ -149,7 +149,7 @@ const toUpdateName = (name) => {
                   'border-[#4096ff]': !emptyCollectionName,
                 }"
                 :placeholder="props.SelectedCollection.name"
-                @keydown.enter="toUpdateName"
+                @keydown.enter="toUpdateName(renameCollectionName)"
                 @input="emptyCollectionName = isEmpty(renameCollectionName)"
                 @focus="$event.target.select()"
               />
