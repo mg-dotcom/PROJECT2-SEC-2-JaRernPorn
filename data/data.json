@@ -415,7 +415,26 @@
     {
       "id": "d226",
       "name": "eqwe",
-      "cards": []
+      "cards": [
+        {
+          "id": 1,
+          "chineseWord": "BASfsdf",
+          "pinyin": "A",
+          "meaning": "A"
+        },
+        {
+          "id": 2,
+          "chineseWord": "S",
+          "pinyin": "S",
+          "meaning": "S"
+        },
+        {
+          "id": 3,
+          "chineseWord": "sdfsdfffCCCCCCCCCCCCccV",
+          "pinyin": "fsdf",
+          "meaning": "sfd"
+        }
+      ]
     },
     {
       "id": "7adf",
