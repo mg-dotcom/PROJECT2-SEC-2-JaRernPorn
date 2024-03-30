@@ -24,6 +24,7 @@ const props = defineProps({
 
 const closeButton = () => {
   props.popup.addEditCollection = false;
+  newCollectionName.value = "New Collection";
 };
 
 const newCollectionName = ref("New Collection");
