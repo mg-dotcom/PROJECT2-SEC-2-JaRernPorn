@@ -1,6 +1,6 @@
 <script setup>
 import { defineProps, defineEmits, ref } from "vue";
-import OptionEditDelete from "../OptionEditDelete.vue";
+import OptionEditDelete from "../optionEditDelete.vue";
 
 const props = defineProps({
   allFlashcards: {
