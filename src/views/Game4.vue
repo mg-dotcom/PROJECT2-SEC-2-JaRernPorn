@@ -1,28 +1,28 @@
 <script setup>
-import Options from "../components/game4/Options.vue";
-import data from "../../data/data.json";
-import Setting from "../components/Setting.vue";
+import Options from '../components/game4/Options.vue'
+import data from '../../data/data.json'
+import Setting from '../components/Setting.vue'
 
-import { ref, computed } from "vue";
-import { useRoute, useRouter } from "vue-router";
-const route = useRoute();
-const router = useRouter();
+import { ref, computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+const route = useRoute()
+const router = useRouter()
 
-const paramCateIndex = route.params.cateIndex - 1;
-const currentIndexItem = ref(paramCateIndex);
+const paramCateIndex = route.params.cateIndex - 1
+const currentIndexItem = ref(paramCateIndex)
 
 const currentCategory = computed(() => {
-  return data.categories[currentIndexItem.value].name;
-});
-const settingPopup = ref(false);
+  return data.categories[currentIndexItem.value].name
+})
+const settingPopup = ref(false)
 
 const closeSetting = () => {
-  settingPopup.value = false; //false
-};
+  settingPopup.value = false //false
+}
 
 const toggleSetting = () => {
-  settingPopup.value = !settingPopup.value;
-};
+  settingPopup.value = !settingPopup.value
+}
 </script>
 
 <template>
@@ -39,9 +39,9 @@ const toggleSetting = () => {
       </div>
       <div class="setting">
         <img
-          src="/settingBtn/setting.svg"
+          src="/settingBtn/menu.svg"
           alt="setting button"
-          class="w-10 absolute right-10 top-10 hover:scale-105 transition-all duration-300 ease-in-out"
+          class="w-8 absolute right-10 top-10 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
           @click="toggleSetting"
         />
       </div>
@@ -66,8 +66,8 @@ const toggleSetting = () => {
               name: 'Game1',
               params: {
                 cateIndex: route.params.cateIndex,
-                unit: route.params.unit,
-              },
+                unit: route.params.unit
+              }
             })
           "
           @resumeGame="toggleSetting"

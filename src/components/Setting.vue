@@ -1,100 +1,71 @@
 <script setup>
-import { ref, watch } from 'vue'
-
 const emits = defineEmits([
   'closeSetting',
-
   'restartGame',
-
   'resumeGame',
-
   'goCategories'
 ])
-
-const isPlaying = ref(false)
-
-const player = ref('')
-
-const musicControl = () => {
-  if (isPlaying.value) {
-    player.value.play()
-  } else {
-    player.value.pause()
-  }
-}
-
-watch(isPlaying, () => {
-  musicControl()
-})
 </script>
 
 <template>
   <div class="flex justify-center z-30">
-    <div class="setting bg-white border border-black rounded-2xl">
-      <div class="closebtn flex justify-end p-3 cursor-pointer">
-        <img
-          src="/settingBtn/close.svg"
-          alt="close setting btn"
-          class="cursor-pointer w-4"
-          @click="$emit('closeSetting')"
-        />
+    <div
+      class="setting bg-white border rounded-2xl shadow-xl max-h-[600px] w-[300px]"
+    >
+      <div class="closebtn flex justify-end p-2 cursor-pointer">
+        <div
+          class="hover:bg-slate-100 p-1 rounded-full transition-all duration-300 ease-in-out"
+        >
+          <img
+            src="/settingBtn/close.svg"
+            alt="close setting btn"
+            class="cursor-pointer w-4"
+            @click="$emit('closeSetting')"
+          />
+        </div>
       </div>
 
       <div
-        class="header text-center text-4xl font-alkatra text-title font-semibold"
+        class="header text-center text-5xl font-alkatra text-title font-semibold"
       >
-        <h1>Setting</h1>
+        <h1>Menu</h1>
       </div>
 
-      <div class="musicToggle flex justify-between m-5">
-        <div class="font-alkatra text-2xl">Music</div>
-
-        <div class="form-control">
-          <input
-            type="checkbox"
-            class="toggle cursor-pointer"
-            v-model="isPlaying"
-            @click="isPlaying = !isPlaying"
-            @change="musicControl"
-          />
-        </div>
-      </div>
-
-      <hr class="mx-5 border border-b-1 border-slate-200" />
-
-      <div class="flex m-5 gap-x-4">
-        <div class="restart">
+      <div class="flex flex-col m-5 gap-x-4 gap-y-4 px-6">
+        <div
+          @click="$emit('restartGame')"
+          class="restart bg-replay-btn px-8 py-3 h-16 rounded-xl flex justify-center items-center cursor-pointer hover:bg-[#EF9D00] transition-all duration-300 ease-in-out"
+        >
           <img
             src="/settingBtn/replay.svg"
-            alt="restart button"
-            class="restart cursor-pointer"
-            @click="$emit('restartGame')"
+            alt="restart"
+            class="restart cursor-pointer w-10"
           />
         </div>
 
-        <div class="play">
+        <div
+          @click="$emit('resumeGame')"
+          class="play bg-play-btn px-8 py-3 h-16 rounded-xl flex justify-center items-center cursor-pointer hover:bg-[#439A00] transition-all duration-300 ease-in-out"
+        >
           <img
-            src="/settingBtn/resume.svg"
-            alt="resume button"
+            src="/settingBtn/play.svg"
+            alt="resume"
             class="resume cursor-pointer"
-            @click="$emit('resumeGame')"
           />
         </div>
 
-        <div class="category">
+        <div
+          @click="$emit('goCategories')"
+          class="category bg-category-btn px-8 py-3 h-16 rounded-xl flex justify-center items-center cursor-pointer hover:bg-[#5FA3C9] transition-all duration-300 ease-in-out"
+        >
           <img
             src="/settingBtn/category.svg"
-            alt="home"
+            alt="category"
             class="home cursor-pointer"
-            @click="$emit('goCategories')"
           />
         </div>
       </div>
     </div>
-
-    <audio controls loop class="hidden" ref="player">
-      <source src="/background-music.mp3" type="audio/mp3" />
-    </audio>
   </div>
 </template>
 

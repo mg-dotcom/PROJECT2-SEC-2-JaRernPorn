@@ -42,7 +42,10 @@ module.exports = {
         black: '#20201D',
         'answer-fontColor': '#BE4400',
         brownColor: '#52250E',
-        'gray-border': '#8A887C'
+        'gray-border': '#8A887C',
+        'replay-btn': '#FEA905',
+        'play-btn': '#4AAC00',
+        'category-btn': '#7AB3D3'
       },
       fontSize: {
         'title-size': '118px',

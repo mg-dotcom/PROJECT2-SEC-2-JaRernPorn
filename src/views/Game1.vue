@@ -165,7 +165,7 @@ const restartGame = () => {
       />
     </div>
     <div class="">
-      <header class="py-8 px-10 flex-grow-0">
+      <header class="py-8 px-10 flex-grow-0 items-center">
         <!-- Back to home Button -->
         <div class="header flex justify-center items-center">
           <div
@@ -176,9 +176,9 @@ const restartGame = () => {
         </div>
         <div class="setting">
           <img
-            src="/settingBtn/setting.svg"
+            src="/settingBtn/menu.svg"
             alt="setting button"
-            class="w-10 absolute right-10 top-10 hover:scale-105 transition-all duration-300 ease-in-out"
+            class="w-8 absolute right-10 top-10 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
             @click="toggleSetting"
           />
         </div>
