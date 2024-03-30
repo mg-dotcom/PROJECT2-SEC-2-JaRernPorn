@@ -10,7 +10,7 @@ import {
   editItem,
 } from "../libs/flashcard-libs/FetchFlashcard.js";
 import addEditFlashcard from "../components/Flashcard/AddEditFlashcard.vue";
-import { FlashcardModal } from "../libs/flashcard-libs/FlashcardModal.js";
+import { FlashcardModal } from "../libs/flashcard-libs/FlashCardModal.js";
 
 const route = useRoute();
 const currentCollectionId = ref(route.params.id);

@@ -339,21 +339,21 @@
               "src": "/play-game/numbers/seven.png",
               "word": "七 (qī)",
               "meaning": "Seven",
-              "pronunciation": "/pronunciation/numbers/seven.mp3"
+              "pronunciation": "/pronunciation/Numbers/seven.mp3"
             },
             {
               "id": 2,
               "src": "/play-game/numbers/two.png",
               "word": "二 (èr)",
               "meaning": "Two",
-              "pronunciation": "/pronunciation/numbers/two.mp3"
+              "pronunciation": "/pronunciation/Numbers/two.mp3"
             },
             {
               "id": 3,
               "src": "/play-game/numbers/five.png",
               "word": "五 (wǔ)",
               "meaning": "Five",
-              "pronunciation": "/pronunciation/numbers/five.mp3"
+              "pronunciation": "/pronunciation/Numbers/five.mp3"
             }
           ]
         },
@@ -364,21 +364,21 @@
               "src": "/play-game/numbers/zero.png",
               "word": "零 (líng)",
               "meaning": "Zero",
-              "pronunciation": "/pronunciation/numbers/zero.mp3"
+              "pronunciation": "/pronunciation/Numbers/zero.mp3"
             },
             {
               "id": 2,
               "src": "/play-game/numbers/one.png",
               "word": "一 (yī)",
               "meaning": "One",
-              "pronunciation": "/pronunciation/numbers/one.mp3"
+              "pronunciation": "/pronunciation/Numbers/one.mp3"
             },
             {
               "id": 3,
               "src": "/play-game/numbers/ten.png",
               "word": "十 (shí)",
               "meaning": "Ten",
-              "pronunciation": "/pronunciation/numbers/ten.mp3"
+              "pronunciation": "/pronunciation/Numbers/ten.mp3"
             }
           ]
         },
@@ -389,21 +389,21 @@
               "src": "/play-game/numbers/eight.png",
               "word": "八 (bā)",
               "meaning": "Eight",
-              "pronunciation": "/pronunciation/numbers/eight.mp3"
+              "pronunciation": "/pronunciation/Numbers/eight.mp3"
             },
             {
               "id": 2,
               "src": "/play-game/numbers/three.png",
               "word": "三 (sān)",
               "meaning": "Three",
-              "pronunciation": "/pronunciation/numbers/three.mp3"
+              "pronunciation": "/pronunciation/Numbers/three.mp3"
             },
             {
               "id": 3,
               "src": "/play-game/numbers/six.png",
               "word": "六 (liù)",
               "meaning": "Six",
-              "pronunciation": "/pronunciation/numbers/six.mp3"
+              "pronunciation": "/pronunciation/Numbers/six.mp3"
             }
           ]
         }
@@ -444,11 +444,6 @@
     {
       "id": "1014",
       "name": "KOK",
-      "cards": []
-    },
-    {
-      "id": "2614",
-      "name": "e",
       "cards": []
     }
   ]
