@@ -39,17 +39,17 @@ const items = currentCategory.units[unitIndex.value].items
 <template>
   <div class="bg-main-bgColor h-screen w-full p-5">
     <div class="border-double border-8 border-title box-border h-full w-full">
-      <div class="flex justify-end">
+      <div class="flex absolute right-12 top-10">
         <router-link to="/">
           <img
             src="/settingBtn/home.svg"
             alt="home button"
-            class="cursor-pointer size-14 absolute left-14 top-10 hover:scale-105 transition-all duration-300 ease-in-out"
+            class="cursor-pointer size-14 hover:scale-105 transition-all duration-300 ease-in-out"
           />
         </router-link>
       </div>
 
-      <div class="flex justify-center mt-5">
+      <div class="flex justify-center mt-10">
         <h1 class="text-title text-7xl font-alkatra font-semibold">
           Review Vocabulary
         </h1>
@@ -88,13 +88,13 @@ const items = currentCategory.units[unitIndex.value].items
       <div class="flex flex-wrap justify-center mt-1">
         <div class="flex justify-center gap-6">
           <div
-            class="flex justify-center items-center font-outfit bg-title rounded-lg font-Outfit font-semibold text-lg p-2 text-white text-center hover:bg-button-bgColor sm:text-lg sm:p-3 sm:w-40 h-14"
+            class="flex justify-center items-center font-outfit bg-title rounded-lg font-Outfit font-semibold text-lg p-2 text-white text-center hover:bg-button-bgColor hover:shadow-lg sm:text-lg sm:p-3 sm:w-40 h-14 transition-all duration-300 ease-in-out cursor-pointer"
           >
             <button class="uppercase" @click="playAgain">Play Again</button>
           </div>
 
           <div
-            class="flex justify-center items-center font-outfit bg-title rounded-lg font-Outfit font-semibold text-lg p-4 text-white text-center hover:bg-button-bgColor sm:text-lg sm:p-3 sm:w-40 h-14"
+            class="flex justify-center items-center font-outfit bg-title rounded-lg font-Outfit font-semibold text-lg p-4 text-white text-center hover:bg-button-bgColor hover:shadow-lg sm:text-lg sm:p-3 sm:w-40 h-14 transition-all duration-300 ease-in-out cursor-pointer"
           >
             <button class="uppercase" @click="mainMenu">Main Menu</button>
           </div>
