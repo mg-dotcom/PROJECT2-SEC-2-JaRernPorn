@@ -7,10 +7,14 @@ const emits = defineEmits(['howToPlay', 'closeHowtoplay'])
     <div class="flex justify-center content-center items-center">
       <div
         @click="$emit('howToPlay', true)"
-        class="grid grid-cols-1 bg-white w-[650px] max-h-[600px] overflow-y-auto rounded-xl p-5 shadow-md"
+        class="grid grid-cols-1 bg-white w-[650px] max-h-[600px] overflow-y-auto rounded-xl p-4 shadow-md"
       >
         <div @click="$emit('closeHowtoplay', false)" class="flex justify-end">
-          <img src="/close.svg" alt="close" class="w-4 cursor-pointer" />
+          <div
+            class="hover:bg-slate-100 p-1 rounded-full transition-all duration-300 ease-in-out"
+          >
+            <img src="/close.svg" alt="close" class="w-4 cursor-pointer" />
+          </div>
         </div>
         <div
           class="text-4xl font-alkatra text-title font-semibold flex justify-center uppercase"

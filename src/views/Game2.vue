@@ -131,9 +131,9 @@ const toggleSetting = () => {
         </div>
         <div class="setting">
           <img
-            src="/settingBtn/setting.svg"
+            src="/settingBtn/menu.svg"
             alt="setting button"
-            class="w-10 absolute right-10 top-10 hover:scale-105 transition-all duration-300 ease-in-out"
+            class="w-8 absolute right-10 top-10 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
             @click="toggleSetting"
           />
         </div>
