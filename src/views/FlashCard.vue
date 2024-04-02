@@ -131,7 +131,6 @@ const handelEditFlashcard = async (
     index
   );
 
-  popup.renameFlashcard = false;
   popup.optionFlashcard = false;
 };
 
