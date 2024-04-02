@@ -148,7 +148,7 @@ const addNewCollectionName = () => {
             :allCollections="collections.getCollections()"
             :closeOption="closeOption"
             :SelectedIndex="SelectedIndex"
-            @optionDelete="handleDeleteCollection"
+            @deleteCollection="handleDeleteCollection"
             @toggle-option-collection="toggleOptionCollection"
           />
         </div>

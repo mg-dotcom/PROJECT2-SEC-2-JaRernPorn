@@ -29,12 +29,12 @@ const showOption = (index) => {
 };
 
 const emit = defineEmits([
-  "optionDelete",
+  "deleteCollection",
   "toggle-option-collection",
 ]);
 
-const passDeleteCollection = (index, id) => {
-  emit("optionDelete", index, id);
+const deleteCollection = (index, id) => {
+  emit("deleteCollection", index, id);
 };
 </script>
 
@@ -78,7 +78,7 @@ const passDeleteCollection = (index, id) => {
       :popup="popup"
       :SelectedIndex="SelectedIndex"
       :collection-id="collectionId"
-      @optionDelete="passDeleteCollection"
+      @optionDelete="deleteCollection"
     ></optionEditDelete>
   </div>
 </template>
