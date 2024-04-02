@@ -58,7 +58,7 @@ const closeButton = () => {
   pinyinIsEmpty.value = false;
   meaningIsEmpty.value = false;
 };
-const emit = defineEmits(["addNewFlashcard", "renameFlashcard"]);
+const emit = defineEmits(["addNewFlashcard", "editFlashcard"]);
 
 const addNewFlashcard = () => {
   const emptyChineseWord = flashcard.chineseWord === "";
@@ -88,7 +88,7 @@ const addNewFlashcard = () => {
   }
 };
 
-const renameFlashcard = () => {
+const editFlashcard = () => {
   const emptyChineseWord = flashcard.chineseWord === "";
   const emptyPinyin = flashcard.pinyin === "";
   const emptyMeaning = flashcard.meaning === "";
@@ -100,7 +100,7 @@ const renameFlashcard = () => {
     return;
   } else {
     emit(
-      "renameFlashcard",
+      "editFlashcard",
       flashcard.chineseWord,
       flashcard.pinyin,
       flashcard.meaning,
@@ -123,7 +123,7 @@ const addOrEditFlashcard = (id) => {
   if (id === undefined) {
     addNewFlashcard();
   } else if (id !== undefined) {
-    renameFlashcard();
+    editFlashcard();
   }
 };
 </script>

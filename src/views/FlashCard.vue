@@ -169,7 +169,7 @@ const showFlashCardAdd = () => {
           :SelectedIndex="SelectedIndex"
           :SelectedFlashcard="flashcards.getFlashcards()[SelectedIndex]"
           @addNewFlashcard="handleAddNewFlashcard"
-          @renameFlashcard="handelEditFlashcard"
+          @editFlashcard="handelEditFlashcard"
         />
 
         <div
@@ -187,7 +187,6 @@ const showFlashCardAdd = () => {
         >
           <Card
             v-for="(card, index) in flashcards.getFlashcards()"
-            :card="card"
             :index="index"
             :key="index"
             :popup="popup"
