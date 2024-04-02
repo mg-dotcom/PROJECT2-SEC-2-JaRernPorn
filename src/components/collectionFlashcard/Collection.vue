@@ -1,7 +1,7 @@
 <script setup>
 import { defineProps, defineEmits } from "vue";
 
-import optionEditDelete from "../OptionEditDelete.vue";
+import optionEditDelete from "../optionEditDelete.vue";
 
 const props = defineProps({
   index: {
