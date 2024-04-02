@@ -3,11 +3,11 @@
 ## Members
 | Student Id | Name  | Responsible | Percentage |
 | ------------- | ------------- | ------------- | ------------- | 
-| 65130500086 | หทัยทัต แย้มชมชื่น  | - Setting<br> - WrongPopup old version<br> - Excellent Popup <br> - all button in setting <br> - main menu & play again button| 20% |
-| 65130500103 | ณัฐธิดา รุ่งเรือง  | - Play game Page <br> - Display names according to the selected category in play game page <br> -  Show image that match the selected category <br> - Generate options | 20% |
-| 65130500109 | ใบตอง แซ่โค้ว  | - Category page <br> - Display pop up show correct answer when user selected wrong answer (next button function) <br> - Check answer function | 20% |
-| 65130500113 | มัณฑนา คชรินทร์  | - Result Page <br> - Pop-up Wrong Answer <br> -  Change button color when answer is correct| 20% |
-| 65130500120 | อภิสรา ชลประสิทธิ์  | - Home Page <br> - How to play popup <br> -  Play button link to category page <br> - How to play button show popup of how to play details <br> - Word list page section of your answer| 20% |
+| 65130500086 | หทัยทัต แย้มชมชื่น  | - Game1 <br> - Unit Page <br> - SoundControl <br> | 20% |
+| 65130500103 | ณัฐธิดา รุ่งเรือง  | - Game2 <br> - Flashcard Page | 20% |
+| 65130500109 | ใบตอง แซ่โค้ว  | - Game3 <br> - Setting <br> - fetchApi collection | 20% |
+| 65130500113 | มัณฑนา คชรินทร์  | - Game4 <br> - Setting <br> -  Router Flashcard| 20% |
+| 65130500120 | อภิสรา ชลประสิทธิ์  | - Collaction Page <br> - Flashcard Page <br> -  Router Collection <br> | 20% |
 
 ## List of feature
 

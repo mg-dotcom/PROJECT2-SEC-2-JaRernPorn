@@ -45,7 +45,7 @@ const currentQuiz = computed(() => {
     data.categories[currentIndexCate.value].units[currentIndexUnit.value].items
       .length
   ) {
-    setTimeout(passToGame4, 2000) //สีขึ้นแต่รูปหาย
+    setTimeout(passToGame4, 2000) 
   } else {
     answerOfQuiz.value =
       data.categories[currentIndexCate.value].units[
@@ -75,7 +75,7 @@ const generateOption = computed(() => {
   return shuffle([...options])
 })
 
-const checkAnswer = (selectedOption) => {
+const checkBtn = (selectedOption) => {
   userSelected.value = selectedOption.word
   showAudio.value = true
   audioOfOption.value = selectedOption.pronunciation
@@ -89,8 +89,6 @@ const toggleSetting = () => {
 const closePopup = () => {
   showPopup.value = !showPopup.value
   setColorOption.value = ''
-  // answer.value=''
-  // userSelected.value=''
   countCheck.value++
   isSelected.value = false
   randomQuiz.value++
@@ -106,7 +104,7 @@ const passToGame4 = () => {
   })
 }
 
-const turnOnCheckStatus = () => {
+const checkAnswer = () => {
   answer.value =
     data.categories[currentIndexCate.value].units[currentIndexUnit.value].items[
       randomQuiz.value
@@ -134,7 +132,6 @@ const turnOnCheckStatus = () => {
 <template>
   <div class="font-outfit bg-main-bgColor min-h-screen">
     <header class="py-8 px-10 flex-grow-0">
-      <!-- Back to home Button -->
       <div class="header flex justify-center items-center">
         <div
           class="categories text-title font-semibold font-outfit text-4xl flex items-center justify-start w-full"
@@ -172,7 +169,7 @@ const turnOnCheckStatus = () => {
               :correctOption="answer"
               :isSelected="isSelected"
               :userSelected="userSelected"
-              @optionClicked="checkAnswer"
+              @optionClicked="checkBtn"
             />
           </SoundControl>
         </div>
@@ -181,7 +178,7 @@ const turnOnCheckStatus = () => {
     <div class="flex justify-center">
       <button
         class="bg-title text-white text-2xl rounded-xl px-4 py-2 mt-5 hover:drop-shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
-        @click="turnOnCheckStatus"
+        @click="checkAnswer"
       >
         Check
       </button>
