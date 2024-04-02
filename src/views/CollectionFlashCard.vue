@@ -149,7 +149,7 @@ const addNewCollectionName = () => {
             :closeOption="closeOption"
             :SelectedIndex="SelectedIndex"
             @changeCollectionName="handleEditCollection"
-            @deleteCollection="handleDeleteCollection"
+            @optionDelete="handleDeleteCollection"
             @toggle-option-collection="toggleOptionCollection"
           />
         </div>

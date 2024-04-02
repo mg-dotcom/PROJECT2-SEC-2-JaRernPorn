@@ -27,15 +27,15 @@ const deleteFlashcard = (index) => {
   emit("deleteFlashcard", index);
 };
 
-const showRenameFlashcard = (index) => {
-  emit("showRenameFlashcard", index);
+const showEditFlashcard = (index) => {
+  emit("showEditFlashcard", index);
   props.popup.optionEditDelete = false;
 };
 
 const emit = defineEmits([
   "toggle-option-flashcard",
   "deleteFlashcard",
-  "showRenameFlashcard",
+  "showEditFlashcard",
   "editFlashcard",
 ]);
 
@@ -110,11 +110,10 @@ const showMeaning = () => {
         v-show="
           props.popup.optionEditDelete && props.SelectedIndex === props.index
         "
-        :index="index"
         :popup="popup"
         :SelectedIndex="SelectedIndex"
-        @deleteCollection="deleteFlashcard(props.index)"
-        @showRenameFlashcard="showRenameFlashcard"
+        @optionDelete="deleteFlashcard(props.index)"
+        @showEditFlashcard="showEditFlashcard"
       />
     </div>
   </div>

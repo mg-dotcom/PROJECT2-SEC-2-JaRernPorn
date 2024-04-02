@@ -4,10 +4,6 @@ import iconDelete from "./icons/iconDelete.vue";
 import iconEdit from "./icons/iconEdit.vue";
 
 const props = defineProps({
-  index: {
-    type: Number,
-    required: true,
-  },
   popup: {
     type: Object,
     required: true,
@@ -26,7 +22,7 @@ const showRename = () => {
   props.popup.optionEditDelete = false;
 };
 
-const emit = defineEmits(["deleteCollection"]);
+const emit = defineEmits(["optionDelete"]);
 </script>
 
 <template>
@@ -35,9 +31,9 @@ const emit = defineEmits(["deleteCollection"]);
     class="sm:block mobile:flex xl:max-w-[170px] xl:scale-105 p-3 bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700 xl:w-full absolute z-40 xl:left-[240px] xl:top-[60px] lg:left-[130px] lg:top-[46px] md:left-[79px] md:top-[18px] md:w-[180px] md:scale-[70%] sm:left-[240px] sm:top-[60px] mobile:left-[143px] mobile:top-[44px] transition-all duration-[270ms] ease-in-out"
   >
     <div
-      id="deleteCollection"
+      id="optionDelete"
       class="flex gap-3 hover:bg-gray-100 transition duration-[270ms] ease-in-out p-1 rounded-lg"
-      @click="$emit('deleteCollection', props.index, props.collectionId)"
+      @click="$emit('optionDelete',props.SelectedIndex, props.collectionId)"
     >
       <iconDelete>
         <template #content>

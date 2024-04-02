@@ -413,62 +413,14 @@
   ],
   "collections": [
     {
-      "id": "d226",
-      "name": "111",
-      "cards": [
-        {
-          "id": 340,
-          "chineseWord": "111",
-          "pinyin": "sdf",
-          "meaning": "sdf"
-        },
-        {
-          "id": 959,
-          "chineseWord": "r",
-          "pinyin": "rwer",
-          "meaning": "werwer"
-        },
-        {
-          "id": 519,
-          "chineseWord": "f",
-          "pinyin": "sdfsd",
-          "meaning": "fsdfdsf"
-        },
-        {
-          "id": 920,
-          "chineseWord": "a",
-          "pinyin": "a",
-          "meaning": "a"
-        }
-      ]
-    },
-    {
-      "id": "7adf",
-      "name": "ee",
-      "cards": [
-        {
-          "id": 196,
-          "chineseWord": "kinh",
-          "pinyin": "vvvv",
-          "meaning": "vvvv"
-        },
-        {
-          "id": 399,
-          "chineseWord": "dddddddd",
-          "pinyin": "ssssss",
-          "meaning": "ddddddd"
-        }
-      ]
-    },
-    {
       "id": "1014",
       "name": "KOK",
       "cards": [
         {
-          "id": 220,
-          "chineseWord": "qwe",
-          "pinyin": "qwe",
-          "meaning": "qwe"
+          "id": 710,
+          "chineseWord": "ajfsasjlkdsal",
+          "pinyin": "asdasdsadsad",
+          "meaning": "asdsad"
         }
       ]
     },
