@@ -27,7 +27,20 @@ const addItem = async (url, id, newCard) => {
     const response = await fetch(`${url}/${id}`);
     const collections = await response.json();
 
-    collections.cards.push(newCard);
+    const checkExistId = collections.cards.findIndex(
+      (card) => card.id === newCard.id
+    );
+
+    if (checkExistId === -1) {
+      collections.cards.push(newCard);
+    } else {
+      // newCard.id = newCard.id + 2;
+      // const updatedCardId = { ...newCard, id: newCard.id };
+      // collections.cards.push(updatedCardId);
+      newCard.id = Math.floor(Math.random() * 1000) + 1;
+      const updatedCardId = { ...newCard, id: newCard.id };
+      collections.cards.push(updatedCardId);
+    }
 
     const updateResponse = await fetch(`${url}/${id}`, {
       method: "PUT",
