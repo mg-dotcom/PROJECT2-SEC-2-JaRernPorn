@@ -148,7 +148,6 @@ const addNewCollectionName = () => {
             :allCollections="collections.getCollections()"
             :closeOption="closeOption"
             :SelectedIndex="SelectedIndex"
-            @changeCollectionName="handleEditCollection"
             @optionDelete="handleDeleteCollection"
             @toggle-option-collection="toggleOptionCollection"
           />

@@ -411,5 +411,42 @@
       "id": "b98c"
     }
   ],
-  "collections": []
+  "collections": [
+    {
+      "id": "4884",
+      "name": "Color",
+      "cards": [
+        {
+          "id": 898,
+          "chineseWord": "橙色",
+          "pinyin": "chéng sè",
+          "meaning": "Orange"
+        },
+        {
+          "id": 207,
+          "chineseWord": "粉红色",
+          "pinyin": "fěn hóng sè",
+          "meaning": "Pink"
+        },
+        {
+          "id": 168,
+          "chineseWord": "紫色",
+          "pinyin": "zǐ sè",
+          "meaning": "Purple"
+        }
+      ]
+    },
+    {
+      "id": "87de",
+      "name": "run",
+      "cards": [
+        {
+          "id": 469,
+          "chineseWord": "hhh",
+          "pinyin": "hhh",
+          "meaning": "hhh"
+        }
+      ]
+    }
+  ]
 }

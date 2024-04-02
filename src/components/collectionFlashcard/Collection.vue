@@ -29,7 +29,6 @@ const showOption = (index) => {
 };
 
 const emit = defineEmits([
-  "changeCollectionName",
   "optionDelete",
   "toggle-option-collection",
 ]);
