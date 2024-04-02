@@ -26,6 +26,7 @@ const closeButton = () => {
   props.popup.addEditCollection = false;
   newCollectionName.value = "New Collection";
   renameCollectionName.value = props.SelectedCollection.name;
+  emptyCollectionName.value = false;
 };
 
 const newCollectionName = ref("New Collection");
@@ -34,7 +35,7 @@ const emptyCollectionName = ref(false);
 const passAndClear = (name) => {
   console.log(name);
   if (name.length === 0) {
-    emptyCollectionName.value = true;
+    emptyCollectionName
     return;
   } else {
     emit("addNewCollections", name);
