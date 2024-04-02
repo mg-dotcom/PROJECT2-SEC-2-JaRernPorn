@@ -36,6 +36,7 @@ const emit = defineEmits([
   "toggle-option-flashcard",
   "deleteFlashcard",
   "showRenameFlashcard",
+  "renameFlashcard",
 ]);
 
 const isClicked = ref(false);

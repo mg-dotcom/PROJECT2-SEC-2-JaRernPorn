@@ -19,6 +19,8 @@ const collectionName = ref(route.params.name);
 const showFlashCard = ref(true);
 
 const popup = reactive({
+  newFlashcard: false,
+  renameFlashcard: false,
   addEditFlashcard: false,
   optionEditDelete: false,
 });
@@ -30,18 +32,13 @@ watch(
   }
 );
 
-const SelectedIndex = ref(undefined);
-
-const showFlashCardAdd = () => {
-  popup.addEditFlashcard = true;
-  closeOption();
-};
-
 const showRenameFlashcard = (index) => {
   popup.addEditFlashcard = true;
   SelectedIndex.value = index;
   closeOption();
 };
+
+const SelectedIndex = ref(undefined);
 
 const toggleOption = (index) => {
   popup.optionEditDelete = !popup.optionEditDelete;
@@ -138,6 +135,10 @@ const handelEditFlashcard = async (
   popup.optionFlashcard = false;
 };
 
+const showFlashCardAdd = () => {
+  popup.addEditFlashcard = true;
+  closeOption();
+};
 </script>
 
 <template>
