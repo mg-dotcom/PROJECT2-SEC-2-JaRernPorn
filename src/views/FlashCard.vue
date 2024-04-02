@@ -57,7 +57,6 @@ onMounted(async () => {
     import.meta.env.VITE_BASE_URL,
     currentCollectionId.value
   );
-
   flashcards.value.addAllFlashcards(flashcardData);
 });
 
@@ -72,7 +71,7 @@ const handleAddNewFlashcard = async (
       import.meta.env.VITE_BASE_URL,
       currentCollectionId.value,
       {
-        id: flashcards.value.getFlashcards().length + 1,
+        id: Math.floor(Math.random() * 1000) + 1,
         chineseWord: newChineseWord,
         pinyin: newPinyin,
         meaning: newMeaning,
@@ -112,7 +111,6 @@ const handelEditFlashcard = async (
   newMeaning,
   index
 ) => {
-
   const editedFlashcard = await editItem(
     import.meta.env.VITE_BASE_URL,
     currentCollectionId.value,

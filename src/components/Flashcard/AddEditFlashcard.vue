@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, defineEmits, ref, computed, watch } from "vue";
+import { defineProps, defineEmits, ref, reactive, watch } from "vue";
 import closeIcon from "../icons/iconClose.vue";
 
 const props = defineProps({
@@ -22,54 +22,95 @@ const props = defineProps({
   },
 });
 
-const previousFlashcard = computed(() => props.SelectedFlashcard);
+const flashcard = reactive({
+  id: props.SelectedFlashcard.id,
+  chineseWord: props.SelectedFlashcard.chineseWord,
+  pinyin: props.SelectedFlashcard.pinyin,
+  meaning: props.SelectedFlashcard.meaning,
+});
+
+watch(
+  () => props.SelectedFlashcard,
+  () => {
+    flashcard.id = props.SelectedFlashcard.id;
+    flashcard.chineseWord = props.SelectedFlashcard.chineseWord;
+    flashcard.pinyin = props.SelectedFlashcard.pinyin;
+    flashcard.meaning = props.SelectedFlashcard.meaning;
+  }
+);
+
 const chineseWordIsEmpty = ref(false);
 const pinyinIsEmpty = ref(false);
 const meaningIsEmpty = ref(false);
 
-const emit = defineEmits(["addNewFlashcard", "renameFlashcard"]);
-
 const closeButton = () => {
-  if (previousFlashcard.value.id === undefined) {
-    previousFlashcard.value.chineseWord = "";
-    previousFlashcard.value.pinyin = "";
-    previousFlashcard.value.meaning = "";
-  } else if (previousFlashcard.value.id !== undefined) {
-    previousFlashcard.value.chineseWord = previousFlashcard.value.chineseWord;
-    previousFlashcard.value.pinyin = previousFlashcard.value.pinyin;
-    previousFlashcard.value.meaning = previousFlashcard.value.meaning;
+  if (flashcard.id === undefined) {
+    flashcard.chineseWord = "";
+    flashcard.pinyin = "";
+    flashcard.meaning = "";
+  } else {
+    flashcard.chineseWord = props.SelectedFlashcard.chineseWord;
+    flashcard.pinyin = props.SelectedFlashcard.pinyin;
+    flashcard.meaning = props.SelectedFlashcard.meaning;
   }
+  props.popup.addEditFlashcard = false;
   chineseWordIsEmpty.value = false;
   pinyinIsEmpty.value = false;
   meaningIsEmpty.value = false;
-  props.popup.addEditFlashcard = false;
 };
+const emit = defineEmits(["addNewFlashcard", "renameFlashcard"]);
 
 const addNewFlashcard = () => {
-  const chineseWordEmpty = previousFlashcard.value.chineseWord === "";
-  const pinyinEmpty = previousFlashcard.value.pinyin === "";
-  const meaningEmpty = previousFlashcard.value.meaning === "";
+  const emptyChineseWord = flashcard.chineseWord === "";
+  const emptyPinyin = flashcard.pinyin === "";
+  const emptyMeaning = flashcard.meaning === "";
 
-  if (chineseWordEmpty || pinyinEmpty || meaningEmpty) {
-    chineseWordIsEmpty.value = chineseWordEmpty;
-    pinyinIsEmpty.value = pinyinEmpty;
-    meaningIsEmpty.value = meaningEmpty;
+  if (emptyChineseWord || emptyPinyin || emptyMeaning) {
+    chineseWordIsEmpty.value = emptyChineseWord;
+    pinyinIsEmpty.value = emptyPinyin;
+    meaningIsEmpty.value = emptyMeaning;
     return;
   } else {
     emit(
       "addNewFlashcard",
-      previousFlashcard.value.id,
-      previousFlashcard.value.chineseWord,
-      previousFlashcard.value.pinyin,
-      previousFlashcard.value.meaning
+      flashcard.id,
+      flashcard.chineseWord,
+      flashcard.pinyin,
+      flashcard.meaning
     );
-    previousFlashcard.value.chineseWord = "";
-    previousFlashcard.value.pinyin = "";
-    previousFlashcard.value.meaning = "";
-    props.popup.addEditFlashcard = false;
+    flashcard.chineseWord = "";
+    flashcard.pinyin = "";
+    flashcard.meaning = "";
     chineseWordIsEmpty.value = false;
     pinyinIsEmpty.value = false;
     meaningIsEmpty.value = false;
+    props.popup.addEditFlashcard = false;
+  }
+};
+
+const renameFlashcard = () => {
+  const emptyChineseWord = flashcard.chineseWord === "";
+  const emptyPinyin = flashcard.pinyin === "";
+  const emptyMeaning = flashcard.meaning === "";
+
+  if (emptyChineseWord || emptyPinyin || emptyMeaning) {
+    chineseWordIsEmpty.value = emptyChineseWord;
+    pinyinIsEmpty.value = emptyPinyin;
+    meaningIsEmpty.value = emptyMeaning;
+    return;
+  } else {
+    emit(
+      "renameFlashcard",
+      flashcard.chineseWord,
+      flashcard.pinyin,
+      flashcard.meaning,
+      props.SelectedIndex
+    );
+
+    chineseWordIsEmpty.value = false;
+    pinyinIsEmpty.value = false;
+    meaningIsEmpty.value = false;
+    props.popup.addEditFlashcard = false;
   }
 };
 
@@ -77,35 +118,11 @@ const isEmpty = (value) => {
   return value === "";
 };
 
-const renameFlashcard = () => {
-  const chineseWordEmpty = previousFlashcard.value.chineseWord === "";
-  const pinyinEmpty = previousFlashcard.value.pinyin === "";
-  const meaningEmpty = previousFlashcard.value.meaning === "";
-
-  if (chineseWordEmpty || pinyinEmpty || meaningEmpty) {
-    chineseWordIsEmpty.value = chineseWordEmpty;
-    pinyinIsEmpty.value = pinyinEmpty;
-    meaningIsEmpty.value = meaningEmpty;
-    return;
-  } else {
-    emit(
-      "renameFlashcard",
-      previousFlashcard.value.chineseWord,
-      previousFlashcard.value.pinyin,
-      previousFlashcard.value.meaning,
-      props.SelectedIndex
-    );
-    props.popup.addEditFlashcard = false;
-    chineseWordIsEmpty.value = false;
-    pinyinIsEmpty.value = false;
-    meaningIsEmpty.value = false;
-  }
-};
-
-const addOrEditFlashcard = () => {
-  if (previousFlashcard.value.id === undefined) {
+const addOrEditFlashcard = (id) => {
+  console.log(id);
+  if (id === undefined) {
     addNewFlashcard();
-  } else {
+  } else if (id !== undefined) {
     renameFlashcard();
   }
 };
@@ -128,7 +145,7 @@ const addOrEditFlashcard = () => {
         />
         <div class="flex flex-col items-center justify-center">
           <div class="text-center text-4xl font-mono font-semibold">
-            {{ previousFlashcard.id === undefined ? "Add new" : "Edit" }}
+            {{ flashcard.id === undefined ? "Add new" : "Edit" }}
             collection
           </div>
           <div class="my-6 flex flex-col items-center justify-center gap-y-7">
@@ -136,16 +153,14 @@ const addOrEditFlashcard = () => {
               <div class="font-outfit">Chinese word</div>
               <input
                 type="text"
-                v-model.trim="previousFlashcard.chineseWord"
+                v-model.trim="flashcard.chineseWord"
                 class="border-[1.5px] rounded-md p-2 w-[360px]"
                 :class="{
                   'border-red-600': chineseWordIsEmpty,
                   'focus:border-red-600': chineseWordIsEmpty,
                   'border-black': !chineseWordIsEmpty,
                 }"
-                @input="
-                  chineseWordIsEmpty = isEmpty(previousFlashcard.chineseWord)
-                "
+                @input="chineseWordIsEmpty = isEmpty(flashcard.chineseWord)"
                 @keydown.enter="addOrEditFlashcard"
                 placeholder="Chinese word"
               />
@@ -160,14 +175,14 @@ const addOrEditFlashcard = () => {
               <div class="font-outfit">Pinyin</div>
               <input
                 type="text"
-                v-model.trim="previousFlashcard.pinyin"
+                v-model.trim="flashcard.pinyin"
                 class="border-[1.5px] rounded-md p-2 w-[360px] focus:outline-1 focus:ring-5 border-black"
                 :class="{
                   'border-red-600': pinyinIsEmpty,
                   'focus:border-red-600': pinyinIsEmpty,
                   'border-black': !pinyinIsEmpty,
                 }"
-                @input="pinyinIsEmpty = isEmpty(previousFlashcard.pinyin)"
+                @input="pinyinIsEmpty = isEmpty(flashcard.pinyin)"
                 placeholder="Pinyin"
                 @keydown.enter="addOrEditFlashcard"
               />
@@ -183,14 +198,14 @@ const addOrEditFlashcard = () => {
               <div class="font-outfit">Meaning</div>
               <input
                 type="text"
-                v-model.trim="previousFlashcard.meaning"
+                v-model.trim="flashcard.meaning"
                 class="border-[1.5px] border-black rounded-md p-2 w-[360px] focus:outline-1 focus:ring-5"
                 :class="{
                   'border-red-600': meaningIsEmpty,
                   'focus:border-red-600': meaningIsEmpty,
                   'border-black': !meaningIsEmpty,
                 }"
-                @input="meaningIsEmpty = isEmpty(previousFlashcard.meaning)"
+                @input="meaningIsEmpty = isEmpty(flashcard.meaning)"
                 @keydown.enter="addOrEditFlashcard"
                 placeholder="Meaning"
               />
@@ -210,9 +225,9 @@ const addOrEditFlashcard = () => {
               </button>
               <button
                 class="bg-[#4096ff] text-white rounded-md w-20 font-outfit font-medium"
-                @click="addOrEditFlashcard"
+                @click="addOrEditFlashcard(flashcard.id)"
               >
-                {{ previousFlashcard.id === undefined ? "ADD" : "OK" }}
+                {{ flashcard.id === undefined ? "ADD" : "OK" }}
               </button>
             </div>
           </div>
