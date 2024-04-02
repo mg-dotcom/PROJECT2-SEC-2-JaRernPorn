@@ -161,7 +161,7 @@ const addOrEditFlashcard = (id) => {
                   'border-black': !chineseWordIsEmpty,
                 }"
                 @input="chineseWordIsEmpty = isEmpty(flashcard.chineseWord)"
-                @keydown.enter="addOrEditFlashcard"
+                @keydown.enter="addOrEditFlashcard(flashcard.id)"
                 placeholder="Chinese word"
               />
               <div
@@ -184,7 +184,7 @@ const addOrEditFlashcard = (id) => {
                 }"
                 @input="pinyinIsEmpty = isEmpty(flashcard.pinyin)"
                 placeholder="Pinyin"
-                @keydown.enter="addOrEditFlashcard"
+                @keydown.enter="addOrEditFlashcard(flashcard.id)"
               />
               <div
                 v-if="pinyinIsEmpty"
@@ -206,7 +206,7 @@ const addOrEditFlashcard = (id) => {
                   'border-black': !meaningIsEmpty,
                 }"
                 @input="meaningIsEmpty = isEmpty(flashcard.meaning)"
-                @keydown.enter="addOrEditFlashcard"
+                @keydown.enter="addOrEditFlashcard(flashcard.id)"
                 placeholder="Meaning"
               />
               <div

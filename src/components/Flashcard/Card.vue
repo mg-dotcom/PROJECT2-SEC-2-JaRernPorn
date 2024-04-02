@@ -112,7 +112,7 @@ const showMeaning = () => {
         "
         :popup="popup"
         :SelectedIndex="SelectedIndex"
-        @optionDelete="deleteFlashcard(props.index)"
+        @optionDelete="deleteFlashcard"
         @showEditFlashcard="showEditFlashcard"
       />
     </div>
