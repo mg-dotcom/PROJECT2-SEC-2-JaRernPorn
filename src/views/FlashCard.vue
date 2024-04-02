@@ -143,7 +143,7 @@ const showFlashCardAdd = () => {
 <template>
   <div class="bg-main-bgColor min-h-screen w-full" @click.self="closeOption">
     <section v-if="showFlashCard" @click.self="closeOption">
-      <Header :closeOption="closeOption">
+      <Header :popup="popup">
         <template #title> {{ collectionName }} </template>
       </Header>
 

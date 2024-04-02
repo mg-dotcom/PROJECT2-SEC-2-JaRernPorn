@@ -1,21 +1,24 @@
 <script setup>
-import { defineProps, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { defineProps, ref } from "vue";
+import { useRouter } from "vue-router";
 const props = defineProps({
-  closeOption: {
-    type: Function,
-    required: true
-  }
-})
+  popup: {
+    type: Object,
+    required: true,
+  },
+});
 
-const router = useRouter()
+const router = useRouter();
 const goBack = () => {
-  router.go(-1)
-}
+  router.go(-1);
+};
 </script>
 
 <template>
-  <div class="p-2 md:p-4 lg:px-10 lg:py-7" @click.self="closeOption">
+  <div
+    class="p-2 md:p-4 lg:px-10 lg:py-7"
+    @click="props.popup.optionEditDelete = false"
+  >
     <div class="absolute">
       <div
         class="hover:scale-110 transition-transform duration-300 sm:scale-100 mobile:scale-90"

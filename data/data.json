@@ -411,23 +411,5 @@
       "id": "b98c"
     }
   ],
-  "collections": [
-    {
-      "id": "1014",
-      "name": "KOK",
-      "cards": [
-        {
-          "id": 710,
-          "chineseWord": "ajfsasjlkdsal",
-          "pinyin": "asdasdsadsad",
-          "meaning": "asdsad"
-        }
-      ]
-    },
-    {
-      "id": "e4aa",
-      "name": "fedfs",
-      "cards": []
-    }
-  ]
+  "collections": []
 }

@@ -99,9 +99,9 @@ const addNewCollectionName = () => {
   <section class="flashcard-page overflow-hidden" v-show="page.flashcard">
     <div
       class="min-h-screen w-screen bg-main-bgColor"
-      @click.self="closeOption"
+      @click.self="closeOption()"
     >
-      <Header :closeOption="closeOption">
+      <Header :popup="popup">
         <template #title> Flashcard </template>
       </Header>
 
