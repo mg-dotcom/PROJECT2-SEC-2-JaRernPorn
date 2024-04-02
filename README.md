@@ -4,7 +4,7 @@
 | Student Id | Name  | Responsible | Percentage |
 | ------------- | ------------- | ------------- | ------------- | 
 | 65130500086 | หทัยทัต แย้มชมชื่น  | - Game1 <br> - Unit Page <br> - SoundControl <br> | 20% |
-| 65130500103 | ณัฐธิดา รุ่งเรือง  | - Game2 <br> - Flashcard Page | 20% |
+| 65130500103 | ณัฐธิดา รุ่งเรือง  | - Game2 <br> - Flashcard Page <br> - Result Page | 20% |
 | 65130500109 | ใบตอง แซ่โค้ว  | - Game3 <br> - Setting <br> - fetchApi collection | 20% |
 | 65130500113 | มัณฑนา คชรินทร์  | - Game4 <br> - Setting <br> -  Router Flashcard| 20% |
 | 65130500120 | อภิสรา ชลประสิทธิ์  | - Collaction Page <br> - Flashcard Page <br> -  Router Collection <br> | 20% |
