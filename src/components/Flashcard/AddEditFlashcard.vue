@@ -146,7 +146,7 @@ const addOrEditFlashcard = (id) => {
         <div class="flex flex-col items-center justify-center">
           <div class="text-center text-4xl font-mono font-semibold">
             {{ flashcard.id === undefined ? "Add new" : "Edit" }}
-            collection
+            flashcard
           </div>
           <div class="my-6 flex flex-col items-center justify-center gap-y-7">
             <div class="chinese-word input-box gap-y-1 flex flex-col">
