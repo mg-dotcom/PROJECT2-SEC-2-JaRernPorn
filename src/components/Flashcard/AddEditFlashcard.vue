@@ -23,7 +23,6 @@ const props = defineProps({
 });
 
 const previousFlashcard = computed(() => props.SelectedFlashcard);
-
 const chineseWordIsEmpty = ref(false);
 const pinyinIsEmpty = ref(false);
 const meaningIsEmpty = ref(false);
@@ -35,6 +34,10 @@ const closeButton = () => {
     previousFlashcard.value.chineseWord = "";
     previousFlashcard.value.pinyin = "";
     previousFlashcard.value.meaning = "";
+  } else if (previousFlashcard.value.id !== undefined) {
+    previousFlashcard.value.chineseWord = previousFlashcard.value.chineseWord;
+    previousFlashcard.value.pinyin = previousFlashcard.value.pinyin;
+    previousFlashcard.value.meaning = previousFlashcard.value.meaning;
   }
   chineseWordIsEmpty.value = false;
   pinyinIsEmpty.value = false;
@@ -103,7 +106,6 @@ const addOrEditFlashcard = () => {
   if (previousFlashcard.value.id === undefined) {
     addNewFlashcard();
   } else {
-    console.log(previousFlashcard.value.chineseWord);
     renameFlashcard();
   }
 };

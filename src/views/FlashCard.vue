@@ -68,7 +68,6 @@ const handleAddNewFlashcard = async (
   newMeaning
 ) => {
   if (newId === undefined) {
-    console.log(newChineseWord, newPinyin, newMeaning);
     const addedFlashcard = await addItem(
       import.meta.env.VITE_BASE_URL,
       currentCollectionId.value,
@@ -113,7 +112,6 @@ const handelEditFlashcard = async (
   newMeaning,
   index
 ) => {
-  console.log(newChineseWord, newPinyin, newMeaning, index);
 
   const editedFlashcard = await editItem(
     import.meta.env.VITE_BASE_URL,
