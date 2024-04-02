@@ -4,10 +4,6 @@ import iconDelete from "./icons/iconDelete.vue";
 import iconEdit from "./icons/iconEdit.vue";
 
 const props = defineProps({
-  index: {
-    type: Number,
-    required: true,
-  },
   popup: {
     type: Object,
     required: true,
