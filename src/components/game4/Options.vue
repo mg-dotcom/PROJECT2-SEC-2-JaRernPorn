@@ -32,9 +32,7 @@ const shuffle = (array) => {
 }
 
 const shuffleOption = computed(() => {
-  // const options =
-  //   data.categories[currentIndexCate.value].units[currentIndexUnit.value].items
-  return shuffle([...options.value]) // copy array
+  return shuffle([...options.value]) 
 })
 
 const handleWordClick = (id, pronunciation) => {
@@ -56,7 +54,6 @@ const isMatching = () => {
     return
   }
 
-  // find() return first element
   const { id: wordId } = options.value.find(
     (option) => option.id === clickedWordId.value
   )
@@ -67,7 +64,6 @@ const isMatching = () => {
   if (wordId === meaningId) {
     wordArray.value.push(wordId)
     meaningArray.value.push(meaningId)
-    // ครบ 3 คู่
     if (
       wordArray.value.length === options.value.length &&
       meaningArray.value.length === options.value.length
