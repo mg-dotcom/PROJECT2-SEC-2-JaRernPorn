@@ -1,41 +1,38 @@
 <script setup>
-import { defineProps, defineEmits } from "vue";
+import { defineProps, defineEmits } from 'vue'
 
-import optionEditDelete from "../optionEditDelete.vue";
+import optionEditDelete from '../optionEditDelete.vue'
 
 const props = defineProps({
   index: {
     type: Number,
-    required: true,
+    required: true
   },
   popup: {
     type: Object,
-    required: true,
+    required: true
   },
   allCollections: {
-    required: true,
+    required: true
   },
   SelectedIndex: {
-    type: Number,
+    type: Number
   },
   collectionId: {
     type: String,
-    required: true,
-  },
-});
+    required: true
+  }
+})
 
 const showOption = (index) => {
-  emit("toggle-option-collection", index);
-};
+  emit('toggle-option-collection', index)
+}
 
-const emit = defineEmits([
-  "deleteCollection",
-  "toggle-option-collection",
-]);
+const emit = defineEmits(['deleteCollection', 'toggle-option-collection'])
 
 const deleteCollection = (index, id) => {
-  emit("deleteCollection", index, id);
-};
+  emit('deleteCollection', index, id)
+}
 </script>
 
 <template>
@@ -51,8 +48,8 @@ const deleteCollection = (index, id) => {
         name: 'FlashCard',
         params: {
           name: props.allCollections[props.index].name,
-          id: collectionId,
-        },
+          id: collectionId
+        }
       }"
     >
       <div
@@ -74,7 +71,6 @@ const deleteCollection = (index, id) => {
 
     <optionEditDelete
       v-show="props.popup.optionEditDelete && SelectedIndex === props.index"
-      :index="index"
       :popup="popup"
       :SelectedIndex="SelectedIndex"
       :collection-id="collectionId"

@@ -1,85 +1,81 @@
 <script setup>
-import { defineProps, ref, defineEmits, watch } from "vue";
-import closeIcon from "../icons/iconClose.vue";
+import { defineProps, ref, defineEmits, watch } from 'vue'
+import closeIcon from '../icons/iconClose.vue'
 
 const props = defineProps({
   popup: {
     type: Object,
-    required: true,
+    required: true
   },
   // ถ้าเป็นการเพิ่ม collection ใหม่ SelectedCollection default จะเป็น object ว่าง
   // ถ้าเป็นการเเก้ไข collection จะเป็น object ที่มีข้อมูลของ collection ที่เลือกมา
   SelectedCollection: {
     type: Object,
-    default: { id: undefined, name: undefined, cards: [] },
+    default: { id: undefined, name: undefined, cards: [] }
   },
   // เป็น index ของ collection ที่เลือกมา
   // ถ้าเป็นการเพิ่ม collection ใหม่ SelectedIndex จะเป็น undefined
   // ถ้าเป็นการเเก้ไข collection จะเป็น index ของ collection ที่เลือกมา
   SelectedIndex: {
     type: Number,
-    default: undefined,
-  },
-});
+    default: undefined
+  }
+})
 
 const closeButton = () => {
-  props.popup.addEditCollection = false;
-  newCollectionName.value = "New Collection";
-  renameCollectionName.value = props.SelectedCollection.name;
-  emptyCollectionName.value = false;
-};
+  props.popup.addEditCollection = false
+  newCollectionName.value = 'New Collection'
+  renameCollectionName.value = props.SelectedCollection.name
+  emptyCollectionName.value = false
+}
 
-const newCollectionName = ref("New Collection");
-const emptyCollectionName = ref(false);
+const newCollectionName = ref('New Collection')
+const emptyCollectionName = ref(false)
 
 const passAndClear = (name) => {
-  console.log(name);
+  console.log(name)
   if (name.length === 0) {
     emptyCollectionName
-    return;
+    return
   } else {
-    emit("addNewCollections", name);
-    newCollectionName.value = "New Collection";
-    emptyCollectionName.value = false;
-    props.popup.addEditCollection = false;
+    emit('addNewCollections', name)
+    newCollectionName.value = 'New Collection'
+    emptyCollectionName.value = false
+    props.popup.addEditCollection = false
   }
-};
+}
 
-const emit = defineEmits([
-  "addNewCollections",
-  "toUpdateName",
-  "changeCollectionName",
-]);
+const emit = defineEmits(['addNewCollections', 'changeCollectionName'])
 
 const isEmpty = (name) => {
-  return name === "";
-};
+  return name === ''
+}
 
-const renameCollectionName = ref(props.SelectedCollection.name);
+const renameCollectionName = ref(props.SelectedCollection.name)
 
 // เมื่อ SelectedCollection มีการเปลี่ยนแปลงให้เปลี่ยนค่าใน renameCollectionName ด้วย
 watch(
   () => props.SelectedCollection,
   () => {
-    renameCollectionName.value = props.SelectedCollection.name;
+    renameCollectionName.value = props.SelectedCollection.name
   }
-);
+)
 
 const toUpdateName = (name) => {
   if (name.length === 0) {
-    emptyCollectionName.value = true;
-    return;
+    emptyCollectionName.value = true
+    return
   } else {
     emit(
-      "changeCollectionName",
+      'changeCollectionName',
       props.SelectedIndex,
       name,
       props.SelectedCollection.id
-    );
-    emptyCollectionName.value = false;
-    props.popup.addEditCollection = false;
+    )
+    emptyCollectionName.value = false
+    props.popup.addEditCollection = false
   }
-};
+}
 </script>
 
 <template>
@@ -99,7 +95,7 @@ const toUpdateName = (name) => {
         />
         <div class="flex flex-col items-center justify-center">
           <div class="text-center text-3xl font-mono font-semibold">
-            {{ props.SelectedCollection.id === undefined ? "Add new" : "Edit" }}
+            {{ props.SelectedCollection.id === undefined ? 'Add new' : 'Edit' }}
             collection
           </div>
           <div class="my-7 flex flex-col items-center justify-center">
@@ -133,7 +129,7 @@ const toUpdateName = (name) => {
                 :class="{
                   'border-red-600': emptyCollectionName,
                   'focus:border-red-600': emptyCollectionName,
-                  'border-[#4096ff]': !emptyCollectionName,
+                  'border-[#4096ff]': !emptyCollectionName
                 }"
                 placeholder="Collection name"
                 @keydown.enter="passAndClear(newCollectionName)"
@@ -149,7 +145,7 @@ const toUpdateName = (name) => {
                 :class="{
                   'border-red-600': emptyCollectionName,
                   'focus:border-red-600': emptyCollectionName,
-                  'border-[#4096ff]': !emptyCollectionName,
+                  'border-[#4096ff]': !emptyCollectionName
                 }"
                 :placeholder="props.SelectedCollection.name"
                 @keydown.enter="toUpdateName(renameCollectionName)"

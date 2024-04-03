@@ -1,97 +1,97 @@
 <script setup>
-import { ref, onMounted, reactive } from "vue";
-import Header from "../components/Header.vue";
-import addEditCollection from "../components/collectionFlashcard/AddEditCollection.vue";
-import Collection from "../components/collectionFlashcard/Collection.vue";
-import { CollectionModal } from "../libs/flashcard-libs/CollectionModal.js";
+import { ref, onMounted, reactive } from 'vue'
+import Header from '../components/Header.vue'
+import addEditCollection from '../components/collectionFlashcard/AddEditCollection.vue'
+import Collection from '../components/collectionFlashcard/Collection.vue'
+import { CollectionModal } from '../libs/flashcard-libs/CollectionModal.js'
 import {
   getCollectionItem,
   addCollectionItem,
   deleteCollectionItem,
-  editCollectionItem,
-} from "../libs/flashcard-libs/FetchCollection";
+  editCollectionItem
+} from '../libs/flashcard-libs/FetchCollection.js'
 
 const page = reactive({
-  flashcard: true,
-});
+  flashcard: true
+})
 
 const popup = reactive({
   Setting: false,
   newCollection: false,
   addEditCollection: false,
-  optionEditDelete: false,
-});
+  optionEditDelete: false
+})
 
-const SelectedIndex = ref(undefined);
+const SelectedIndex = ref(undefined)
 
 // เมื่อกดปุ่ม option ของแต่ละ collection ให้แสดง popup เเก้ไขชื่อ collection หรือลบ collection
 // เเละเก็บ index ของ collection ที่กดไว้ใน SelectedIndex
 const toggleOptionCollection = (index) => {
-  popup.optionEditDelete = !popup.optionEditDelete;
-  SelectedIndex.value = index;
-};
+  popup.optionEditDelete = !popup.optionEditDelete
+  SelectedIndex.value = index
+}
 
 // ปิด popup ทั้งหมด ที่เปิดอยู่ เเละ reset SelectedIndex ให้เป็น undefined
 const closeOption = () => {
-  popup.optionCollection = false;
-  SelectedIndex.value = undefined;
-};
+  popup.optionCollection = false
+  SelectedIndex.value = undefined
+}
 
-const collections = ref(new CollectionModal());
+const collections = ref(new CollectionModal())
 
 onMounted(async () => {
-  const col = await getCollectionItem(import.meta.env.VITE_BASE_URL);
-  collections.value.addAllCollection(col);
-});
+  const col = await getCollectionItem(import.meta.env.VITE_BASE_URL)
+  collections.value.addAllCollection(col)
+})
 
 const handleEditCollection = async (index, newName, id) => {
   const editedCollection = await editCollectionItem(
     import.meta.env.VITE_BASE_URL,
     id,
     {
-      name: newName.trim(),
+      name: newName.trim()
     }
-  );
+  )
 
-  collections.value.editCollection(editedCollection.name, index);
+  collections.value.editCollection(editedCollection.name, index)
 
-  popup.renameCollection = false;
-  closeOption();
-};
+  popup.renameCollection = false
+  closeOption()
+}
 
 const handleDeleteCollection = async (index, id) => {
   const statusCode = await deleteCollectionItem(
     import.meta.env.VITE_BASE_URL,
     id
-  );
+  )
   if (statusCode === 200) {
-    collections.value.removeCollection(index);
+    collections.value.removeCollection(index)
   }
-  closeOption();
-};
+  closeOption()
+}
 
 const handleAddNewCollection = async (name) => {
-  const newColName = name.trim();
+  const newColName = name.trim()
   const newCollectionName = await addCollectionItem(
     import.meta.env.VITE_BASE_URL,
     {
       name: newColName,
-      cards: [],
+      cards: []
     }
-  );
+  )
 
   collections.value.addCollection(
     newCollectionName.id,
     newCollectionName.name,
     newCollectionName.cards
-  );
-  popup.newCollection = false;
-};
+  )
+  popup.newCollection = false
+}
 
 const addNewCollectionName = () => {
-  popup.addEditCollection = true;
-  closeOption();
-};
+  popup.addEditCollection = true
+  closeOption()
+}
 </script>
 
 <template>
@@ -158,3 +158,4 @@ const addNewCollectionName = () => {
 </template>
 
 <style scoped></style>
+../libs/flashcard-libs/FetchCollection

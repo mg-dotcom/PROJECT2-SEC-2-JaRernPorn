@@ -1,49 +1,39 @@
 <script setup>
-import { defineProps, defineEmits, ref } from "vue";
-import OptionEditDelete from "../optionEditDelete.vue";
+import { defineProps, defineEmits, ref } from 'vue'
+import OptionEditDelete from '../optionEditDelete.vue'
 
 const props = defineProps({
   allFlashcards: {
-    required: true,
+    required: true
   },
   index: {
     type: Number,
-    required: true,
+    required: true
   },
   SelectedIndex: {
-    type: Number,
+    type: Number
   },
   popup: {
     type: Object,
-    required: true,
-  },
-});
+    required: true
+  }
+})
 
 const showOption = (index) => {
-  emit("toggle-option-flashcard", index);
-};
+  emit('toggle-option-flashcard', index)
+}
 
 const deleteFlashcard = (index) => {
-  emit("deleteFlashcard", index);
-};
+  emit('deleteFlashcard', index)
+}
 
-const showEditFlashcard = (index) => {
-  emit("showEditFlashcard", index);
-  props.popup.optionEditDelete = false;
-};
+const emit = defineEmits(['toggle-option-flashcard', 'deleteFlashcard'])
 
-const emit = defineEmits([
-  "toggle-option-flashcard",
-  "deleteFlashcard",
-  "showEditFlashcard",
-  "editFlashcard",
-]);
-
-const isClicked = ref(false);
+const isClicked = ref(false)
 
 const showMeaning = () => {
-  isClicked.value = !isClicked.value;
-};
+  isClicked.value = !isClicked.value
+}
 </script>
 
 <template>
@@ -73,7 +63,7 @@ const showMeaning = () => {
                   'h-auto':
                     props.allFlashcards[props.index].chineseWord.length > 10,
                   'h-[140px]':
-                    props.allFlashcards[props.index].chineseWord.length <= 10,
+                    props.allFlashcards[props.index].chineseWord.length <= 10
                 }"
               >
                 {{ props.allFlashcards[props.index].chineseWord }}
@@ -84,7 +74,7 @@ const showMeaning = () => {
                 :class="{
                   'h-auto': props.allFlashcards[props.index].pinyin.length > 15,
                   'h-[42px]':
-                    props.allFlashcards[props.index].pinyin.length <= 15,
+                    props.allFlashcards[props.index].pinyin.length <= 15
                 }"
               >
                 {{ props.allFlashcards[props.index].pinyin }}
@@ -113,8 +103,9 @@ const showMeaning = () => {
         :popup="popup"
         :SelectedIndex="SelectedIndex"
         @optionDelete="deleteFlashcard"
-        @showEditFlashcard="showEditFlashcard"
       />
+
+      <!-- @showEditFlashcard="showEditFlashcard" -->
     </div>
   </div>
 </template>
