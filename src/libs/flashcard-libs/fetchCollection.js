@@ -27,7 +27,6 @@ async function addCollectionItem(url, newCollection) {
 }
 
 async function deleteCollectionItem(url, id) {
-  // console.log(`${url}?id=${id}`);
   try {
     const res = await fetch(`${url}/${id}`, {
       method: 'DELETE'
