@@ -21,7 +21,7 @@ const checkStatus = ref(false)
 const isCorrect = ref(false)
 const isWrong = ref(false)
 const userAnswer = ref([])
-const userAnswerId = ref(null)
+const wrongAnswerId = ref(null)
 const clickedChoice = ref(false)
 
 //Setting
@@ -111,7 +111,7 @@ const checkAnswer = (userAns) => {
     }, 0)
   } else {
     console.log('Wrong!')
-    userAnswerId.value = userAns[0].id
+    wrongAnswerId.value = userAns[0].id
     isWrong.value = true
     isCorrect.value = true
     setTimeout(() => {
@@ -195,7 +195,7 @@ const restartGame = () => {
             :isWrong="isWrong"
             :userAnswer="userAnswer"
             :correctAnswer="correctAnswer"
-            :userAnswerId="userAnswerId"
+            :wrongAnswerId="wrongAnswerId"
             :checkStatus="checkStatus"
             :clickedChoice="clickedChoice"
             @selected="selectedAnswer"

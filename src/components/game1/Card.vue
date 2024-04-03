@@ -9,7 +9,7 @@ const props = defineProps({
   isWrong: Boolean,
   userAnswer: Array,
   correctAnswer: Object,
-  userAnswerId: Number,
+  wrongAnswerId: Number,
   clickedChoice: Boolean
 })
 
@@ -24,7 +24,8 @@ const emits = defineEmits(['selected'])
       :class="{
         'bg-correct-option-green':
           showColor && item.id === correctAnswer.id && isCorrect,
-        'bg-wrong-option-red': showColor && item.id === userAnswerId && isWrong,
+        'bg-wrong-option-red':
+          showColor && item.id === wrongAnswerId && isWrong,
         'border-selected-option-blue':
           clickedChoice && item.id === userAnswer[0].id
       }"
