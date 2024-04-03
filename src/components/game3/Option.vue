@@ -6,7 +6,7 @@ const props = defineProps({
   userSelected: String
 })
 const emits = defineEmits(['optionClicked'])
-// console.log('from option.vue = ' + props.isSelected)
+
 </script>
 
 <template>

@@ -23,7 +23,6 @@ const showSetting = ref(false)
 const userSelected = ref()
 const showAudio = ref(false)
 const showPopup = ref(false)
-const checkStatus = ref(false)
 const audioOfOption = ref(
   data.categories[currentIndexCate.value].units[currentIndexUnit.value].items[
     randomQuiz.value
@@ -109,8 +108,8 @@ const checkAnswer = () => {
     data.categories[currentIndexCate.value].units[currentIndexUnit.value].items[
       randomQuiz.value
     ].word
-  checkStatus.value = true
-  if (userSelected.value === answer.value && checkStatus.value) {
+  
+  if (userSelected.value === answer.value ) {
     countCheck.value++
     setColorOption.value = answer.value
     userSelected.value = ''
@@ -119,7 +118,6 @@ const checkAnswer = () => {
       setColorOption.value = ''
       isSelected.value = false
       randomQuiz.value++
-      console.log('correct!')
     }, 2000)
   } else {
     answer.value = ''
