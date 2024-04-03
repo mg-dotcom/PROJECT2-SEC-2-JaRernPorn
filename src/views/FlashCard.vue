@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref, watch, onMounted } from 'vue'
+import { reactive, ref, watchEffect, onMounted } from 'vue'
 import Card from '../components/Flashcard/Card.vue'
 import Header from '../components/Header.vue'
 import { useRoute } from 'vue-router'
@@ -23,12 +23,9 @@ const popup = reactive({
   optionEditDelete: false
 })
 
-watch(
-  () => route.params.name,
-  (newName) => {
-    collectionName.value = newName
-  }
-)
+watchEffect(() => {
+  collectionName.value = route.params.name
+})
 
 const SelectedIndex = ref(undefined)
 
