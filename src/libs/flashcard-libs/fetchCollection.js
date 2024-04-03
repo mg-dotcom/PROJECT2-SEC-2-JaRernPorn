@@ -41,7 +41,6 @@ async function editCollectionItem(url, id, editCollection) {
   try {
     const response = await fetch(`${url}/${id}`)
     const selectedCollection = await response.json()
-    console.log(selectedCollection)
     const updatedCollection = { ...selectedCollection, ...editCollection }
     const res = await fetch(`${url}/${id}`, {
       method: 'PUT',

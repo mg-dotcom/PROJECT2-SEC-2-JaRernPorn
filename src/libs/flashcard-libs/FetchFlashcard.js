@@ -2,20 +2,10 @@ async function getItem(url, id) {
   try {
     const data = await fetch(`${url}/${id}`)
     const response = await data.json()
-
-    if (response.hasOwnProperty('cards')) {
-      if (Array.isArray(response.cards)) {
-        return response.cards
-      } else {
-        console.log("Error: The 'cards' property is not an array.")
-        return []
-      }
-    } else {
-      const allCards = response.collections.flatMap(
-        (collection) => collection.cards
-      )
-      return allCards
-    }
+    const allCards=[]
+    response.cards.forEach((card)=>allCards.push(card))
+    return allCards;
+    
   } catch (error) {
     console.log(`Error: ${error}`)
     return []
