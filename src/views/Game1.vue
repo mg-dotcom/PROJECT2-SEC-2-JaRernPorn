@@ -18,17 +18,12 @@ const currentIndexQuestion = ref(0)
 const showColor = ref(false)
 const checkStatus = ref(false)
 
-const correctAnswer = ref(
-  categories[currentIndexCate.value].units[currentIndexUnit.value].items[
-    currentIndexQuestion.value
-  ]
-)
-
 const isCorrect = ref(false)
 const isWrong = ref(false)
 const userAnswer = ref([])
 const userAnswerId = ref(null)
 const clickedChoice = ref(false)
+
 //Setting
 const showSetting = ref(false)
 
@@ -82,8 +77,13 @@ const passToGame2 = () => {
   })
 }
 
-const correctAnswers = ref([])
 //CheckAnswer
+const correctAnswer = ref(
+  categories[currentIndexCate.value].units[currentIndexUnit.value].items[
+    currentIndexQuestion.value
+  ]
+)
+
 const checkAnswer = (userAns) => {
   clickedChoice.value = false
   checkStatus.value = true
