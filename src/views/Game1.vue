@@ -78,11 +78,7 @@ const passToGame2 = () => {
 }
 
 //CheckAnswer
-const correctAnswer = ref(
-  categories[currentIndexCate.value].units[currentIndexUnit.value].items[
-    currentIndexQuestion.value
-  ]
-)
+const correctAnswer = ref(undefined)
 
 const checkAnswer = (userAns) => {
   clickedChoice.value = false
@@ -133,6 +129,7 @@ const checkAnswer = (userAns) => {
   checkStatus.value = false
 
   console.log(currentIndexQuestion.value)
+  console.log(correctAnswer.value)
 }
 
 const restartGame = () => {
