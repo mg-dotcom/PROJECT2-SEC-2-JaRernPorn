@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from 'vue'
 import SoundControl from '../SoundControl.vue'
 
 const props = defineProps({
@@ -10,7 +9,6 @@ const props = defineProps({
   isWrong: Boolean,
   userAnswer: Array,
   correctAnswer: Object,
-  currentItem: String,
   userAnswerId: Number,
   clickedChoice: Boolean
 })
