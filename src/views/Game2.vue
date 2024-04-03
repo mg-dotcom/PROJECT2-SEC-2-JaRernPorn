@@ -2,7 +2,7 @@
 import { ref, computed, defineProps } from 'vue'
 import data from '../../data/data.json'
 import Setting from '../components/Setting.vue'
-import Answer_popup from '../components/game2/Answer_popup.vue'
+import Answer_popup from '../components/Answer_popup.vue'
 import SoundControl from '../components/SoundControl.vue'
 import { useRouter, useRoute } from 'vue-router'
 

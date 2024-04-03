@@ -2,7 +2,7 @@
 import Option from '../components/game3/Option.vue'
 import data from '../../data/data.json'
 import Setting from '../components/Setting.vue'
-import Answer_popup from '../components/game3/Answer_popup.vue'
+import Answer_popup from '../components/Answer_popup.vue'
 import { computed, ref } from 'vue'
 import SoundControl from '../components/SoundControl.vue'
 import { useRoute, useRouter } from 'vue-router'
@@ -45,7 +45,7 @@ const currentQuiz = computed(() => {
     data.categories[currentIndexCate.value].units[currentIndexUnit.value].items
       .length
   ) {
-    setTimeout(passToGame4, 2000) 
+    setTimeout(passToGame4, 2000)
   } else {
     answerOfQuiz.value =
       data.categories[currentIndexCate.value].units[
