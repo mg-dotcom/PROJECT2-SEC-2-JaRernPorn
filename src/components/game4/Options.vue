@@ -32,7 +32,7 @@ const shuffle = (array) => {
 }
 
 const shuffleOption = computed(() => {
-  return shuffle([...options.value]) 
+  return shuffle([...options.value])
 })
 
 const handleWordClick = (id, pronunciation) => {
@@ -78,7 +78,6 @@ const isMatching = () => {
       wrongWord.value = []
       wrongMeaning.value = []
     }, 1000)
-    console.log('wrong')
   }
 
   clickedWordId.value = ''
