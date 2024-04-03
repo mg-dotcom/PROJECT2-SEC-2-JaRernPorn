@@ -187,8 +187,6 @@ const restartGame = () => {
           </h2>
         </div>
 
-        <!-- Setting Part -->
-
         <div class="scale-75">
           <Card
             :choices="threeChoices"
