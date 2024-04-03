@@ -11,7 +11,7 @@ const route = useRoute()
 
 const answer = ref('')
 const options = ref([])
-const currentIndex = ref(0) //คำถามปัจจุบัน
+const currentIndex = ref(0)
 const showSetting = ref(false)
 const showPopup = ref(false)
 const checkStatus = ref(false)
@@ -21,7 +21,6 @@ const paramUnitIndex = route.params.unit - 1
 
 const unitIndex = ref(paramUnitIndex)
 const categoryIndex = ref(paramCateIndex)
-//const items = category.categories[0].units[0].items
 
 const currentCategory = data.categories[paramCateIndex]
 const items = currentCategory.units[paramUnitIndex].items
@@ -40,10 +39,10 @@ const currentQuiz = computed(() => {
     passToGame3()
   }
 
-  answer.value = items[currentIndex.value].meaning // กำหนดคำตอบจากข้อปัจจุบัน
+  answer.value = items[currentIndex.value].meaning
   options.value = generateOptions(answer.value)
 
-  return items[currentIndex.value].word // แสดงคำปัจจุบันที่กำลังเล่น
+  return items[currentIndex.value].word
 })
 
 const generateOptions = (answer) => {

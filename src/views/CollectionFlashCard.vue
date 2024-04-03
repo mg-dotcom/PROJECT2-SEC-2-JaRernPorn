@@ -16,22 +16,17 @@ const page = reactive({
 })
 
 const popup = reactive({
-  Setting: false,
-  newCollection: false,
   addEditCollection: false,
   optionEditDelete: false
 })
 
 const SelectedIndex = ref(undefined)
 
-// เมื่อกดปุ่ม option ของแต่ละ collection ให้แสดง popup เเก้ไขชื่อ collection หรือลบ collection
-// เเละเก็บ index ของ collection ที่กดไว้ใน SelectedIndex
 const toggleOptionCollection = (index) => {
   popup.optionEditDelete = !popup.optionEditDelete
   SelectedIndex.value = index
 }
 
-// ปิด popup ทั้งหมด ที่เปิดอยู่ เเละ reset SelectedIndex ให้เป็น undefined
 const closeOption = () => {
   popup.optionCollection = false
   SelectedIndex.value = undefined

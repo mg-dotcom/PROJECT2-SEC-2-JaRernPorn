@@ -1,6 +1,6 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
-const route = useRoute() // using useRoute() hook to access the current route object
+const route = useRoute()
 const router = useRouter()
 import { categories } from '../../data/data.json'
 import { computed, ref } from 'vue'
@@ -94,7 +94,6 @@ const checkAnswer = (userAns) => {
     ]
 
   if (userAns[0].id === correctAnswer.value.id) {
-    // userAnswerId.value = userAnswer[0].id
     console.log('Correct!')
     isCorrect.value = true
 
@@ -103,8 +102,7 @@ const checkAnswer = (userAns) => {
       setTimeout(() => {
         showColor.value = false
         isCorrect.value = false
-        currentIndexQuestion.value++ // 3
-        // loop 3 questions
+        currentIndexQuestion.value++
         if (currentIndexQuestion.value > 2) {
           currentIndexQuestion.value = 0
           passToGame2()
@@ -138,9 +136,7 @@ const checkAnswer = (userAns) => {
 }
 
 const restartGame = () => {
-  // Check if the current route name is "Game1"
   if (router.currentRoute.value.name === 'Game1') {
-    // Reload the current route
     router.go(0)
   } else {
     router.push({

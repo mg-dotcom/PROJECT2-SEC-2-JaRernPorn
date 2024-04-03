@@ -1,8 +1,7 @@
 <script setup>
-import { ref, defineProps } from 'vue'
+import { ref } from 'vue'
 import category from '../../data/data.json'
 import SoundControl from '../components/SoundControl.vue'
-import SettingHomePage from '../components/SettingHomePage.vue'
 import { useRouter, useRoute } from 'vue-router'
 
 const route = useRoute()

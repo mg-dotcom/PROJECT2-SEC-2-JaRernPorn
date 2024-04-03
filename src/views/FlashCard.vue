@@ -19,8 +19,6 @@ const collectionName = ref(route.params.name)
 const showFlashCard = ref(true)
 
 const popup = reactive({
-  newFlashcard: false,
-  renameFlashcard: false,
   addEditFlashcard: false,
   optionEditDelete: false
 })

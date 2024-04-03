@@ -7,15 +7,10 @@ const props = defineProps({
     type: Object,
     required: true
   },
-  // ถ้าเป็นการเพิ่ม collection ใหม่ SelectedCollection default จะเป็น object ว่าง
-  // ถ้าเป็นการเเก้ไข collection จะเป็น object ที่มีข้อมูลของ collection ที่เลือกมา
   SelectedCollection: {
     type: Object,
     default: { id: undefined, name: undefined, cards: [] }
   },
-  // เป็น index ของ collection ที่เลือกมา
-  // ถ้าเป็นการเพิ่ม collection ใหม่ SelectedIndex จะเป็น undefined
-  // ถ้าเป็นการเเก้ไข collection จะเป็น index ของ collection ที่เลือกมา
   SelectedIndex: {
     type: Number,
     default: undefined
@@ -53,7 +48,6 @@ const isEmpty = (name) => {
 
 const renameCollectionName = ref(props.SelectedCollection.name)
 
-// เมื่อ SelectedCollection มีการเปลี่ยนแปลงให้เปลี่ยนค่าใน renameCollectionName ด้วย
 watch(
   () => props.SelectedCollection,
   () => {

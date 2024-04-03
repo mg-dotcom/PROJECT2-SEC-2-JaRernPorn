@@ -17,7 +17,7 @@ const currentCategory = computed(() => {
 const settingPopup = ref(false)
 
 const closeSetting = () => {
-  settingPopup.value = false //false
+  settingPopup.value = false
 }
 
 const toggleSetting = () => {
@@ -55,7 +55,6 @@ const toggleSetting = () => {
     </div>
 
     <Options />
-    <!-- <ShuffleOptions /> -->
 
     <Teleport to="#setting">
       <div class="absolute left-0 right-0 top-1/3 z-20" v-show="settingPopup">

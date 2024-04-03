@@ -1,28 +1,28 @@
 <script setup>
-import { defineProps, defineEmits } from "vue";
-import iconDelete from "./icons/iconDelete.vue";
-import iconEdit from "./icons/iconEdit.vue";
+import { defineProps, defineEmits } from 'vue'
+import iconDelete from './icons/iconDelete.vue'
+import iconEdit from './icons/iconEdit.vue'
 
 const props = defineProps({
   popup: {
     type: Object,
-    required: true,
+    required: true
   },
   collectionId: {
-    type: String,
+    type: String
   },
   SelectedIndex: {
-    type: Number,
-  },
-});
+    type: Number
+  }
+})
 
 const showRename = () => {
-  props.popup.addEditCollection = true;
-  props.popup.addEditFlashcard = true;
-  props.popup.optionEditDelete = false;
-};
+  props.popup.addEditCollection = true
+  props.popup.addEditFlashcard = true
+  props.popup.optionEditDelete = false
+}
 
-const emit = defineEmits(["optionDelete"]);
+const emit = defineEmits(['optionDelete'])
 </script>
 
 <template>
@@ -33,7 +33,7 @@ const emit = defineEmits(["optionDelete"]);
     <div
       id="optionDelete"
       class="flex gap-3 hover:bg-gray-100 transition duration-[270ms] ease-in-out p-1 rounded-lg"
-      @click="$emit('optionDelete',props.SelectedIndex, props.collectionId)"
+      @click="$emit('optionDelete', props.SelectedIndex, props.collectionId)"
     >
       <iconDelete>
         <template #content>
@@ -55,8 +55,6 @@ const emit = defineEmits(["optionDelete"]);
       </iconEdit>
     </div>
   </div>
-
-  <!-- Rename Collection Section -->
 </template>
 
 <style scoped></style>

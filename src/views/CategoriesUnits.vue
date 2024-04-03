@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed, defineProps } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
-const route = useRoute() // using useRoute() hook to access the current route object
+const route = useRoute()
 import { categories } from '../../data/data.json'
 
 const unitPage = ref(true)
