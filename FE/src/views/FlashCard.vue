@@ -1,53 +1,53 @@
 <script setup>
-import { reactive, ref, watchEffect, onMounted } from 'vue'
-import Card from '../components/Flashcard/Card.vue'
-import Header from '../components/Header.vue'
-import { useRoute } from 'vue-router'
+import { reactive, ref, watchEffect, onMounted } from "vue";
+import Card from "../components/Flashcard/Card.vue";
+import Header from "../components/Header.vue";
+import { useRoute } from "vue-router";
 import {
   getItem,
   addItem,
   deleteItem,
-  editItem
-} from '../libs/flashcard-libs/FetchFlashcard.js'
-import addEditFlashcard from '../components/Flashcard/AddEditFlashcard.vue'
-import { FlashcardModal } from '../libs/flashcard-libs/FlashCardModal.js'
+  editItem,
+} from "../libs/flashcard-libs/FetchFlashcard.js";
+import addEditFlashcard from "../components/Flashcard/AddEditFlashcard.vue";
+import { FlashcardModal } from "../libs/flashcard-libs/FlashCardModal.js";
 
-const route = useRoute()
-const currentCollectionId = ref(route.params.id)
-const collectionName = ref(route.params.name)
+const route = useRoute();
+const currentCollectionId = ref(route.params.id);
+const collectionName = ref(route.params.name);
 
-const showFlashCard = ref(true)
+const showFlashCard = ref(true);
 
 const popup = reactive({
   addEditFlashcard: false,
-  optionEditDelete: false
-})
+  optionEditDelete: false,
+});
 
 watchEffect(() => {
-  collectionName.value = route.params.name
-})
+  collectionName.value = route.params.name;
+});
 
-const SelectedIndex = ref(undefined)
+const SelectedIndex = ref(undefined);
 
 const toggleOption = (index) => {
-  popup.optionEditDelete = !popup.optionEditDelete
-  SelectedIndex.value = index
-}
+  popup.optionEditDelete = !popup.optionEditDelete;
+  SelectedIndex.value = index;
+};
 
 const closeOption = () => {
-  popup.optionFlashcard = false
-  SelectedIndex.value = undefined
-}
+  popup.optionFlashcard = false;
+  SelectedIndex.value = undefined;
+};
 
-const flashcards = ref(new FlashcardModal())
+const flashcards = ref(new FlashcardModal());
 
 onMounted(async () => {
   const flashcardData = await getItem(
     import.meta.env.VITE_BASE_URL,
     currentCollectionId.value
-  )
-  flashcards.value.addAllFlashcards(flashcardData)
-})
+  );
+  flashcards.value.addAllFlashcards(flashcardData);
+});
 
 const handleAddNewFlashcard = async (
   newId,
@@ -63,36 +63,36 @@ const handleAddNewFlashcard = async (
         id: Math.floor(Math.random() * 1000) + 1,
         chineseWord: newChineseWord,
         pinyin: newPinyin,
-        meaning: newMeaning
+        meaning: newMeaning,
       }
-    )
+    );
 
-    const lastCardAdded = addedFlashcard.cards[addedFlashcard.cards.length - 1]
+    const lastCardAdded = addedFlashcard.cards[addedFlashcard.cards.length - 1];
 
     flashcards.value.addFlashcard(
       lastCardAdded.id,
       lastCardAdded.chineseWord,
       lastCardAdded.pinyin,
       lastCardAdded.meaning
-    )
+    );
   }
 
-  popup.optionFlashcard = false
-}
+  popup.optionFlashcard = false;
+};
 
 const handelDeleteFlashcard = async (index) => {
   const statusCode = await deleteItem(
     import.meta.env.VITE_BASE_URL,
     currentCollectionId.value,
     index
-  )
+  );
 
   if (statusCode === 200) {
-    flashcards.value.removeFlashcard(index)
+    flashcards.value.removeFlashcard(index);
   }
 
-  popup.optionFlashcard = false
-}
+  popup.optionFlashcard = false;
+};
 
 const handelEditFlashcard = async (
   newChineseWord,
@@ -106,27 +106,27 @@ const handelEditFlashcard = async (
     {
       chineseWord: newChineseWord,
       pinyin: newPinyin,
-      meaning: newMeaning
+      meaning: newMeaning,
     },
     index
-  )
+  );
 
-  const selectedCard = editedFlashcard.cards[index]
+  const selectedCard = editedFlashcard.cards[index];
 
   flashcards.value.editFlashcard(
     selectedCard.chineseWord,
     selectedCard.pinyin,
     selectedCard.meaning,
     index
-  )
+  );
 
-  popup.optionFlashcard = false
-}
+  popup.optionFlashcard = false;
+};
 
 const showFlashCardAdd = () => {
-  popup.addEditFlashcard = true
-  closeOption()
-}
+  popup.addEditFlashcard = true;
+  closeOption();
+};
 </script>
 
 <template>

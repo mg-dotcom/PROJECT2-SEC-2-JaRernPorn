@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import category from ".../../../BE/data.json";
+import category from "../../../BE/data.json";
 import SoundControl from "../components/SoundControl.vue";
 import { useRouter, useRoute } from "vue-router";
 

@@ -1,106 +1,105 @@
 async function getItem(url, id) {
   try {
-    const data = await fetch(`${url}/${id}`)
-    const response = await data.json()
-    const allCards=[]
-    response.cards.forEach((card)=>allCards.push(card))
+    const data = await fetch(`${url}/collections/${id}`);
+    const response = await data.json();
+    const allCards = [];
+    response.cards.forEach((card) => allCards.push(card));
     return allCards;
-    
   } catch (error) {
-    console.log(`Error: ${error}`)
-    return []
+    console.log(`Error: ${error}`);
+    return [];
   }
 }
 
 const addItem = async (url, id, newCard) => {
   try {
-    const response = await fetch(`${url}/${id}`)
-    const collections = await response.json()
+    const response = await fetch(`${url}/collections/${id}`);
+    const collections = await response.json();
 
     const checkExistId = collections.cards.findIndex(
       (card) => card.id === newCard.id
-    )
+    );
 
     if (checkExistId === -1) {
-      collections.cards.push(newCard)
+      collections.cards.push(newCard);
     } else {
-      newCard.id = Math.floor(Math.random() * 1000) + 1
-      const updatedCardId = { ...newCard, id: newCard.id }
-      collections.cards.push(updatedCardId)
+      newCard.id = Math.floor(Math.random() * 1000) + 1;
+      const updatedCardId = { ...newCard, id: newCard.id };
+      collections.cards.push(updatedCardId);
     }
 
-    const updateResponse = await fetch(`${url}/${id}`, {
-      method: 'PUT',
+    const updateResponse = await fetch(`${url}/collections/${id}`, {
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(collections)
-    })
+      body: JSON.stringify(collections),
+    });
 
     if (!updateResponse.ok) {
-      throw new Error('Failed to update collection')
+      throw new Error("Failed to update collection");
     }
 
-    const updatedCollections = await updateResponse.json()
-    return updatedCollections
+    const updatedCollections = await updateResponse.json();
+    return updatedCollections;
   } catch (error) {
-    console.error('Error adding new card:', error)
-    return null
+    console.error("Error adding new card:", error);
+    return null;
   }
-}
+};
 
 const deleteItem = async (url, id, index) => {
   try {
-    const response = await fetch(`${url}/${id}`)
-    const collections = await response.json()
+    const response = await fetch(`${url}/collections/${id}`);
+    const collections = await response.json();
 
-    collections.cards.splice(index, 1)
+    collections.cards.splice(index, 1);
 
-    const updateResponse = await fetch(`${url}/${id}`, {
-      method: 'PUT',
+    const updateResponse = await fetch(`${url}/collections/${id}`, {
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(collections)
-    })
+      body: JSON.stringify(collections),
+    });
 
-    console.log(updateResponse.status)
+    console.log(updateResponse.status);
 
     if (!updateResponse.ok) {
-      throw new Error('Failed to update collection')
+      throw new Error("Failed to update collection");
     }
 
-    return updateResponse.status
+    return updateResponse.status;
   } catch (error) {
-    console.error('Error deleting card:', error)
-    return null
+    console.error("Error deleting card:", error);
+    return null;
   }
-}
+};
 
 const editItem = async (url, id, newFlashcard, cardIndex) => {
   try {
-    const response = await fetch(`${url}/${id}`)
-    const collections = await response.json()
+    const response = await fetch(`${url}/collections/${id}`);
+    const collections = await response.json();
 
-    const nonEditCard = collections.cards[cardIndex]
+    const nonEditCard = collections.cards[cardIndex];
 
-    const updatedCard = { ...nonEditCard, ...newFlashcard }
+    const updatedCard = { ...nonEditCard, ...newFlashcard };
 
-    collections.cards[cardIndex] = updatedCard
+    collections.cards[cardIndex] = updatedCard;
 
-    const updateResponse = await fetch(`${url}/${id}`, {
-      method: 'PATCH',
+    const updateResponse = await fetch(`${url}/collections/${id}`, {
+      method: "PATCH",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(collections)
-    })
+      body: JSON.stringify(collections),
+    });
 
-    const updateCollections = await updateResponse.json()
-    return updateCollections
+    const updateCollections = await updateResponse.json();
+    return updateCollections;
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
-}
+};
 
-export { getItem, addItem, deleteItem, editItem }
+export { getItem, addItem, deleteItem, editItem };
