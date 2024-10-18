@@ -1,42 +1,42 @@
 <script setup>
-import Option from '../components/game3/Option.vue'
-import data from '../../data/data.json'
-import Setting from '../components/Setting.vue'
-import Answer_popup from '../components/Answer_popup.vue'
-import { computed, ref } from 'vue'
-import SoundControl from '../components/SoundControl.vue'
-import { useRoute, useRouter } from 'vue-router'
+import Option from "../components/game3/Option.vue";
+import data from "../../../BE/data.json";
+import Setting from "../components/Setting.vue";
+import Answer_popup from "../components/Answer_popup.vue";
+import { computed, ref } from "vue";
+import SoundControl from "../components/SoundControl.vue";
+import { useRoute, useRouter } from "vue-router";
 
-const route = useRoute()
-const router = useRouter()
+const route = useRoute();
+const router = useRouter();
 
-const paramCateIndex = route.params.cateIndex - 1
-const paramUnitIndex = route.params.unit - 1
+const paramCateIndex = route.params.cateIndex - 1;
+const paramUnitIndex = route.params.unit - 1;
 
-const currentIndexCate = ref(paramCateIndex)
-const currentIndexUnit = ref(paramUnitIndex)
+const currentIndexCate = ref(paramCateIndex);
+const currentIndexUnit = ref(paramUnitIndex);
 
-const answer = ref()
-const meaning = ref()
-const randomQuiz = ref(0)
-const showSetting = ref(false)
-const userSelected = ref()
-const showAudio = ref(false)
-const showPopup = ref(false)
+const answer = ref();
+const meaning = ref();
+const randomQuiz = ref(0);
+const showSetting = ref(false);
+const userSelected = ref();
+const showAudio = ref(false);
+const showPopup = ref(false);
 const audioOfOption = ref(
   data.categories[currentIndexCate.value].units[currentIndexUnit.value].items[
     randomQuiz.value
   ].pronunciation
-)
-const setColorOption = ref('')
-const isSelected = ref(false)
-const answerOfQuiz = ref('')
+);
+const setColorOption = ref("");
+const isSelected = ref(false);
+const answerOfQuiz = ref("");
 
 const currentCategory = computed(() => {
-  return data.categories[currentIndexCate.value].name
-})
+  return data.categories[currentIndexCate.value].name;
+});
 
-const countCheck = ref(0)
+const countCheck = ref(0);
 
 const currentQuiz = computed(() => {
   if (
@@ -44,87 +44,87 @@ const currentQuiz = computed(() => {
     data.categories[currentIndexCate.value].units[currentIndexUnit.value].items
       .length
   ) {
-    setTimeout(passToGame4, 2000)
+    setTimeout(passToGame4, 2000);
   } else {
     answerOfQuiz.value =
       data.categories[currentIndexCate.value].units[
         currentIndexUnit.value
-      ].items[randomQuiz.value].word
+      ].items[randomQuiz.value].word;
     meaning.value =
       data.categories[currentIndexCate.value].units[
         currentIndexUnit.value
-      ].items[randomQuiz.value].meaning
+      ].items[randomQuiz.value].meaning;
   }
   return data.categories[currentIndexCate.value].units[currentIndexUnit.value]
-    .items[randomQuiz.value].src
-})
+    .items[randomQuiz.value].src;
+});
 
 //Shuffle
 const shuffle = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[array[i], array[j]] = [array[j], array[i]]
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
   }
-  return array
-}
+  return array;
+};
 
 const generateOption = computed(() => {
   const options =
-    data.categories[currentIndexCate.value].units[currentIndexUnit.value].items
-  return shuffle([...options])
-})
+    data.categories[currentIndexCate.value].units[currentIndexUnit.value].items;
+  return shuffle([...options]);
+});
 
 const checkBtn = (selectedOption) => {
-  userSelected.value = selectedOption.word
-  showAudio.value = true
-  audioOfOption.value = selectedOption.pronunciation
-  isSelected.value = true
-}
+  userSelected.value = selectedOption.word;
+  showAudio.value = true;
+  audioOfOption.value = selectedOption.pronunciation;
+  isSelected.value = true;
+};
 
 const toggleSetting = () => {
-  showSetting.value = !showSetting.value
-}
+  showSetting.value = !showSetting.value;
+};
 
 const closePopup = () => {
-  showPopup.value = !showPopup.value
-  setColorOption.value = ''
-  countCheck.value++
-  isSelected.value = false
-  randomQuiz.value++
-}
+  showPopup.value = !showPopup.value;
+  setColorOption.value = "";
+  countCheck.value++;
+  isSelected.value = false;
+  randomQuiz.value++;
+};
 
 const passToGame4 = () => {
   router.push({
-    name: 'Game4',
+    name: "Game4",
     params: {
       cateIndex: route.params.cateIndex,
-      unit: route.params.unit
-    }
-  })
-}
+      unit: route.params.unit,
+    },
+  });
+};
 
 const checkAnswer = () => {
   answer.value =
     data.categories[currentIndexCate.value].units[currentIndexUnit.value].items[
       randomQuiz.value
-    ].word
-  
-  if (userSelected.value === answer.value ) {
-    countCheck.value++
-    setColorOption.value = answer.value
-    userSelected.value = ''
+    ].word;
+
+  if (userSelected.value === answer.value) {
+    countCheck.value++;
+    setColorOption.value = answer.value;
+    userSelected.value = "";
     setTimeout(() => {
-      answer.value = ''
-      setColorOption.value = ''
-      isSelected.value = false
-      randomQuiz.value++
-    }, 2000)
+      answer.value = "";
+      setColorOption.value = "";
+      isSelected.value = false;
+      randomQuiz.value++;
+    }, 2000);
   } else {
-    answer.value = ''
-    userSelected.value = ''
-    showPopup.value = true
+    answer.value = "";
+    userSelected.value = "";
+    showPopup.value = true;
   }
-}
+};
 </script>
 
 <template>
@@ -190,8 +190,8 @@ const checkAnswer = () => {
           name: 'Game1',
           params: {
             cateIndex: route.params.cateIndex,
-            unit: route.params.unit
-          }
+            unit: route.params.unit,
+          },
         })
       "
       @resumeGame="toggleSetting"

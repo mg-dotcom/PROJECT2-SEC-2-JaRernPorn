@@ -1,24 +1,24 @@
 <script setup>
-import { ref, computed, defineProps } from 'vue'
-import { useRoute, RouterLink } from 'vue-router'
-const route = useRoute()
-import { categories } from '../../data/data.json'
+import { ref, computed, defineProps } from "vue";
+import { useRoute, RouterLink } from "vue-router";
+const route = useRoute();
+import { categories } from "../../../BE/data.json";
 
-const unitPage = ref(true)
+const unitPage = ref(true);
 
-const paramCateIndex = route.params.cateIndex - 1
+const paramCateIndex = route.params.cateIndex - 1;
 
-const currentIndexCate = ref(paramCateIndex)
+const currentIndexCate = ref(paramCateIndex);
 
 const currentCategory = computed(() => {
-  return categories[currentIndexCate.value].name
-})
+  return categories[currentIndexCate.value].name;
+});
 
 const currentItem = computed(() => {
-  const currentUnit = categories[currentIndexCate.value].units
-  const firstItem = currentUnit.map((unit) => unit.items[0])
-  return firstItem
-})
+  const currentUnit = categories[currentIndexCate.value].units;
+  const firstItem = currentUnit.map((unit) => unit.items[0]);
+  return firstItem;
+});
 </script>
 
 <template>

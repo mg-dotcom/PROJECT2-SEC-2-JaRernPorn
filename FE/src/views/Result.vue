@@ -1,38 +1,38 @@
 <script setup>
-import { ref } from 'vue'
-import category from '../../data/data.json'
-import SoundControl from '../components/SoundControl.vue'
-import { useRouter, useRoute } from 'vue-router'
+import { ref } from "vue";
+import category from ".../../../BE/data.json";
+import SoundControl from "../components/SoundControl.vue";
+import { useRouter, useRoute } from "vue-router";
 
-const route = useRoute()
-const router = useRouter()
+const route = useRoute();
+const router = useRouter();
 
 const playAgain = () => {
   router.push({
-    name: 'Game1',
-    params: { cateIndex: route.params.cateIndex, unit: route.params.unit }
-  })
-}
+    name: "Game1",
+    params: { cateIndex: route.params.cateIndex, unit: route.params.unit },
+  });
+};
 
 const mainMenu = () => {
-  router.push({ name: 'Categories' })
-}
+  router.push({ name: "Categories" });
+};
 
-console.log()
+console.log();
 
-const paramCateIndex = route.params.cateIndex - 1
-const paramUnitIndex = route.params.unit - 1
+const paramCateIndex = route.params.cateIndex - 1;
+const paramUnitIndex = route.params.unit - 1;
 
-const unitIndex = ref(paramUnitIndex)
-const categoryIndex = ref(paramCateIndex)
+const unitIndex = ref(paramUnitIndex);
+const categoryIndex = ref(paramCateIndex);
 
-const showSetting = ref(false)
+const showSetting = ref(false);
 const toggleSetting = () => {
-  showSetting.value = !showSetting.value
-}
+  showSetting.value = !showSetting.value;
+};
 
-const currentCategory = category.categories[categoryIndex.value]
-const items = currentCategory.units[unitIndex.value].items
+const currentCategory = category.categories[categoryIndex.value];
+const items = currentCategory.units[unitIndex.value].items;
 </script>
 
 <template>
@@ -78,8 +78,8 @@ const items = currentCategory.units[unitIndex.value].items
             class="border-solid border-b-2 border-black w-[230px] ml-7 mt-10"
           ></div>
           <h1 class="text-[24px] ml-10 mt-3">
-            {{ item.word.split(' ')[0] }} <br />
-            {{ item.word.split(' ').slice(1).join(' ') }}
+            {{ item.word.split(" ")[0] }} <br />
+            {{ item.word.split(" ").slice(1).join(" ") }}
           </h1>
         </div>
       </div>

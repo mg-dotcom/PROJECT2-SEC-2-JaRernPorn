@@ -1,88 +1,88 @@
 <script setup>
-import { ref, computed } from 'vue'
-import data from '../../../data/data.json'
-import { useRoute, useRouter } from 'vue-router'
-const route = useRoute()
-const router = useRouter()
+import { ref, computed } from "vue";
+import data from "../../../../BE/data.json";
+import { useRoute, useRouter } from "vue-router";
+const route = useRoute();
+const router = useRouter();
 
-const paramCateIndex = route.params.cateIndex - 1
-const paramUnitIndex = route.params.unit - 1
-const currentIndexItem = ref(paramCateIndex)
-const currentIndexUnit = ref(paramUnitIndex)
+const paramCateIndex = route.params.cateIndex - 1;
+const paramUnitIndex = route.params.unit - 1;
+const currentIndexItem = ref(paramCateIndex);
+const currentIndexUnit = ref(paramUnitIndex);
 
-const clickedWordId = ref('')
-const clickedMeaningId = ref('')
+const clickedWordId = ref("");
+const clickedMeaningId = ref("");
 const options = ref(
   data.categories[currentIndexItem.value].units[currentIndexUnit.value].items
-)
+);
 
-const wordArray = ref([])
-const meaningArray = ref([])
-const wrongWord = ref([])
-const wrongMeaning = ref([])
-const checkBtn = ref(true)
-const continueBtn = ref(false)
+const wordArray = ref([]);
+const meaningArray = ref([]);
+const wrongWord = ref([]);
+const wrongMeaning = ref([]);
+const checkBtn = ref(true);
+const continueBtn = ref(false);
 
 const shuffle = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[array[i], array[j]] = [array[j], array[i]]
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
   }
-  return array
-}
+  return array;
+};
 
 const shuffleOption = computed(() => {
-  return shuffle([...options.value])
-})
+  return shuffle([...options.value]);
+});
 
 const handleWordClick = (id, pronunciation) => {
-  clickedWordId.value = id
-  soundControl(pronunciation)
-}
+  clickedWordId.value = id;
+  soundControl(pronunciation);
+};
 
 const handleMeaningClick = (id) => {
-  clickedMeaningId.value = id
-}
+  clickedMeaningId.value = id;
+};
 
 const soundControl = (path) => {
-  const sound = new Audio(path)
-  sound.play()
-}
+  const sound = new Audio(path);
+  sound.play();
+};
 
 const isMatching = () => {
   if (!clickedWordId.value || !clickedMeaningId.value) {
-    return
+    return;
   }
 
   const { id: wordId } = options.value.find(
     (option) => option.id === clickedWordId.value
-  )
+  );
   const { id: meaningId } = options.value.find(
     (option) => option.id === clickedMeaningId.value
-  )
+  );
 
   if (wordId === meaningId) {
-    wordArray.value.push(wordId)
-    meaningArray.value.push(meaningId)
+    wordArray.value.push(wordId);
+    meaningArray.value.push(meaningId);
     if (
       wordArray.value.length === options.value.length &&
       meaningArray.value.length === options.value.length
     ) {
-      checkBtn.value = false
-      continueBtn.value = true
+      checkBtn.value = false;
+      continueBtn.value = true;
     }
   } else {
-    wrongWord.value.push(wordId)
-    wrongMeaning.value.push(meaningId)
+    wrongWord.value.push(wordId);
+    wrongMeaning.value.push(meaningId);
     setTimeout(() => {
-      wrongWord.value = []
-      wrongMeaning.value = []
-    }, 1000)
+      wrongWord.value = [];
+      wrongMeaning.value = [];
+    }, 1000);
   }
 
-  clickedWordId.value = ''
-  clickedMeaningId.value = ''
-}
+  clickedWordId.value = "";
+  clickedMeaningId.value = "";
+};
 </script>
 
 <template>
@@ -99,7 +99,7 @@ const isMatching = () => {
             'bg-correct-option-green border-green-border': wordArray.includes(
               wordOption.id
             ),
-            'bg-wrong-option-red': wrongWord.includes(wordOption.id)
+            'bg-wrong-option-red': wrongWord.includes(wordOption.id),
           }"
           class="bg-white text-black rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-20 md:w-96 md:text-2xl lg:rounded-2xl"
         >
@@ -117,7 +117,7 @@ const isMatching = () => {
               clickedMeaningId && clickedMeaningId === meaningOption.id,
             'bg-correct-option-green border-green-border':
               meaningArray.includes(meaningOption.id),
-            'bg-wrong-option-red': wrongMeaning.includes(meaningOption.id)
+            'bg-wrong-option-red': wrongMeaning.includes(meaningOption.id),
           }"
           class="bg-white text-black rounded-lg font-NotoSansSC border border-pink-border h-12 sm:h-16 hover:border-blue-border md:border-2 md:h-20 md:w-96 md:text-2xl lg:rounded-2xl"
         >

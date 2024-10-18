@@ -1,8 +1,8 @@
 <script setup>
-import { ref } from 'vue'
-import { categories } from '../../data/data.json'
+import { ref } from "vue";
+import { categories } from "../../../BE/data.json";
 
-const categoryPage = ref(true)
+const categoryPage = ref(true);
 </script>
 
 <template>
@@ -47,8 +47,8 @@ const categoryPage = ref(true)
                     name: 'CategoriesUnits',
                     params: {
                       category: category.name.toLowerCase(),
-                      cateIndex: cateIndex + 1
-                    }
+                      cateIndex: cateIndex + 1,
+                    },
                   }"
                 >
                   <img
